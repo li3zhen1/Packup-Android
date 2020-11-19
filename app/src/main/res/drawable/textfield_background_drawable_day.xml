@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/textfield_background_drawable_day_default" />
+    <item>
+        <selector
+            android:enterFadeDuration="240"
+            android:exitFadeDuration="120">
+            <item
+                android:drawable="@drawable/textfield_background_drawable_day_focused"
+                android:state_focused="true" />
+        </selector>
+    </item>
+</layer-list>

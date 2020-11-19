@@ -1,0 +1,64 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <bool name="isDarkMode">false</bool>
+
+    <!-- Base application theme. -->
+    <style name="Theme.Packup.Activity" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary_400</item>
+        <item name="colorPrimaryVariant">@color/color_primary_400</item>
+        <item name="colorOnPrimary">@color/color_white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_primary_400</item>
+        <item name="colorSecondaryVariant">@color/color_primary_400</item>
+        <item name="colorOnSecondary">@color/color_black</item>
+        <!-- Status bar color. -->
+        <item name="colorError">@color/color_error_background</item>
+        <item name="fontFamily">@font/inter</item>
+        <!--status bar-->
+        <item name="android:statusBarColor">@color/color_primary_400</item>
+        <item name="android:windowBackground">@color/color_white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/color_white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
+    <style name="Theme.Packup.Activity.Immersive" parent="Theme.Packup.Activity">
+        <item name="android:statusBarColor">@color/color_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/color_white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
+
+    <style name="Theme.Packup.Splash" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowBackground">@drawable/splash_day</item>
+        <item name="colorSurface">@color/color_white</item>
+        <!--Same as Theme.Packup-->
+        <item name="colorPrimary">@color/color_primary_400</item>
+        <item name="colorPrimaryVariant">@color/color_primary_400</item>
+        <item name="colorOnPrimary">@color/color_white</item>
+        <item name="colorSecondary">@color/color_primary_400</item>
+        <item name="colorSecondaryVariant">@color/color_primary_400</item>
+        <item name="colorOnSecondary">@color/color_black</item>
+        <item name="android:statusBarColor">@color/color_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/color_white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
+
+    <color name="windowBackgroundColor">@color/color_white</color>
+
+    <color name="activityStatusBarColor">@color/color_primary_400</color>
+
+    <color name="navBarBackgroundColor">@color/color_white</color>
+
+
+    <drawable name="packupIcon">@drawable/packup_large_alpha_512</drawable>
+
+    <drawable name="primaryTextFieldBackground">@drawable/textfield_background_drawable_day
+    </drawable>
+    <color name="primaryTextFieldHintColor">@color/color_surface_neutral</color>
+
+    <drawable name="primaryButtonBackground">@drawable/button_background_primary_day</drawable>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Packup</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Dashboard</string>
+
+
+    <string name="main_nav_deadlines">Deadlines</string>
+    <string name="main_nav_events">Events</string>
+    <string name="main_nav_documents">Documents</string>
+
+    <string name="login_title">Sign in to Packup with your PKU account.</string>
+    <string name="login_student_id_hint">Student ID</string>
+    <string name="login_password_id_hint">Password</string>
+    <string name="login_button_alt">Sign In</string>
+
+    <string name="login_error_network_unavailable">Network is currently unavailable. Please check and retry.</string>
+    <string name="login_error_e01">User ID or Password is NOT correct.</string>
+    <string name="login_error_e21">Too many attempts. Please sign in after a half hour.</string>
+    <string name="login_error_unknown">Unknown error.</string>
+
+    <string name="student_id_should_consist_of_exactly_10_digits">Student ID should consist of exactly 10 digits.</string>
+    <string name="student_id_or_password_is_not_correct">Student ID or Password is not correct.</string>
+
+    <string name="login_hint">By signing in, you agree to Packup\'s&#160;</string>
+
+    <string name="space_and_space">&#160;and&#160;</string>
+    <string name="closure">.</string>
+
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+    <string name="open_source_license"><u>Licenses</u></string>
+    <string name="terms_of_use"><u>Terms of Use</u></string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+
+
+    <string name="widget_up_coming_next">Up Coming Next</string>
+    <string name="widget_events">Events</string>
+    <string name="widget_recently_title_recent_deadlines">Deadline Manifest</string>
+
+    <string name="widget_recently_uninitialized_intro">This is a widget listing your recent deadlines.</string>
+    <string name="widget_recently_uninitialized_login">To fully utilize this functionality, please sign in to Packup.</string>
+
+    <string name="widget_recently_remaining">&#160;remaining,&#160;</string>
+    <string name="widget_recently_relax">Seems that you have finished all deadlines</string>
+    <string name="widget_recently_due_tomorrow">&#160;due tomorrow</string>
+    <string name="widget_recently_due_this_week">&#160;due this week</string>
+</resources>

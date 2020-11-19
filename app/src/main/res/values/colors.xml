@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 400 as Accent Color -->
+    <color name="color_primary_900">#001cb1</color>
+    <color name="color_primary_800">#0032c9</color>
+    <color name="color_primary_700">#003dd4</color>
+    <color name="color_primary_600">#0048e1</color>
+    <color name="color_primary_500">#0051ec</color>
+    <color name="color_primary_400">#486df1</color>
+    <color name="color_primary_300">#7088f4</color>
+    <color name="color_primary_200">#9daaf7</color>
+    <color name="color_primary_100">#c5cbfa</color>
+    <color name="color_primary_50">#e8ebfd</color>
+
+
+    <!-- 400 as Accent Color -->
+    <color name="color_vibrant_900">#c20014</color>
+    <color name="color_vibrant_800">#d21221</color>
+    <color name="color_vibrant_700">#df1d28</color>
+    <color name="color_vibrant_600">#f12b2e</color>
+    <color name="color_vibrant_500">#ff362e</color>
+    <color name="color_vibrant_400">#fa4b4b</color>
+    <color name="color_vibrant_300">#ef6f70</color>
+    <color name="color_vibrant_200">#f79898</color>
+    <color name="color_vibrant_100">#ffccd2</color>
+    <color name="color_vibrant_50">#ffebee</color>
+
+
+    <!-- Surface Color -->
+    <color name="color_black_transparent">#00000000</color>
+    <color name="color_black">#000000</color>
+    <color name="color_white_transparent">#00ffffff</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_surface_neutral_dark_elevation_01dp">#121212</color>
+    <color name="color_surface_neutral_dark_elevation_02dp">#1e1e1e</color>
+    <color name="color_surface_neutral_dark_elevation_03dp">#222222</color>
+    <color name="color_surface_neutral_dark_elevation_04dp">#272727</color>
+    <color name="color_surface_neutral_dark_elevation_06dp">#2c2c2c</color>
+    <color name="color_surface_neutral_dark_elevation_08dp">#2e2e2e</color>
+    <color name="color_surface_neutral_dark_elevation_12dp">#323232</color>
+    <color name="color_surface_neutral_dark_elevation_16dp">#353535</color>
+    <color name="color_surface_neutral_dark_elevation_24dp">#383838</color>
+
+    <color name="color_surface_neutral">#888</color>
+
+    <color name="color_surface_neutral_light_elevation_01dp">#f7f9fa</color>
+    <color name="color_surface_neutral_light_elevation_02dp">#f3f3f3</color>
+    <color name="color_surface_neutral_light_elevation_03dp">#f0f0f0</color>
+    <color name="color_surface_neutral_light_elevation_04dp">#e8e8e8</color>
+    <color name="color_surface_neutral_light_elevation_06dp">#e0e0e0</color>
+    <color name="color_surface_neutral_light_elevation_08dp">#d7d7d7</color>
+    <color name="color_surface_neutral_light_elevation_12dp">#cacaca</color>
+    <color name="color_surface_neutral_light_elevation_16dp">#c0c0c0</color>
+    <color name="color_surface_neutral_light_elevation_24dp">#b0b0b0</color>
+
+
+    <!-- message colors -->
+
+    <color name="color_fatal_foreground">#434</color>
+    <color name="color_fatal_background">#FFC8EA</color>
+
+    <color name="color_error_foreground">#FFF</color>
+    <color name="color_error_background">#E30000</color>
+
+    <color name="color_warning_foreground">#B45F06</color>
+    <color name="color_warning_background">#FFEE9C</color>
+
+    <color name="color_success_500">#4DA400</color>
+    <color name="color_success_100">#E6F6CF</color>
+
+</resources>

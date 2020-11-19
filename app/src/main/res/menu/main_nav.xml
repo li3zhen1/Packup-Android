@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/deadline_fragment_item"
+        android:title="@string/main_nav_deadlines"
+        android:icon="@drawable/nav_badge_deadlines"/>
+    <item
+        android:id="@+id/event_fragment_item"
+        android:title="@string/main_nav_events"
+        android:icon="@drawable/nav_badge_events"/>
+    <item
+        android:id="@+id/document_fragment_item"
+        android:title="@string/main_nav_documents"
+        android:icon="@drawable/nav_badge_documents"/>
+</menu>

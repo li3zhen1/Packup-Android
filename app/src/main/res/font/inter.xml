@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    TODO: 删掉不必要的字体文件   -->
+<!--    <font android:font="@font/inter_thin" android:fontWeight="100" android:fontStyle="normal"/>-->
+<!--    <font android:font="@font/inter_extralight" android:fontWeight="200" android:fontStyle="normal"/>-->
+<!--    <font android:font="@font/inter_light" android:fontWeight="300" android:fontStyle="normal"/>-->
+    <font android:font="@font/inter_regular" android:fontWeight="400" android:fontStyle="normal"/>
+<!--    <font android:font="@font/inter_medium" android:fontWeight="500" android:fontStyle="normal"/>-->
+<!--    <font android:font="@font/inter_semibold" android:fontWeight="600" android:fontStyle="normal"/>-->
+    <font android:font="@font/inter_bold" android:fontWeight="700" android:fontStyle="normal"/>
+<!--    <font android:font="@font/inter_extrabold" android:fontWeight="800" android:fontStyle="normal"/>-->
+<!--    <font android:font="@font/inter_black" android:fontWeight="900" android:fontStyle="normal"/>-->
+
+<!--    <font android:font="@font/inter_thinitalic" android:fontWeight="100" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_extralightitalic" android:fontWeight="200" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_lightitalic" android:fontWeight="300" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_italic" android:fontWeight="400" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_mediumitalic" android:fontWeight="500" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_semibolditalic" android:fontWeight="600" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_bolditalic" android:fontWeight="700" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_extrabolditalic" android:fontWeight="800" android:fontStyle="italic"/>-->
+<!--    <font android:font="@font/inter_blackitalic" android:fontWeight="900" android:fontStyle="italic"/>-->
+</font-family>
