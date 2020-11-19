@@ -1,4 +1,4 @@
-package org.engrave.packup.network.pku.portal
+package org.engrave.packup.api.pku.portal
 
 import kotlinx.serialization.decodeFromString
 import org.engrave.packup.util.DummyCookie

@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.engrave.packup.network.pku.iaaa.fetchIaaaToken
+import org.engrave.packup.api.pku.iaaa.fetchIaaaToken
 import org.engrave.packup.util.device.isNetworkAvailable
 import org.engrave.packup.util.exception.EXCEPTION_NETWORK_UNAVAILABLE
 

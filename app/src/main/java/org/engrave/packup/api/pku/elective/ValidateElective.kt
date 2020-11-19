@@ -1,6 +1,6 @@
-package org.engrave.packup.network.pku.elective
+package org.engrave.packup.api.pku.elective
 
-import org.engrave.packup.network.pku.iaaa.fetchIaaaToken
+import org.engrave.packup.api.pku.iaaa.fetchIaaaToken
 import org.engrave.packup.util.DummyCookie
 import org.engrave.packup.util.makeURL
 import java.net.HttpURLConnection

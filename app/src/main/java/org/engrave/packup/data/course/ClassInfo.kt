@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import org.engrave.packup.data.StringListTypeConverter
-import org.engrave.packup.network.pku.portal.CourseInfoRawJson
-import org.engrave.packup.network.pku.portal.Semester
-import org.engrave.packup.network.pku.portal.Weekday
+import org.engrave.packup.api.pku.portal.CourseInfoRawJson
+import org.engrave.packup.api.pku.portal.Semester
+import org.engrave.packup.api.pku.portal.Weekday
 import org.engrave.packup.util.cleanXmlNodes
 import org.engrave.packup.util.substringBetween
 import org.jsoup.Jsoup

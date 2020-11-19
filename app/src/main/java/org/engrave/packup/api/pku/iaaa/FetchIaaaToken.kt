@@ -1,4 +1,4 @@
-package org.engrave.packup.network.pku.iaaa
+package org.engrave.packup.api.pku.iaaa
 
 import org.engrave.packup.util.DummyCookie
 import org.engrave.packup.util.makeURL

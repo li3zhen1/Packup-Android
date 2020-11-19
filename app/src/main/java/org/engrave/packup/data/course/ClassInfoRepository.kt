@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.engrave.packup.data.account.AccountInfoRepository
-import org.engrave.packup.network.pku.elective.fetchElectiveLoginCookies
-import org.engrave.packup.network.pku.elective.fetchElectiveResultTable
-import org.engrave.packup.network.pku.portal.Semester
-import org.engrave.packup.network.pku.portal.SemesterSeason
-import org.engrave.packup.network.pku.portal.fetchPortalCourseInfo
-import org.engrave.packup.network.pku.portal.fetchPortalLoginCookies
+import org.engrave.packup.api.pku.elective.fetchElectiveLoginCookies
+import org.engrave.packup.api.pku.elective.fetchElectiveResultTable
+import org.engrave.packup.api.pku.portal.Semester
+import org.engrave.packup.api.pku.portal.SemesterSeason
+import org.engrave.packup.api.pku.portal.fetchPortalCourseInfo
+import org.engrave.packup.api.pku.portal.fetchPortalLoginCookies
 import javax.inject.Inject
 
 class ClassInfoRepository @Inject constructor(

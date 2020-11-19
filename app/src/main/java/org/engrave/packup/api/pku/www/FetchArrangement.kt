@@ -1,4 +1,4 @@
-package org.engrave.packup.network.pku.www
+package org.engrave.packup.api.pku.www
 
 import org.engrave.packup.util.scanAsString
 import org.jsoup.Jsoup

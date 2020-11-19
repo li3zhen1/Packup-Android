@@ -1,4 +1,4 @@
-package org.engrave.packup.network.pku.elective
+package org.engrave.packup.api.pku.elective
 
 import org.engrave.packup.util.DummyCookie
 import org.engrave.packup.util.scanAsString
