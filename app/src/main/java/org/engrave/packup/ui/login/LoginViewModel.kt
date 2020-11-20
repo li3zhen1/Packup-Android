@@ -1,4 +1,4 @@
-package org.engrave.packup.viewmodel
+package org.engrave.packup.ui.login
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

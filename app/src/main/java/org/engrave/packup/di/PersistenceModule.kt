@@ -7,7 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
 import org.engrave.packup.data.AppDatabase
+import org.engrave.packup.data.account.AccountInfoRepository
 import javax.inject.Singleton
 
 
@@ -38,6 +40,5 @@ object PersistenceModule {
     @Provides
     @Singleton
     fun provideDeadlineDao(appDatabase: AppDatabase) = appDatabase.deadlineDao()
-
 
 }

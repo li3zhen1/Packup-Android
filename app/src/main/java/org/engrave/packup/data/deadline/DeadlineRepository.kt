@@ -9,7 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 /**
- * Manage all the relevant local storage and network operations about ClassInfo
+ * Manage all the relevant local storage and network operations about Deadline Repository
  */
 class DeadlineRepository @Inject constructor(
     private val deadlineDao: DeadlineDao,

@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val accountInfo = runBlocking { accountInfoRepository.getAccountInfo() }
+        val accountInfo = accountInfoRepository.getAccountInfo
         if (accountInfo.studentId.isEmpty() || accountInfo.password.isEmpty())
             startActivity(Intent(this, LoginActivity::class.java))
         else

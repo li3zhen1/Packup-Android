@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_activity_bottom_nav"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/main_activity_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/navBarBackgroundColor"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/defaultNav"
         app:menu="@menu/main_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>

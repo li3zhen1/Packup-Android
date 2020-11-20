@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.engrave.packup.data.account.AccountInfoRepository
 import org.engrave.packup.databinding.ActivityLoginBinding
-import org.engrave.packup.viewmodel.LoginViewModel
+import org.engrave.packup.ui.login.LoginViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -104,7 +104,8 @@ class LoginActivity : AppCompatActivity() {
     private suspend fun onLoginInfoValidated() {
         accountInfoRepository.setAccountInfo(
             loginViewModel.getStudentId(),
-            loginViewModel.getPassword()
+            loginViewModel.getPassword(),
+            "pku"
         )
         withContext(Dispatchers.Main) {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))

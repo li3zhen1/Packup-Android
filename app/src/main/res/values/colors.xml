@@ -13,6 +13,8 @@
     <color name="color_primary_100">#c5cbfa</color>
     <color name="color_primary_50">#e8ebfd</color>
 
+    <color name="color_primary_700_opaque">#30003dd4</color>
+
 
     <!-- 400 as Accent Color -->
     <color name="color_vibrant_900">#c20014</color>

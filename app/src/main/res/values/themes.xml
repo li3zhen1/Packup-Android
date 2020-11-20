@@ -14,6 +14,8 @@
         <!-- Status bar color. -->
         <item name="colorError">@color/color_error_background</item>
         <item name="fontFamily">@font/inter</item>
+
+        <item name="colorSurface">@color/color_white</item>
         <!--status bar-->
         <item name="android:statusBarColor">@color/color_primary_400</item>
         <item name="android:windowBackground">@color/color_white</item>
@@ -53,12 +55,11 @@
 
     <color name="navBarBackgroundColor">@color/color_white</color>
 
+    <color name="shimmerBackground">@color/color_primary_700_opacity_20</color>
+
 
     <drawable name="packupIcon">@drawable/packup_large_alpha_512</drawable>
-
-    <drawable name="primaryTextFieldBackground">@drawable/textfield_background_drawable_day
-    </drawable>
+    <drawable name="primaryTextFieldBackground">@drawable/textfield_background_drawable_day</drawable>
     <color name="primaryTextFieldHintColor">@color/color_surface_neutral</color>
-
     <drawable name="primaryButtonBackground">@drawable/button_background_primary_day</drawable>
 </resources>

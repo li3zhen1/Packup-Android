@@ -31,7 +31,7 @@ class ClassInfoRepository @Inject constructor(
     private suspend fun crawlSpecifiedClassInfoFromPortal(
         semester: Semester
     ) = withContext(Dispatchers.IO) {
-        val accountInfo = accountInfoRepository.getAccountInfo()
+        val accountInfo = accountInfoRepository.getAccountInfo
         val rawJson = fetchPortalCourseInfo(
             semester,
             fetchPortalLoginCookies(accountInfo.studentId, accountInfo.password)
@@ -42,7 +42,7 @@ class ClassInfoRepository @Inject constructor(
     }
 
     private suspend fun crawlCurrentClassInfoFromElective() = withContext(Dispatchers.IO) {
-        val accountInfo = accountInfoRepository.getAccountInfo()
+        val accountInfo = accountInfoRepository.getAccountInfo
         val rawHtml = fetchElectiveResultTable(
             fetchElectiveLoginCookies(accountInfo.studentId, accountInfo.password)
         )
