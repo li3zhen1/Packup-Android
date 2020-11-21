@@ -219,7 +219,7 @@
     <org.engrave.packup.component.shimmer.RepeatedShimmer
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/color_primary_100"
+        android:background="@color/color_primary_700_opaque"
         android:layout_height="4dp"
         app:shimmer_color="@color/color_primary_400"
         android:visibility="invisible"
