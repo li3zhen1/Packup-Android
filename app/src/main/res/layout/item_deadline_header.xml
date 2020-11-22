@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSurfaceElevated2"
+    android:paddingHorizontal="@dimen/deadline_recycler_view_item_horizontal_padding"
+    android:paddingVertical="@dimen/deadline_recycler_view_header_vertical_padding">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deadline_item_header_digest"
+        android:text="@string/expired"
+        android:textColor="@color/color_surface_neutral"
+        android:textSize="@dimen/deadline_recycler_view_item_header_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deadline_item_header_detail"
+        android:text="Due before Monday 23:59"
+        android:textColor="@color/color_surface_neutral"
+        android:textSize="@dimen/deadline_recycler_view_item_header_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

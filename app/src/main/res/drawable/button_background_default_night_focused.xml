@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ripple android:color="@color/color_primary_300"
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <item>
         <shape>
             <corners android:radius="4dp"/>
-            <solid android:color="@color/color_primary_400"/>
+            <solid android:color="@color/color_black_transparent"/>
+            <stroke android:color="@color/color_primary_400" android:width="2dp"/>
         </shape>
     </item>
 </ripple>

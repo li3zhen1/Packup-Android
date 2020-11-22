@@ -22,6 +22,7 @@ import javax.inject.Inject
 class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var binding: ActivityLoginBinding
+
     @Inject
     lateinit var accountInfoRepository: AccountInfoRepository
 
@@ -64,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         }
         loginViewModel.apply {
             isValidationSucceed.observe(this@LoginActivity) {
-                if (it) lifecycleScope.launch{
+                if (it) lifecycleScope.launch {
                     onLoginInfoValidated()
                 }
             }

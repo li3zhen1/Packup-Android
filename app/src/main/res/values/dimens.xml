@@ -3,6 +3,10 @@
 <!-- Deadline Recycler View -->
     <dimen name="deadline_recycler_view_item_member_height">72dp</dimen>
     <dimen name="deadline_recycler_view_item_header_height">16dp</dimen>
+    <dimen name="deadline_recycler_view_item_horizontal_padding">16dp</dimen>
+    <dimen name="deadline_recycler_view_header_vertical_padding">4dp</dimen>
+    <dimen name="deadline_recycler_view_item_vertical_padding">16dp</dimen>
+    <dimen name="deadline_recycler_view_item_header_text_size">12sp</dimen>
 
 
     <!--

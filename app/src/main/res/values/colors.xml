@@ -13,7 +13,7 @@
     <color name="color_primary_100">#c5cbfa</color>
     <color name="color_primary_50">#e8ebfd</color>
 
-    <color name="color_primary_700_opaque">#30003dd4</color>
+    <color name="color_primary_400_opaque">#40486df1</color>
 
 
     <!-- 400 as Accent Color -->
@@ -34,6 +34,7 @@
     <color name="color_black">#000000</color>
     <color name="color_white_transparent">#00ffffff</color>
     <color name="color_white">#ffffff</color>
+    <color name="color_white_opaque">#b0ffffff</color>
     <color name="color_surface_neutral_dark_elevation_01dp">#121212</color>
     <color name="color_surface_neutral_dark_elevation_02dp">#1e1e1e</color>
     <color name="color_surface_neutral_dark_elevation_03dp">#222222</color>
@@ -47,7 +48,7 @@
     <color name="color_surface_neutral">#888</color>
 
     <color name="color_surface_neutral_light_elevation_01dp">#f7f9fa</color>
-    <color name="color_surface_neutral_light_elevation_02dp">#f3f3f3</color>
+    <color name="color_surface_neutral_light_elevation_02dp">#f1f3f4</color>
     <color name="color_surface_neutral_light_elevation_03dp">#f0f0f0</color>
     <color name="color_surface_neutral_light_elevation_04dp">#e8e8e8</color>
     <color name="color_surface_neutral_light_elevation_06dp">#e0e0e0</color>

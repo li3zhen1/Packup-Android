@@ -2,7 +2,7 @@
 
 # Packup
 
-Pack up all about your university.
+Pack up all about your university life.
 
 
 

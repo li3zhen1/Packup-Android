@@ -11,7 +11,7 @@
     <string name="main_nav_documents">Documents</string>
 
     <string name="login_title">Sign in to Packup with your PKU account.</string>
-    <string name="login_student_id_hint">Student ID</string>
+    <string name="login_student_id_hint">Peking University Student ID</string>
     <string name="login_password_id_hint">Password</string>
     <string name="login_button_alt">Sign In</string>
 
@@ -23,7 +23,8 @@
     <string name="student_id_should_consist_of_exactly_10_digits">Student ID should consist of exactly 10 digits.</string>
     <string name="student_id_or_password_is_not_correct">Student ID or Password is not correct.</string>
 
-    <string name="login_hint">By signing in, you agree to Packup\'s&#160;</string>
+    <string name="login_hint">By signing in, you agree to Packup\'s</string>
+    <string name="save_credential_hint">By saving credentials, you agree to Packup\'s</string>
 
     <string name="space_and_space">&#160;and&#160;</string>
     <string name="closure">.</string>
@@ -49,4 +50,15 @@
     <string name="widget_recently_relax">Seems that you have finished all deadlines</string>
     <string name="widget_recently_due_tomorrow">&#160;due tomorrow</string>
     <string name="widget_recently_due_this_week">&#160;due this week</string>
+    <string name="login_packup_account">Packup Account (Email)</string>
+    <string name="login_packup_register">Get a <b>Packup account</b></string>
+    <string name="login_packup_disconnected_mode">Access without Packup account</string>
+    <string name="password_is_not_correct">Account (email) or password not correct</string>
+    <string name="invalid_email">Invalid account (email).</string>
+    <string name="provide_credentials">Save Credentials</string>
+    <string name="expired">Expired</string>
+
+    <string name="have_submission">Submitted</string>
+    <string name="no_submission">No submission</string>
+
 </resources>

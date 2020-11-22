@@ -15,6 +15,7 @@
 
         <item name="colorError">@color/color_error_background</item>
         <item name="fontFamily">@font/inter</item>
+        <item name="colorOnSurface">@color/color_surface_neutral_light_elevation_08dp</item>
 
         <item name="colorSurface">@color/color_surface_neutral_dark_elevation_01dp</item>
         <!--        Status Bar-->
@@ -53,11 +54,13 @@
     <color name="navBarBackgroundColor">#131313</color>
     <color name="activityStatusBarColor">@color/color_surface_neutral_dark_elevation_01dp</color>
 
-    <color name="shimmerBackground"></color>
-
+    <color name="shimmerBackground">@color/color_primary_400_opaque</color>
+    <color name="pkuColor">@color/color_white</color>
+    <color name="pkuBackground">@color/color_black</color>
     <drawable name="packupIcon">@drawable/packup_large_alpha_512</drawable>
     <drawable name="primaryTextFieldBackground">@drawable/textfield_background_drawable_night</drawable>
     <color name="primaryTextFieldHintColor">@color/color_surface_neutral</color>
     <drawable name="primaryButtonBackground">@drawable/button_background_primary_night</drawable>
-
+    <color name="colorSurfaceElevated">@color/color_surface_neutral_light_elevation_02dp</color>
+    <color name="colorSurfaceElevated2">@color/color_surface_neutral_dark_elevation_03dp</color>
 </resources>

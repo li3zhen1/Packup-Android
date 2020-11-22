@@ -14,6 +14,7 @@
         <!-- Status bar color. -->
         <item name="colorError">@color/color_error_background</item>
         <item name="fontFamily">@font/inter</item>
+        <item name="colorOnSurface">@color/color_black</item>
 
         <item name="colorSurface">@color/color_white</item>
         <!--status bar-->
@@ -55,11 +56,16 @@
 
     <color name="navBarBackgroundColor">@color/color_white</color>
 
-    <color name="shimmerBackground">@color/color_primary_700_opacity_20</color>
+    <color name="shimmerBackground">@color/color_primary_400_opaque</color>
 
-
+    <drawable name="defaultButtonBackground">@drawable/button_background_default_night</drawable>
+    <color name="pkuColor">#7e0111</color>
+    <color name="pkuBackground">#7e0111</color>
     <drawable name="packupIcon">@drawable/packup_large_alpha_512</drawable>
     <drawable name="primaryTextFieldBackground">@drawable/textfield_background_drawable_day</drawable>
     <color name="primaryTextFieldHintColor">@color/color_surface_neutral</color>
     <drawable name="primaryButtonBackground">@drawable/button_background_primary_day</drawable>
+
+    <color name="colorSurfaceElevated">@color/color_surface_neutral_light_elevation_01dp</color>
+    <color name="colorSurfaceElevated2">@color/color_surface_neutral_light_elevation_02dp</color>
 </resources>

@@ -11,30 +11,18 @@ class DeadlineViewModel @ViewModelInject constructor(
 ) : ViewModel() {
     /* TODO: 保存默认状态 */
     val sortOrder = MutableLiveData(DeadlineSortOrder.DUE_TIME_DESCENDING)
-    val sortFilter = MutableLiveData(DeadlineSortFilter.NOT_STASHED)
 
     private val deadlines: LiveData<List<Deadline>> = deadlineRepository.allDeadlines
 
-    val sortedDeadlines = MediatorLiveData<List<Deadline>?>()
+    val sortedDeadlines = MediatorLiveData<List<DeadlineItem>?>()
         .apply {
             value = listOf()
             addSource(deadlines) {
-                this.value = it.filteredSortAndGroup(
-                    sortOrder.value ?: DeadlineSortOrder.DUE_TIME_DESCENDING,
-                    sortFilter.value ?: DeadlineSortFilter.NOT_STASHED
-                )
-            }
-            addSource(sortFilter) {
-                this.value = deadlines.value?.filteredSortAndGroup(
-                    sortOrder.value ?: DeadlineSortOrder.DUE_TIME_DESCENDING,
-                    it
-                )
+                this.value =
+                    it.sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_DESCENDING)
             }
             addSource(sortOrder) {
-                this.value = deadlines.value?.filteredSortAndGroup(
-                    it,
-                    sortFilter.value ?: DeadlineSortFilter.NOT_STASHED
-                )
+                this.value = deadlines.value?.sortAndGroup(it)
             }
         }
 }

@@ -7,7 +7,7 @@
     tools:context=".LoginActivity">
 
     <ImageView
-        android:id="@+id/login_pku_icon"
+        android:id="@+id/login_activity_icon"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:contentDescription="@string/login_title"
@@ -18,11 +18,10 @@
         tools:ignoreViewBinding="true"
         app:layout_constraintBottom_toTopOf="@id/login_activity_form_container"/>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/login_activity_form_container"
         android:layout_width="match_parent"
-        android:layout_height="312dp"
+        android:layout_height="420dp"
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,11 +35,11 @@
             android:layout_marginHorizontal="16dp"
             android:autofillHints=""
             android:background="@drawable/primaryTextFieldBackground"
-            android:drawableStart="@drawable/ic_fluent_contact_card_24_regular"
+            android:drawableStart="@drawable/ic_fluent_person_24_regular"
             android:drawablePadding="12dp"
             android:drawableTint="@color/primaryTextFieldHintColor"
             android:textColorHint="@color/primaryTextFieldHintColor"
-            android:hint="@string/login_student_id_hint"
+            android:hint="@string/login_packup_account"
             android:inputType="number"
             android:paddingHorizontal="16dp"
             android:fontFeatureSettings="tnum"
@@ -63,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
-            android:text="@string/student_id_should_consist_of_exactly_10_digits"
+            android:text="@string/invalid_email"
             android:textColor="?colorError"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +98,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             android:layout_marginTop="8dp"
-            android:text="@string/student_id_or_password_is_not_correct"
+            android:text="@string/password_is_not_correct"
             android:textColor="?colorError"
             android:ellipsize="end"
             android:maxLines="2"
@@ -126,7 +125,7 @@
             android:layout_marginHorizontal="60dp"
             android:layout_marginTop="48dp"
             android:gravity="center"
-            android:text="@string/save_credential_hint"
+            android:text="@string/login_hint"
             android:textColor="@color/primaryTextFieldHintColor"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -199,7 +198,7 @@
 
 
         <Button
-            android:id="@+id/login_activity_validate_button"
+            android:id="@+id/login_packup_login_button"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginHorizontal="16dp"
@@ -208,15 +207,55 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/primaryButtonBackground"
             android:enabled="true"
-            android:text="@string/provide_credentials"
+            android:text="@string/login_button_alt"
             android:src="@drawable/ic_fluent_arrow_right_28_regular"
             android:textColor="?colorSurface"
             android:textSize="18sp"
-            android:textAllCaps="false"
             app:layout_constraintTop_toBottomOf="@id/login_activity_hint_2"
+            android:elevation="4dp"/>
+
+        <Button
+            android:id="@+id/login_packup_register_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:enabled="true"
+            android:text="@string/login_packup_register"
+            android:textSize="18sp"
+            android:textColor="?colorPrimary"
+            android:textAllCaps="false"
+            android:background="@drawable/defaultButtonBackground"
+            app:layout_constraintTop_toBottomOf="@id/login_packup_login_button"
+            android:elevation="0dp"/>
+
+        <Button
+            android:id="@+id/login_packup_disconnected_mode"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/defaultButtonBackground"
+            android:enabled="true"
+            android:textAllCaps="false"
+            android:text="@string/login_packup_disconnected_mode"
+            android:src="@drawable/ic_fluent_arrow_right_28_regular"
+            android:textColor="?colorPrimary"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/login_packup_register_button"
             android:elevation="4dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:text="@string/login_packup_disconnected_mode"/>
 
     <org.engrave.packup.component.shimmer.RepeatedShimmer
         android:layout_width="match_parent"
