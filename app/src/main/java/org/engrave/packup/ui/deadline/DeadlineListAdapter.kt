@@ -3,6 +3,7 @@ package org.engrave.packup.ui.deadline
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import org.engrave.packup.R
 import org.engrave.packup.component.DistinctiveDiffCallback
 import org.engrave.packup.component.IDistinctive
+import org.engrave.packup.data.IContentComparable
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.databinding.ItemDeadlineHeaderBinding
 import org.engrave.packup.databinding.ItemDeadlineMemberBinding
@@ -25,12 +27,11 @@ data class DeadlineMember(val deadline: Deadline) : DeadlineItem() {
 
     override fun getIdentityDescriptor() = deadline.uid.toString()
 
-    override fun getContentDescriptor() = deadline.copy(
-        crawl_update_time = 0,
-        sync_time = 0
-    ).toString()
-
     override fun getModifierDescriptor() = ""
+
+    override fun isOfSameContent(other: IDistinctive): Boolean =
+        if (other is DeadlineMember) this.deadline.isOfSameContent(other.deadline)
+        else false
 }
 
 data class DeadlineHeader(val title: String, val num: Int) : DeadlineItem() {
@@ -38,9 +39,11 @@ data class DeadlineHeader(val title: String, val num: Int) : DeadlineItem() {
 
     override fun getIdentityDescriptor() = title
 
-    override fun getContentDescriptor() = num.toString()
-
     override fun getModifierDescriptor() = ""
+
+    override fun isOfSameContent(other: IDistinctive): Boolean =
+        if (other is DeadlineHeader) this.title == other.title && this.num == other.num
+        else false
 }
 
 /*class DeadlineItemDiffCallback : DiffUtil.ItemCallback<DeadlineItem>() {
@@ -75,7 +78,12 @@ class DeadlineListAdapter(private val context: Context) :
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     val pangu = Pangu()
     val haveSubmissionString = context.getString(R.string.have_submission)
-    val noSubmissionString = context.getString(R.string.have_submission)
+    val noSubmissionString = context.getString(R.string.no_submission)
+    val haveSubmissionDrawable =
+        ContextCompat.getDrawable(context, R.drawable.ic_fluent_document_24_regular)
+    val noSubmissionDrawable =
+        ContextCompat.getDrawable(context, R.drawable.ic_fluent_document_endnote_24_regular)
+    val noSubmissionBackgroundTint = ContextCompat.getColor(context, R.color.colorSurfaceElevated2)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -114,9 +122,15 @@ class DeadlineListAdapter(private val context: Context) :
             binding.apply {
                 deadlineItemMemberTitle.text = pangu.spacingText(item.deadline.name)
                 deadlineItemMemberDueTime.text = item.deadline.due_time.asCalendar().applyFormat()
-                deadlineItemMemberSubmissionText.text =
-                    if (item.deadline.has_submission) haveSubmissionString else noSubmissionString
-                deadlineItemMemberCourseName.text = pangu.spacingText(item.deadline.source_name)
+                if (item.deadline.has_submission) {
+                    deadlineItemMemberSubmissionText.text = haveSubmissionString
+                    deadlineItemMemberSubmissionIcon.setImageDrawable(haveSubmissionDrawable)
+                } else {
+                    deadlineItemMemberSubmissionText.text = noSubmissionString
+                    deadlineItemMemberSubmissionIcon.setImageDrawable(noSubmissionDrawable)
+                }
+                deadlineItemMemberCourseName.text =
+                    pangu.spacingText(item.deadline.source_course_name)
             }
         }
     }

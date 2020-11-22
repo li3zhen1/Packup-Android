@@ -10,7 +10,7 @@ class DeadlineViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     /* TODO: 保存默认状态 */
-    val sortOrder = MutableLiveData(DeadlineSortOrder.DUE_TIME_DESCENDING)
+    val sortOrder = MutableLiveData(DeadlineSortOrder.SOURCE_COURSE_NAME)
 
     private val deadlines: LiveData<List<Deadline>> = deadlineRepository.allDeadlines
 
@@ -25,4 +25,5 @@ class DeadlineViewModel @ViewModelInject constructor(
                 this.value = deadlines.value?.sortAndGroup(it)
             }
         }
+
 }

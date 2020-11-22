@@ -3,6 +3,7 @@ package org.engrave.packup.data.deadline
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.engrave.packup.api.pku.course.DeadlineRawJson
+import org.engrave.packup.data.IContentComparable
 import org.engrave.packup.util.DAY_IN_MILLIS
 import org.engrave.packup.util.HOUR_IN_MILLIS
 import org.engrave.packup.util.MONTH_IN_MILLIS
@@ -19,22 +20,31 @@ data class Deadline(
     val event_type: String?,
     val course_object_id: String?,
     val source_name: String?,
-    val reminder: Long?,
-    /* 从教学网抓下来的时间 */
-    val crawl_update_time: Long?,
-    /* 和服务器同步的时间 */
-    val sync_time: Long?,
     val due_time: Long?,
-    val is_finished: Boolean,
+    val reminder: Long?,
+    val is_completed: Boolean,
     val is_deleted: Boolean,
     val is_starred: Boolean,
-    val has_submission: Boolean
-) {
-    val importance: Int
-        get() = 0
+    val has_submission: Boolean,
 
-    val inferred_subject: String?
-        get() = null
+    /* 用户无关字段 */
+    val crawl_update_time: Long?,   // 从教学网抓下来的时间
+    val sync_time: Long?,           // 和服务器同步的时间
+): IContentComparable<Deadline> {
+    val importance: Int get() = 0
+    val inferred_subject: String? get() = null
+
+    val source_course_name: String get() = source_name?.substringBeforeLast("(") ?: ""
+
+
+    /* 仅比较用户有关字段 */
+    override fun isOfSameContent(other: Deadline) =
+        uid == other.uid && name == other.name && description == other.description
+                && event_type == other.event_type && course_object_id == other.course_object_id
+                && source_name == other.source_name && reminder == other.reminder
+                && due_time == other.due_time && is_completed == other.is_completed
+                && is_deleted == other.is_deleted && is_starred == other.is_starred
+                && has_submission == other.has_submission
 
     companion object {
         private val zuluFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA);
@@ -48,13 +58,14 @@ data class Deadline(
             course_object_id = it.itemSourceId,
             source_name = it.calendarName,
             reminder = null,
-            crawl_update_time = Date().time,
-            sync_time = null,
             due_time = zuluFormatter.parse(it.endDate).time,
-            is_finished = false,
+            is_completed = false,
             is_deleted = false,
             is_starred = false,
-            has_submission = false
+            has_submission = false,
+
+            crawl_update_time = Date().time,
+            sync_time = null,
         )
     }
 }
