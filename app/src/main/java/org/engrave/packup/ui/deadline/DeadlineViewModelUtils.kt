@@ -1,16 +1,36 @@
 package org.engrave.packup.ui.deadline
 
-import android.util.Log
-import org.engrave.packup.data.deadline.*
+import org.engrave.packup.data.deadline.Deadline
+import org.engrave.packup.data.deadline.DeadlineSortOrder
+import org.engrave.packup.data.deadline.groupByAssignedTime
+import org.engrave.packup.data.deadline.groupByDueTime
 import java.util.*
+
+
+fun List<Deadline>.crossFilter(
+    isDeleted: Boolean = false,
+    isSubmitted: Boolean? = false,
+    isExpired: Boolean? = null,
+    certainCourseName: String? = null,
+    baselineTime: Long = Calendar.getInstance().timeInMillis
+): List<Deadline> = this.filter { ddl ->
+    (ddl.is_deleted == isDeleted)
+            && (isSubmitted?.let { ddl.has_submission == isSubmitted } ?: true)
+            /**
+             * isExpired == null   ==>   true
+             * isExpired != null:
+             *     due_time == null  ==> true
+             *     due_time != null  ==> Is it expired?
+             */
+            && (isExpired?.let { ddl.due_time?.let { dt -> dt <= baselineTime } ?: true } ?: true)
+            && (certainCourseName?.let { ddl.source_name == certainCourseName } ?: true)
+}
 
 fun List<Deadline>.sortAndGroup(
     order: DeadlineSortOrder,
     baselineTime: Long = Calendar.getInstance().timeInMillis
 ): List<DeadlineItem> {
-    val date = Date().time
-    Log.e("", "start at $date")
-    val groups = when (order) {
+    return when (order) {
         DeadlineSortOrder.DUE_TIME_ASCENDING -> groupByDueTime()
             .flatMap { entry ->
                 listOf(
@@ -77,7 +97,4 @@ fun List<Deadline>.sortAndGroup(
                 }
             }
     }
-
-    Log.e("", "end after ${Date().time - date}")
-    return groups
 }

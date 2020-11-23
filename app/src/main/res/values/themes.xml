@@ -2,7 +2,7 @@
     <bool name="isDarkMode">false</bool>
 
     <!-- Base application theme. -->
-    <style name="Theme.Packup.Activity" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Packup.Activity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary_400</item>
         <item name="colorPrimaryVariant">@color/color_primary_400</item>
@@ -33,7 +33,7 @@
     </style>
 
 
-    <style name="Theme.Packup.Splash" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Packup.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_day</item>
         <item name="colorSurface">@color/color_white</item>
         <!--Same as Theme.Packup-->
@@ -70,4 +70,7 @@
     <color name="colorSurfaceElevated2">@color/color_surface_neutral_light_elevation_02dp</color>
 
     <color name="colorText">#9AA0A2</color>
+
+
+    <drawable name="starButtonBackground">@drawable/button_background_round_ripple_star_day</drawable>
 </resources>

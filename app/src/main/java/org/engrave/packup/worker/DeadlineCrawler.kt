@@ -17,7 +17,6 @@ import org.engrave.packup.api.pku.course.fetchDeadlineIsSubmitted
 import org.engrave.packup.data.account.AccountInfoRepository
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.data.deadline.DeadlineDao
-import org.engrave.packup.util.applyFormat
 
 
 class DeadlineCrawler @WorkerInject constructor(
@@ -49,7 +48,7 @@ class DeadlineCrawler @WorkerInject constructor(
 
             if (deadlines != null) {
                 for (existedDdl in deadlines) {
-                    if (newDeadline.isOfSameContent(existedDdl)) {
+                    if (newDeadline.contentSameWith(existedDdl)) {
                         existFlag = true
                         occludedDeadlineHasSubmission = existedDdl.has_submission
                         break

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:background="@color/color_primary_400"
+        android:paddingHorizontal="@dimen/toolbar_horiztontal_padding"
+        android:paddingVertical="@dimen/toolbar_vertical_padding">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/toolbar_title"
+            android:text="Fragment Name"
+            android:textStyle="bold"
+            android:textColor="?colorSurface"
+            android:textSize="20sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

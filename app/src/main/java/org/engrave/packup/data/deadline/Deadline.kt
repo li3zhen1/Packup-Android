@@ -1,10 +1,10 @@
 package org.engrave.packup.data.deadline
 
+import android.icu.text.SimpleDateFormat
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.engrave.packup.api.pku.course.DeadlineRawJson
-import org.engrave.packup.data.IContentComparable
-import android.icu.text.SimpleDateFormat
+import org.engrave.packup.data.IPayloadChangeAnimatable
 import org.engrave.packup.util.*
 import java.util.*
 
@@ -27,20 +27,21 @@ data class Deadline(
     /* 用户无关字段 */
     val crawl_update_time: Long?,   // 从教学网抓下来的时间
     val sync_time: Long?,           // 和服务器同步的时间
-): IContentComparable<Deadline> {
+) : IPayloadChangeAnimatable<Deadline> {
     val importance: Int get() = 0
     val inferred_subject: String? get() = null
 
     val source_course_name: String get() = source_name?.substringBeforeLast("(") ?: ""
 
-    /* 仅比较用户有关字段 */
-    override fun isOfSameContent(other: Deadline) =
+    override fun keyFieldsSameWith(other: Deadline) =
         uid == other.uid && name == other.name && description == other.description
                 && event_type == other.event_type && course_object_id == other.course_object_id
                 && source_name == other.source_name && reminder == other.reminder
                 && due_time == other.due_time && is_completed == other.is_completed
-                && is_deleted == other.is_deleted && is_starred == other.is_starred
-                && has_submission == other.has_submission
+                && is_deleted == other.is_deleted
+
+    override fun animatableFieldsSameWith(other: Deadline): Boolean =
+        is_starred == other.is_starred && has_submission == other.has_submission
 
     companion object {
         private val zuluFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA);
@@ -64,6 +65,8 @@ data class Deadline(
             sync_time = null,
         )
     }
+
+
 }
 
 enum class DeadlineSortOrder {
@@ -77,14 +80,9 @@ enum class DeadlineSortOrder {
     SUBMISSION
 }
 
-enum class DeadlineSortFilter {
-    NOT_STASHED,
-    ONLY_STASHED,
-    NOT_SUBMITTED,
-    SUBMITTED,
-}
 
-enum class DueTimeNode {
+
+enum class DueTimeNode{
     UNKNOWN,
     EXPIRED,
     DUE_WITHIN_1_HOUR,
@@ -95,14 +93,14 @@ enum class DueTimeNode {
     MORE_THAN_ONE_MONTH_LEFT
 }
 
-enum class AssignedTimeNode {
+enum class AssignedTimeNode{
     UNKNOWN,
     RECENT_1_HOUR,
     RECENT_24_HOUR,
     RECENT_72_HOUR,
     RECENT_7_DAYS,
     RECENT_30_DAYS,
-    LONG_LONG_AGO,
+    LONG_LONG_AGO
 }
 
 
@@ -120,6 +118,8 @@ fun List<Deadline>.groupByDueTime(baselineTime: Long = Calendar.getInstance().ti
                 else -> DueTimeNode.MORE_THAN_ONE_MONTH_LEFT
             }
         }
+    }.toSortedMap { o1, o2 ->
+        o1.ordinal - o2.ordinal
     }
 
 fun List<Deadline>.groupByAssignedTime(baselineTime: Long = Calendar.getInstance().timeInMillis) =
@@ -136,5 +136,7 @@ fun List<Deadline>.groupByAssignedTime(baselineTime: Long = Calendar.getInstance
                 else -> AssignedTimeNode.LONG_LONG_AGO
             }
         }
+    }.toSortedMap { o1, o2 ->
+        o1.ordinal - o2.ordinal
     }
 

@@ -32,7 +32,7 @@ class DeadlineRepository @Inject constructor(
                     .setConstraints(constraints)
                     .build()
             WorkManager.getInstance(context).enqueueUniquePeriodicWork(
-                "course-crawler",
+                COURSE_CRAWLER_NAME,
                 ExistingPeriodicWorkPolicy.KEEP,
                 courseCrawler
             )
@@ -40,5 +40,7 @@ class DeadlineRepository @Inject constructor(
     }
 
 
-
+    companion object {
+        const val COURSE_CRAWLER_NAME = "course-crawler"
+    }
 }

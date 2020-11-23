@@ -14,7 +14,6 @@ import org.engrave.packup.component.IDistinctive
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.databinding.ItemDeadlineHeaderBinding
 import org.engrave.packup.databinding.ItemDeadlineMemberBinding
-import org.engrave.packup.util.asGmtCalendar
 import org.engrave.packup.util.asLocalCalendar
 import org.engrave.packup.util.toGlobalizedString
 import ws.vinta.pangu.Pangu
@@ -29,7 +28,7 @@ data class DeadlineMember(val deadline: Deadline) : DeadlineItem() {
     override fun getModifierDescriptor() = ""
 
     override fun isOfSameContent(other: IDistinctive): Boolean =
-        if (other is DeadlineMember) this.deadline.isOfSameContent(other.deadline)
+        if (other is DeadlineMember) this.deadline.contentSameWith(other.deadline)
         else false
 }
 

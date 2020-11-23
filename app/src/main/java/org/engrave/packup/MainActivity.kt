@@ -1,33 +1,28 @@
 package org.engrave.packup
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import androidx.work.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import org.engrave.packup.databinding.ActivityMainBinding
 import org.engrave.packup.ui.deadline.DeadlineFragment
-import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var viewPager: ViewPager2
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        bottomNavigationView = findViewById(R.id.main_activity_bottom_nav)
-        viewPager = findViewById(R.id.main_activity_view_pager)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.mainActivityToolBarContainer)
 
-        viewPager.apply {
+        binding.mainActivityToolbarTitle.text = ""
+
+        binding.mainActivityViewPager.apply {
             isUserInputEnabled = false
             offscreenPageLimit = 2
             adapter = object : FragmentStateAdapter(this@MainActivity) {
@@ -45,19 +40,24 @@ class MainActivity : AppCompatActivity() {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    bottomNavigationView.menu.getItem(position).isChecked = true
+                    binding.mainActivityBottomNav.menu.getItem(position).isChecked = true
                 }
             })
         }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener {
+        binding.mainActivityBottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.deadline_fragment_item -> viewPager.setCurrentItem(0, false)
-                R.id.event_fragment_item -> viewPager.setCurrentItem(1, false)
-                R.id.document_fragment_item -> viewPager.setCurrentItem(2, false)
+                R.id.deadline_fragment_item -> binding.mainActivityViewPager.setCurrentItem(
+                    0,
+                    false
+                )
+                R.id.event_fragment_item -> binding.mainActivityViewPager.setCurrentItem(1, false)
+                R.id.document_fragment_item -> binding.mainActivityViewPager.setCurrentItem(
+                    2,
+                    false
+                )
             }
             true
         }
-
     }
 }

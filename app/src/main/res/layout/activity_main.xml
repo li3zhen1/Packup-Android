@@ -10,14 +10,46 @@
         android:id="@+id/main_activity_view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/main_activity_bottom_nav"/>
-<com.google.android.material.bottomnavigation.BottomNavigationView
+        android:elevation="0dp"
+        app:layout_constraintTop_toBottomOf="@id/main_activity_tool_bar_container"
+        app:layout_constraintBottom_toTopOf="@id/main_activity_bottom_nav" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_activity_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         style="@style/defaultNav"
-        app:menu="@menu/main_nav" />
+        app:menu="@menu/main_nav"
+        android:elevation="8dp"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_activity_tool_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:contentInsetStart="0dp"
+        android:elevation="8dp"
+        android:background="@color/color_primary_400">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:background="@color/color_primary_400"
+            android:paddingHorizontal="@dimen/toolbar_horiztontal_padding"
+            android:paddingVertical="@dimen/toolbar_vertical_padding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/main_activity_toolbar_title"
+                android:text="Fragment Name"
+                android:textStyle="bold"
+                android:textColor="?colorSurface"
+                android:textSize="20sp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>
