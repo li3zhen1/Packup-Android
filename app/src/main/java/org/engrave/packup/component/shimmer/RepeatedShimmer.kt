@@ -35,7 +35,7 @@ class RepeatedShimmer : FrameLayout, IBaseView {
         defStyleAttr
     ) {
         init(context)
-        // ToDo 可能存在内存泄漏的问题？
+        // ToDo 可能存在内存泄漏的问题
         val v = inflate(context, R.layout.component_shimmer, this)
         shimmer = v.findViewById(R.id.component_shimmer_indicator)
         attrs?.let { retrieveAttributes(attrs) }
