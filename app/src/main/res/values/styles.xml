@@ -14,4 +14,10 @@
         <item name="android:background">@drawable/button_background_default_day</item>
         <item name="android:textColor">@color/color_primary_300</item>
     </style>
+
+    <style name="StarCheckBox" parent="Theme.Packup.Activity">
+        <item name="colorAccent">@color/color_vibrant_500</item>
+        <item name="colorPrimary">@color/color_vibrant_500</item>
+    </style>
+
 </resources>

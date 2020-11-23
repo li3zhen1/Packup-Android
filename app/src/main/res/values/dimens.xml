@@ -10,7 +10,7 @@
     <dimen name="deadline_recycler_view_item_line_gap">8dp</dimen>
     <dimen name="deadline_recycler_view_item_column_gap">4dp</dimen>
 
-    <dimen name="toolbar_horiztontal_padding">12dp</dimen>
+    <dimen name="toolbar_horizontal_padding">16dp</dimen>
     <dimen name="toolbar_vertical_padding">16dp</dimen>
 
     <!--

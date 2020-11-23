@@ -73,4 +73,7 @@
 
 
     <drawable name="starButtonBackground">@drawable/button_background_round_ripple_star_day</drawable>
+    <drawable name="addIcon24">@drawable/ic_packup_add_24_regular_white</drawable>
+
+    <color name="colorToolbarButton">@color/color_primary_500</color>
 </resources>

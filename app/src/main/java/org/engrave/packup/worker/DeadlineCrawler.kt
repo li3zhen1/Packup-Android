@@ -26,12 +26,12 @@ class DeadlineCrawler @WorkerInject constructor(
     private val accountInfoRepository: AccountInfoRepository,
     // TODO: Inject Configs
 ) : CoroutineWorker(appContext, workerParams) {
-    init {
-        showToast("WorkerInit")
-    }
+//    init {
+//        showToast("WorkerInit")
+//    }
     override suspend fun doWork(): Result = try {
 
-        showToast("Worker Dowork")
+//        showToast("Worker Dowork")
         val accountInfo = accountInfoRepository.readAccountInfo()
         val deadlines = deadlineDao.getAllDeadlines().value
         val loggedCookie = fetchCourseLoginCookies(
@@ -43,7 +43,7 @@ class DeadlineCrawler @WorkerInject constructor(
                 loggedCookie
             )
         }
-        showToast(newDeadlinesUnparsed.joinToString("\n") { it.endDate })
+//        showToast(newDeadlinesUnparsed.joinToString("\n") { it.endDate })
         val newDealines = newDeadlinesUnparsed.map(Deadline::fromRawJson)
 
         newDealines.forEach { newDeadline ->

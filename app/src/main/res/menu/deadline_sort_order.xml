@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_deadline_filter_due_time_ascending"
+        android:icon="@drawable/ic_fluent_text_sort_descending_20_regular"
+        android:title="Due Time Ascending"/>
+
+    <item
+        android:id="@+id/menu_deadline_filter_due_time_descending"
+        android:icon="@drawable/ic_fluent_text_sort_descending_20_regular"
+        android:title="Due Time Descending"/>
+
+    <item
+        android:id="@+id/menu_deadline_filter_course_name"
+        android:icon="@drawable/ic_fluent_text_sort_ascending_20_regular"
+        android:title="Course Name"/>
+
+</menu>

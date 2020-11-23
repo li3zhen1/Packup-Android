@@ -18,6 +18,10 @@ class DeadlineRepository @Inject constructor(
     private val deadlineDao: DeadlineDao,
     @ApplicationContext private val context: Context
 ) {
+    suspend fun setStarred(uid: Int, boolean: Boolean) {
+        deadlineDao.setDeadlineStarred(uid, boolean)
+    }
+
     private val repositoryScope = CoroutineScope(Dispatchers.Default)
     val allDeadlines: LiveData<List<Deadline>> = deadlineDao.getAllDeadlines()
     val allDeadlinesStatic: List<Deadline> get() = deadlineDao.getAllDeadlinesStatic()

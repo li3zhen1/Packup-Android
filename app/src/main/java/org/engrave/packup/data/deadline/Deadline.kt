@@ -118,8 +118,6 @@ fun List<Deadline>.groupByDueTime(baselineTime: Long = Calendar.getInstance().ti
                 else -> DueTimeNode.MORE_THAN_ONE_MONTH_LEFT
             }
         }
-    }.toSortedMap { o1, o2 ->
-        o1.ordinal - o2.ordinal
     }
 
 fun List<Deadline>.groupByAssignedTime(baselineTime: Long = Calendar.getInstance().timeInMillis) =
@@ -136,7 +134,5 @@ fun List<Deadline>.groupByAssignedTime(baselineTime: Long = Calendar.getInstance
                 else -> AssignedTimeNode.LONG_LONG_AGO
             }
         }
-    }.toSortedMap { o1, o2 ->
-        o1.ordinal - o2.ordinal
     }
 

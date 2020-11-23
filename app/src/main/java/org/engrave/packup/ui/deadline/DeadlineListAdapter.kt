@@ -1,8 +1,10 @@
 package org.engrave.packup.ui.deadline
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -71,7 +73,10 @@ data class DeadlineHeader(val title: String, val num: Int) : DeadlineItem() {
 }*/
 
 
-class DeadlineListAdapter(private val context: Context) :
+class DeadlineListAdapter(
+    private val context: Context,
+    private val onClickStar: (Int, Boolean) -> Unit
+) :
     ListAdapter<DeadlineItem, RecyclerView.ViewHolder>(DistinctiveDiffCallback<DeadlineItem>()) {
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     val pangu = Pangu()
@@ -101,8 +106,9 @@ class DeadlineListAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder) {
         is DeadlineHeaderViewHolder -> holder.bind(getItem(position) as DeadlineHeader)
-        is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember) {
-            // TODO: onClick
+        is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember) { bool ->
+            Log.e("position", position.toString())
+            onClickStar((getItem(position) as DeadlineMember).deadline.uid, bool)
         }
         else -> throw ClassCastException("Unknown ViewHolder Class ${holder::class.simpleName} when inflating deadline list.")
     }
@@ -116,15 +122,17 @@ class DeadlineListAdapter(private val context: Context) :
 
     inner class DeadlineMemberViewHolder internal constructor(private val binding: ItemDeadlineMemberBinding) :
         RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
-        fun bind(item: DeadlineMember, onClick: () -> Unit) {
+        fun bind(item: DeadlineMember, onClickStarBind: (Boolean)->Unit) {
             binding.apply {
                 deadlineItemMemberTitle.text = pangu.spacingText(item.deadline.name)
                 deadlineItemMemberDueTime.text =
                     item.deadline.due_time.asLocalCalendar()?.toGlobalizedString(context)
-                if (item.deadline.has_submission) {
-                    deadlineItemMemberSubmissionButton.setImageDrawable(haveSubmissionDrawable)
-                } else {
-                    deadlineItemMemberSubmissionButton.setImageDrawable(noSubmissionDrawable)
+                deadlineItemMemberSubmissionButton.isChecked = item.deadline.has_submission
+                deadlineItemMemberStarButton.apply {
+                    setOnCheckedChangeListener { _, isChecked ->
+                        onClickStarBind(isChecked)
+                    }
+                    isChecked = item.deadline.is_starred
                 }
                 deadlineItemMemberCourseText.text =
                     pangu.spacingText(item.deadline.source_course_name)

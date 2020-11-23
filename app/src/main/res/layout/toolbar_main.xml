@@ -5,7 +5,7 @@
         android:layout_height="60dp"
         android:layout_width="match_parent"
         android:background="@color/color_primary_400"
-        android:paddingHorizontal="@dimen/toolbar_horiztontal_padding"
+        android:paddingHorizontal="@dimen/toolbar_horizontal_padding"
         android:paddingVertical="@dimen/toolbar_vertical_padding">
         <TextView
             android:layout_width="wrap_content"

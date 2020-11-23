@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/button_background_round_ripple_star_day_activated" android:state_enabled="true" android:state_active="true"/>
-    <item android:drawable="@drawable/button_background_round_ripple_star_day_default" android:state_enabled="true" android:state_active="false"/>
-    <item android:drawable="@drawable/button_background_round_ripple_star_day_disabled"/>
+    <item android:drawable="@drawable/ic_packup_star_24_filled" android:state_checked="true"/>
+    <item android:drawable="@drawable/ic_packup_star_24_regular" android:state_checked="false"/>
+    <item android:drawable="@drawable/ic_packup_star_24_regular"/>
+<!--    <item android:drawable="@drawable/button_background_round_ripple_star_day_activated" android:state_enabled="true" android:state_active="true"/>-->
+<!--    <item android:drawable="@drawable/button_background_round_ripple_star_day_default" android:state_enabled="true" android:state_active="false"/>-->
+<!--    <item android:drawable="@drawable/button_background_round_ripple_star_day_disabled"/>-->
 </selector>

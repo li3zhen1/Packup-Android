@@ -3,6 +3,7 @@ package org.engrave.packup.ui.deadline
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.data.deadline.DeadlineRepository
 import org.engrave.packup.data.deadline.DeadlineSortOrder
@@ -68,4 +69,10 @@ class DeadlineViewModel @ViewModelInject constructor(
         filterIsExpired.value,
         certainCourseName.value
     )
+
+    fun setStarred(uid: Int, boolean: Boolean) {
+        viewModelScope.launch {
+            deadlineRepository.setStarred(uid, boolean)
+        }
+    }
 }

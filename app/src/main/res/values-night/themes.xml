@@ -67,4 +67,7 @@
     <color name="colorText">@color/color_surface_neutral_light_elevation_24dp</color>
 
     <drawable name="starButtonBackground">@drawable/button_background_round_ripple_star_night</drawable>
+    <drawable name="addIcon24">@drawable/ic_packup_add_24_regular_black</drawable>
+
+    <color name="colorToolbarButton">@color/color_surface_neutral_dark_elevation_08dp</color>
 </resources>

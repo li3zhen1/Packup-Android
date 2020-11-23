@@ -32,6 +32,9 @@ fun List<Deadline>.sortAndGroup(
 ): List<DeadlineItem> {
     return when (order) {
         DeadlineSortOrder.DUE_TIME_ASCENDING -> groupByDueTime(baselineTime)
+            .toSortedMap { o1, o2 ->
+                o1.ordinal - o2.ordinal
+            }
             .flatMap { entry ->
                 listOf(
                     DeadlineHeader(entry.key.toString(), entry.value.size)
@@ -40,6 +43,9 @@ fun List<Deadline>.sortAndGroup(
                 }
             }
         DeadlineSortOrder.DUE_TIME_DESCENDING -> groupByDueTime(baselineTime)
+            .toSortedMap { o1, o2 ->
+                o2.ordinal - o1.ordinal
+            }
             .flatMap { entry ->
                 listOf(
                     DeadlineHeader(entry.key.toString(), entry.value.size)
@@ -48,6 +54,9 @@ fun List<Deadline>.sortAndGroup(
                 }
             }
         DeadlineSortOrder.ASSIGNED_TIME_ASCENDING -> groupByAssignedTime()
+            .toSortedMap { o1, o2 ->
+                o1.ordinal - o2.ordinal
+            }
             .flatMap { entry ->
                 listOf(
                     DeadlineHeader(entry.key.toString(), entry.value.size)
@@ -56,6 +65,9 @@ fun List<Deadline>.sortAndGroup(
                 }
             }
         DeadlineSortOrder.ASSIGNED_TIME_DESCENDING -> groupByAssignedTime()
+            .toSortedMap { o1, o2 ->
+                o2.ordinal - o1.ordinal
+            }
             .flatMap { entry ->
                 listOf(
                     DeadlineHeader(entry.key.toString(), entry.value.size)
@@ -65,6 +77,14 @@ fun List<Deadline>.sortAndGroup(
             }
 
         DeadlineSortOrder.SOURCE_COURSE_NAME -> groupBy { it.source_name }
+            .toSortedMap { o1, o2 ->
+                if (o1 == null && o2 == null) 0
+                else if (o1 == null) -1
+                else if (o2 == null) 1
+                else if (o1 == o2) 0
+                else if (o1 > o2) 1
+                else -1
+            }
             .flatMap { entry ->
                 listOf(
                     DeadlineHeader(entry.key ?: "其它", entry.value.size)

@@ -12,12 +12,15 @@
         android:id="@+id/deadline_fragment_recyclerview"/>
 
 
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/deadline_fragment_add_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_fluent_add_24_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/toolbar_horizontal_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        android:tooltipText="Add"
+        android:src="@drawable/addIcon24"
+        android:contentDescription="Add">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
