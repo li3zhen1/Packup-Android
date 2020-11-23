@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                 doOnTextChanged { text, _, _, _ ->
                     loginViewModel.setPassword(text.toString())
                 }
-                setOnEditorActionListener { v, actionId, event ->
+                setOnEditorActionListener { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_DONE)
                         loginViewModel.validateLoginInfo()
                     false

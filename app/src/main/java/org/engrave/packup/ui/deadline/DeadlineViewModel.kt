@@ -63,7 +63,7 @@ class DeadlineViewModel @ViewModelInject constructor(
         }
 
     private fun List<Deadline>.applyLiveDateToCrossFilter() = this.crossFilter(
-        filterIsDeleted.value,
+        filterIsDeleted.value ?: false,
         filterIsSubmitted.value,
         filterIsExpired.value,
         certainCourseName.value

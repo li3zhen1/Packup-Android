@@ -16,7 +16,7 @@ import kotlin.math.PI
 import kotlin.math.sin
 
 class RepeatedShimmer : FrameLayout, IBaseView {
-    private lateinit var shimmer: View
+    private var shimmer: View
 
     @ColorInt
     var shimmerColor: Int = 0

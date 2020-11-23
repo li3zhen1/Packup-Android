@@ -31,7 +31,7 @@ fun List<Deadline>.sortAndGroup(
     baselineTime: Long = Calendar.getInstance().timeInMillis
 ): List<DeadlineItem> {
     return when (order) {
-        DeadlineSortOrder.DUE_TIME_ASCENDING -> groupByDueTime()
+        DeadlineSortOrder.DUE_TIME_ASCENDING -> groupByDueTime(baselineTime)
             .flatMap { entry ->
                 listOf(
                     DeadlineHeader(entry.key.toString(), entry.value.size)
@@ -39,7 +39,7 @@ fun List<Deadline>.sortAndGroup(
                     DeadlineMember(it)
                 }
             }
-        DeadlineSortOrder.DUE_TIME_DESCENDING -> groupByDueTime()
+        DeadlineSortOrder.DUE_TIME_DESCENDING -> groupByDueTime(baselineTime)
             .flatMap { entry ->
                 listOf(
                     DeadlineHeader(entry.key.toString(), entry.value.size)
