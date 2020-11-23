@@ -26,8 +26,12 @@ class DeadlineCrawler @WorkerInject constructor(
     private val accountInfoRepository: AccountInfoRepository,
     // TODO: Inject Configs
 ) : CoroutineWorker(appContext, workerParams) {
+    init {
+        showToast("WorkerInit")
+    }
     override suspend fun doWork(): Result = try {
 
+        showToast("Worker Dowork")
         val accountInfo = accountInfoRepository.readAccountInfo()
         val deadlines = deadlineDao.getAllDeadlines().value
         val loggedCookie = fetchCourseLoginCookies(
@@ -79,6 +83,7 @@ class DeadlineCrawler @WorkerInject constructor(
             )
         )
     } catch (e: Exception) {
+        showToast(e.message.toString())
         Result.failure(
             workDataOf(
                 DATA_EXCEPTION_MESSAGE_FIELD to e.message

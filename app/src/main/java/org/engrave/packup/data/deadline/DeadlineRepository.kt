@@ -29,8 +29,9 @@ class DeadlineRepository @Inject constructor(
                 .build()
             val courseCrawler =
                 PeriodicWorkRequestBuilder<DeadlineCrawler>(30, TimeUnit.MINUTES)
-                    .setConstraints(constraints)
+                    //.setConstraints(constraints)
                     .build()
+            //WorkManager.getInstance(context).enqueue(courseCrawler)
             WorkManager.getInstance(context).enqueueUniquePeriodicWork(
                 COURSE_CRAWLER_NAME,
                 ExistingPeriodicWorkPolicy.KEEP,
