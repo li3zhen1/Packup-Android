@@ -63,4 +63,6 @@
     <drawable name="primaryButtonBackground">@drawable/button_background_primary_night</drawable>
     <color name="colorSurfaceElevated">@color/color_surface_neutral_light_elevation_02dp</color>
     <color name="colorSurfaceElevated2">@color/color_surface_neutral_dark_elevation_03dp</color>
+
+    <color name="colorText">@color/color_surface_neutral_light_elevation_24dp</color>
 </resources>

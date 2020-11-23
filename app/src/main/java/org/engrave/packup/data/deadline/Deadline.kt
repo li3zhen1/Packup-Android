@@ -4,11 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.engrave.packup.api.pku.course.DeadlineRawJson
 import org.engrave.packup.data.IContentComparable
-import org.engrave.packup.util.DAY_IN_MILLIS
-import org.engrave.packup.util.HOUR_IN_MILLIS
-import org.engrave.packup.util.MONTH_IN_MILLIS
-import org.engrave.packup.util.WEEK_IN_MILLIS
-import java.text.SimpleDateFormat
+import android.icu.text.SimpleDateFormat
+import org.engrave.packup.util.*
 import java.util.*
 
 @Entity
@@ -36,7 +33,6 @@ data class Deadline(
 
     val source_course_name: String get() = source_name?.substringBeforeLast("(") ?: ""
 
-
     /* 仅比较用户有关字段 */
     override fun isOfSameContent(other: Deadline) =
         uid == other.uid && name == other.name && description == other.description
@@ -58,7 +54,7 @@ data class Deadline(
             course_object_id = it.itemSourceId,
             source_name = it.calendarName,
             reminder = null,
-            due_time = zuluFormatter.parse(it.endDate).time,
+            due_time = fromZuluFormat(it.endDate).timeInMillis,
             is_completed = false,
             is_deleted = false,
             is_starred = false,

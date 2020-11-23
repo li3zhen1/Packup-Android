@@ -1,22 +1,78 @@
 package org.engrave.packup.util
 
+import android.content.Context
+import org.engrave.packup.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Suppress("NOTHING_TO_INLINE")
-inline fun Long?.asCalendar() =
-    if (this != null) Calendar.getInstance().apply {
-        timeInMillis = this@asCalendar
+fun fromZuluFormat(formatted: String) = Calendar.getInstance(TimeZone.getTimeZone("GMT"))
+    .apply {
+        set(
+            formatted.slice(0..3).toInt(),
+            formatted.slice(5..6).toInt() - 1,
+            formatted.slice(8..9).toInt(),
+            formatted.slice(11..12).toInt(),
+            formatted.slice(14..15).toInt(),
+            formatted.slice(17..18).toInt()
+        )
+        set(Calendar.MILLISECOND, 0)
+    }
+
+fun Long?.asGmtCalendar() =
+    if (this != null) Calendar.getInstance(TimeZone.getTimeZone("GMT")).apply {
+        timeInMillis = this@asGmtCalendar
     } else null
 
-// TODO
+fun Long?.asLocalCalendar() =
+    if (this != null) Calendar.getInstance().apply {
+        timeInMillis = this@asLocalCalendar
+    } else null
+
+
+@Deprecated("Not thread-safe", replaceWith = ReplaceWith("Calendar.toGlobalizedString()"))
 @Suppress("NOTHING_TO_INLINE")
 inline fun Calendar?.applyFormat(
     fmt: SimpleDateFormat = SimpleDateFormat(
         "yyyy-MM-dd HH:mm:ss",
-        Locale.CHINA
+        Locale.getDefault()
     )
 ): String = if (this != null) fmt.format(this.time) else "Unspecified Date."
+
+
+fun Calendar.toGlobalizedString(context: Context, autoOmitYear: Boolean = true): String {
+    val template_omit = context.getString(R.string.date_time_format_omitted)
+    val template_complete = context.getString(R.string.date_time_format)
+    val isSameYear = this.get(Calendar.YEAR) == Calendar.getInstance().getYear()
+    val monthName = when (this.get(Calendar.MONTH)) {
+        0 -> context.getString(R.string.month1)
+        1 -> context.getString(R.string.month2)
+        2 -> context.getString(R.string.month3)
+        3 -> context.getString(R.string.month4)
+        4 -> context.getString(R.string.month5)
+        5 -> context.getString(R.string.month6)
+        6 -> context.getString(R.string.month7)
+        7 -> context.getString(R.string.month8)
+        8 -> context.getString(R.string.month9)
+        9 -> context.getString(R.string.month10)
+        10 -> context.getString(R.string.month11)
+        11 -> context.getString(R.string.month12)
+        else -> throw Exception("Invalid month.")
+    }
+    return if (autoOmitYear && isSameYear) String.format(
+        template_omit,
+        monthName,
+        this.get(Calendar.DATE),
+        this.get(Calendar.HOUR_OF_DAY),
+        this.get(Calendar.MINUTE)
+    ) else String.format(
+        template_complete,
+        this.get(Calendar.YEAR),
+        monthName,
+        this.get(Calendar.DATE),
+        this.get(Calendar.HOUR_OF_DAY),
+        this.get(Calendar.MINUTE)
+    )
+}
 
 // TODO
 @Suppress("NOTHING_TO_INLINE")

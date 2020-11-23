@@ -61,4 +61,20 @@
     <string name="have_submission">Submitted</string>
     <string name="no_submission">No submission</string>
 
+    <string name="date_time_format_omitted">%s %s  %s:%s</string>
+    <string name="date_time_format">%s %s  %s:%s</string>
+
+    <string name="month1">Jan</string>
+    <string name="month2">Feb</string>
+    <string name="month3">Mar</string>
+    <string name="month4">Apr</string>
+    <string name="month5">May</string>
+    <string name="month6">Jun</string>
+    <string name="month7">Jul</string>
+    <string name="month8">Aug</string>
+    <string name="month9">Sep</string>
+    <string name="month10">Oct</string>
+    <string name="month11">Nov</string>
+    <string name="month12">Dec</string>
+
 </resources>

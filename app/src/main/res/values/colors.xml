@@ -45,7 +45,7 @@
     <color name="color_surface_neutral_dark_elevation_16dp">#353535</color>
     <color name="color_surface_neutral_dark_elevation_24dp">#383838</color>
 
-    <color name="color_surface_neutral">#888</color>
+    <color name="color_surface_neutral">#6a6c6d</color>
 
     <color name="color_surface_neutral_light_elevation_01dp">#f7f9fa</color>
     <color name="color_surface_neutral_light_elevation_02dp">#f1f3f4</color>

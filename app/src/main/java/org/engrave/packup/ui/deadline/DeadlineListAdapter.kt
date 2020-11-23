@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
@@ -12,12 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import org.engrave.packup.R
 import org.engrave.packup.component.DistinctiveDiffCallback
 import org.engrave.packup.component.IDistinctive
-import org.engrave.packup.data.IContentComparable
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.databinding.ItemDeadlineHeaderBinding
 import org.engrave.packup.databinding.ItemDeadlineMemberBinding
-import org.engrave.packup.util.applyFormat
-import org.engrave.packup.util.asCalendar
+import org.engrave.packup.util.asGmtCalendar
+import org.engrave.packup.util.asLocalCalendar
+import org.engrave.packup.util.toGlobalizedString
 import ws.vinta.pangu.Pangu
 
 sealed class DeadlineItem : IDistinctive
@@ -80,10 +79,10 @@ class DeadlineListAdapter(private val context: Context) :
     val haveSubmissionString = context.getString(R.string.have_submission)
     val noSubmissionString = context.getString(R.string.no_submission)
     val haveSubmissionDrawable =
-        ContextCompat.getDrawable(context, R.drawable.ic_fluent_document_24_regular)
+        ContextCompat.getDrawable(context, R.drawable.ic_packup_submission_status_24_filled)
+
     val noSubmissionDrawable =
-        ContextCompat.getDrawable(context, R.drawable.ic_fluent_document_endnote_24_regular)
-    val noSubmissionBackgroundTint = ContextCompat.getColor(context, R.color.colorSurfaceElevated2)
+        ContextCompat.getDrawable(context, R.drawable.ic_packup_submission_status_24_regular)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -121,15 +120,14 @@ class DeadlineListAdapter(private val context: Context) :
         fun bind(item: DeadlineMember, onClick: () -> Unit) {
             binding.apply {
                 deadlineItemMemberTitle.text = pangu.spacingText(item.deadline.name)
-                deadlineItemMemberDueTime.text = item.deadline.due_time.asCalendar().applyFormat()
+                deadlineItemMemberDueTime.text =
+                    item.deadline.due_time.asLocalCalendar()?.toGlobalizedString(context)
                 if (item.deadline.has_submission) {
-                    deadlineItemMemberSubmissionText.text = haveSubmissionString
-                    deadlineItemMemberSubmissionIcon.setImageDrawable(haveSubmissionDrawable)
+                    deadlineItemMemberSubmissionButton.setImageDrawable(haveSubmissionDrawable)
                 } else {
-                    deadlineItemMemberSubmissionText.text = noSubmissionString
-                    deadlineItemMemberSubmissionIcon.setImageDrawable(noSubmissionDrawable)
+                    deadlineItemMemberSubmissionButton.setImageDrawable(noSubmissionDrawable)
                 }
-                deadlineItemMemberCourseName.text =
+                deadlineItemMemberCourseText.text =
                     pangu.spacingText(item.deadline.source_course_name)
             }
         }

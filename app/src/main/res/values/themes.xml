@@ -68,4 +68,6 @@
 
     <color name="colorSurfaceElevated">@color/color_surface_neutral_light_elevation_01dp</color>
     <color name="colorSurfaceElevated2">@color/color_surface_neutral_light_elevation_02dp</color>
+
+    <color name="colorText">#9AA0A2</color>
 </resources>

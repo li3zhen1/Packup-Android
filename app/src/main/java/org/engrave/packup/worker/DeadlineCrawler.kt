@@ -1,6 +1,9 @@
 package org.engrave.packup.worker
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import androidx.hilt.Assisted
 import androidx.hilt.work.WorkerInject
 import androidx.work.CoroutineWorker
@@ -14,6 +17,8 @@ import org.engrave.packup.api.pku.course.fetchDeadlineIsSubmitted
 import org.engrave.packup.data.account.AccountInfoRepository
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.data.deadline.DeadlineDao
+import org.engrave.packup.util.applyFormat
+
 
 class DeadlineCrawler @WorkerInject constructor(
     @Assisted val appContext: Context,
@@ -30,17 +35,18 @@ class DeadlineCrawler @WorkerInject constructor(
             accountInfo.studentId,
             accountInfo.password
         )
-        val newDealines = withContext(Dispatchers.IO) {
+        val newDeadlinesUnparsed = withContext(Dispatchers.IO) {
             fetchCourseDeadlines(
                 loggedCookie
             )
-        }.map(Deadline::fromRawJson)
+        }
+        showToast(newDeadlinesUnparsed.joinToString("\n") { it.endDate })
+        val newDealines = newDeadlinesUnparsed.map(Deadline::fromRawJson)
 
-
-
-        newDealines.forEachIndexed { index, newDeadline ->
+        newDealines.forEach { newDeadline ->
             var existFlag = false
             var occludedDeadlineHasSubmission = false
+
             if (deadlines != null) {
                 for (existedDdl in deadlines) {
                     if (newDeadline.isOfSameContent(existedDdl)) {
@@ -50,6 +56,7 @@ class DeadlineCrawler @WorkerInject constructor(
                     }
                 }
             }
+
             if (!existFlag || !occludedDeadlineHasSubmission) {
                 val isSubmitted =
                     if (newDeadline.course_object_id.isNullOrEmpty()) false
@@ -81,4 +88,11 @@ class DeadlineCrawler @WorkerInject constructor(
 
     }
 
+
+    fun showToast(msg: String){
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(Runnable { // Run your task here
+            Toast.makeText(appContext, msg, Toast.LENGTH_LONG).show()
+        }, 1000)
+    }
 }

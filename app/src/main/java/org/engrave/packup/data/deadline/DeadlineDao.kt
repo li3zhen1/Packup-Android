@@ -1,10 +1,7 @@
 package org.engrave.packup.data.deadline
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface DeadlineDao {
@@ -22,4 +19,8 @@ interface DeadlineDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllDeadlines(deadlines: List<Deadline>)
+
+
+    @Query("UPDATE deadline SET is_starred= :isStarred WHERE uid = :uid")
+    suspend fun setDeadlineStarred(uid: Int, isStarred: Boolean)
 }

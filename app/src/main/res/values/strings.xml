@@ -56,4 +56,20 @@
     <string name="expired">已逾期</string>
     <string name="have_submission">已提交</string>
     <string name="no_submission">未提交</string>
+
+    <string name="date_time_format_omitted">%s 月 %s 日 %s:%s</string>
+    <string name="date_time_format">%s 年 %s 月 %s 日 %s:%s</string>
+
+    <string name="month1">1</string>
+    <string name="month2">2</string>
+    <string name="month3">3</string>
+    <string name="month4">4</string>
+    <string name="month5">5</string>
+    <string name="month6">6</string>
+    <string name="month7">7</string>
+    <string name="month8">8</string>
+    <string name="month9">9</string>
+    <string name="month10">10</string>
+    <string name="month11">11</string>
+    <string name="month12">12</string>
 </resources>
