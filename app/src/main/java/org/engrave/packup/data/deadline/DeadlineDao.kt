@@ -26,4 +26,8 @@ interface DeadlineDao {
 
     @Query("UPDATE deadline SET is_starred=:isStarred WHERE uid = :uid")
     suspend fun setDeadlineStarred(uid: Int, isStarred: Boolean)
+
+    @Query("UPDATE deadline SET has_submission=:isSubmitted WHERE uid = :uid")
+    suspend fun setDeadlineSubmission(uid: Int, isSubmitted: Boolean)
+
 }

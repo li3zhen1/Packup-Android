@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -135,7 +134,7 @@ class DeadlineListAdapter(
                     isChecked = item.deadline.is_starred
                 }
                 deadlineItemMemberCourseText.text =
-                    pangu.spacingText(item.deadline.source_course_name)
+                    pangu.spacingText(item.deadline.source_course_name_without_semester)
             }
         }
     }

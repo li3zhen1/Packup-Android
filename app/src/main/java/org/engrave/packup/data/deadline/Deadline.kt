@@ -1,6 +1,5 @@
 package org.engrave.packup.data.deadline
 
-import android.icu.text.SimpleDateFormat
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.engrave.packup.api.pku.course.DeadlineRawJson
@@ -27,11 +26,16 @@ data class Deadline(
     /* 用户无关字段 */
     val crawl_update_time: Long?,   // 从教学网抓下来的时间
     val sync_time: Long?,           // 和服务器同步的时间
+
+    /* 更新标记 */
+    val update_field_flag: Int = 0,
+    val update_field_time: Long = 0
 ) : IPayloadChangeAnimatable<Deadline> {
     val importance: Int get() = 0
     val inferred_subject: String? get() = null
 
-    val source_course_name: String get() = source_name?.substringBeforeLast("(") ?: ""
+    val source_course_name_without_semester: String
+        get() = source_name?.substringBeforeLast("(") ?: ""
 
     override fun keyFieldsSameWith(other: Deadline) =
         uid == other.uid && name == other.name && description == other.description
@@ -40,14 +44,13 @@ data class Deadline(
                 && due_time == other.due_time && is_completed == other.is_completed
                 && is_deleted == other.is_deleted
 
-    override fun animatableFieldsSameWith(other: Deadline): Boolean =
+    override fun manipulatableFieldsSameWith(other: Deadline): Boolean =
         is_starred == other.is_starred && has_submission == other.has_submission
 
-    companion object {
-        private val zuluFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA);
 
+    companion object {
         fun fromRawJson(it: DeadlineRawJson) = Deadline(
-            // TODO: uid 换一种方式
+            // TODO: uid 换一种方式???
             uid = it.itemSourceId.replace("_", "").toInt(),
             name = it.title,
             description = it.calendarId,
@@ -60,7 +63,6 @@ data class Deadline(
             is_deleted = false,
             is_starred = false,
             has_submission = false,
-
             crawl_update_time = Date().time,
             sync_time = null,
         )

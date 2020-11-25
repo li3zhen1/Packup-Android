@@ -26,9 +26,6 @@ class DeadlineCrawler @WorkerInject constructor(
     private val accountInfoRepository: AccountInfoRepository,
     // TODO: Inject Configs
 ) : CoroutineWorker(appContext, workerParams) {
-//    init {
-//        showToast("WorkerInit")
-//    }
     override suspend fun doWork(): Result = try {
 
 //        showToast("Worker Dowork")
@@ -47,20 +44,23 @@ class DeadlineCrawler @WorkerInject constructor(
         val newDealines = newDeadlinesUnparsed.map(Deadline::fromRawJson)
 
         newDealines.forEach { newDeadline ->
-            var existFlag = false
-            var occludedDeadlineHasSubmission = false
+            var existSameKey = false
+            var conflictDeadline: Deadline? = null
 
             if (deadlines != null) {
                 for (existedDdl in deadlines) {
-                    if (newDeadline.contentSameWith(existedDdl)) {
-                        existFlag = true
-                        occludedDeadlineHasSubmission = existedDdl.has_submission
+                    if (newDeadline.keyFieldsSameWith(existedDdl)) {
+                        existSameKey = true
+                        conflictDeadline = existedDdl
                         break
                     }
                 }
             }
 
-            if (!existFlag || !occludedDeadlineHasSubmission) {
+            /**
+             * 不存在相同的 Ddl
+             */
+            if (!existSameKey) {
                 val isSubmitted =
                     if (newDeadline.course_object_id.isNullOrEmpty()) false
                     else withContext(Dispatchers.IO) {
@@ -72,10 +72,25 @@ class DeadlineCrawler @WorkerInject constructor(
                 if (isSubmitted) deadlineDao.insertDeadline(
                     newDeadline.copy(has_submission = true)
                 )
-                else deadlineDao.insertDeadline(
-                    newDeadline
-                )
-            }
+                else deadlineDao.insertDeadline(newDeadline)
+            } else
+            /**
+             * 有相同无提交 => 检查有没有提交，仅更新 has_submission 字段
+             */
+                if (conflictDeadline != null && !conflictDeadline.has_submission) {
+                    val isSubmitted =
+                        if (newDeadline.course_object_id.isNullOrEmpty()) false
+                        else withContext(Dispatchers.IO) {
+                            fetchDeadlineIsSubmitted(
+                                newDeadline.course_object_id,
+                                loggedCookie
+                            )
+                        }
+                    if (isSubmitted)
+                        deadlineDao.setDeadlineSubmission(conflictDeadline.uid, true)
+                }
+
+            // TODO: 记录所有操作同步到 Server
         }
         Result.success(
             workDataOf(
@@ -89,13 +104,12 @@ class DeadlineCrawler @WorkerInject constructor(
                 DATA_EXCEPTION_MESSAGE_FIELD to e.message
             )
         )
-
     }
 
 
     fun showToast(msg: String){
         val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(Runnable { // Run your task here
+        handler.postDelayed({ // Run your task here
             Toast.makeText(appContext, msg, Toast.LENGTH_LONG).show()
         }, 1000)
     }
