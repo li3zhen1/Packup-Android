@@ -95,7 +95,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/deadline_item_member_star_button"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -106,7 +106,7 @@
         android:layout_marginTop="@dimen/deadline_recycler_view_item_vertical_padding"
         />
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/deadline_item_member_submission_button"
         android:layout_width="24dp"
         android:layout_height="24dp"

@@ -3,4 +3,203 @@
     <declare-styleable name="RepeatedShimmer">
         <attr name="shimmer_color" format="color" />
     </declare-styleable>
+
+    <attr name="packupColorPrimaryDarker" format="reference|color"/>
+    <attr name="packupColorPrimaryLight" format="reference|color"/>
+    <attr name="packupColorPrimaryLighter" format="reference|color"/>
+
+    <!-- *** Base Semantic Colors *** -->
+
+    <!--Backgrounds-->
+    <attr name="packupBackgroundColor" format="reference|color"/>
+    <attr name="packupBackgroundPressedColor" format="reference|color"/>
+    <attr name="packupBackgroundPrimaryColor" format="reference|color"/>
+    <attr name="packupBackgroundSecondaryColor" format="reference|color"/>
+    <attr name="packupBackgroundSecondaryPressedColor" format="reference|color"/>
+
+    <!--Foregrounds-->
+    <attr name="packupForegroundColor" format="reference|color"/>
+    <attr name="packupForegroundSelectedColor" format="reference|color"/>
+    <attr name="packupForegroundSecondaryColor" format="reference|color"/>
+    <attr name="packupForegroundSecondaryIconColor" format="reference|color"/>
+    <attr name="packupForegroundOnPrimaryColor" format="reference|color"/>
+    <attr name="packupForegroundOnSecondaryColor" format="reference|color"/>
+    <attr name="packupDividerColor" format="reference|color"/>
+
+    <!--Transparent Backgrounds-->
+    <attr name="packupBackgroundSecondary20Color" format="reference|color"/>
+
+    <!--Transparent Foregrounds-->
+    <attr name="packupForegroundOnPrimary80Color" format="reference|color"/>
+    <attr name="packupForegroundOnPrimary70Color" format="reference|color"/>
+
+    <!-- *** Semantic Colors *** -->
+
+    <!--AppBarLayout-->
+    <attr name="packupAppBarLayoutBackgroundColor" format="reference|color"/>
+
+    <!--BottomNavigation-->
+    <attr name="packupBottomNavigationBackgroundColor" format="reference|color"/>
+    <attr name="packupBottomNavigationForegroundActiveColor" format="reference|color"/>
+    <attr name="packupBottomNavigationForegroundInactiveColor" format="reference|color"/>
+
+    <!--BottomSheet-->
+    <attr name="packupBottomSheetBackgroundColor" format="reference|color"/>
+    <attr name="packupBottomSheetBackgroundPressedColor" format="reference|color"/>
+    <attr name="packupBottomSheetIconColor" format="reference|color"/>
+    <attr name="packupBottomSheetDividerColor" format="reference|color"/>
+
+    <!--Button-->
+    <attr name="packupButtonBackgroundDefaultColor" format="reference|color"/>
+    <attr name="packupButtonBackgroundDisabledColor" format="reference|color"/>
+    <attr name="packupButtonBackgroundPressedColor" format="reference|color"/>
+    <attr name="packupButtonTextDefaultColor" format="reference|color"/>
+    <attr name="packupButtonTextDisabledColor" format="reference|color"/>
+
+    <!--Button Borderless-->
+    <attr name="packupButtonBorderlessBackgroundDefaultColor" format="reference|color"/>
+    <attr name="packupButtonBorderlessBackgroundDisabledColor" format="reference|color"/>
+    <attr name="packupButtonBorderlessBackgroundPressedColor" format="reference|color"/>
+    <attr name="packupButtonBorderlessTextDefaultColor" format="reference|color"/>
+    <attr name="packupButtonBorderlessTextDisabledColor" format="reference|color"/>
+    <attr name="packupButtonBorderlessTextPressedColor" format="reference|color"/>
+
+    <!--Button Outlined-->
+    <attr name="packupButtonOutlinedTextDefaultColor" format="reference|color"/>
+    <attr name="packupButtonOutlinedTextDisabledColor" format="reference|color"/>
+    <attr name="packupButtonOutlinedTextPressedColor" format="reference|color"/>
+    <attr name="packupButtonOutlinedStrokeDefaultColor" format="reference|color"/>
+    <attr name="packupButtonOutlinedStrokeDisabledColor" format="reference|color"/>
+    <attr name="packupButtonOutlinedStrokePressedColor" format="reference|color"/>
+
+    <!--CalendarView-->
+    <attr name="packupCalendarBackgroundColor" format="reference|color"/>
+    <attr name="packupCalendarWeekHeadingBackgroundColor" format="reference|color"/>
+    <attr name="packupCalendarWeekHeadingWeekDayTextColor" format="reference|color"/>
+    <attr name="packupCalendarWeekHeadingWeekendTextColor" format="reference|color"/>
+    <attr name="packupCalendarMonthOverlayBackgroundColor" format="reference|color"/>
+    <attr name="packupCalendarMonthOverlayTextColor" format="reference|color"/>
+    <attr name="packupCalendarOtherMonthBackgroundColor" format="reference|color"/>
+    <attr name="packupCalendarSelectedColor" format="reference|color"/>
+    <attr name="packupCalendarDayTodayBackgroundColor" format="reference|color"/>
+    <!--day selector-->
+    <attr name="packupCalendarDayTextActiveColor" format="reference|color"/>
+    <attr name="packupCalendarDayTextActiveCheckedColor" format="reference|color"/>
+    <attr name="packupCalendarDayTextInactiveCheckedColor" format="reference|color"/>
+    <attr name="packupCalendarDayTextDefaultColor" format="reference|color"/>
+
+    <!--Compound Buttons-->
+    <attr name="packupCompoundButtonTintDefaultColor" format="reference|color"/>
+    <attr name="packupCompoundButtonTintCheckedColor" format="reference|color"/>
+
+    <!--DateTimePicker-->
+    <attr name="packupDateTimePickerToolbarTitleTextColor" format="reference|color"/>
+    <attr name="packupDateTimePickerTabTextColor" format="reference|color"/>
+    <attr name="packupDateTimePickerDialogBackgroundColor" format="reference|color"/>
+    <attr name="packupDateTimePickerToolbarIconColor" format="reference|color"/>
+
+    <!--Dialog-->
+    <attr name="packupDialogBackgroundColor" format="reference|color"/>
+    <attr name="packupDialogCloseIconColor" format="reference|color"/>
+    <attr name="packupDialogTabLayoutBackgroundColor" format="reference|color"/>
+
+    <!--Drawer-->
+    <attr name="packupDrawerBackgroundColor" format="reference|color"/>
+    <attr name="packupDrawerHandleColor" format="reference|color"/>
+
+    <!--ListItemView-->
+    <attr name="packupListItemBackgroundColor" format="reference|color"/>
+    <attr name="packupListItemTitleColor" format="reference|color"/>
+    <attr name="packupListItemSubtitleColor" format="reference|color"/>
+    <attr name="packupListItemSubtitleLargeHeaderColor" format="reference|color"/>
+    <attr name="packupListItemFooterColor" format="reference|color"/>
+    <attr name="packupListItemRippleColor" format="reference|color"/>
+
+    <!--ListSubHeader-->
+    <attr name="packupListSubHeaderTitlePrimaryColor" format="reference|color"/>
+    <attr name="packupListSubHeaderTitleSecondaryColor" format="reference|color"/>
+    <attr name="packupListSubHeaderTitleTertiaryColor" format="reference|color"/>
+
+    <!--NumberPicker-->
+    <attr name="packupNumberPickerBackgroundColor" format="reference|color"/>
+    <attr name="packupNumberPickerDefaultTextColor" format="reference|color"/>
+    <attr name="packupNumberPickerSelectedTextColor" format="reference|color"/>
+
+    <!--PeoplePicker-->
+    <attr name="packupPeoplePickerBackgroundColor" format="reference|color"/>
+    <attr name="packupPeoplePickerPopupBackgroundColor" format="reference|color"/>
+    <attr name="packupPeoplePickerTextViewBackgroundColor" format="reference|color"/>
+    <attr name="packupPeoplePickerTextViewDragBackgroundColor" format="reference|color"/>
+    <attr name="packupPeoplePickerHintTextColor" format="reference|color"/>
+    <attr name="packupPeoplePickerLabelTextColor" format="reference|color"/>
+    <attr name="packupPeoplePickerCountSpanTextColor" format="reference|color"/>
+
+    <!--PersonaChip-->
+    <attr name="packupPersonaChipBackgroundNormalColor" format="reference|color"/>
+    <attr name="packupPersonaChipBackgroundActiveColor" format="reference|color"/>
+    <attr name="packupPersonaChipBackgroundErrorColor" format="reference|color"/>
+    <attr name="packupPersonaChipBackgroundErrorActiveColor" format="reference|color"/>
+    <attr name="packupPersonaChipBackgroundPressedColor" format="reference|color"/>
+    <attr name="packupPersonaChipTextNormalColor" format="reference|color"/>
+    <attr name="packupPersonaChipForegroundActiveColor" format="reference|color"/>
+    <attr name="packupPersonaChipTextErrorColor" format="reference|color"/>
+    <attr name="packupPersonaChipTextDisabledColor" format="reference|color"/>
+
+    <!--PopupMenu-->
+    <attr name="packupPopupMenuBackgroundColor" format="reference|color"/>
+    <attr name="packupPopupMenuBackgroundPressedColor" format="reference|color"/>
+    <attr name="packupPopupMenuItemTitleColor" format="reference|color"/>
+    <attr name="packupPopupMenuItemForegroundSelectedColor" format="reference|color"/>
+    <attr name="packupPopupMenuItemCheckBackgroundRippleColor" format="reference|color"/>
+
+    <!--Progress-->
+    <attr name="packupProgressPrimaryColor" format="reference|color"/>
+    <attr name="packupProgressBackgroundColor" format="reference|color"/>
+
+    <!--Searchbar-->
+    <attr name="packupSearchbarBackgroundColor" format="reference|color"/>
+    <attr name="packupSearchbarSearchViewContainerBackgroundColor" format="reference|color"/>
+    <attr name="packupSearchbarBackButtonColor" format="reference|color"/>
+    <attr name="packupSearchbarSearchIconColor" format="reference|color"/>
+    <attr name="packupSearchbarSearchViewTextColor" format="reference|color"/>
+    <attr name="packupSearchbarSearchViewTextHintColor" format="reference|color"/>
+    <attr name="packupSearchbarSearchViewCursorColor" format="reference|color"/>
+    <attr name="packupSearchbarProgressColor" format="reference|color"/>
+    <attr name="packupSearchbarCloseIconColor" format="reference|color"/>
+
+    <!--Snackbar-->
+    <attr name="packupSnackbarBackgroundColor" format="reference|color"/>
+    <attr name="packupSnackbarBackgroundAnnouncementColor" format="reference|color"/>
+    <attr name="packupSnackbarTextColor" format="reference|color"/>
+    <attr name="packupSnackbarActionTextColor" format="reference|color"/>
+    <attr name="packupSnackbarActionTextAnnouncementColor" format="reference|color"/>
+
+    <!--Dialog TabLayout-->
+    <attr name="packupDialogTabTextColor" format="reference|color"/>
+    <attr name="packupDialogTabSelectedTextColor" format="reference|color"/>
+    <attr name="packupDialogTabIndicatorColor" format="reference|color"/>
+
+    <!--TabLayout-->
+    <attr name="packupTabLayoutContainerBackgroundColor" format="reference|color"/>
+    <attr name="packupTabLayoutBackgroundColor" format="reference|color"/>
+    <attr name="packupTabSelectedTextColor" format="reference|color"/>
+    <attr name="packupTabUnselectedTextColor" format="reference|color"/>
+    <attr name="packupTabUnselectedBackgroundColor" format="reference|color"/>
+    <attr name="packupTabSelectedBackgroundColor" format="reference|color"/>
+    <attr name="packupTabTextAppearance" format="reference" />
+
+    <!--Toolbar-->
+    <attr name="packupToolbarBackgroundColor" format="reference|color"/>
+    <attr name="packupToolbarTitleTextColor" format="reference|color"/>
+    <attr name="packupToolbarSubtitleTextColor" format="reference|color"/>
+    <attr name="packupToolbarIconColor" format="reference|color"/>
+
+    <!--Tooltip-->
+    <attr name="packupTooltipBackgroundColor" format="reference|color"/>
+    <attr name="packupTooltipTextColor" format="reference|color"/>
+
+    <!--Persistent bottomsheet-->
+    <attr name="packupPersistentBottomSheetHeadingColor" format="reference|color"/>
+    <attr name="packupPersistentBottomSheetItemColor" format="reference|color"/>
+    <attr name="packupPersistentBottomSheetHorizontalItemColor" format="reference|color"/>
 </resources>

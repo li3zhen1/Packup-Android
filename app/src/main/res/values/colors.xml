@@ -72,4 +72,57 @@
     <color name="color_success_500">#4DA400</color>
     <color name="color_success_100">#E6F6CF</color>
 
+    <color name="packup_communication_shade_30">#213E88</color>
+    <color name="packup_communication_shade_20">#2E4EBF</color>
+    <color name="packup_communication_shade_10">#3C5FDC</color>
+    <color name="packup_communication_blue">#486df1</color>
+    <color name="packup_communication_tint_20">#9daaf7</color>
+    <color name="packup_communication_tint_30">#DEECF9</color>
+    <color name="packup_communication_tint_40">#EFF6FC</color>
+
+    <!--Neutral Colors-->
+    <color name="packup_black">#000000</color>
+    <color name="packup_gray_950">#141414</color>
+    <color name="packup_gray_900">#212121</color>
+    <color name="packup_gray_800">#292929</color>
+    <color name="packup_gray_700">#303030</color>
+    <color name="packup_gray_600">#404040</color>
+    <color name="packup_gray_500">#6E6E6E</color>
+    <color name="packup_gray_400">#919191</color>
+    <color name="packup_gray_300">#ACACAC</color>
+    <color name="packup_gray_200">#C8C8C8</color>
+    <color name="packup_gray_100">#E1E1E1</color>
+    <color name="packup_gray_56">#777777</color>
+    <color name="packup_gray_50">#F1F1F1</color>
+    <color name="packup_gray_25">#F8F8F8</color>
+    <color name="packup_white">#FFFFFF</color>
+
+    <!-- *** Semantic Colors *** -->
+
+    <!--Avatar-->
+    <array name="packup_avatar_background_colors">
+        <item>#750B1C</item>
+        <item>#A4262C</item>
+        <item>#D13438</item>
+        <item>#CA5010</item>
+        <item>#986F0B</item>
+        <item>#498205</item>
+        <item>#005E50</item>
+        <item>#038387</item>
+        <item>#0078D4</item>
+        <item>#004E8C</item>
+        <item>#4F6BED</item>
+        <item>#373277</item>
+        <item>#881798</item>
+        <item>#C239B3</item>
+        <item>#E3008C</item>
+        <item>#603D30</item>
+        <item>#567C73</item>
+        <item>#69797E</item>
+    </array>
+
+    <color name="packup_transparent">#00000000</color>
+    <!--ActionBarLayout-->
+    <color name="packup_action_bar_indicator_background">@color/packup_communication_tint_20</color>
+    <color name="packup_action_bar_carousel_background">@color/packup_communication_blue</color>
 </resources>

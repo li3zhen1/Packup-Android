@@ -69,48 +69,66 @@
                 app:layout_constraintEnd_toStartOf="@id/main_activity_filter_button"
                 app:layout_constraintTop_toTopOf="@id/main_activity_toolbar_title" />
 
-            <ImageButton
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:id="@+id/main_activity_filter_button"
-                android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginEnd="@dimen/deadline_recycler_view_item_horizontal_padding"
-                android:background="@drawable/button_background_round_ripple_surface_day"
-                android:padding="6dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_fluent_filter_24_regular"
-                android:tint="@color/color_white"
+                android:minWidth="32dp"
+                android:animateLayoutChanges="true"
                 app:layout_constraintBottom_toBottomOf="@id/main_activity_toolbar_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/main_activity_toolbar_title">
+                app:layout_constraintTop_toTopOf="@id/main_activity_toolbar_title"
+                android:layout_marginEnd="@dimen/deadline_recycler_view_item_horizontal_padding"
+                android:background="@drawable/button_background_round_ripple_surface_day"
+                android:orientation="horizontal"
+                android:paddingHorizontal="6dp">
 
-            </ImageButton>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_fluent_filter_24_regular"
+                    app:tint="@color/color_white"
+                    android:layout_marginVertical="6dp"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:contextClickable="false"
+                    android:linksClickable="false"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/main_activity_deadline_filter_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
-                android:layout_marginVertical="@dimen/toolbar_vertical_padding"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/main_activity_toolbar_title">
-
-                <Button
-                    android:id="@+id/main_activity_deadline_filter_dropper"
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_marginVertical="0dp"
-                    android:drawableEnd="@drawable/ic_fluent_chevron_down_20_regular"
-                    android:drawableTint="@color/color_white"
-                    android:drawablePadding="0dp"
-                    android:elevation="0dp"
-                    android:padding="0dp"
-                    android:layout_margin="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/main_activity_filter_button_text"
+                    android:text="Sort"
+                    android:visibility="gone"
+                    android:height="32dp"
+                    android:gravity="center"
                     android:textColor="@color/color_white"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:paddingHorizontal="6dp"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:contextClickable="false"
+                    android:linksClickable="false"/>
+
+            </LinearLayout>
+<!--            <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                android:id="@+id/main_activity_filter_button"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="32dp"-->
+<!--                android:layout_marginEnd="@dimen/deadline_recycler_view_item_horizontal_padding"-->
+<!--                android:background="@drawable/button_background_round_ripple_surface_day"-->
+<!--                android:padding="6dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/ic_fluent_filter_24_regular"-->
+<!--                android:tint="@color/color_white"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/main_activity_toolbar_title"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@id/main_activity_toolbar_title">-->
+
+<!--            </androidx.appcompat.widget.AppCompatImageButton>-->
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
