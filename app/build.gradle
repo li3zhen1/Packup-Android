@@ -51,12 +51,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -123,7 +123,9 @@ dependencies {
     def hilt_worker_version = "1.0.0-alpha02"
     implementation "androidx.hilt:hilt-work:$hilt_worker_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_worker_version"
-    def datastore_version = "1.0.0-alpha04"
+    def datastore_version = "1.0.0-alpha05"
     implementation "androidx.datastore:datastore-preferences:$datastore_version"
     implementation 'org.mnode.ical4j:ical4j:4.0.0-alpha6'
+    implementation 'com.microsoft.fluentui:FluentUIAndroid:0.0.9'
+    implementation 'com.microsoft.device:dualscreen-layout:1.0.0-alpha01'
 }

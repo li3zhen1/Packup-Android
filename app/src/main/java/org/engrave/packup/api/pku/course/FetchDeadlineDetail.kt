@@ -7,18 +7,38 @@ import javax.net.ssl.HttpsURLConnection
 
 private const val PkuCourseDeadlineSubmissionStatusBaseUrl =
     "https://course.pku.edu.cn/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2.GradableItem-"
+private const val PkuCourseDeadlineBlobsBaseUrl =
+    "https://course.pku.edu.cn/"
 
-fun fetchDeadlineIsSubmitted(
+fun fetchDeadlineDetailHtml(
     deadlineObjectId: String,
-    courseLoginCookie: DummyCookie
+    courseLoggedCookie: DummyCookie
 ) = (
         URL(
             PkuCourseDeadlineSubmissionStatusBaseUrl + deadlineObjectId
         ).openConnection() as HttpsURLConnection)
     .apply {
         instanceFollowRedirects = true
-        setRequestProperty("Cookie", courseLoginCookie.toString())
+        setRequestProperty("Cookie", courseLoggedCookie.toString())
         requestMethod = "GET"
     }.inputStream
     .scanAsString()
+
+
+fun fetchDeadlineIsSubmitted(
+    deadlineObjectId: String,
+    courseLoggedCookie: DummyCookie
+) = fetchDeadlineDetailHtml(deadlineObjectId, courseLoggedCookie)
     .contains("复查提交历史记录")
+
+fun fetchDeadlineIsSubmitted(
+    detailHtml: String
+) = detailHtml.contains("复查提交历史记录")
+
+
+fun downloadDeadlineDetailFiles(
+    url: String,
+    courseLoggedCookie: DummyCookie
+) {
+
+}

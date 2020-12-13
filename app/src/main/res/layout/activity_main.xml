@@ -42,90 +42,41 @@
             android:background="?android:statusBarColor"
             android:animateLayoutChanges="true"
             android:paddingBottom="@dimen/toolbar_vertical_padding">
-
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/main_activity_nav_button"
+                android:src="@drawable/ic_fluent_navigation_24_regular"
+                android:background="@color/color_white_transparent"
+                android:tint="@color/color_white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/main_activity_nav_button"
+                app:layout_constraintBottom_toBottomOf="@id/main_activity_nav_button"
+                app:layout_constraintStart_toEndOf="@id/main_activity_nav_button"
                 android:id="@+id/main_activity_toolbar_title"
                 android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
-                android:layout_marginTop="@dimen/toolbar_vertical_padding"
                 android:text="Deadline"
+
                 android:textColor="@color/color_white"
                 android:textSize="20sp" />
 
-            <ImageButton
-                android:id="@+id/main_activity_search_button"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="@dimen/deadline_recycler_view_item_horizontal_padding"
-                android:background="@drawable/button_background_round_ripple_surface_day"
-                android:padding="6dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_fluent_search_24_regular"
-                android:tint="@color/color_white"
-                app:layout_constraintBottom_toBottomOf="@id/main_activity_toolbar_title"
-                app:layout_constraintEnd_toStartOf="@id/main_activity_filter_button"
-                app:layout_constraintTop_toTopOf="@id/main_activity_toolbar_title" />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:id="@+id/main_activity_filter_button"
-                android:layout_height="32dp"
-                android:minWidth="32dp"
-                android:animateLayoutChanges="true"
-                app:layout_constraintBottom_toBottomOf="@id/main_activity_toolbar_title"
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/main_activity_toolbar_title"
-                android:layout_marginEnd="@dimen/deadline_recycler_view_item_horizontal_padding"
-                android:background="@drawable/button_background_round_ripple_surface_day"
-                android:orientation="horizontal"
-                android:paddingHorizontal="6dp">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_fluent_filter_24_regular"
-                    app:tint="@color/color_white"
-                    android:layout_marginVertical="6dp"
-                    android:clickable="false"
-                    android:longClickable="false"
-                    android:contextClickable="false"
-                    android:linksClickable="false"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/main_activity_filter_button_text"
-                    android:text="Sort"
-                    android:visibility="gone"
-                    android:height="32dp"
-                    android:gravity="center"
-                    android:textColor="@color/color_white"
-                    android:paddingHorizontal="6dp"
-                    android:clickable="false"
-                    android:longClickable="false"
-                    android:contextClickable="false"
-                    android:linksClickable="false"/>
-
-            </LinearLayout>
-<!--            <androidx.appcompat.widget.AppCompatImageButton-->
-<!--                android:id="@+id/main_activity_filter_button"-->
-<!--                android:layout_width="32dp"-->
-<!--                android:layout_height="32dp"-->
-<!--                android:layout_marginEnd="@dimen/deadline_recycler_view_item_horizontal_padding"-->
-<!--                android:background="@drawable/button_background_round_ripple_surface_day"-->
-<!--                android:padding="6dp"-->
-<!--                android:scaleType="fitXY"-->
-<!--                android:src="@drawable/ic_fluent_filter_24_regular"-->
-<!--                android:tint="@color/color_white"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/main_activity_toolbar_title"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="@id/main_activity_toolbar_title">-->
-
-<!--            </androidx.appcompat.widget.AppCompatImageButton>-->
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/main_activity_filter_button"
+                android:src="@drawable/ic_fluent_search_24_regular"
+                android:background="@color/color_white_transparent"
+                android:tint="@color/color_white"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

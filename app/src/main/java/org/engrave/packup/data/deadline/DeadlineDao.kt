@@ -14,6 +14,9 @@ interface DeadlineDao {
     @Query("SELECT * FROM deadline")
     fun getAllDeadlinesStatic(): List<Deadline>
 
+    @Query("SELECT * FROM deadline WHERE uid=:uid")
+    suspend fun getDeadline(uid: Int): Deadline
+
 //    @Query("SELECT * FROM deadline WHERE is_finished IS 1")
 //    fun getAllDeadlineCompleted(): List<Deadline>
 
@@ -29,5 +32,6 @@ interface DeadlineDao {
 
     @Query("UPDATE deadline SET has_submission=:isSubmitted WHERE uid = :uid")
     suspend fun setDeadlineSubmission(uid: Int, isSubmitted: Boolean)
+
 
 }

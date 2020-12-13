@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeadlineDetailActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/deadline_detail_activity_tool_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:contentInsetStart="0dp"
+        android:elevation="6dp"
+        android:background="@color/color_primary_400">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?android:statusBarColor"
+            android:animateLayoutChanges="true"
+            android:paddingBottom="@dimen/toolbar_vertical_padding">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
+                android:id="@+id/deadline_detail_nav_button"
+                android:src="@drawable/ic_fluent_arrow_left_24_regular"
+                android:background="@drawable/icon_button_on_status_bar"
+                android:tint="@color/color_white"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/deadline_detail_delete_button"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:background="@drawable/icon_button_on_status_bar"
+                android:src="@drawable/ic_fluent_star_24_regular"
+                android:tint="@color/color_white"
+                app:layout_constraintEnd_toStartOf="@id/deadline_detail_more_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
+                android:id="@+id/deadline_detail_more_button"
+                android:src="@drawable/ic_fluent_more_vertical_24_regular"
+                android:background="@drawable/icon_button_on_status_bar"
+                android:tint="@color/color_white"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_nav_button"
+                app:layout_constraintStart_toStartOf="@id/deadline_detail_title"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/color_error_background"
+                android:background="@drawable/button_embedded_on_action_bar"
+                android:id="@+id/deadline_status_caption"
+                android:layout_marginEnd="12dp">
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="剩余 3 天"
+                    android:paddingHorizontal="6dp"
+                    android:textColor="#ffffff"
+                    android:id="@+id/deadline_detail_status_text"
+                    android:textSize="@dimen/packup_caption"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View android:id="@+id/deadline_detail_pill_placeholder"
+                android:layout_width="4dp"
+                android:layout_height="24dp"
+                app:layout_constraintStart_toEndOf="@id/deadline_status_caption"
+                app:layout_constraintTop_toTopOf="@id/deadline_status_caption"
+                android:clickable="false"
+                android:focusable="false"
+                android:longClickable="false"/>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_nav_button"
+                app:layout_constraintStart_toEndOf="@id/deadline_detail_pill_placeholder"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/button_embedded_on_action_bar"
+                android:id="@+id/deadline_detail_caption"
+                android:clickable="true">
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="Android Developer"
+                    android:clickable="false"
+                    android:textColor="#c0ffffff"
+                    android:id="@+id/deadline_detail_source_link_text"
+                    android:textSize="@dimen/packup_caption"
+                    />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:clickable="false"
+                    android:scaleType="center"
+                    android:src="@drawable/packup_chevron_12_right_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/deadline_detail_source_link_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_caption"
+                android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+                android:id="@+id/deadline_detail_title"
+                android:paddingTop="4dp"
+                android:textStyle="bold"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="使用 Hilt 实现依赖项注入"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/packup_h5"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_tool_bar_container"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:id="@+id/deadline_detail_desc_caption"
+        android:paddingTop="24dp"
+        android:text="描述"
+        android:textSize="@dimen/packup_caption"/>
+
+    <TextView
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_desc_caption"
+        android:enabled="false"
+        android:paddingVertical="4dp"
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnSurface"
+        android:id="@+id/deadline_detail_desc_block"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:text="Hilt 是 Android 的依赖项注入库，可减少在项目中执行手动依赖项注入的样板代码。">
+    </TextView>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_desc_block"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:id="@+id/deadline_detail_due_time_caption"
+        android:paddingTop="24dp"
+        android:text="到期时间"
+        android:textSize="@dimen/packup_caption"/>
+    <TextView
+        android:layout_width="0dp"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_due_time_caption"
+        android:paddingVertical="4dp"
+        app:layout_constraintStart_toStartOf="@id/deadline_detail_due_time_caption"
+        app:layout_constraintEnd_toEndOf="@id/deadline_detail_due_time_caption"
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnSurface"
+        android:layout_marginTop="4dp"
+        android:id="@+id/deadline_detail_due_time_text"
+        android:enabled="false"
+        android:fontFeatureSettings="tnum"
+        android:text="12 月 25 日 (周五)   20:30">
+    </TextView>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/deadline_detail_due_time_text"
+        app:layout_constraintEnd_toEndOf="@id/deadline_detail_due_time_text"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_due_time_text"
+        android:id="@+id/deadline_detail_reminder_time_caption"
+        android:paddingTop="24dp"
+        android:text="提醒时间"
+        android:textSize="@dimen/packup_caption"/>
+    <TextView
+        android:layout_width="0dp"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_reminder_time_caption"
+        android:paddingVertical="4dp"
+        app:layout_constraintStart_toStartOf="@id/deadline_detail_due_time_caption"
+        app:layout_constraintEnd_toEndOf="@id/deadline_detail_due_time_caption"
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnSurface"
+        android:id="@+id/deadline_detail_reminder_time_text"
+        android:layout_marginTop="4dp"
+        android:fontFeatureSettings="tnum"
+        android:text="12 月 25 日 (周五)   20:30">
+    </TextView>
+
+    <com.google.android.material.slider.Slider
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_reminder_time_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reminder_slider"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"/>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reminder_slider"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:id="@+id/deadline_detail_files_caption"
+        android:paddingTop="24dp"
+        android:text="附件"
+        android:textSize="@dimen/packup_caption"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deadline_detail_linked_file_list"
+        app:layout_constraintTop_toBottomOf="@id/deadline_detail_files_caption"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

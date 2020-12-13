@@ -3,6 +3,7 @@ package org.engrave.packup.api.pku.www
 import org.engrave.packup.util.scanAsString
 import org.jsoup.Jsoup
 import java.net.URL
+import java.time.MonthDay
 import javax.net.ssl.HttpsURLConnection
 
 private const val WWW_PKU_ROOT_URL = "https://www.pku.edu.cn"
@@ -268,7 +269,7 @@ fun fetchCampusCalendarUrls() =
 20:40—21:30}
  * 2020 is yearStart
  */
-fun fetchAllCampusCalendar(): Map<Int, String>{
+fun fetchAllCampusCalendar(): Map<Int, List<String>>{
     val urlMaps = fetchCampusCalendarUrls()
     return urlMaps.map { pair ->
         pair.first.substringBefore("-").toInt() to Jsoup.parse(
@@ -278,8 +279,27 @@ fun fetchAllCampusCalendar(): Map<Int, String>{
             .filter{
                 it.text().isNotBlank()
             }
-            .joinToString("\n") {
+            .map {
                 it.text()
             }
     }.toMap()
 }
+
+fun parseCampusCalendar(cld: String){
+
+}
+
+val monthDayRangeRegex1 = """[0-9]{1,2}月[0-9]{1,2}日""".toRegex()
+val monthDayRangeRegex2 = """[0-9]{1,2}月[0-9]{1,2}日至[0-9]{1,2}日""".toRegex()
+val monthDayRangeRegex3 = """[0-9]{1,2}月[0-9]{1,2}日至[0-9]{1,2}月[0-9]{1,2}日""".toRegex()
+
+data class CampusCalendarEventEntry(
+    val semesterOrdinal: Int,
+    val eventOrdinal: String,
+    val eventName: String,
+    val literalMonthStart: Int,
+    val literalMonthEnd: Int,
+    val literalDayStart: Int,
+    val literalDayEnd: Int,
+    val target: String,
+)

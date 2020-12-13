@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/item_thin_border"
+    android:padding="12dp"
+    android:clickable="true"
+    android:layout_marginStart="@dimen/packup_general_padding_horizontal"
+    android:layout_marginVertical="4dp">
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/item_file_extension_icon"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Untitled.pdf"
+        android:textColor="?colorOnSurface"
+        android:id="@+id/item_file_name"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@id/item_file_extension_icon"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="未下载"
+        android:id="@+id/item_file_desc"
+        android:layout_marginTop="2dp"
+        android:textSize="@dimen/packup_caption"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:drawableTint="?colorOnBackground"
+        android:drawableEnd="@drawable/ic_fluent_arrow_download_16_regular"
+        app:layout_constraintTop_toBottomOf="@id/item_file_name"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

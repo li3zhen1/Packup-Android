@@ -59,7 +59,6 @@ class DeadlineFragment : Fragment() {
             deadlineSortOrder.observe(viewLifecycleOwner){
                 deadlineViewModel.sortOrder.value = it
             }
-
         }
     }
 }

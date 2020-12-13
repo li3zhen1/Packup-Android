@@ -3,6 +3,9 @@
     <declare-styleable name="RepeatedShimmer">
         <attr name="shimmer_color" format="color" />
     </declare-styleable>
+    <declare-styleable name="ReminderTimeSlider">
+        <attr name="bar_percent" format="float" />
+    </declare-styleable>
 
     <attr name="packupColorPrimaryDarker" format="reference|color"/>
     <attr name="packupColorPrimaryLight" format="reference|color"/>

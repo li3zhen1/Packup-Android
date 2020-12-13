@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.detail.DeadlineDetailFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_activity_tool_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:contentInsetStart="0dp"
+        android:elevation="8dp"
+        android:background="@color/color_primary_400">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?android:statusBarColor"
+            android:animateLayoutChanges="true"
+            android:paddingBottom="@dimen/toolbar_vertical_padding">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/deadline_detail_nav_button"
+                android:src="@drawable/ic_fluent_arrow_left_24_regular"
+                android:background="@color/color_white_transparent"
+                android:tint="@color/color_white"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/deadline_detail_more_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/deadline_detail_delete_button"
+                android:src="@drawable/ic_fluent_delete_20_regular"
+                android:background="@color/color_white_transparent"
+                android:tint="@color/color_white"/>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/deadline_detail_more_button"
+                android:src="@drawable/ic_fluent_more_vertical_24_regular"
+                android:background="@color/color_white_transparent"
+                android:tint="@color/color_white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_nav_button"
+                android:paddingHorizontal="@dimen/packup_general_padding_horizontal"
+                android:id="@+id/deadline_detail_caption"
+                android:paddingTop="@dimen/toolbar_vertical_padding"
+                android:text="操作系统"
+                android:textColor="#80ffffff"
+                android:textSize="@dimen/packup_overline"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_caption"
+                android:paddingHorizontal="@dimen/packup_general_padding_horizontal"
+                android:id="@+id/deadline_detail_title"
+                android:paddingTop="4dp"
+                android:textStyle="bold"
+                android:text="第一次作业"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/packup_h5"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

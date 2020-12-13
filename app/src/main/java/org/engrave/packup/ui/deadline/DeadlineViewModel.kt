@@ -14,7 +14,7 @@ class DeadlineViewModel @ViewModelInject constructor(
 ) : ViewModel() {
     /* TODO: 保存默认状态 */
     val sortOrder = MutableLiveData(DeadlineSortOrder.SOURCE_COURSE_NAME)
-    val filterIsDeleted = MutableLiveData<Boolean>(false)
+    val filterIsDeleted = MutableLiveData(false)
     val filterIsSubmitted = MutableLiveData<Boolean?>(null)
     val filterIsExpired = MutableLiveData<Boolean?>(null)
     val certainCourseName = MutableLiveData<String?>(null)

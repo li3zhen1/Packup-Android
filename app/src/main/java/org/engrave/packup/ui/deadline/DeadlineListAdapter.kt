@@ -1,6 +1,7 @@
 package org.engrave.packup.ui.deadline
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.engrave.packup.DEADLINE_DETAIL_ACTIVITY_UID
+import org.engrave.packup.DeadlineDetailActivity
 import org.engrave.packup.R
 import org.engrave.packup.component.DistinctiveDiffCallback
 import org.engrave.packup.component.IDistinctive
@@ -123,6 +126,16 @@ class DeadlineListAdapter(
         RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
         fun bind(item: DeadlineMember, onClickStarBind: (Boolean)->Unit) {
             binding.apply {
+                root.setOnClickListener{
+                    context.startActivity(
+                        Intent(
+                            context,
+                            DeadlineDetailActivity::class.java
+                        ).apply {
+                            putExtra(DEADLINE_DETAIL_ACTIVITY_UID, item.deadline.uid)
+                        }
+                    )
+                }
                 deadlineItemMemberTitle.text = pangu.spacingText(item.deadline.name)
                 deadlineItemMemberDueTime.text =
                     item.deadline.due_time.asLocalCalendar()?.toGlobalizedString(context)

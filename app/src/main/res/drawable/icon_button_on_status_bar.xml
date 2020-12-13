@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/rippleColorOnActionBar">
+    <item>
+        <shape>
+            <corners android:radius="24dp"/>
+            <solid android:color="@color/activityStatusBarColor"/>
+        </shape>
+    </item>
+</ripple>
