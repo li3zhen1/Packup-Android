@@ -15,7 +15,7 @@ interface DeadlineDao {
     fun getAllDeadlinesStatic(): List<Deadline>
 
     @Query("SELECT * FROM deadline WHERE uid=:uid")
-    suspend fun getDeadline(uid: Int): Deadline
+    fun getDeadline(uid: Int): LiveData<Deadline>
 
 //    @Query("SELECT * FROM deadline WHERE is_finished IS 1")
 //    fun getAllDeadlineCompleted(): List<Deadline>

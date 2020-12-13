@@ -25,7 +25,7 @@ class DeadlineRepository @Inject constructor(
     private val repositoryScope = CoroutineScope(Dispatchers.Default)
     val allDeadlines: LiveData<List<Deadline>> = deadlineDao.getAllDeadlines()
     val allDeadlinesStatic: List<Deadline> get() = deadlineDao.getAllDeadlinesStatic()
-    suspend fun getDeadline(uid: Int) = deadlineDao.getDeadline(uid)
+    fun getDeadline(uid: Int) = deadlineDao.getDeadline(uid)
 
     init {
         repositoryScope.launch {

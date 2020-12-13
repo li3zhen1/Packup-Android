@@ -138,3 +138,5 @@ fun List<Deadline>.groupByAssignedTime(baselineTime: Long = Calendar.getInstance
         }
     }
 
+
+fun List<Deadline>.getByUid(uid:Int) = find { it.uid == uid }

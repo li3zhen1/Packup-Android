@@ -281,4 +281,8 @@
 
     <color name="infoBoundBorderColor">#f1f3f4</color>
     <color name="rippleColorOnActionBar">#3252C5</color>
+    <color name="messagePillRed">#E4231B</color>
+    <color name="messagePillOrange">#E88205</color>
+    <color name="messagePillPurple">#562EB3</color>
+    <color name="messagePillGreen">#6DB065</color>
 </resources>

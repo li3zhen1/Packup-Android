@@ -37,14 +37,13 @@
                 android:tint="@color/color_white"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/deadline_detail_delete_button"
+                android:id="@+id/deadline_detail_star_button"
                 android:layout_width="@dimen/image_button_size_with_ripple"
                 android:layout_height="@dimen/image_button_size_with_ripple"
                 android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
                 android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
                 android:background="@drawable/icon_button_on_status_bar"
-                android:src="@drawable/ic_fluent_star_24_regular"
-                android:tint="@color/color_white"
+                android:src="@drawable/ic_packup_star_24_white_border"
                 app:layout_constraintEnd_toStartOf="@id/deadline_detail_more_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -111,7 +110,6 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginHorizontal="6dp"
-                    android:text="Android Developer"
                     android:clickable="false"
                     android:textColor="#c0ffffff"
                     android:id="@+id/deadline_detail_source_link_text"
@@ -130,20 +128,20 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/deadline_detail_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/deadline_detail_caption"
                 android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
-                android:id="@+id/deadline_detail_title"
-                android:paddingTop="4dp"
-                android:textStyle="bold"
-                android:maxLines="3"
                 android:ellipsize="end"
-                android:text="使用 Hilt 实现依赖项注入"
+                android:maxLines="3"
+                android:paddingTop="8dp"
+                android:text=""
                 android:textColor="@color/color_white"
-                android:textSize="@dimen/packup_h5"/>
+                android:textSize="@dimen/packup_h5"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_caption" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>

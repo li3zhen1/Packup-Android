@@ -32,3 +32,6 @@ fun InputStream.scanAsString(): String = Scanner(this).useDelimiter("\\A").run {
 @Suppress("NOTHING_TO_INLINE")
 inline fun String.substringBetween(delimiterBefore: String, delimiterAfter: String): String =
     this.substringAfter(delimiterBefore, "").substringBefore(delimiterAfter, "")
+
+
+fun String.asDocument() = Jsoup.parse(this)

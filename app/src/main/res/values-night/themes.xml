@@ -73,4 +73,9 @@
 
     <color name="infoBoundBorderColor">@color/color_surface_neutral_dark_elevation_16dp</color>
     <color name="rippleColorOnActionBar">@color/color_surface_neutral_dark_elevation_16dp</color>
+
+    <color name="messagePillRed">#B3302C</color>
+    <color name="messagePillOrange">#B16725</color>
+    <color name="messagePillPurple">#48327A</color>
+    <color name="messagePillGreen">#457C46</color>
 </resources>

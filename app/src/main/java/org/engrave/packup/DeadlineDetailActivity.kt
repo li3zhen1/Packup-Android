@@ -20,6 +20,9 @@ import kotlin.math.floor
 
 const val DEADLINE_DETAIL_ACTIVITY_UID = "DEADLINE_DETAIL_ACTIVITY_UID"
 
+/*
+* TODO: Pill 红橙紫白天模式饱和度过低
+* */
 @AndroidEntryPoint
 class DeadlineDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDeadlineDetailBinding
@@ -65,69 +68,77 @@ class DeadlineDetailActivity : AppCompatActivity() {
         }
 
         detailViewModel.deadline.observe(this){
-            binding.apply {
-                deadlineDetailTitle.text = it.name
-                deadlineDetailSourceLinkText.text = it.source_course_name_without_semester
+            if (it != null)
+                binding.apply {
+                    deadlineDetailTitle.text = it.name
+                    deadlineDetailSourceLinkText.text = it.source_course_name_without_semester
+                    deadlineDetailStarButton.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this@DeadlineDetailActivity,
+                            if (it.is_starred) R.drawable.ic_packup_star_24_filled
+                            else R.drawable.ic_packup_star_24_white_border
+                        )
+                    )
 
 
-                val remainingTime = it.due_time?.minus(Date().time)
-                deadlineDetailRemainingTimeText.apply {
-                    if (it.has_submission) {
-                        text = "已提交"
-                        deadlineStatusCaption.visibility = View.VISIBLE
-                        deadlineDetailPillPlaceholder.visibility = View.VISIBLE
-                        deadlineStatusCaption.background = ContextCompat.getDrawable(
+                    val remainingTime = it.due_time?.minus(Date().time)
+                    deadlineDetailRemainingTimeText.apply {
+                        if (it.has_submission) {
+                            text = "已提交"
+                            deadlineStatusCaption.visibility = View.VISIBLE
+                            deadlineDetailPillPlaceholder.visibility = View.VISIBLE
+                            deadlineStatusCaption.background = ContextCompat.getDrawable(
                                 context,
                                 R.drawable.pill_safe_green
                             )
-                    } else {
-                        when {
-                            remainingTime == null -> {
-                                visibility = View.GONE
-                                deadlineStatusCaption.visibility = View.GONE
-                                deadlineDetailPillPlaceholder.visibility = View.GONE
-                            }
-                            remainingTime <= 0 -> {
-                                text = "已逾期"
-                                deadlineStatusCaption.visibility = View.VISIBLE
-                                deadlineDetailPillPlaceholder.visibility = View.VISIBLE
-                                deadlineStatusCaption.background =
-                                    ContextCompat.getDrawable(
-                                        context,
-                                        R.drawable.pill_warning_purple
-                                    )
-                            }
-                            remainingTime < DAY_IN_MILLIS -> {
-                                text =
-                                    "剩余 ${floor(remainingTime.toDouble() / HOUR_IN_MILLIS).toInt()} 小时"
-                                deadlineStatusCaption.visibility = View.VISIBLE
-                                deadlineDetailPillPlaceholder.visibility = View.VISIBLE
-                                deadlineStatusCaption.background =
-                                    ContextCompat.getDrawable(
-                                        context,
-                                        R.drawable.pill_warning_red
-                                    )
-                            }
-                            remainingTime < WEEK_IN_MILLIS -> {
-                                text =
-                                    "剩余 ${floor(remainingTime.toDouble() / DAY_IN_MILLIS).toInt()} 天"
-                                deadlineStatusCaption.visibility = View.VISIBLE
-                                deadlineDetailPillPlaceholder.visibility = View.VISIBLE
-                                deadlineStatusCaption.background =
-                                    ContextCompat.getDrawable(
-                                        context,
-                                        R.drawable.pill_warning_orange
-                                    )
-                            }
-                            else -> {
-                                visibility = View.GONE
-                                deadlineStatusCaption.visibility = View.GONE
-                                deadlineDetailPillPlaceholder.visibility = View.GONE
+                        } else {
+                            when {
+                                remainingTime == null -> {
+                                    visibility = View.GONE
+                                    deadlineStatusCaption.visibility = View.GONE
+                                    deadlineDetailPillPlaceholder.visibility = View.GONE
+                                }
+                                remainingTime <= 0 -> {
+                                    text = "已逾期"
+                                    deadlineStatusCaption.visibility = View.VISIBLE
+                                    deadlineDetailPillPlaceholder.visibility = View.VISIBLE
+                                    deadlineStatusCaption.background =
+                                        ContextCompat.getDrawable(
+                                            context,
+                                            R.drawable.pill_warning_purple
+                                        )
+                                }
+                                remainingTime < DAY_IN_MILLIS -> {
+                                    text =
+                                        "剩余 ${floor(remainingTime.toDouble() / HOUR_IN_MILLIS).toInt()} 小时"
+                                    deadlineStatusCaption.visibility = View.VISIBLE
+                                    deadlineDetailPillPlaceholder.visibility = View.VISIBLE
+                                    deadlineStatusCaption.background =
+                                        ContextCompat.getDrawable(
+                                            context,
+                                            R.drawable.pill_warning_red
+                                        )
+                                }
+                                remainingTime < WEEK_IN_MILLIS -> {
+                                    text =
+                                        "剩余 ${floor(remainingTime.toDouble() / DAY_IN_MILLIS).toInt()} 天"
+                                    deadlineStatusCaption.visibility = View.VISIBLE
+                                    deadlineDetailPillPlaceholder.visibility = View.VISIBLE
+                                    deadlineStatusCaption.background =
+                                        ContextCompat.getDrawable(
+                                            context,
+                                            R.drawable.pill_warning_orange
+                                        )
+                                }
+                                else -> {
+                                    visibility = View.GONE
+                                    deadlineStatusCaption.visibility = View.GONE
+                                    deadlineDetailPillPlaceholder.visibility = View.GONE
+                                }
                             }
                         }
                     }
                 }
-            }
         }
         binding.apply {
             deadlineDetailNavButton.setOnClickListener {
