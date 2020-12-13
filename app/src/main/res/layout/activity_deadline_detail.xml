@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeadlineDetailActivity">
+    tools:context=".DeadlineDetailActivity"
+    android:animateLayoutChanges="true">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/deadline_detail_activity_tool_bar_container"
         android:layout_width="match_parent"
@@ -65,10 +66,10 @@
                 app:layout_constraintTop_toBottomOf="@id/deadline_detail_nav_button"
                 app:layout_constraintStart_toStartOf="@id/deadline_detail_title"
                 android:layout_marginTop="12dp"
-                android:backgroundTint="@color/color_error_background"
                 android:background="@drawable/button_embedded_on_action_bar"
                 android:id="@+id/deadline_status_caption"
-                android:layout_marginEnd="12dp">
+                android:layout_marginEnd="12dp"
+                android:visibility="gone">
                 <TextView
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +79,7 @@
                     android:text="剩余 3 天"
                     android:paddingHorizontal="6dp"
                     android:textColor="#ffffff"
-                    android:id="@+id/deadline_detail_status_text"
+                    android:id="@+id/deadline_detail_remaining_time_text"
                     android:textSize="@dimen/packup_caption"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -89,6 +90,7 @@
                 app:layout_constraintTop_toTopOf="@id/deadline_status_caption"
                 android:clickable="false"
                 android:focusable="false"
+                android:visibility="gone"
                 android:longClickable="false"/>
 
 

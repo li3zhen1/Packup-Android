@@ -66,7 +66,7 @@
     <color name="color_error_foreground">#FFF</color>
     <color name="color_error_background">#E30000</color>
 
-    <color name="color_warning_foreground">#B45F06</color>
+    <color name="color_warning_foreground">#CC6E0C</color>
     <color name="color_warning_background">#FFEE9C</color>
 
     <color name="color_success_500">#4DA400</color>
