@@ -10,29 +10,22 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.engrave.packup.R
 import org.engrave.packup.component.images.FILE_TYPE_ICON_MAP
-
-data class DeadlineItemAttachedFileItem(
-    val fileName: String,
-    val downloadStatus: Int,
-    val urlOrPath: String
-) {
-    val fileType
-        get() =
-            fileName.substringAfterLast(".").run {
-                if (isNullOrBlank()) "genericfile"
-                else FILE_TYPE_ICON_MAP.getOrDefault(this, "genericfile")
-            }
-}
+import org.engrave.packup.data.deadline.DeadlineAttachedFile
 
 class AttachedFilesAdapter(
     val context: Context,
-    var files: List<DeadlineItemAttachedFileItem>
+    var files: List<DeadlineAttachedFile>
 ) : RecyclerView.Adapter<AttachedFilesAdapter.ViewHolder>(
 ) {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val fileName: TextView = itemView.findViewById(R.id.item_file_name)
         val fileIcon: ImageView = itemView.findViewById(R.id.item_file_extension_icon)
         val fileDesc: TextView = itemView.findViewById(R.id.item_file_desc)
+    }
+
+    fun postFileList(fs: List<DeadlineAttachedFile>){
+        files = fs
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

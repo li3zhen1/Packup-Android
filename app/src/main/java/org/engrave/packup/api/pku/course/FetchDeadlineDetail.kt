@@ -1,12 +1,8 @@
 package org.engrave.packup.api.pku.course
 
-import org.engrave.packup.util.DummyCookie
-import org.engrave.packup.util.asDocument
-import org.engrave.packup.util.attachCookie
-import org.engrave.packup.util.scanAsString
-import org.jsoup.Jsoup
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
+import org.engrave.packup.data.deadline.DeadlineAttachedFile
+import org.engrave.packup.util.*
+import org.jsoup.nodes.Document
 
 private const val PkuCourseDeadlineSubmissionStatusBaseUrl =
     "https://course.pku.edu.cn/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2.GradableItem-"
@@ -18,10 +14,8 @@ private const val PkuCourseDeadlineBlobsBaseUrlWithoutSlash =
 fun fetchDeadlineDetailHtml(
     deadlineObjectId: String,
     courseLoggedCookie: DummyCookie
-) = (
-        URL(
-            PkuCourseDeadlineSubmissionStatusBaseUrl + deadlineObjectId
-        ).openConnection() as HttpsURLConnection)
+) = (PkuCourseDeadlineSubmissionStatusBaseUrl + deadlineObjectId)
+    .openAsHttpUrlConnection()
     .apply {
         instanceFollowRedirects = true
         setRequestProperty("Cookie", courseLoggedCookie.toString())
@@ -41,29 +35,46 @@ fun fetchDeadlineIsSubmitted(
 ) = fetchDeadlineDetailHtml(deadlineObjectId, courseLoggedCookie)
     .contains("复查提交历史记录")
 
-fun fetchDeadlineIsSubmitted(
-    detailHtml: String
-) = detailHtml.contains("复查提交历史记录")
+fun getSubmissionStatusFromSubmissionPage(
+    submissionPage: String
+) = submissionPage.contains("复查提交历史记录")
 
-private fun fetchDeadlineDescriptionUrl(
-    detailHtml: String
-) = PkuCourseDeadlineBlobsBaseUrlWithoutSlash + Jsoup.parse(detailHtml)
-    .select(".submit.button-1")
-    .attr("onClick")
-    .substringAfter("'")
-    .substringBeforeLast("'")
-
-fun fetchDeadlineDescription(
+fun fetchDeadlineSubmitPage(
+    detailHtml: Document,
     courseLoggedCookie: DummyCookie,
-    detailHtml: String
-) = (URL(fetchDeadlineDescriptionUrl(detailHtml)).openConnection() as HttpsURLConnection)
+) = (
+        PkuCourseDeadlineBlobsBaseUrlWithoutSlash + detailHtml
+            .select(".submit.button-1")
+            .attr("onClick")
+            .substringAfter("'")
+            .substringBeforeLast("'")
+        )
+    .openAsHttpUrlConnection()
     .attachCookie(courseLoggedCookie)
     .inputStream
     .scanAsString()
     .asDocument()
-    .select(".vtbegenerated>.vtbegenerated")
-    .text()
 
+fun getDescriptionFromSubmitPage(
+    submitHtml: Document
+) = submitHtml.select(".vtbegenerated>.vtbegenerated").text()
+
+/**
+ * @param detailHtml 是否有上传的页面都可以
+ */
+fun getAttachedFilesFromSubmitPage(
+    submitHtml: Document
+) = submitHtml
+    .select("a")
+    .filter { it.attr("href").startsWith("/bbcswebdav") }
+    .map {
+        DeadlineAttachedFile(
+            fileName = it.text(),
+            url = it.attr("href"),
+            downloadStatus = 0,
+            path = ""
+        )
+    }
 
 fun downloadDeadlineDetailFiles(
     url: String,

@@ -169,7 +169,7 @@
         android:textColor="?colorOnSurface"
         android:id="@+id/deadline_detail_desc_block"
         android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
-        android:text="Hilt 是 Android 的依赖项注入库，可减少在项目中执行手动依赖项注入的样板代码。">
+        >
     </TextView>
 
     <TextView

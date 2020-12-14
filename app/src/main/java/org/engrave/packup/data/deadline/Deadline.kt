@@ -2,17 +2,22 @@ package org.engrave.packup.data.deadline
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import org.engrave.packup.api.pku.course.DeadlineRawJson
+import org.engrave.packup.component.images.FILE_TYPE_ICON_MAP
 import org.engrave.packup.data.IPayloadChangeAnimatable
 import org.engrave.packup.util.*
 import java.util.*
 
 @Entity
+@TypeConverters(DeadlineAttachedFileTypeConverter::class)
 data class Deadline(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,
     val name: String?,
-    val description: String?,
+    var description: String?,
+    val calendar_id: String?,
     val event_type: String?,
     val course_object_id: String?,
     val source_name: String?,
@@ -21,7 +26,7 @@ data class Deadline(
     val is_completed: Boolean,
     val is_deleted: Boolean,
     val is_starred: Boolean,
-    val has_submission: Boolean,
+    var has_submission: Boolean,
 
     /* 用户无关字段 */
     val crawl_update_time: Long?,   // 从教学网抓下来的时间
@@ -29,7 +34,12 @@ data class Deadline(
 
     /* 更新标记 */
     val update_field_flag: Int = 0,
-    val update_field_time: Long = 0
+    val update_field_time: Long = 0,
+
+    /* 本地缓存 */
+    var attached_file_list: List<DeadlineAttachedFile>,
+    var attached_file_list_crawled: Boolean = false
+
 ) : IPayloadChangeAnimatable<Deadline> {
     val importance: Int get() = 0
     val inferred_subject: String? get() = null
@@ -38,7 +48,7 @@ data class Deadline(
         get() = source_name?.substringBeforeLast("(") ?: ""
 
     override fun keyFieldsSameWith(other: Deadline) =
-        uid == other.uid && name == other.name && description == other.description
+        uid == other.uid && name == other.name && calendar_id == other.calendar_id
                 && event_type == other.event_type && course_object_id == other.course_object_id
                 && source_name == other.source_name && reminder == other.reminder
                 && due_time == other.due_time && is_completed == other.is_completed
@@ -50,10 +60,9 @@ data class Deadline(
 
     companion object {
         fun fromRawJson(it: DeadlineRawJson) = Deadline(
-            // TODO: uid 换一种方式???
             uid = it.itemSourceId.replace("_", "").toInt(),
             name = it.title,
-            description = it.calendarId,
+            calendar_id = it.calendarId,
             event_type = it.eventType,
             course_object_id = it.itemSourceId,
             source_name = it.calendarName,
@@ -65,10 +74,52 @@ data class Deadline(
             has_submission = false,
             crawl_update_time = Date().time,
             sync_time = null,
+            attached_file_list = listOf(),
+            description = null //To be crawled
         )
     }
 
 
+}
+
+data class DeadlineAttachedFile(
+    val fileName: String,
+    val url: String,
+    val downloadStatus: Int,
+    val path: String
+) {
+    val fileType
+        get() =
+            fileName.substringAfterLast(".").run {
+                if (isNullOrBlank()) "genericfile"
+                else FILE_TYPE_ICON_MAP.getOrDefault(this, "genericfile")
+            }
+}
+
+class DeadlineAttachedFileTypeConverter {
+
+    @TypeConverter
+    fun fileListToString(strings: List<DeadlineAttachedFile>) =
+        strings.joinToString(CONVERT_DELIMITER) {
+            "${it.fileName}\n${it.url}\n${it.downloadStatus}\n${it.path}"
+        }
+
+    @TypeConverter
+    fun stringToFileList(string: String) =
+        if (string == "") listOf()
+        else string.split(CONVERT_DELIMITER)
+            .chunked(4) {
+                DeadlineAttachedFile(
+                    it[0],
+                    it[1],
+                    it[2].toIntOrNull() ?: -1,
+                    it[3]
+                )
+            }
+
+    companion object {
+        const val CONVERT_DELIMITER = "\n"
+    }
 }
 
 enum class DeadlineSortOrder {

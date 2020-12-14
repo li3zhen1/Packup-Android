@@ -10,23 +10,23 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.ActivityDeadlineDetailBinding
 import org.engrave.packup.ui.detail.AttachedFilesAdapter
 import org.engrave.packup.ui.detail.DeadlineDetailViewModel
-import org.engrave.packup.ui.detail.DeadlineItemAttachedFileItem
 import org.engrave.packup.util.DAY_IN_MILLIS
 import org.engrave.packup.util.HOUR_IN_MILLIS
 import org.engrave.packup.util.WEEK_IN_MILLIS
+import org.engrave.packup.util.getSpaced
+import ws.vinta.pangu.Pangu
 import java.util.*
+import javax.inject.Inject
 import kotlin.math.floor
 
 
 const val DEADLINE_DETAIL_ACTIVITY_UID = "DEADLINE_DETAIL_ACTIVITY_UID"
 
-/*
-* TODO: Pill 红橙紫白天模式饱和度过低
-* */
 @AndroidEntryPoint
 class DeadlineDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDeadlineDetailBinding
     private val detailViewModel: DeadlineDetailViewModel by viewModels()
+    private val pangu = Pangu()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,40 +38,27 @@ class DeadlineDetailActivity : AppCompatActivity() {
         val detailLayoutManager = LinearLayoutManager(this).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
+        val attachedFilesAdapter = AttachedFilesAdapter(this, listOf())
         binding.deadlineDetailLinkedFileList.apply {
             layoutManager = detailLayoutManager
-            adapter = AttachedFilesAdapter(
-                this@DeadlineDetailActivity,
-                listOf(
-                    DeadlineItemAttachedFileItem(
-                        "Hello.pdf",
-                        0,
-                        ""
-                    ),
-                    DeadlineItemAttachedFileItem(
-                        "Hello.doc",
-                        1,
-                        ""
-                    ),
-                    DeadlineItemAttachedFileItem(
-                        "Hello.png",
-                        2,
-                        ""
-                    ),
-                    DeadlineItemAttachedFileItem(
-                        "Hello.svg",
-                        3,
-                        ""
-                    )
-                )
-            )
+            adapter = attachedFilesAdapter
+        }
+        binding.deadlineDetailStarButton.setOnClickListener {
+            detailViewModel.alterStarredAsync()
         }
 
         detailViewModel.deadline.observe(this){
             if (it != null)
                 binding.apply {
-                    deadlineDetailTitle.text = it.name
+                    /**
+                     * 动作处理放外面，这里只放界面绑定！！
+                     */
+                    deadlineDetailTitle.text = it.name?.getSpaced(pangu)
                     deadlineDetailSourceLinkText.text = it.source_course_name_without_semester
+                    deadlineDetailDescBlock.text = it.description?.getSpaced(pangu) //TODO: 空串？
+
+                    attachedFilesAdapter.postFileList(it.attached_file_list)
+
                     deadlineDetailStarButton.setImageDrawable(
                         ContextCompat.getDrawable(
                             this@DeadlineDetailActivity,
@@ -79,8 +66,6 @@ class DeadlineDetailActivity : AppCompatActivity() {
                             else R.drawable.ic_packup_star_24_white_border
                         )
                     )
-
-
                     val remainingTime = it.due_time?.minus(Date().time)
                     deadlineDetailRemainingTimeText.apply {
                         if (it.has_submission) {

@@ -3,6 +3,8 @@ package org.engrave.packup.util
 import org.jsoup.Jsoup
 import ws.vinta.pangu.Pangu
 import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.*
 import javax.inject.Inject
 
@@ -34,4 +36,8 @@ inline fun String.substringBetween(delimiterBefore: String, delimiterAfter: Stri
     this.substringAfter(delimiterBefore, "").substringBefore(delimiterAfter, "")
 
 
-fun String.asDocument() = Jsoup.parse(this)
+@Suppress("NOTHING_TO_INLINE")
+inline fun String.asDocument() = Jsoup.parse(this)
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun String.openAsHttpUrlConnection() = URL(this).openConnection() as HttpURLConnection

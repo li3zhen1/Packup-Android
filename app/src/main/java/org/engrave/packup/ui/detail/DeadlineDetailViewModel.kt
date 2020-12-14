@@ -2,10 +2,8 @@ package org.engrave.packup.ui.detail
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.data.deadline.DeadlineRepository
 import org.engrave.packup.data.deadline.getByUid
@@ -27,6 +25,17 @@ class DeadlineDetailViewModel @ViewModelInject constructor(
         }
         addSource(deadlines) {
             this.value = deadlineUid.value?.let { it1 -> it.getByUid(it1) }
+        }
+    }
+
+    fun alterStarredAsync() = viewModelScope.launch {
+        deadlineUid.value?.let {
+            deadline.value?.let { deadlineVal ->
+                deadlineRepository.setStarred(
+                    it,
+                    !deadlineVal.is_starred
+                )
+            }
         }
     }
 }

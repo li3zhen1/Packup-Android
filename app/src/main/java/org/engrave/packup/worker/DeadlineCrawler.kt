@@ -11,12 +11,11 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.engrave.packup.api.pku.course.fetchCourseDeadlines
-import org.engrave.packup.api.pku.course.fetchCourseLoginCookies
-import org.engrave.packup.api.pku.course.fetchDeadlineIsSubmitted
+import org.engrave.packup.api.pku.course.*
 import org.engrave.packup.data.account.AccountInfoRepository
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.data.deadline.DeadlineDao
+import org.engrave.packup.util.asDocument
 
 
 class DeadlineCrawler @WorkerInject constructor(
@@ -40,13 +39,12 @@ class DeadlineCrawler @WorkerInject constructor(
                 loggedCookie
             )
         }
-//        showToast(newDeadlinesUnparsed.joinToString("\n") { it.endDate })
+
         val newDealines = newDeadlinesUnparsed.map(Deadline::fromRawJson)
 
         newDealines.forEach { newDeadline ->
             var existSameKey = false
             var conflictDeadline: Deadline? = null
-
             if (deadlines != null) {
                 for (existedDdl in deadlines) {
                     if (newDeadline.keyFieldsSameWith(existedDdl)) {
@@ -60,34 +58,66 @@ class DeadlineCrawler @WorkerInject constructor(
             /**
              * 不存在相同的 Ddl
              */
-            if (!existSameKey) {
-                val isSubmitted =
-                    if (newDeadline.course_object_id.isNullOrEmpty()) false
-                    else withContext(Dispatchers.IO) {
-                        fetchDeadlineIsSubmitted(
+            if (!newDeadline.course_object_id.isNullOrEmpty())
+                if (!existSameKey) {
+                    /**
+                     * 数据库里没有相同 DDL ==> 全量更新
+                     */
+                    val detailHtmlStr = withContext(Dispatchers.IO) {
+                        fetchDeadlineDetailHtml(
                             newDeadline.course_object_id,
                             loggedCookie
                         )
                     }
-                if (isSubmitted) deadlineDao.insertDeadline(
-                    newDeadline.copy(has_submission = true)
-                )
-                else deadlineDao.insertDeadline(newDeadline)
-            } else
-            /**
-             * 有相同无提交 => 检查有没有提交，仅更新 has_submission 字段
-             */
-                if (conflictDeadline != null && !conflictDeadline.has_submission) {
-                    val isSubmitted =
-                        if (newDeadline.course_object_id.isNullOrEmpty()) false
-                        else withContext(Dispatchers.IO) {
-                            fetchDeadlineIsSubmitted(
-                                newDeadline.course_object_id,
-                                loggedCookie
-                            )
-                        }
-                    if (isSubmitted)
-                        deadlineDao.setDeadlineSubmission(conflictDeadline.uid, true)
+                    val detailPage = detailHtmlStr.asDocument()
+                    val isSubmitted = getSubmissionStatusFromSubmissionPage(detailHtmlStr)
+                    val submitPage =
+                        if (isSubmitted) fetchDeadlineSubmitPage(detailPage, loggedCookie)
+                        else detailPage
+                    val attachedFiles = getAttachedFilesFromSubmitPage(submitPage)
+                    val desc = getDescriptionFromSubmitPage(submitPage)
+
+                    newDeadline.apply {
+                        description = desc
+                        attached_file_list = attachedFiles
+                        has_submission = isSubmitted
+                        attached_file_list_crawled = true
+                    }
+                    deadlineDao.insertDeadline(newDeadline)
+                } else if (conflictDeadline != null && !conflictDeadline.has_submission) {
+                    val detailHtmlStr by lazy {
+                        fetchDeadlineDetailHtml(
+                            newDeadline.course_object_id,
+                            loggedCookie
+                        )
+                    }
+                    val hasSubmission by lazy {
+                        getSubmissionStatusFromSubmissionPage(detailHtmlStr)
+                    }
+                    val submitPage by lazy {
+                        if (hasSubmission) fetchDeadlineSubmitPage(
+                            detailHtmlStr.asDocument(),
+                            loggedCookie
+                        )
+                        else detailHtmlStr.asDocument()
+                    }
+
+                    /**
+                     * 有相同无提交 => 检查有没有提交，仅更新 has_submission 字段
+                     */
+                    if (!conflictDeadline.has_submission && hasSubmission) {
+                        deadlineDao.setDeadlineSubmission(
+                            conflictDeadline.uid,
+                            true
+                        )
+                    }
+
+                    if (!conflictDeadline.attached_file_list_crawled) {
+                        deadlineDao.setDeadlineAttachedFiles(
+                            conflictDeadline.uid,
+                            getAttachedFilesFromSubmitPage(submitPage)
+                        )
+                    }
                 }
 
             // TODO: 记录所有操作同步到 Server
@@ -106,8 +136,7 @@ class DeadlineCrawler @WorkerInject constructor(
         )
     }
 
-
-    fun showToast(msg: String){
+    private fun showToast(msg: String) {
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({ // Run your task here
             Toast.makeText(appContext, msg, Toast.LENGTH_LONG).show()

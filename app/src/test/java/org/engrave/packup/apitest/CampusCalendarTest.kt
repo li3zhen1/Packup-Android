@@ -8,6 +8,7 @@ import org.engrave.packup.api.pku.www.monthDayRangeRegex1
 import org.engrave.packup.pw
 import org.engrave.packup.sid
 import org.engrave.packup.util.DummyCookie
+import org.engrave.packup.util.asDocument
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.junit.Test
@@ -83,21 +84,20 @@ class CampusCalendarTest {
             sid,
             pw
         )
-        val html: Document = Jsoup.parse(
-            fetchDeadlineDetailHtml(
-                "_150239_1",
+        val html: Document = fetchDeadlineDetailHtml(
+                "_150158_1",
                 loggedCookie
-            )
-        )
-        println(loggedCookie)
-        val attachedFiles = html.select("#assignmentInfo a").forEach {
+            ).asDocument()
+        //println(html)
+        val attachedFiles = html.select("a")
+            .filter{ it.attr("href").startsWith("/bbcswebdav")}
+            .forEach {
             println("${it.text()} ${it.attr("href")}")
-
-            val blb = getFileBlobWithCookie(
-                loggedCookie,
-                "https://course.pku.edu.cn/" + it.attr("href"),
-                it.text()
-            )
+//            val blb = getFileBlobWithCookie(
+//                loggedCookie,
+//                "https://course.pku.edu.cn/" + it.attr("href"),
+//                it.text()
+//            )
         }
 
 

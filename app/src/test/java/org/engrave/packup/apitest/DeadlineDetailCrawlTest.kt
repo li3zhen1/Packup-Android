@@ -1,7 +1,6 @@
 package org.engrave.packup.apitest
 
 import org.engrave.packup.api.pku.course.fetchCourseLoginCookies
-import org.engrave.packup.api.pku.course.fetchDeadlineDescriptionUrl
 import org.engrave.packup.api.pku.course.fetchDeadlineDetailHtml
 import org.engrave.packup.pw
 import org.engrave.packup.sid
@@ -19,19 +18,11 @@ class DeadlineDetailCrawlTest {
             sid,
             pw
         )
-        val newUrl = fetchDeadlineDescriptionUrl(
-            fetchDeadlineDetailHtml(
-                "_150152_1",
-                courseLoggedCookie
-            )
+        val doc = fetchDeadlineDetailHtml(
+            "_150158_1",
+            courseLoggedCookie
         )
-        val conn =
-            (URL(newUrl).openConnection() as HttpURLConnection).attachCookie(courseLoggedCookie)
-        val inStream = conn.inputStream
-            .scanAsString()
-            .asDocument()
-            .select(".vtbegenerated>.vtbegenerated")
-            .text()
-        println(inStream)
+        println(doc)
+
     }
 }
