@@ -1,21 +1,33 @@
 package org.engrave.packup.data.deadline
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.StrictMode
+import android.util.Log
+import androidx.core.content.FileProvider
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import org.engrave.packup.BuildConfig
 import org.engrave.packup.api.pku.course.DeadlineRawJson
+import org.engrave.packup.api.pku.course.downloadDeadlineAttachedFiles
 import org.engrave.packup.component.images.FILE_TYPE_ICON_MAP
+import org.engrave.packup.data.DEADLINE_ATTACHED_FILES_FOLDER
+import org.engrave.packup.data.FILE_PROVIDER_AUTHORITY
 import org.engrave.packup.data.IPayloadChangeAnimatable
 import org.engrave.packup.util.*
+import java.io.File
 import java.util.*
+
 
 @Entity
 @TypeConverters(DeadlineAttachedFileTypeConverter::class)
 data class Deadline(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,
-    val name: String?,
+    val name: String,
     var description: String?,
     val calendar_id: String?,
     val event_type: String?,
@@ -58,6 +70,30 @@ data class Deadline(
         is_starred == other.is_starred && has_submission == other.has_submission
 
 
+    suspend fun downloadAttachedFiles(context: Context, courseLoggedCookieString: String) {
+        if (attached_file_list_crawled) {
+            val rootAttachedFileFolder by lazy {
+                File(
+                    context.filesDir,
+                    DEADLINE_ATTACHED_FILES_FOLDER
+                ).also { if (!it.exists()) it.mkdir() }
+            }
+            val deadlineAttachedFileFolder by lazy {
+                File(
+                    rootAttachedFileFolder,
+                    "uid$uid"
+                ).also { if (!it.exists()) it.mkdir() }
+            }
+            attached_file_list.forEach {
+                it.download(
+                    courseLoggedCookieString,
+                    deadlineAttachedFileFolder,
+                    context
+                )
+            }
+        }
+    }
+
     companion object {
         fun fromRawJson(it: DeadlineRawJson) = Deadline(
             uid = it.itemSourceId.replace("_", "").toInt(),
@@ -77,6 +113,7 @@ data class Deadline(
             attached_file_list = listOf(),
             description = null //To be crawled
         )
+
     }
 
 
@@ -85,15 +122,106 @@ data class Deadline(
 data class DeadlineAttachedFile(
     val fileName: String,
     val url: String,
-    val downloadStatus: Int,
-    val path: String
+    var downloadStatus: Int,
+    var localUri: String
 ) {
     val fileType
         get() =
-            fileName.substringAfterLast(".").run {
+            fileExt.run {
                 if (isNullOrBlank()) "genericfile"
                 else FILE_TYPE_ICON_MAP.getOrDefault(this, "genericfile")
             }
+    val fileExt
+        get() =
+            fileName.substringAfterLast(".").toLowerCase()
+
+    suspend fun download(
+        courseLoggedCookieString: String,
+        deadlineAttachedFileFolder: File,
+        context: Context
+    ) {
+        val attachedFile = File(deadlineAttachedFileFolder, fileName)
+        downloadStatus = STATUS_DOWNLOADING
+        try {
+            downloadDeadlineAttachedFiles(
+                url,
+                courseLoggedCookieString,
+                attachedFile
+            )
+            localUri = FileProvider.getUriForFile(
+                context,
+                FILE_PROVIDER_AUTHORITY,
+                attachedFile
+            ).toString()
+        } catch (e: Exception) {
+            downloadStatus = STATUS_ERROR
+            throw e
+        }
+        downloadStatus = STATUS_DOWNLOADED
+    }
+
+    val needAttemptDownload get() = downloadStatus <= 0
+
+    fun startExternalOpenIntent(context: Context) {
+        val uri = Uri.parse(localUri)
+        context.grantUriPermission(
+            BuildConfig.APPLICATION_ID,
+            uri,
+            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        )
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            addCategory(Intent.CATEGORY_DEFAULT)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            setDataAndType(uri, context.contentResolver.getType(uri))
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        context.startActivity(intent)
+    }
+
+    fun startShareIntent(context: Context) {
+        val uri = Uri.parse(localUri)
+        context.grantUriPermission(
+            BuildConfig.APPLICATION_ID,
+            uri,
+            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+        )
+
+        val builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "application/octet-stream"
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            putExtra(Intent.EXTRA_STREAM, uri)
+        }
+        context.startActivity(Intent.createChooser(intent, "分享 $fileName"))
+    }
+
+    fun asString() = "${fileName}\n${url}\n${downloadStatus}\n${localUri}"
+
+    companion object {
+
+        const val STATUS_ERROR = -1
+        const val STATUS_NOT_DOWNLOADED = 0
+        const val STATUS_DOWNLOADING = 1
+        const val STATUS_DOWNLOADED = 2
+        private const val PARCEL_DELIMITER = "\n"
+
+        fun fromString(str: String): DeadlineAttachedFile? {
+            Log.e("SPLIT", str)
+            val sl = str.split(PARCEL_DELIMITER)
+            return fromStringList(sl)
+        }
+
+        fun fromStringList(sl: List<String>) =
+            if (sl.size == 4) DeadlineAttachedFile(
+                sl[0],
+                sl[1],
+                sl[2].toIntOrNull() ?: -1,
+                sl[3]
+            ) else null
+    }
 }
 
 class DeadlineAttachedFileTypeConverter {
@@ -101,7 +229,7 @@ class DeadlineAttachedFileTypeConverter {
     @TypeConverter
     fun fileListToString(strings: List<DeadlineAttachedFile>) =
         strings.joinToString(CONVERT_DELIMITER) {
-            "${it.fileName}\n${it.url}\n${it.downloadStatus}\n${it.path}"
+            it.asString()
         }
 
     @TypeConverter
@@ -109,13 +237,9 @@ class DeadlineAttachedFileTypeConverter {
         if (string == "") listOf()
         else string.split(CONVERT_DELIMITER)
             .chunked(4) {
-                DeadlineAttachedFile(
-                    it[0],
-                    it[1],
-                    it[2].toIntOrNull() ?: -1,
-                    it[3]
-                )
-            }
+                //Log.e("convert", it.toString())
+                DeadlineAttachedFile.fromStringList(it)
+            }.filterNotNull()
 
     companion object {
         const val CONVERT_DELIMITER = "\n"
@@ -190,4 +314,4 @@ fun List<Deadline>.groupByAssignedTime(baselineTime: Long = Calendar.getInstance
     }
 
 
-fun List<Deadline>.getByUid(uid:Int) = find { it.uid == uid }
+fun List<Deadline>.getByUid(uid: Int) = find { it.uid == uid }

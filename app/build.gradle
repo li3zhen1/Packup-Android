@@ -126,6 +126,11 @@ dependencies {
     def datastore_version = "1.0.0-alpha05"
     implementation "androidx.datastore:datastore-preferences:$datastore_version"
     implementation 'org.mnode.ical4j:ical4j:4.0.0-alpha6'
-    implementation 'com.microsoft.fluentui:FluentUIAndroid:0.0.9'
-    implementation 'com.microsoft.device:dualscreen-layout:1.0.0-alpha01'
+//    implementation 'com.microsoft.fluentui:FluentUIAndroid:0.0.9'
+//    implementation 'com.microsoft.device:dualscreen-layout:1.0.0-alpha01'
+
+//    implementation 'com.facebook.fresco:fresco:2.3.0'
+//    implementation 'com.facebook.fresco:animated-gif:2.3.0'
+//    implementation 'com.facebook.fresco:animated-webp:2.3.0'
+//    implementation 'com.facebook.fresco:webpsupport:2.3.0'
 }

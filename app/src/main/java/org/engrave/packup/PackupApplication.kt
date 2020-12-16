@@ -15,4 +15,10 @@ class PackupApplication : Application(), Configuration.Provider{
         Configuration.Builder()
             .setWorkerFactory(workerFactory)
             .build()
+
+
+    override fun onCreate() {
+        super.onCreate()
+        //Fresco.initialize(this)
+    }
 }

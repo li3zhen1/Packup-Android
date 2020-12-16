@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:paddingBottom="@dimen/packup_general_padding_vertical"
+    android:theme="@style/Theme.Packup.Activity"
+    android:background="@drawable/bottom_sheet_container">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/file_blob_fragment_file_name"
+        app:layout_constraintBottom_toBottomOf="@id/file_blob_fragment_file_desc"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:layout_marginVertical="@dimen/packup_general_padding_vertical"
+        android:src="@drawable/ic_genericfile"
+        android:id="@+id/file_blob_fragment_file_ext_icon"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/file_blob_fragment_file_name"
+        app:layout_constraintStart_toEndOf="@id/file_blob_fragment_file_ext_icon"
+        app:layout_constraintEnd_toStartOf="@id/file_blob_fragment_share_button"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="?colorOnSurface"
+        android:ellipsize="marquee"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/packup_general_padding_vertical"
+        android:layout_marginHorizontal="8dp"
+        android:singleLine="true" />
+
+    <TextView
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/file_blob_fragment_file_desc"
+        app:layout_constraintStart_toStartOf="@+id/file_blob_fragment_file_name"
+        app:layout_constraintEnd_toEndOf="@id/file_blob_fragment_file_name"
+        app:layout_constraintTop_toBottomOf="@id/file_blob_fragment_file_name"
+
+        android:textSize="@dimen/packup_caption"
+        android:layout_marginTop="2dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+        app:layout_constraintTop_toTopOf="@id/file_blob_fragment_file_name"
+        app:layout_constraintBottom_toBottomOf="@id/file_blob_fragment_file_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/image_button_size_with_ripple"
+        android:layout_height="@dimen/image_button_size_with_ripple"
+        android:id="@+id/file_blob_fragment_share_button"
+        android:src="@drawable/ic_fluent_share_android_24_regular"
+        android:background="@drawable/icon_button_on_bottom_sheet"
+        android:tint="?colorOnSurface"/>
+
+    <!-- TODO： 大图内存溢出 改成 Fresco -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/file_blob_fragment_file_desc"
+        android:layout_margin="@dimen/packup_general_padding_horizontal"
+        android:id="@+id/file_blob_fragment_file_preview"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="120dp"
+        android:paddingTop="24dp"
+        android:src="@drawable/ic_emoji_grinning"
+        android:layout_margin="@dimen/packup_general_padding_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/file_blob_fragment_file_preview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/file_blob_fragment_file_preview_sorry_emoji"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/packup_general_padding_horizontal"
+        android:text="@string/packup_unsupported_file_format"
+        android:id="@+id/file_blob_unable_to_provide_preview"
+        app:layout_constraintTop_toBottomOf="@id/file_blob_fragment_file_preview_sorry_emoji"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:paddingBottom="36dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/file_blob_unable_to_provide_preview"
+        android:drawableStart="@drawable/ic_fluent_open_24_regular"
+        android:paddingHorizontal="12dp"
+        android:drawableTint="?colorSurface"
+        android:text="通过外部应用程序打开"
+        android:id="@+id/file_blob_fragment_open_external_button"
+        android:layout_marginTop="@dimen/packup_general_padding_vertical"
+        android:background="@drawable/primaryButtonBackground"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:textColor="?colorSurface"
+        android:elevation="0dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

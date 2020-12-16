@@ -2,17 +2,14 @@ package org.engrave.packup.ui.deadline
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.engrave.packup.DEADLINE_DETAIL_ACTIVITY_UID
 import org.engrave.packup.DeadlineDetailActivity
-import org.engrave.packup.R
 import org.engrave.packup.component.DistinctiveDiffCallback
 import org.engrave.packup.component.IDistinctive
 import org.engrave.packup.data.deadline.Deadline
@@ -77,19 +74,14 @@ data class DeadlineHeader(val title: String, val num: Int) : DeadlineItem() {
 
 class DeadlineListAdapter(
     private val context: Context,
-    private val onClickStar: (Int, Boolean) -> Unit
+    private val onClickStar: (Int, Boolean) -> Unit,
+    private val onAttemptDeleteItem: (Int) -> Unit,
+    private val onAttemptCompleteItem: (Int) -> Unit
 ) :
-    ListAdapter<DeadlineItem, RecyclerView.ViewHolder>(DistinctiveDiffCallback<DeadlineItem>()) {
+    ListAdapter<DeadlineItem, RecyclerView.ViewHolder>(DistinctiveDiffCallback<DeadlineItem>()),
+    DeadlineItemTouchHelper.IDeadlineItemTouchHelperAdapter {
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     val pangu = Pangu()
-    val haveSubmissionString = context.getString(R.string.have_submission)
-    val noSubmissionString = context.getString(R.string.no_submission)
-    val haveSubmissionDrawable =
-        ContextCompat.getDrawable(context, R.drawable.ic_packup_submission_status_24_filled)
-
-    val noSubmissionDrawable =
-        ContextCompat.getDrawable(context, R.drawable.ic_packup_submission_status_24_regular)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
@@ -109,7 +101,6 @@ class DeadlineListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder) {
         is DeadlineHeaderViewHolder -> holder.bind(getItem(position) as DeadlineHeader)
         is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember) { bool ->
-            Log.e("position", position.toString())
             onClickStar((getItem(position) as DeadlineMember).deadline.uid, bool)
         }
         else -> throw ClassCastException("Unknown ViewHolder Class ${holder::class.simpleName} when inflating deadline list.")
@@ -166,4 +157,17 @@ class DeadlineListAdapter(
         const val DEADLINE_ITEM_HEADER = 0
         const val DEADLINE_ITEM_MEMBER = 1
     }
+
+    override fun onItemRemoved(position: Int) {
+        val item = getItem(position)
+        if (item is DeadlineMember)
+            onAttemptDeleteItem(item.deadline.uid)
+    }
+
+    override fun onItemCompleted(position: Int) {
+        val item = getItem(position)
+        if (item is DeadlineMember)
+            onAttemptCompleteItem(item.deadline.uid)
+    }
+
 }

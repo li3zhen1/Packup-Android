@@ -51,179 +51,10 @@
         <item name="packupForegroundOnSecondaryColor">@color/packup_white</item>
         <item name="packupDividerColor">@color/packup_gray_100</item>
 
-        <!--Foregrounds, Transparent-->
-        <item name="packupForegroundOnPrimary80Color">#CCFFFFFF</item>
-        <item name="packupForegroundOnPrimary70Color">#B3FFFFFF</item>
 
-        <!-- *** Semantic Colors *** -->
 
-        <!--AppBarLayout-->
-        <item name="packupAppBarLayoutBackgroundColor">?attr/colorPrimary</item>
 
-        <!--BottomNavigation-->
-        <item name="packupBottomNavigationBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupBottomNavigationForegroundActiveColor">?attr/colorPrimary</item>
-        <item name="packupBottomNavigationForegroundInactiveColor">?attr/packupForegroundSecondaryColor</item>
-
-        <!--BottomSheet-->
-        <item name="packupBottomSheetBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupBottomSheetBackgroundPressedColor">?attr/packupBackgroundPressedColor</item>
-        <item name="packupBottomSheetIconColor">?attr/packupForegroundSecondaryIconColor</item>
-        <item name="packupBottomSheetDividerColor">?attr/packupDividerColor</item>
-
-        <!--Button-->
-        <item name="packupButtonBackgroundDefaultColor">?attr/packupBackgroundPrimaryColor</item>
-        <item name="packupButtonBackgroundDisabledColor">@color/packup_gray_50</item>
-        <item name="packupButtonBackgroundPressedColor">?attr/colorControlHighlight</item>
-        <item name="packupButtonTextDefaultColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupButtonTextDisabledColor">@color/packup_gray_300</item>
-
-        <!--Button Borderless-->
-        <item name="packupButtonBorderlessBackgroundDefaultColor">@android:color/transparent</item>
-        <item name="packupButtonBorderlessBackgroundDisabledColor">@android:color/transparent</item>
-        <item name="packupButtonBorderlessBackgroundPressedColor">?attr/colorControlHighlight</item>
-        <item name="packupButtonBorderlessTextDefaultColor">?attr/colorPrimary</item>
-        <item name="packupButtonBorderlessTextDisabledColor">@color/packup_gray_300</item>
-        <item name="packupButtonBorderlessTextPressedColor">?attr/packupButtonBorderlessTextDefaultColor</item>
-
-        <!--Button Outlined-->
-        <item name="packupButtonOutlinedTextDefaultColor">@color/packup_communication_blue</item>
-        <item name="packupButtonOutlinedTextPressedColor">@color/packup_communication_tint_20</item>
-        <item name="packupButtonOutlinedTextDisabledColor">@color/packup_gray_300</item>
-        <item name="packupButtonOutlinedStrokeDefaultColor">@color/packup_communication_tint_20</item>
-        <item name="packupButtonOutlinedStrokePressedColor">@color/packup_communication_tint_30</item>
-        <item name="packupButtonOutlinedStrokeDisabledColor">@color/packup_gray_50</item>
-
-        <!--Compound Buttons-->
-        <item name="packupCompoundButtonTintDefaultColor">?attr/packupForegroundSecondaryIconColor</item>
-        <item name="packupCompoundButtonTintCheckedColor">?attr/packupForegroundSelectedColor</item>
-
-        <!--CalendarView-->
-        <item name="packupCalendarBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupCalendarWeekHeadingBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupCalendarWeekHeadingWeekDayTextColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupCalendarWeekHeadingWeekendTextColor">@color/packup_gray_400</item>
-        <item name="packupCalendarMonthOverlayBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupCalendarMonthOverlayTextColor">?attr/packupForegroundColor</item>
-        <item name="packupCalendarOtherMonthBackgroundColor">@color/packup_gray_25</item>
-        <item name="packupCalendarSelectedColor">?attr/packupForegroundSelectedColor</item>
-        <item name="packupCalendarDayTodayBackgroundColor">?attr/packupColorPrimaryLighter</item>
-        <!--day selector-->
-        <item name="packupCalendarDayTextActiveColor">?attr/packupForegroundSelectedColor</item>
-        <item name="packupCalendarDayTextActiveCheckedColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupCalendarDayTextInactiveCheckedColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupCalendarDayTextDefaultColor">?attr/packupForegroundSecondaryColor</item>
-
-        <!--DateTimePicker-->
-        <item name="packupDateTimePickerToolbarTitleTextColor">?attr/colorPrimary</item>
-        <item name="packupDateTimePickerTabTextColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupDateTimePickerDialogBackgroundColor">?attr/packupDialogBackgroundColor</item>
-        <item name="packupDateTimePickerToolbarIconColor">?attr/colorPrimary</item>
-
-        <!--Dialog-->
-        <item name="packupDialogBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupDialogCloseIconColor">?attr/packupForegroundSecondaryIconColor</item>
-        <item name="packupDialogTabLayoutBackgroundColor">?attr/packupDialogBackgroundColor</item>
-
-        <!--Drawer-->
-        <item name="packupDrawerBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupDrawerHandleColor">@color/packup_gray_100</item>
-
-        <!--ListItemView-->
-        <item name="packupListItemBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupListItemTitleColor">?attr/packupForegroundColor</item>
-        <item name="packupListItemSubtitleColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupListItemSubtitleLargeHeaderColor">?attr/packupForegroundColor</item>
-        <item name="packupListItemFooterColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupListItemRippleColor">?attr/packupBackgroundPressedColor</item>
-
-        <!--ListSubHeader-->
-        <item name="packupListSubHeaderTitlePrimaryColor">?attr/colorPrimary</item>
-        <item name="packupListSubHeaderTitleSecondaryColor">?attr/packupForegroundColor</item>
-        <item name="packupListSubHeaderTitleTertiaryColor">?attr/packupForegroundSecondaryColor</item>
-
-        <!--NumberPicker-->
-        <item name="packupNumberPickerBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupNumberPickerDefaultTextColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupNumberPickerSelectedTextColor">?attr/packupForegroundSelectedColor</item>
-
-        <!--PeoplePicker-->
-        <item name="packupPeoplePickerBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupPeoplePickerPopupBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupPeoplePickerTextViewBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupPeoplePickerTextViewDragBackgroundColor">?attr/packupBackgroundPrimaryColor</item>
-        <item name="packupPeoplePickerHintTextColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupPeoplePickerLabelTextColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupPeoplePickerCountSpanTextColor">?attr/packupForegroundSecondaryColor</item>
-
-        <!--Persona Chip-->
-        <!--TODO add hex values to the colors file when they get added to the toolkit-->
-        <item name="packupPersonaChipBackgroundNormalColor">@color/packup_gray_50</item>
-        <item name="packupPersonaChipBackgroundActiveColor">?attr/packupBackgroundPrimaryColor</item>
-        <item name="packupPersonaChipBackgroundErrorColor">#FFF3F4</item>
-        <item name="packupPersonaChipBackgroundErrorActiveColor">#E8484C</item>
-        <item name="packupPersonaChipBackgroundPressedColor">#0D000000</item>
-        <item name="packupPersonaChipTextNormalColor">@color/packup_gray_900</item>
-        <item name="packupPersonaChipForegroundActiveColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupPersonaChipTextErrorColor">#E63237</item>
-        <item name="packupPersonaChipTextDisabledColor">@color/packup_gray_400</item>
-
-        <!--PopupMenu-->
-        <item name="packupPopupMenuBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupPopupMenuBackgroundPressedColor">?attr/packupBackgroundPressedColor</item>
-        <item name="packupPopupMenuItemTitleColor">?attr/packupForegroundColor</item>
-        <item name="packupPopupMenuItemForegroundSelectedColor">?attr/packupForegroundSelectedColor</item>
-        <item name="packupPopupMenuItemCheckBackgroundRippleColor">@color/packup_gray_300</item>
-
-        <!--Progress-->
-        <item name="packupProgressPrimaryColor">?attr/colorPrimary</item>
-        <item name="packupProgressBackgroundColor">@color/packup_gray_100</item>
-
-        <!--Searchbar-->
-        <item name="packupSearchbarBackgroundColor">?attr/packupBackgroundPrimaryColor</item>
-        <item name="packupSearchbarSearchViewContainerBackgroundColor">?attr/packupBackgroundSecondary20Color</item>
-        <item name="packupSearchbarBackButtonColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupSearchbarSearchIconColor">?attr/packupForegroundOnPrimary80Color</item>
-        <item name="packupSearchbarSearchViewTextColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupSearchbarSearchViewTextHintColor">?attr/packupForegroundOnPrimary80Color</item>
-        <item name="packupSearchbarSearchViewCursorColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupSearchbarProgressColor">?attr/packupForegroundOnPrimary70Color</item>
-        <item name="packupSearchbarCloseIconColor">?attr/packupForegroundOnPrimary70Color</item>
-
-        <!--Snackbar-->
-        <item name="packupSnackbarBackgroundColor">?attr/packupBackgroundSecondaryColor</item>
-        <item name="packupSnackbarBackgroundAnnouncementColor">?attr/packupBackgroundPrimaryColor</item>
-        <item name="packupSnackbarTextColor">?attr/packupForegroundOnSecondaryColor</item>
-        <item name="packupSnackbarActionTextColor">?attr/packupColorPrimaryLight</item>
-        <item name="packupSnackbarActionTextAnnouncementColor">?attr/packupForegroundOnPrimaryColor</item>
-
-        <!--TabLayout Dialog-->
-        <item name="packupDialogTabTextColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupDialogTabSelectedTextColor">?attr/packupForegroundSelectedColor</item>
-        <item name="packupDialogTabIndicatorColor">?attr/packupForegroundSelectedColor</item>
-
-        <!--TabLayout-->
-        <item name="packupTabSelectedTextColor">?attr/packupBackgroundPrimaryColor</item>
-        <item name="packupTabUnselectedTextColor">?attr/packupBackgroundColor</item>
-        <item name="packupTabLayoutContainerBackgroundColor">?attr/packupBackgroundPrimaryColor</item>
-        <item name="packupTabLayoutBackgroundColor">@color/packup_communication_shade_10</item>
-        <item name="packupTabSelectedBackgroundColor">?attr/packupBackgroundColor</item>
-        <item name="packupTabUnselectedBackgroundColor">?attr/packupTabLayoutBackgroundColor</item>
-<!--        <item name="packupTabTextAppearance">@style/TextAppearance.packup.Tab</item>-->
-        <!--Toolbar-->
-        <item name="packupToolbarBackgroundColor">?attr/colorPrimary</item>
-        <item name="packupToolbarTitleTextColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupToolbarSubtitleTextColor">?attr/packupForegroundOnPrimaryColor</item>
-        <item name="packupToolbarIconColor">?attr/packupForegroundOnPrimaryColor</item>
-
-        <!--Tooltip-->
-        <item name="packupTooltipBackgroundColor">?attr/packupBackgroundSecondaryColor</item>
-        <item name="packupTooltipTextColor">?attr/packupForegroundOnSecondaryColor</item>
-
-        <!--BottomSheet-->
-        <item name="packupPersistentBottomSheetHeadingColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupPersistentBottomSheetItemColor">?attr/packupForegroundSecondaryColor</item>
-        <item name="packupPersistentBottomSheetHorizontalItemColor">?attr/packupForegroundColor</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.Packup.Activity.Immersive" parent="Theme.Packup.Activity">
@@ -231,6 +62,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/color_white</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
 
@@ -248,10 +80,12 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/color_white</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
     </style>
 
     
 
+    <color name="colorText">#8A000000</color>
     <color name="windowBackgroundColor">@color/color_white</color>
 
     <color name="activityStatusBarColor">@color/color_primary_400</color>
@@ -271,9 +105,6 @@
     <color name="colorSurfaceElevated">@color/color_surface_neutral_light_elevation_01dp</color>
     <color name="colorSurfaceElevated2">@color/color_surface_neutral_light_elevation_02dp</color>
 
-    <color name="colorText">#9AA0A2</color>
-
-
     <drawable name="starButtonBackground">@drawable/button_background_round_ripple_star_day</drawable>
     <drawable name="addIcon24">@drawable/ic_packup_add_24_regular_white</drawable>
 
@@ -285,4 +116,19 @@
     <color name="messagePillOrange">#E88205</color>
     <color name="messagePillPurple">#562EB3</color>
     <color name="messagePillGreen">#6DB065</color>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_container</item>
+    </style>
+    <color name="bottomSheetBackgroundColor">@color/white</color>
+    <color name="messageBarBackgroundColor_Normal">@color/color_surface_neutral_dark_elevation_16dp</color>
+    <color name="messageBarButtonRippleColor">#7a7a7a</color>
+
+    <color name="itemBackgroundRippleColor">@color/color_surface_neutral_light_elevation_24dp</color>
 </resources>

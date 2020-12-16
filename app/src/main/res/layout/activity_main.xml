@@ -14,7 +14,6 @@
         app:layout_constraintTop_toBottomOf="@id/main_activity_tool_bar_container"
         app:layout_constraintBottom_toTopOf="@id/main_activity_bottom_nav" />
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_activity_bottom_nav"
         android:layout_width="match_parent"
@@ -23,7 +22,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         style="@style/defaultNav"
         app:menu="@menu/main_nav"
-        android:elevation="8dp"/>
+        android:elevation="24dp"
+        app:elevation="24dp"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_activity_tool_bar_container"
@@ -41,17 +41,17 @@
             android:layout_width="match_parent"
             android:background="?android:statusBarColor"
             android:animateLayoutChanges="true"
-            android:paddingBottom="@dimen/toolbar_vertical_padding">
+            android:paddingBottom="@dimen/toolbar_vertical_padding_minus_ripple">
             <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
-                android:layout_marginTop="@dimen/toolbar_vertical_padding"
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
                 android:id="@+id/main_activity_nav_button"
                 android:src="@drawable/ic_fluent_navigation_24_regular"
-                android:background="@color/color_white_transparent"
+                android:background="@drawable/icon_button_on_status_bar"
                 android:tint="@color/color_white"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -67,15 +67,15 @@
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_marginHorizontal="@dimen/toolbar_horizontal_padding"
-                android:layout_marginTop="@dimen/toolbar_vertical_padding"
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
                 android:id="@+id/main_activity_filter_button"
                 android:src="@drawable/ic_fluent_search_24_regular"
-                android:background="@color/color_white_transparent"
+                android:background="@drawable/icon_button_on_status_bar"
                 android:tint="@color/color_white"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

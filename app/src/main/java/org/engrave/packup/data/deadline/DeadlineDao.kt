@@ -18,6 +18,9 @@ interface DeadlineDao {
     @Query("SELECT * FROM deadline WHERE uid=:uid")
     fun getDeadline(uid: Int): LiveData<Deadline>
 
+    @Query("SELECT * FROM deadline WHERE uid=:uid")
+    fun getDeadlineStatic(uid: Int): Deadline
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDeadline(deadline: Deadline)
 
@@ -32,4 +35,10 @@ interface DeadlineDao {
 
     @Query("UPDATE deadline SET attached_file_list=:attachedFileList, attached_file_list_crawled=1 WHERE uid=:uid")
     suspend fun setDeadlineAttachedFiles(uid: Int, attachedFileList: List<DeadlineAttachedFile>)
+
+    @Query("UPDATE deadline SET is_completed=:isCompleted WHERE uid = :uid")
+    suspend fun setDeadlineCompleted(uid: Int, isCompleted: Boolean)
+
+    @Query("UPDATE deadline SET is_deleted=:isDeleted WHERE uid = :uid")
+    suspend fun setDeadlineDeleted(uid: Int, isDeleted: Boolean)
 }

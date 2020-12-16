@@ -27,7 +27,12 @@ class DeadlineCrawler @WorkerInject constructor(
 ) : CoroutineWorker(appContext, workerParams) {
     override suspend fun doWork(): Result = try {
 
-//        showToast("Worker Dowork")
+        setProgress(
+            workDataOf(
+                NEWLY_CRAWLED_DEADLINE_NUM to 0
+            )
+        )
+
         val accountInfo = accountInfoRepository.readAccountInfo()
         val deadlines = deadlineDao.getAllDeadlines().value
         val loggedCookie = fetchCourseLoginCookies(
@@ -42,7 +47,9 @@ class DeadlineCrawler @WorkerInject constructor(
 
         val newDealines = newDeadlinesUnparsed.map(Deadline::fromRawJson)
 
-        newDealines.forEach { newDeadline ->
+        var newlyCrawledCount = 0
+
+        newDealines.forEachIndexed { idx, newDeadline ->
             var existSameKey = false
             var conflictDeadline: Deadline? = null
             if (deadlines != null) {
@@ -54,7 +61,6 @@ class DeadlineCrawler @WorkerInject constructor(
                     }
                 }
             }
-
             /**
              * 不存在相同的 Ddl
              */
@@ -82,8 +88,18 @@ class DeadlineCrawler @WorkerInject constructor(
                         attached_file_list = attachedFiles
                         has_submission = isSubmitted
                         attached_file_list_crawled = true
+                        downloadAttachedFiles(appContext, loggedCookie.toString())
                     }
                     deadlineDao.insertDeadline(newDeadline)
+
+
+                    newlyCrawledCount += 1
+                    setProgress(
+                        workDataOf(
+                            NEWLY_CRAWLED_DEADLINE_NUM to newlyCrawledCount
+                        )
+                    )
+
                 } else if (conflictDeadline != null && !conflictDeadline.has_submission) {
                     val detailHtmlStr by lazy {
                         fetchDeadlineDetailHtml(

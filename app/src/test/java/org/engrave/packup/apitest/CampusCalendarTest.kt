@@ -72,59 +72,8 @@ class CampusCalendarTest {
             if (dateStrings.isNullOrEmpty()) {
                 print("!!")
             }
-
-
             println("${flagCapitalOrdinal?.plus(1)}${flagEventName.orEmpty()}  $str")
         }
     }
 
-    @Test
-    fun printHtml() {
-        val loggedCookie = fetchCourseLoginCookies(
-            sid,
-            pw
-        )
-        val html: Document = fetchDeadlineDetailHtml(
-                "_150158_1",
-                loggedCookie
-            ).asDocument()
-        //println(html)
-        val attachedFiles = html.select("a")
-            .filter{ it.attr("href").startsWith("/bbcswebdav")}
-            .forEach {
-            println("${it.text()} ${it.attr("href")}")
-//            val blb = getFileBlobWithCookie(
-//                loggedCookie,
-//                "https://course.pku.edu.cn/" + it.attr("href"),
-//                it.text()
-//            )
-        }
-
-
-    }
-
-    fun getFileBlobWithCookie(cookie: DummyCookie, url: String, fileName: String) {
-        val conn = URL(url).openConnection() as HttpsURLConnection
-        conn.apply {
-            setRequestProperty("Cookie", cookie.toString())
-            requestMethod = "GET"
-            doOutput = true
-            useCaches = false
-            connectTimeout = 100_000
-            readTimeout = 100_000
-            instanceFollowRedirects = true
-        }
-        val mimeType = conn.contentType
-        val httpStatus = conn.responseCode
-        val bis = BufferedInputStream(conn.inputStream)
-        val bos = BufferedOutputStream(FileOutputStream("D:/$fileName"))
-        var b = 0
-        val byArr = ByteArray(1024)
-        while (bis.read(byArr).also { b = it } != -1) {
-            bos.write(byArr, 0, b)
-        }
-        bis.close()
-        bos.close()
-        println("$mimeType $httpStatus")
-    }
 }

@@ -2,7 +2,6 @@ package org.engrave.packup.util
 
 
 import java.io.Serializable
-import java.lang.StringBuilder
 
 class DummyCookie private constructor(
     private val cookieMap: Map<String, String>
@@ -16,11 +15,8 @@ class DummyCookie private constructor(
             if (cookiesHeader != null)
                 makeCookie(
                     cookiesHeader.associateBy(
-                        { it -> it.substringBefore("=") },
-                        { it ->
-                            it.substringAfter("=")
-                                .substringBefore(";")
-                        }
+                        { it.substringBefore("=") },
+                        { it.substringAfter("=").substringBefore(";") }
                     )
                 )
             else makeCookie(mapOf())
@@ -30,11 +26,8 @@ class DummyCookie private constructor(
                 DummyCookie(
                     dummyCookie.cookieMap +
                             cookiesHeader.associateBy(
-                                { it -> it.substringBefore("=") },
-                                { it ->
-                                    it.substringAfter("=")
-                                        .substringBefore(";")
-                                }
+                                { it.substringBefore("=") },
+                                { it.substringAfter("=").substringBefore(";") }
                             )
                 )
             else dummyCookie

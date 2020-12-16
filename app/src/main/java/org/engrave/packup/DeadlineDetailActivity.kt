@@ -16,7 +16,6 @@ import org.engrave.packup.util.WEEK_IN_MILLIS
 import org.engrave.packup.util.getSpaced
 import ws.vinta.pangu.Pangu
 import java.util.*
-import javax.inject.Inject
 import kotlin.math.floor
 
 
@@ -55,7 +54,10 @@ class DeadlineDetailActivity : AppCompatActivity() {
                      */
                     deadlineDetailTitle.text = it.name?.getSpaced(pangu)
                     deadlineDetailSourceLinkText.text = it.source_course_name_without_semester
-                    deadlineDetailDescBlock.text = it.description?.getSpaced(pangu) //TODO: 空串？
+                    deadlineDetailDescBlock.text = it.description.let { desc ->
+                        if (desc.isNullOrBlank()) "未添加描述。"
+                        else desc
+                    }
 
                     attachedFilesAdapter.postFileList(it.attached_file_list)
 

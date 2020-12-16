@@ -244,6 +244,7 @@
         android:text="附件"
         android:textSize="@dimen/packup_caption"/>
     <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/item_file_blobs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/deadline_detail_linked_file_list"

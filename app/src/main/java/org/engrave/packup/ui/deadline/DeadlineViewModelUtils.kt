@@ -8,21 +8,22 @@ import java.util.*
 
 
 fun List<Deadline>.crossFilter(
-    isDeleted: Boolean = false,
-    isSubmitted: Boolean? = false,
-    isExpired: Boolean? = null,
+    showDeleted: Boolean = false,
+    showCompleted: Boolean = false,
+    showSubmitted: Boolean? = false,
+    showExpired: Boolean? = null,
     certainCourseName: String? = null,
     baselineTime: Long = Calendar.getInstance().timeInMillis
 ): List<Deadline> = this.filter { ddl ->
-    (ddl.is_deleted == isDeleted)
-            && (isSubmitted?.let { ddl.has_submission == isSubmitted } ?: true)
+    (ddl.is_deleted == showDeleted) && (ddl.is_completed == showCompleted)
+            && (showSubmitted?.let { ddl.has_submission == showSubmitted } ?: true)
             /**
              * isExpired == null   ==>   true
              * isExpired != null:
              *     due_time == null  ==> true
              *     due_time != null  ==> Is it expired?
              */
-            && (isExpired?.let { ddl.due_time?.let { dt -> dt <= baselineTime } ?: true } ?: true)
+            && (showExpired?.let { ddl.due_time?.let { dt -> dt <= baselineTime } ?: true } ?: true)
             && (certainCourseName?.let { ddl.source_name == certainCourseName } ?: true)
 }
 

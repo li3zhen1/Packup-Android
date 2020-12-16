@@ -24,6 +24,8 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/navBarBackgroundColor</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.Packup.Activity.Immersive" parent="Theme.Packup.Activity">
@@ -49,7 +51,7 @@
         <item name="android:navigationBarColor">@color/color_black</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
-
+    <color name="colorText">#8Affffff</color>
     <color name="windowBackgroundColor">@color/color_black</color>
     <color name="navBarBackgroundColor">#131313</color>
     <color name="activityStatusBarColor">@color/color_surface_neutral_dark_elevation_01dp</color>
@@ -64,7 +66,6 @@
     <color name="colorSurfaceElevated">@color/color_surface_neutral_light_elevation_02dp</color>
     <color name="colorSurfaceElevated2">@color/color_surface_neutral_dark_elevation_03dp</color>
 
-    <color name="colorText">@color/color_surface_neutral_light_elevation_24dp</color>
 
     <drawable name="starButtonBackground">@drawable/button_background_round_ripple_star_night</drawable>
     <drawable name="addIcon24">@drawable/ic_packup_add_24_regular_black</drawable>
@@ -78,4 +79,19 @@
     <color name="messagePillOrange">#B16725</color>
     <color name="messagePillPurple">#48327A</color>
     <color name="messagePillGreen">#457C46</color>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_container</item>
+    </style>
+    <color name="bottomSheetBackgroundColor">@color/color_surface_neutral_dark_elevation_12dp</color>
+    <color name="messageBarBackgroundColor_Normal">@color/color_surface_neutral_dark_elevation_08dp</color>
+    <color name="messageBarButtonRippleColor">#6a6a6a</color>
+
+    <color name="itemBackgroundRippleColor">@color/color_surface_neutral_dark_elevation_24dp</color>
 </resources>

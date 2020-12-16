@@ -31,7 +31,7 @@ class DeadlineDetailViewModel @ViewModelInject constructor(
     fun alterStarredAsync() = viewModelScope.launch {
         deadlineUid.value?.let {
             deadline.value?.let { deadlineVal ->
-                deadlineRepository.setStarred(
+                deadlineRepository.setDeadlineStarred(
                     it,
                     !deadlineVal.is_starred
                 )

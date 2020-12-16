@@ -4,23 +4,141 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.deadline.DeadlineFragment">
+    tools:context=".ui.deadline.DeadlineFragment"
+    android:animateLayoutChanges="true">
 
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:src="@drawable/ic_celebrate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/deadline_fragment_celebrate_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/deadline_fragment_celebrate_text"
+        android:layout_marginTop="120dp"
+        android:visibility="gone"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deadline_fragment_celebrate_text"
+        android:text="似乎已经处理完了所有 Deadline。"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deadline_fragment_celebrate_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="72dp"
+        android:visibility="gone"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/deadline_fragment_recyclerview"/>
+        android:id="@+id/deadline_fragment_recyclerview"
+        tools:listitem="@layout/item_deadline_member"/>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/deadline_fragment_add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="@dimen/toolbar_horizontal_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/deadline_fragment_message_bar_new_container"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/floating_round_button_primary"
         android:tooltipText="Add"
         android:src="@drawable/addIcon24"
+        android:elevation="4dp"
         android:contentDescription="Add">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+    </androidx.appcompat.widget.AppCompatImageButton>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/message_bar_background_normal"
+        app:layout_constraintBottom_toTopOf="@id/deadline_fragment_message_bar_operation_container"
+        android:id="@+id/deadline_fragment_message_bar_new_container"
+        android:clickable="true"
+        android:layout_margin="12dp"
+        android:elevation="4dp"
+        android:padding="4dp"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fluent_cloud_sync_complete_24_regular"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingEnd="2dp"
+            android:paddingStart="12dp"
+            android:id="@+id/deadline_fragment_message_bar_sync_icon"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/deadline_fragment_message_bar_new_text"
+            android:fontFeatureSettings="tnum"
+            android:textColor="@color/white"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:drawableTint="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/deadline_fragment_message_bar_sync_icon"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/message_bar_background_normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/deadline_fragment_message_bar_operation_container"
+        android:clickable="true"
+        android:layout_margin="12dp"
+        android:elevation="4dp"
+        android:padding="4dp"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fluent_checkmark_24_regular"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingEnd="2dp"
+            android:paddingStart="12dp"
+            android:id="@+id/deadline_operation_done_icon"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="这项 Deadline 已经被删除。"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/deadline_fragment_message_bar_operation_withdraw"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="8dp"
+            android:id="@+id/deadline_fragment_message_bar_operation_text"
+            app:layout_constraintStart_toEndOf="@id/deadline_operation_done_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableTint="@color/white"/>
+
+        <TextView
+            android:paddingHorizontal="@dimen/packup_general_padding_horizontal"
+            android:paddingVertical="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="撤销"
+            android:id="@+id/deadline_fragment_message_bar_operation_withdraw"
+            android:background="@drawable/message_bar_ripple_button_normal"
+            android:clickable="true"
+            android:textColor="@color/color_primary_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
