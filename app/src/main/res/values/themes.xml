@@ -126,7 +126,7 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_container</item>
     </style>
-    <color name="bottomSheetBackgroundColor">@color/white</color>
+    <color name="bottomSheetBackgroundColor">@color/color_white</color>
     <color name="messageBarBackgroundColor_Normal">@color/color_surface_neutral_dark_elevation_16dp</color>
     <color name="messageBarButtonRippleColor">#7a7a7a</color>
 
