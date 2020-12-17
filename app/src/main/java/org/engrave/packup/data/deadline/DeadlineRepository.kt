@@ -50,6 +50,8 @@ class DeadlineRepository @Inject constructor(
         }
     }
 
+    suspend fun commitNewDeadline(deadline: Deadline) = deadlineDao.insertDeadline(deadline)
+
 
     companion object {
         const val COURSE_CRAWLER_NAME = "course-crawler"

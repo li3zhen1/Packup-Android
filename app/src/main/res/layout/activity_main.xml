@@ -54,17 +54,29 @@
                 android:background="@drawable/icon_button_on_status_bar"
                 android:tint="@color/color_white"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/main_activity_nav_button"
                 app:layout_constraintBottom_toBottomOf="@id/main_activity_nav_button"
                 app:layout_constraintStart_toEndOf="@id/main_activity_nav_button"
+                app:layout_constraintEnd_toStartOf="@id/main_activity_search_button"
                 android:id="@+id/main_activity_toolbar_title"
                 android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
                 android:text="Deadline"
-
                 android:textColor="@color/color_white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/main_activity_filter_button"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
+                android:id="@+id/main_activity_search_button"
+                android:src="@drawable/ic_fluent_search_24_regular"
+                android:background="@drawable/icon_button_on_status_bar"
+                android:tint="@color/color_white"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
@@ -74,10 +86,9 @@
                 android:layout_width="@dimen/image_button_size_with_ripple"
                 android:layout_height="@dimen/image_button_size_with_ripple"
                 android:id="@+id/main_activity_filter_button"
-                android:src="@drawable/ic_fluent_search_24_regular"
+                android:src="@drawable/ic_fluent_filter_24_regular"
                 android:background="@drawable/icon_button_on_status_bar"
                 android:tint="@color/color_white"/>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>

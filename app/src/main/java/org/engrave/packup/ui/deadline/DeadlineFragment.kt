@@ -1,5 +1,6 @@
 package org.engrave.packup.ui.deadline
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.WorkManager
 import dagger.hilt.android.AndroidEntryPoint
+import org.engrave.packup.EditDeadlineActivity
 import org.engrave.packup.R
 import org.engrave.packup.ui.main.MainViewModel
 import org.engrave.packup.worker.NEWLY_CRAWLED_DEADLINE_NUM
@@ -135,7 +137,12 @@ class DeadlineFragment() : Fragment() {
         )
 
         addButton.setOnClickListener {
-
+            startActivity(
+                Intent(
+                    activity,
+                    EditDeadlineActivity::class.java
+                )
+            )
         }
         recyclerView.apply {
             layoutManager = deadlineLayoutManager

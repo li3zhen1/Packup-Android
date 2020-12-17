@@ -229,6 +229,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/reminder_slider"
+        android:visibility="gone"
         android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"/>
 
 

@@ -94,4 +94,6 @@
     <color name="messageBarButtonRippleColor">#6a6a6a</color>
 
     <color name="itemBackgroundRippleColor">@color/color_surface_neutral_dark_elevation_24dp</color>
-</resources>
+    <color name="cursurColorOnActionBar">@color/color_primary_400</color>
+
+    </resources>

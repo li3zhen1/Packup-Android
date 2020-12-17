@@ -89,5 +89,9 @@
 
     <string name="deadline_has_been_completed"><b>%1$s</b> has been marked completed.</string>
     <string name="deadline_has_been_deleted"><b>%1$s</b> has been deleted.</string>
+    <string name="document_fragment_connect_to_onedrive">Connect to OneDrive to\nfully utilize Packup\'s functionality.</string>
+
+    <string name="sign_in_with_microsoft">Sign in with <b>Microsoft</b></string>
+    <string name="only_local_storage">Use local storage only</string>
 
 </resources>

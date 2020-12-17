@@ -43,12 +43,11 @@
         android:layout_margin="@dimen/toolbar_horizontal_padding"
         app:layout_constraintBottom_toTopOf="@id/deadline_fragment_message_bar_new_container"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/floating_round_button_primary"
-        android:tooltipText="Add"
+        android:background="@drawable/floating_round_button_vibrant"
+        android:tooltipText="添加新的 Deadline"
         android:src="@drawable/addIcon24"
         android:elevation="4dp"
-        android:contentDescription="Add">
-    </androidx.appcompat.widget.AppCompatImageButton>
+        android:contentDescription="添加新的 Deadline"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"

@@ -16,9 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Packup.Splash">
-
-
-        <!--Providers-->
+        <activity android:name=".EditDeadlineActivity"
+            android:theme="@style/Theme.Packup.Activity"></activity>
+        <!-- Providers -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="org.engrave.packup.fileprovider"
@@ -28,9 +28,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
-
 
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -52,11 +49,10 @@
 
         <activity
             android:name=".MainActivity"
+            android:theme="@style/Theme.Packup.Activity" />
+        <activity
+            android:name=".DeadlineDetailActivity"
             android:theme="@style/Theme.Packup.Activity"></activity>
-
-        <activity android:name=".DeadlineDetailActivity"
-            android:theme="@style/Theme.Packup.Activity">
-        </activity>
     </application>
 
 </manifest>

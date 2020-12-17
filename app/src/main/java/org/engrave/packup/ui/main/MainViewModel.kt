@@ -6,5 +6,11 @@ import org.engrave.packup.data.deadline.DeadlineSortOrder
 
 class MainViewModel : ViewModel() {
     val deadlineSortOrder = MutableLiveData(DeadlineSortOrder.DUE_TIME_ASCENDING)
+    val fragmentId = MutableLiveData(0)
 
+    companion object {
+        const val FRAGMENT_ID_DEADLINE = 0
+        const val FRAGMENT_ID_EVENT = 1
+        const val FRAGMENT_ID_DOCUMENT = 2
+    }
 }

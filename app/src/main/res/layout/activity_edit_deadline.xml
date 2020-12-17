@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditDeadlineActivity"
+    android:theme="@style/Theme.Packup.Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/deadline_detail_activity_tool_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:contentInsetStart="0dp"
+        android:elevation="6dp"
+        android:background="@color/color_primary_400">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?android:statusBarColor"
+            android:animateLayoutChanges="true"
+            android:paddingBottom="@dimen/toolbar_vertical_padding">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
+                android:id="@+id/deadline_detail_nav_button"
+                android:src="@drawable/ic_fluent_arrow_left_24_regular"
+                android:background="@drawable/icon_button_on_status_bar"
+                android:tint="@color/color_white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/deadline_detail_nav_button"
+                app:layout_constraintBottom_toBottomOf="@id/deadline_detail_nav_button"
+                app:layout_constraintStart_toEndOf="@id/deadline_detail_nav_button"
+                android:id="@+id/main_activity_toolbar_title"
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:text="添加新的Deadline"
+                android:textColor="@color/color_white"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/deadline_detail_star_button"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:background="@drawable/icon_button_on_status_bar"
+                android:src="@drawable/ic_packup_star_24_white_border"
+                app:layout_constraintEnd_toStartOf="@id/deadline_detail_more_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
+                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/image_button_size_with_ripple"
+                android:layout_height="@dimen/image_button_size_with_ripple"
+                android:id="@+id/deadline_detail_more_button"
+                android:src="@drawable/ic_fluent_more_vertical_24_regular"
+                android:background="@drawable/icon_button_on_status_bar"
+                android:tint="@color/color_white"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/add_deadline_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingTop="8dp"
+                android:text=""
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/packup_h5"
+                android:textStyle="bold"
+                android:textCursorDrawable="@drawable/ic_cursor"
+                android:hint="去新食堂干饭 !"
+                android:textColorHint="#60ffffff"
+                android:background="@drawable/button_embedded_on_action_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="42dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:singleLine="true"
+                android:focusedByDefault="true"
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_nav_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/edit_deadline_fragment_confirm_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/toolbar_horizontal_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/floating_round_button_vibrant"
+        android:tooltipText="Add"
+        android:src="@drawable/ic_fluent_checkmark_24_regular"
+        android:tint="@color/color_white"
+        android:elevation="4dp"
+        android:contentDescription="添加新的 Deadline"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

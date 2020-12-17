@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
-import org.engrave.packup.data.deadline.DeadlineSortOrder
 import org.engrave.packup.databinding.ActivityMainBinding
 import org.engrave.packup.ui.deadline.DeadlineFragment
+import org.engrave.packup.ui.deadline.DocumentFragment
 import org.engrave.packup.ui.event.EventFragment
 import org.engrave.packup.ui.main.MainViewModel
 
@@ -36,10 +36,11 @@ class MainActivity : AppCompatActivity() {
                 override fun getItemCount(): Int {
                     return 3
                 }
-
                 override fun createFragment(position: Int): Fragment {
                     return when (position) {
                         0 -> DeadlineFragment()
+                        1 -> EventFragment()
+                        2 -> DocumentFragment()
                         else -> EventFragment()
                     }
                 }
@@ -51,25 +52,46 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+
         binding.mainActivityFilterButton.setOnClickListener {
             popDeadlineFilterMenu(it)
         }
         binding.mainActivityBottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.deadline_fragment_item -> binding.mainActivityViewPager.setCurrentItem(
-                    0,
-                    false
-                )
-                R.id.event_fragment_item -> binding.mainActivityViewPager.setCurrentItem(
-                    1,
-                    false
-                )
-                R.id.document_fragment_item -> binding.mainActivityViewPager.setCurrentItem(
-                    2,
-                    false
-                )
+                R.id.deadline_fragment_item -> {
+                    binding.mainActivityViewPager.setCurrentItem(
+                        0,
+                        true
+                    )
+                    mainViewModel.fragmentId.value = MainViewModel.FRAGMENT_ID_DEADLINE
+                }
+                R.id.event_fragment_item -> {
+                    binding.mainActivityViewPager.setCurrentItem(
+                        1,
+                        true
+                    )
+                    mainViewModel.fragmentId.value = MainViewModel.FRAGMENT_ID_EVENT
+                }
+                R.id.document_fragment_item -> {
+                    binding.mainActivityViewPager.setCurrentItem(
+                        2,
+                        true
+                    )
+                    mainViewModel.fragmentId.value = MainViewModel.FRAGMENT_ID_DOCUMENT
+                }
             }
             true
+        }
+
+
+        mainViewModel.fragmentId.observe(this) {
+            binding.mainActivityToolbarTitle.text = when (it) {
+                MainViewModel.FRAGMENT_ID_DOCUMENT -> "文档"
+                MainViewModel.FRAGMENT_ID_EVENT -> "事件"
+                else -> "Deadline"
+            }
+            binding.mainActivityFilterButton.visibility =
+                if (it == MainViewModel.FRAGMENT_ID_DEADLINE) View.VISIBLE else View.GONE
         }
     }
 

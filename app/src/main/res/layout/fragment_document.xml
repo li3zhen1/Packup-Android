@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.deadline.DocumentFragment">
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:padding="48dp"
+        android:src="@drawable/ic_onedrive_48x1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/deadline_fragment_celebrate_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/deadline_fragment_celebrate_text"
+        android:visibility="visible"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deadline_fragment_celebrate_text"
+        android:text="@string/document_fragment_connect_to_onedrive"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deadline_fragment_celebrate_image"
+        app:layout_constraintBottom_toBottomOf="@id/sign_in_with_microsoft_button"
+        android:visibility="visible"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:background="@drawable/message_bar_ripple_button_normal"
+        app:layout_constraintTop_toBottomOf="@id/deadline_fragment_celebrate_text"
+        app:layout_constraintBottom_toTopOf="@id/do_not_use_onedrive_button"
+        android:id="@+id/sign_in_with_microsoft_button"
+        android:textColor="@color/color_white"
+        android:paddingHorizontal="8dp"
+        android:drawableStart="@drawable/ic_microsoft"
+        android:textAllCaps="false"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/sign_in_with_microsoft"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/do_not_use_onedrive_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
+        android:background="@drawable/item_thin_border"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/only_local_storage"
+        android:textAllCaps="false"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_with_microsoft_button"
+        tools:layout_editor_absoluteX="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

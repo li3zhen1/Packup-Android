@@ -1,5 +1,6 @@
 package org.engrave.packup.data.course
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -37,6 +38,7 @@ class ClassInfoRepository @Inject constructor(
             fetchPortalLoginCookies(accountInfo.studentId, accountInfo.password)
         )
         ClassInfo.fromCourseRawJson(rawJson, semester).forEach {
+            Log.e("PORTAL", it.toString())
             classInfoDao.insertOrUpdate(it)
         }
     }
@@ -47,6 +49,7 @@ class ClassInfoRepository @Inject constructor(
             fetchElectiveLoginCookies(accountInfo.studentId, accountInfo.password)
         )
         ClassInfo.fromElectiveResultHtml(rawHtml).forEach {
+            Log.e("ELE", it.toString())
             classInfoDao.insertOrUpdate(it)
         }
     }
