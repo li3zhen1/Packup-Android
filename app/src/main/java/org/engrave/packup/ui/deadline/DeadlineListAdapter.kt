@@ -100,9 +100,7 @@ class DeadlineListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder) {
         is DeadlineHeaderViewHolder -> holder.bind(getItem(position) as DeadlineHeader)
-        is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember) { bool ->
-            onClickStar((getItem(position) as DeadlineMember).deadline.uid, bool)
-        }
+        is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember, onClickStar)
         else -> throw ClassCastException("Unknown ViewHolder Class ${holder::class.simpleName} when inflating deadline list.")
     }
 
@@ -115,7 +113,7 @@ class DeadlineListAdapter(
 
     inner class DeadlineMemberViewHolder internal constructor(private val binding: ItemDeadlineMemberBinding) :
         RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
-        fun bind(item: DeadlineMember, onClickStarBind: (Boolean)->Unit) {
+        fun bind(item: DeadlineMember, onClickStarBind: (Int, Boolean)->Unit) {
             binding.apply {
                 root.setOnClickListener{
                     context.startActivity(
@@ -133,7 +131,7 @@ class DeadlineListAdapter(
                 deadlineItemMemberSubmissionButton.isChecked = item.deadline.has_submission
                 deadlineItemMemberStarButton.apply {
                     setOnCheckedChangeListener { _, isChecked ->
-                        onClickStarBind(isChecked)
+                        onClickStarBind(item.deadline.uid, isChecked)
                     }
                     isChecked = item.deadline.is_starred
                 }

@@ -80,8 +80,8 @@ class DeadlineFragment() : Fragment() {
         val deadlineLayoutManager = LinearLayoutManager(activity)
 
         deadlineAdapter = DeadlineListAdapter(context,
-            onClickStar = { uid, boolean ->
-                deadlineViewModel.setStarred(uid, boolean)
+            onClickStar = { uid, isStarred ->
+                deadlineViewModel.setStarred(uid, isStarred)
             },
             onAttemptCompleteItem = { uid ->
                 deadlineViewModel.setDeadlineCompleted(uid, true)

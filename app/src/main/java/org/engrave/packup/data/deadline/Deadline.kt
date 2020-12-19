@@ -167,7 +167,9 @@ data class DeadlineAttachedFile(
         context.grantUriPermission(
             BuildConfig.APPLICATION_ID,
             uri,
-            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
         )
         val intent = Intent(Intent.ACTION_VIEW).apply {
             addCategory(Intent.CATEGORY_DEFAULT)
@@ -192,7 +194,12 @@ data class DeadlineAttachedFile(
         StrictMode.setVmPolicy(builder.build())
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "application/octet-stream"
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK
+                        or Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                        or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+            )
             putExtra(Intent.EXTRA_STREAM, uri)
         }
         context.startActivity(Intent.createChooser(intent, "分享 $fileName"))
