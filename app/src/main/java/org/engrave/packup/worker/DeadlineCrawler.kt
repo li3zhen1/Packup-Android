@@ -49,7 +49,7 @@ class DeadlineCrawler @WorkerInject constructor(
 
         var newlyCrawledCount = 0
 
-        newDealines.forEachIndexed { idx, newDeadline ->
+        newDealines.forEach { newDeadline ->
             var existSameKey = false
             var conflictDeadline: Deadline? = null
             if (deadlines != null) {

@@ -34,6 +34,7 @@ data class Deadline(
     val course_object_id: String?,
     val source_name: String?,
     val due_time: Long?,
+
     val reminder: Long?,
     val is_completed: Boolean,
     val is_deleted: Boolean,
@@ -62,9 +63,7 @@ data class Deadline(
     override fun keyFieldsSameWith(other: Deadline) =
         uid == other.uid && name == other.name && calendar_id == other.calendar_id
                 && event_type == other.event_type && course_object_id == other.course_object_id
-                && source_name == other.source_name && reminder == other.reminder
-                && due_time == other.due_time && is_completed == other.is_completed
-                && is_deleted == other.is_deleted
+                && source_name == other.source_name && due_time == other.due_time
 
     override fun manipulatableFieldsSameWith(other: Deadline): Boolean =
         is_starred == other.is_starred && has_submission == other.has_submission
@@ -93,6 +92,18 @@ data class Deadline(
             }
         }
     }
+
+    fun applyUserSetFields(localDeadline: Deadline) = this.copy(
+        uid = localDeadline.uid,
+        reminder = localDeadline.reminder,
+        is_completed = localDeadline.is_completed,
+        is_deleted = localDeadline.is_deleted,
+        is_starred = localDeadline.is_starred,
+        has_submission = localDeadline.has_submission,
+
+        crawl_update_time = localDeadline.crawl_update_time
+    )
+
 
     companion object {
         fun fromRawJson(it: DeadlineRawJson) = Deadline(
@@ -254,37 +265,83 @@ class DeadlineAttachedFileTypeConverter {
 }
 
 enum class DeadlineSortOrder {
-    DUE_TIME_ASCENDING,
-    DUE_TIME_DESCENDING,
-    ASSIGNED_TIME_ASCENDING,
-    ASSIGNED_TIME_DESCENDING,
-    SOURCE_COURSE_NAME,
-    INFERRED_SUBJECT,
-    IMPORTANCE_DESCENDING,
-    SUBMISSION
+    DUE_TIME_ASCENDING {
+        override fun toString() = "按截止时间升序"
+    },
+    DUE_TIME_DESCENDING{
+        override fun toString() = "按截止时间降序"
+    },
+    ASSIGNED_TIME_ASCENDING{
+        override fun toString() = "按布置时间升序"
+    },
+    ASSIGNED_TIME_DESCENDING{
+        override fun toString() = "按布置时间降序"
+    },
+    SOURCE_COURSE_NAME{
+        override fun toString() = "按课程名称排序"
+    },
+    INFERRED_SUBJECT{
+        override fun toString() = "按学科排序"
+    },
+    IMPORTANCE_DESCENDING{
+        override fun toString() = "按重要性排序"
+    },
+    SUBMISSION{
+        override fun toString() = "按提交状态排序"
+    }
 }
 
 
 
 enum class DueTimeNode{
-    UNKNOWN,
-    EXPIRED,
-    DUE_WITHIN_1_HOUR,
-    DUE_WITHIN_24_HOUR,
-    DUE_WITHIN_72_HOUR,
-    DUE_WITHIN_7_DAYS,
-    DUE_WITHIN_30_DAYS,
-    MORE_THAN_ONE_MONTH_LEFT
+    UNKNOWN{
+        override fun toString() = "未知"
+    },
+    EXPIRED{
+        override fun toString() = "已逾期"
+    },
+    DUE_WITHIN_1_HOUR{
+        override fun toString() = "1 小时内"
+    },
+    DUE_WITHIN_24_HOUR{
+        override fun toString() = "24 小时内"
+    },
+    DUE_WITHIN_72_HOUR{
+        override fun toString() = "3 天内"
+    },
+    DUE_WITHIN_7_DAYS{
+        override fun toString() = "1 星期内"
+    },
+    DUE_WITHIN_30_DAYS{
+        override fun toString() = "1 个月内"
+    },
+    MORE_THAN_ONE_MONTH_LEFT{
+        override fun toString() = "多于 1 个月"
+    }
 }
 
 enum class AssignedTimeNode{
-    UNKNOWN,
-    RECENT_1_HOUR,
-    RECENT_24_HOUR,
-    RECENT_72_HOUR,
-    RECENT_7_DAYS,
-    RECENT_30_DAYS,
-    LONG_LONG_AGO
+    UNKNOWN{
+        override fun toString() = "未知"
+    },
+    RECENT_1_HOUR{
+        override fun toString() = "最近 1 小时"
+    },
+    RECENT_24_HOUR{
+        override fun toString() = "最近 24 小时"
+    },
+    RECENT_72_HOUR{
+        override fun toString() = "最近 3 天"
+    },
+    RECENT_7_DAYS{
+        override fun toString() = "最近 7 天"
+    },
+    RECENT_30_DAYS{
+        override fun toString() = "最近 1 个月"
+    },
+    LONG_LONG_AGO{
+        override fun toString() = "更久远"
+    }
 }
 
 

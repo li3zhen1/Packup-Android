@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_background_ripple"
+    android:elevation="2dp"
+    android:paddingBottom="@dimen/packup_item_padding_vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/itemSeparatorColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/item_deadline_content_guideline_begin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="56dp"
+        tools:viewBindingIgnore="true" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/item_deadline_content_guideline_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="56dp"
+        tools:viewBindingIgnore="true" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/deadline_item_complete_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/deadline_recycler_view_item_horizontal_padding"
+        android:button="@drawable/checkbox_complete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/deadline_item_member_title"
+        app:layout_constraintBottom_toBottomOf="@id/deadline_item_member_desc"/>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/deadline_item_star_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="@dimen/deadline_recycler_view_item_horizontal_padding"
+        android:button="@drawable/checkbox_star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/deadline_item_member_title"
+        app:layout_constraintBottom_toBottomOf="@id/deadline_item_member_desc"/>
+
+    <TextView
+        android:id="@+id/deadline_item_member_warning_pill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/packup_general_padding_vertical"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/pill_warning_orange"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingHorizontal="4dp"
+        android:text="6 天"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/packup_caption"
+        app:layout_constraintBottom_toBottomOf="@id/deadline_item_member_title"
+        app:layout_constraintStart_toStartOf="@id/item_deadline_content_guideline_begin"
+        app:layout_constraintTop_toTopOf="@id/deadline_item_member_title" />
+
+
+    <TextView
+        android:id="@+id/deadline_item_member_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/packup_item_padding_vertical"
+        android:layout_marginStart="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Lab4 内存机制"
+        android:textColor="?colorOnSurface"
+        android:textSize="@dimen/packup_subtitle1"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/item_deadline_content_guideline_end"
+        app:layout_constraintStart_toEndOf="@+id/deadline_item_member_warning_pill"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginStart="0dp" />
+
+    <TextView
+        android:id="@+id/deadline_item_member_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/packup_text_padding_vertical"
+        android:layout_marginBottom="@dimen/packup_general_padding_vertical"
+        android:ellipsize="end"
+        android:fontFeatureSettings="tnum"
+        android:maxLines="1"
+        android:text="12 月 25 日 23:00"
+        app:layout_constraintStart_toStartOf="@+id/item_deadline_content_guideline_begin"
+        app:layout_constraintTop_toBottomOf="@id/deadline_item_member_title" />
+
+    <TextView
+        android:id="@+id/deadline_item_member_source"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/packup_text_padding_vertical"
+        android:layout_marginBottom="@dimen/packup_general_padding_vertical"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="操作系统"
+        app:layout_constraintEnd_toEndOf="@+id/item_deadline_content_guideline_end"
+        app:layout_constraintStart_toEndOf="@+id/text_separator"
+        app:layout_constraintTop_toBottomOf="@id/deadline_item_member_title" />
+
+    <ImageView
+        android:id="@+id/text_separator"
+        android:layout_width="22dp"
+        android:layout_height="6dp"
+        android:paddingHorizontal="8dp"
+        android:src="@drawable/ic_fluent_circle_16_filled"
+        app:layout_constraintBottom_toBottomOf="@id/deadline_item_member_desc"
+        app:layout_constraintStart_toEndOf="@id/deadline_item_member_desc"
+        app:layout_constraintTop_toTopOf="@id/deadline_item_member_desc"
+        app:tint="@color/itemSeparatorColor" />
+</androidx.constraintlayout.widget.ConstraintLayout>

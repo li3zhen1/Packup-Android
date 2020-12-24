@@ -13,7 +13,6 @@ class PkuClient(
         if(accountInfo.schoolAbbr!= SCHOOL_ABBR){
             throw Exception("School specified doesn't match client type.")
         }
-
     }
 
     override fun fetchCourseTable() {

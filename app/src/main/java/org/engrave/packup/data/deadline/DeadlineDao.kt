@@ -11,7 +11,7 @@ interface DeadlineDao {
 
     /**
      *  调用不要加 withContext 会死锁！！
-     *  */
+     */
     @Query("SELECT * FROM deadline")
     fun getAllDeadlinesStatic(): List<Deadline>
 

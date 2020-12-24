@@ -5,7 +5,7 @@ import org.engrave.packup.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun fromZuluFormat(formatted: String) = Calendar.getInstance(TimeZone.getTimeZone("GMT"))
+fun fromZuluFormat(formatted: String): Calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"))
     .apply {
         set(
             formatted.slice(0..3).toInt(),

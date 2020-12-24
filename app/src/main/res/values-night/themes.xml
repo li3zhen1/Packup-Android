@@ -19,7 +19,7 @@
 
         <item name="colorSurface">@color/color_surface_neutral_dark_elevation_01dp</item>
         <!--        Status Bar-->
-        <item name="android:statusBarColor">@color/color_surface_neutral_dark_elevation_01dp</item>
+        <item name="android:statusBarColor">@color/activityStatusBarColor</item>
         <item name="android:windowBackground">@color/color_black</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/navBarBackgroundColor</item>
@@ -53,8 +53,8 @@
     </style>
     <color name="colorText">#8Affffff</color>
     <color name="windowBackgroundColor">@color/color_black</color>
-    <color name="navBarBackgroundColor">#131313</color>
-    <color name="activityStatusBarColor">@color/color_surface_neutral_dark_elevation_01dp</color>
+    <color name="navBarBackgroundColor">@color/color_surface_neutral_dark_elevation_04dp</color>
+    <color name="activityStatusBarColor">@color/color_surface_neutral_dark_elevation_03dp</color>
 
     <color name="shimmerBackground">@color/color_primary_400_opaque</color>
     <color name="pkuColor">@color/color_white</color>
@@ -94,6 +94,9 @@
     <color name="messageBarButtonRippleColor">#6a6a6a</color>
 
     <color name="itemBackgroundRippleColor">@color/color_surface_neutral_dark_elevation_24dp</color>
-    <color name="cursurColorOnActionBar">@color/color_primary_400</color>
+    <color name="cursorColorOnActionBar">@color/color_primary_400</color>
 
+    <color name="fragmentBackground">@color/color_black</color>
+    <color name="itemBackgroundColor">@color/color_surface_neutral_dark_elevation_01dp</color>
+    <color name="itemSeparatorColor">@color/color_surface_neutral_dark_elevation_04dp</color>
     </resources>

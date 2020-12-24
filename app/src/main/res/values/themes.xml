@@ -51,9 +51,6 @@
         <item name="packupForegroundOnSecondaryColor">@color/packup_white</item>
         <item name="packupDividerColor">@color/packup_gray_100</item>
 
-
-
-
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
@@ -80,7 +77,6 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/color_white</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-
     </style>
 
     
@@ -131,5 +127,9 @@
     <color name="messageBarButtonRippleColor">#7a7a7a</color>
 
     <color name="itemBackgroundRippleColor">@color/color_surface_neutral_light_elevation_24dp</color>
-    <color name="cursurColorOnActionBar">@color/color_white</color>
+    <color name="cursorColorOnActionBar">@color/color_white</color>
+
+    <color name="fragmentBackground">@color/color_surface_neutral_light_elevation_01dp</color>
+    <color name="itemSeparatorColor">@color/color_surface_neutral_light_elevation_04dp</color>
+    <color name="itemBackgroundColor">@color/color_white</color>
 </resources>

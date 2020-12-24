@@ -1,6 +1,7 @@
 package org.engrave.packup.ui.deadline
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.EditDeadlineActivity
 import org.engrave.packup.R
 import org.engrave.packup.ui.main.MainViewModel
+import org.engrave.packup.util.inDp
 import org.engrave.packup.worker.NEWLY_CRAWLED_DEADLINE_NUM
 
 @AndroidEntryPoint
@@ -35,6 +37,18 @@ class DeadlineFragment() : Fragment() {
     lateinit var messageButtonWithdrawOperation: TextView
 
     lateinit var deadlineAdapter: DeadlineListAdapter
+    var deadlineItemDecorator = object : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+            if (context != null)
+                outRect.bottom = 48.inDp(context!!)
+        }
+    }
     lateinit var touchHelper: ItemTouchHelper
     lateinit var celebrateImage: ImageView
     lateinit var celebrateText: TextView
@@ -78,7 +92,6 @@ class DeadlineFragment() : Fragment() {
         celebrateText = findViewById(R.id.deadline_fragment_celebrate_text)
 
         val deadlineLayoutManager = LinearLayoutManager(activity)
-
         deadlineAdapter = DeadlineListAdapter(context,
             onClickStar = { uid, isStarred ->
                 deadlineViewModel.setStarred(uid, isStarred)
@@ -147,12 +160,13 @@ class DeadlineFragment() : Fragment() {
         recyclerView.apply {
             layoutManager = deadlineLayoutManager
             adapter = deadlineAdapter
+            //addItemDecoration(deadlineItemDecorator)
         }
 
         deadlineViewModel.apply {
             sortedDeadlines.observe(viewLifecycleOwner) {
                 it?.let {
-                    deadlineAdapter.submitList(it)
+                    deadlineAdapter.submitList(it + DeadlinePadding(it.size))
                     if (it.isEmpty()) {
                         celebrateText.visibility = View.VISIBLE
                         celebrateImage.visibility = View.VISIBLE

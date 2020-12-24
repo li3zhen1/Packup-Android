@@ -10,13 +10,14 @@
     <dimen name="packup_h6">20sp</dimen>
     <dimen name="packup_subtitle1">16sp</dimen>
     <dimen name="packup_subtitle2">14sp</dimen>
-    <dimen name="packup_body1">16px</dimen>
+    <dimen name="packup_body1">16sp</dimen>
     <dimen name="packup_body2">14sp</dimen>
     <dimen name="packup_caption">12sp</dimen>
     <dimen name="packup_overline">10sp</dimen>
 
     <dimen name="packup_general_padding_horizontal">16dp</dimen>
     <dimen name="packup_general_padding_vertical">16dp</dimen>
+    <dimen name="packup_text_padding_vertical">6dp</dimen>
 <!-- Deadline Recycler View -->
     <dimen name="deadline_recycler_view_item_member_height">72dp</dimen>
     <dimen name="deadline_recycler_view_item_header_height">16dp</dimen>
@@ -267,4 +268,5 @@
     <dimen name="fluentui_tooltip_padding_horizontal">12dp</dimen>
     <dimen name="fluentui_tooltip_radius">@dimen/fluentui_corner_radius_4</dimen>
     <dimen name="fluentui_tooltip_background_padding">2dp</dimen>
+    <dimen name="packup_item_padding_vertical">24dp</dimen>
 </resources>

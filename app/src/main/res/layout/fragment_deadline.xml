@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.deadline.DeadlineFragment"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:background="@color/fragmentBackground">
 
     <ImageView
         android:layout_width="240dp"
@@ -33,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/deadline_fragment_recyclerview"
-        tools:listitem="@layout/item_deadline_member"/>
+        tools:listitem="@layout/item_deadline"/>
 
 
     <androidx.appcompat.widget.AppCompatImageButton

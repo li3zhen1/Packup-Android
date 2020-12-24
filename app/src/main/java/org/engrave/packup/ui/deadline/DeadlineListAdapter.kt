@@ -3,21 +3,26 @@ package org.engrave.packup.ui.deadline
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.engrave.packup.DEADLINE_DETAIL_ACTIVITY_UID
 import org.engrave.packup.DeadlineDetailActivity
+import org.engrave.packup.R
 import org.engrave.packup.component.DistinctiveDiffCallback
 import org.engrave.packup.component.IDistinctive
 import org.engrave.packup.data.deadline.Deadline
+import org.engrave.packup.databinding.ItemDeadlineBinding
 import org.engrave.packup.databinding.ItemDeadlineHeaderBinding
-import org.engrave.packup.databinding.ItemDeadlineMemberBinding
-import org.engrave.packup.util.asLocalCalendar
-import org.engrave.packup.util.toGlobalizedString
+import org.engrave.packup.databinding.ItemPaddingBinding
+import org.engrave.packup.util.*
 import ws.vinta.pangu.Pangu
+import java.util.*
+import kotlin.math.floor
 
 sealed class DeadlineItem : IDistinctive
 
@@ -43,6 +48,16 @@ data class DeadlineHeader(val title: String, val num: Int) : DeadlineItem() {
     override fun isOfSameContent(other: IDistinctive): Boolean =
         if (other is DeadlineHeader) this.title == other.title && this.num == other.num
         else false
+}
+
+data class DeadlinePadding(val identity: Int) : DeadlineItem() {
+    override fun getTypeDescriptor() = "P"
+
+    override fun getIdentityDescriptor() = identity.toString()
+
+    override fun getModifierDescriptor() = ""
+
+    override fun isOfSameContent(other: IDistinctive): Boolean = true
 }
 
 /*class DeadlineItemDiffCallback : DiffUtil.ItemCallback<DeadlineItem>() {
@@ -92,8 +107,13 @@ class DeadlineListAdapter(
             }
             DEADLINE_ITEM_MEMBER -> {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemDeadlineMemberBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemDeadlineBinding.inflate(layoutInflater, parent, false)
                 DeadlineMemberViewHolder(binding)
+            }
+            DEADLINE_PADDING -> {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemPaddingBinding.inflate(layoutInflater, parent, false)
+                DeadlinePaddingViewHolder(binding)
             }
             else -> throw ClassCastException("Unknown viewType $viewType when inflating deadline list.")
         }
@@ -101,21 +121,24 @@ class DeadlineListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder) {
         is DeadlineHeaderViewHolder -> holder.bind(getItem(position) as DeadlineHeader)
         is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember, onClickStar)
+        is DeadlinePaddingViewHolder -> holder.bind(getItem(position) as DeadlinePadding)
         else -> throw ClassCastException("Unknown ViewHolder Class ${holder::class.simpleName} when inflating deadline list.")
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is DeadlineMember -> DEADLINE_ITEM_MEMBER
         is DeadlineHeader -> DEADLINE_ITEM_HEADER
+        is DeadlinePadding -> DEADLINE_PADDING
     }
 
     interface DeadlineItemViewHolder
 
-    inner class DeadlineMemberViewHolder internal constructor(private val binding: ItemDeadlineMemberBinding) :
+    inner class DeadlineMemberViewHolder internal constructor(private val binding: ItemDeadlineBinding) :
         RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
-        fun bind(item: DeadlineMember, onClickStarBind: (Int, Boolean)->Unit) {
+        fun bind(item: DeadlineMember, onClickStarBind: (Int, Boolean) -> Unit) {
+            val remainingTime = item.deadline.due_time?.minus(Date().time)
             binding.apply {
-                root.setOnClickListener{
+                root.setOnClickListener {
                     context.startActivity(
                         Intent(
                             context,
@@ -126,16 +149,62 @@ class DeadlineListAdapter(
                     )
                 }
                 deadlineItemMemberTitle.text = pangu.spacingText(item.deadline.name)
-                deadlineItemMemberDueTime.text =
+                deadlineItemMemberDesc.text =
                     item.deadline.due_time.asLocalCalendar()?.toGlobalizedString(context)
-                deadlineItemMemberSubmissionButton.isChecked = item.deadline.has_submission
-                deadlineItemMemberStarButton.apply {
+                deadlineItemMemberWarningPill.apply {
+                    if (item.deadline.has_submission) {
+                        text = "已提交"
+                        visibility = View.VISIBLE
+                        background =
+                            ContextCompat.getDrawable(
+                                context,
+                                R.drawable.pill_safe_green
+                            )
+                    } else when {
+                        remainingTime == null -> {
+                            visibility = View.GONE
+                        }
+                        remainingTime <= 0 -> {
+                            text = "已逾期"
+                            visibility = View.VISIBLE
+                            background =
+                                ContextCompat.getDrawable(
+                                    context,
+                                    R.drawable.pill_warning_purple
+                                )
+                        }
+                        remainingTime < DAY_IN_MILLIS -> {
+                            text =
+                                "剩余 ${floor(remainingTime.toDouble() / HOUR_IN_MILLIS).toInt()} 小时"
+                            visibility = View.VISIBLE
+                            background =
+                                ContextCompat.getDrawable(
+                                    context,
+                                    R.drawable.pill_warning_red
+                                )
+                        }
+                        remainingTime < WEEK_IN_MILLIS -> {
+                            text =
+                                "剩余 ${floor(remainingTime.toDouble() / DAY_IN_MILLIS).toInt()} 天"
+                            visibility = View.VISIBLE
+                            background =
+                                ContextCompat.getDrawable(
+                                    context,
+                                    R.drawable.pill_warning_orange
+                                )
+                        }
+                        else -> {
+                            visibility = View.GONE
+                        }
+                    }
+                }
+                deadlineItemStarButton.apply {
                     setOnCheckedChangeListener { _, isChecked ->
                         onClickStarBind(item.deadline.uid, isChecked)
                     }
                     isChecked = item.deadline.is_starred
                 }
-                deadlineItemMemberCourseText.text =
+                deadlineItemMemberSource.text =
                     pangu.spacingText(item.deadline.source_course_name_without_semester)
             }
         }
@@ -151,9 +220,16 @@ class DeadlineListAdapter(
         }
     }
 
+    inner class DeadlinePaddingViewHolder internal constructor(private val binding: ItemPaddingBinding) :
+        RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
+        fun bind(padding: DeadlinePadding) {
+        }
+    }
+
     companion object {
         const val DEADLINE_ITEM_HEADER = 0
         const val DEADLINE_ITEM_MEMBER = 1
+        const val DEADLINE_PADDING = 2
     }
 
     override fun onItemRemoved(position: Int) {

@@ -52,7 +52,7 @@ class DeadlineDetailActivity : AppCompatActivity() {
                     /**
                      * 动作处理放外面，这里只放界面绑定！！
                      */
-                    deadlineDetailTitle.text = it.name?.getSpaced(pangu)
+                    deadlineDetailTitle.text = it.name.getSpaced(pangu)
                     deadlineDetailSourceLinkText.text = it.source_course_name_without_semester
                     deadlineDetailDescBlock.text = it.description.let { desc ->
                         if (desc.isNullOrBlank()) "未添加描述。"
