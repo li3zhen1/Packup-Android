@@ -291,6 +291,20 @@ enum class DeadlineSortOrder {
     }
 }
 
+enum class DeadlineFilter {
+    PENDING_TO_COMPLETE {
+        override fun toString() = "待提交"
+    },
+    COMPLETED{
+        override fun toString() = "已完成"
+    },
+    DELETED{
+        override fun toString() = "已删除"
+    },
+    SUBMITTED{
+        override fun toString() = "已有提交"
+    }
+}
 
 
 enum class DueTimeNode{

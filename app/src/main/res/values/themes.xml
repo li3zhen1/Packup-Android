@@ -132,4 +132,5 @@
     <color name="fragmentBackground">@color/color_surface_neutral_light_elevation_01dp</color>
     <color name="itemSeparatorColor">@color/color_surface_neutral_light_elevation_04dp</color>
     <color name="itemBackgroundColor">@color/color_white</color>
+    <color name="starColor">#F6CD3A</color>
 </resources>

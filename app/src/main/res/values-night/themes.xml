@@ -99,4 +99,5 @@
     <color name="fragmentBackground">@color/color_black</color>
     <color name="itemBackgroundColor">@color/color_surface_neutral_dark_elevation_01dp</color>
     <color name="itemSeparatorColor">@color/color_surface_neutral_dark_elevation_04dp</color>
+    <color name="starColor">#F6CD3A</color>
     </resources>

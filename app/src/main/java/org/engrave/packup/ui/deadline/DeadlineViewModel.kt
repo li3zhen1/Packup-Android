@@ -4,10 +4,7 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
-import org.engrave.packup.data.deadline.Deadline
-import org.engrave.packup.data.deadline.DeadlineRepository
-import org.engrave.packup.data.deadline.DeadlineSortOrder
-import org.engrave.packup.data.deadline.getByUid
+import org.engrave.packup.data.deadline.*
 
 class DeadlineViewModel @ViewModelInject constructor(
     private val deadlineRepository: DeadlineRepository,
@@ -15,11 +12,11 @@ class DeadlineViewModel @ViewModelInject constructor(
 ) : ViewModel() {
     /* TODO: 保存默认状态 */
     val sortOrder = MutableLiveData(DeadlineSortOrder.SOURCE_COURSE_NAME)
-    val filterShowDeleted = MutableLiveData(false)
-    val filterShowCompleted = MutableLiveData(false)
-    val filterIsSubmitted = MutableLiveData<Boolean?>(null)
+    val filter = MutableLiveData(DeadlineFilter.PENDING_TO_COMPLETE)
+
+/*    val filterIsSubmitted = MutableLiveData<Boolean?>(null)
     val filterIsExpired = MutableLiveData<Boolean?>(null)
-    val certainCourseName = MutableLiveData<String?>(null)
+    val certainCourseName = MutableLiveData<String?>(null)*/
 
     private val deadlines: LiveData<List<Deadline>> = deadlineRepository.allDeadlines
 
@@ -31,42 +28,23 @@ class DeadlineViewModel @ViewModelInject constructor(
             value = listOf()
             addSource(deadlines) {
                 this.value = it
-                    .applyLiveDataToCrossFilter()
+                    .applyDeadlineFilter(filter.value)
                     .sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_ASCENDING)
             }
             addSource(sortOrder) {
                 this.value = deadlines.value
-                    ?.applyLiveDataToCrossFilter()
+                    ?.applyDeadlineFilter(filter.value)
                     ?.sortAndGroup(it)
                     ?: listOf()
             }
 
-            addSource(filterShowDeleted) {
+            addSource(filter) {
                 this.value = deadlines.value
-                    ?.applyLiveDataToCrossFilter()
+                    ?.applyDeadlineFilter(it)
                     ?.sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_ASCENDING)
                     ?: listOf()
             }
 
-            addSource(filterIsSubmitted) {
-                this.value = deadlines.value
-                    ?.applyLiveDataToCrossFilter()
-                    ?.sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_ASCENDING)
-                    ?: listOf()
-            }
-
-            addSource(filterIsExpired) {
-                this.value = deadlines.value
-                    ?.applyLiveDataToCrossFilter()
-                    ?.sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_ASCENDING)
-                    ?: listOf()
-            }
-            addSource(certainCourseName) {
-                this.value = deadlines.value
-                    ?.applyLiveDataToCrossFilter()
-                    ?.sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_ASCENDING)
-                    ?: listOf()
-            }
         }
 
     fun setDeadlineStarred(uid: Int, boolean: Boolean) = viewModelScope.launch {
@@ -81,13 +59,16 @@ class DeadlineViewModel @ViewModelInject constructor(
         deadlineRepository.setDeadlineCompleted(uid, boolean)
     }
 
-    private fun List<Deadline>.applyLiveDataToCrossFilter() = this.crossFilter(
-        filterShowDeleted.value ?: false,
-        filterShowCompleted.value ?: false,
-        filterIsSubmitted.value,
-        filterIsExpired.value,
-        certainCourseName.value
-    )
+    private fun List<Deadline>.applyDeadlineFilter(ft: DeadlineFilter?) = this.filter {
+        if (ft != null)
+            when (ft) {
+                DeadlineFilter.PENDING_TO_COMPLETE -> !it.is_completed && !it.is_deleted
+                DeadlineFilter.COMPLETED -> it.is_completed && !it.is_deleted
+                DeadlineFilter.DELETED -> it.is_deleted
+                else -> !it.is_completed && !it.is_deleted
+            }
+        else true
+    }
 
     fun setStarred(uid: Int, boolean: Boolean) {
         viewModelScope.launch {

@@ -9,9 +9,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.ActivityMainBinding
+import org.engrave.packup.ui.attached.AttachedFileBottomSheetFragment
 import org.engrave.packup.ui.deadline.DeadlineFragment
 import org.engrave.packup.ui.deadline.DocumentFragment
 import org.engrave.packup.ui.event.EventFragment
+import org.engrave.packup.ui.filter.FilterBottomSheetFragment
 import org.engrave.packup.ui.main.MainViewModel
 
 
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.mainActivityFilterButton.setOnClickListener {
-            popDeadlineFilterMenu(it)
+            popDeadlineFilterMenu()
         }
         binding.mainActivityBottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -95,7 +97,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun popDeadlineFilterMenu(anchorView: View) {
+    private fun popDeadlineFilterMenu() {
+        val filterFragment = FilterBottomSheetFragment()
+        filterFragment.show(supportFragmentManager, "DEADLINE_FILTER_BOTTOM_SHEET")
 //        val items = arrayListOf(
 //            PopupMenuItem(
 //                id = 0,

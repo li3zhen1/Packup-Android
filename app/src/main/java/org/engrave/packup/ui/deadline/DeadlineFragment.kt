@@ -3,7 +3,6 @@ package org.engrave.packup.ui.deadline
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,9 @@ import androidx.work.WorkManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.EditDeadlineActivity
 import org.engrave.packup.R
+import org.engrave.packup.data.deadline.DeadlineFilter
 import org.engrave.packup.ui.main.MainViewModel
+import org.engrave.packup.util.SimpleCountDown
 import org.engrave.packup.util.inDp
 import org.engrave.packup.worker.NEWLY_CRAWLED_DEADLINE_NUM
 
@@ -55,18 +56,14 @@ class DeadlineFragment() : Fragment() {
 
     private val deadlineViewModel: DeadlineViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
-    private val messageBarNewlySyncedDismissTimer = object : CountDownTimer(3000, 1000) {
-        override fun onTick(millisUntilFinished: Long) {}
-        override fun onFinish() {
-            messageBarNewlySyncedContainer.visibility = View.GONE
-        }
+    private val messageBarNewlySyncedDismissTimer = SimpleCountDown(3000) {
+        messageBarNewlySyncedContainer.visibility = View.GONE
     }
-
-    private val messageBarOperationDismissTimer = object : CountDownTimer(3000, 1000) {
-        override fun onTick(millisUntilFinished: Long) {}
-        override fun onFinish() {
-            messageBarOperationContainer.visibility = View.GONE
-        }
+    private val messageBarOperationDismissTimer = SimpleCountDown(3000) {
+        messageBarOperationContainer.visibility = View.GONE
+    }
+    private val scrollToTopCountDown = SimpleCountDown(400) {
+        recyclerView.smoothScrollToPosition(0)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,10 +88,17 @@ class DeadlineFragment() : Fragment() {
         celebrateImage = findViewById(R.id.deadline_fragment_celebrate_image)
         celebrateText = findViewById(R.id.deadline_fragment_celebrate_text)
 
+        messageBarOperationContainer.visibility = View.GONE
+        messageBarNewlySyncedContainer.visibility = View.GONE
+
         val deadlineLayoutManager = LinearLayoutManager(activity)
-        deadlineAdapter = DeadlineListAdapter(context,
+        deadlineAdapter = DeadlineListAdapter(
+            context,
             onClickStar = { uid, isStarred ->
                 deadlineViewModel.setStarred(uid, isStarred)
+            },
+            onClickComplete = { uid, isCompleted ->
+                deadlineViewModel.setDeadlineCompleted(uid, isCompleted)
             },
             onAttemptCompleteItem = { uid ->
                 deadlineViewModel.setDeadlineCompleted(uid, true)
@@ -116,8 +120,7 @@ class DeadlineFragment() : Fragment() {
                     messageBarOperationContainer.visibility = View.GONE
                 }
                 messageBarOperationContainer.visibility = View.VISIBLE
-                messageBarOperationDismissTimer.cancel()
-                messageBarOperationDismissTimer.start()
+                messageBarOperationDismissTimer.restart()
             },
             onAttemptDeleteItem = { uid ->
                 deadlineViewModel.setDeadlineDeleted(uid, true)
@@ -139,16 +142,11 @@ class DeadlineFragment() : Fragment() {
                     messageBarOperationContainer.visibility = View.GONE
                 }
                 messageBarOperationContainer.visibility = View.VISIBLE
-                messageBarOperationDismissTimer.cancel()
-                messageBarOperationDismissTimer.start()
+                messageBarOperationDismissTimer.restart()
             }
         )
 
         touchHelper = ItemTouchHelper(DeadlineItemTouchHelper(deadlineAdapter, context))
-        touchHelper.attachToRecyclerView(
-            recyclerView
-        )
-
         addButton.setOnClickListener {
             startActivity(
                 Intent(
@@ -160,7 +158,6 @@ class DeadlineFragment() : Fragment() {
         recyclerView.apply {
             layoutManager = deadlineLayoutManager
             adapter = deadlineAdapter
-            //addItemDecoration(deadlineItemDecorator)
         }
 
         deadlineViewModel.apply {
@@ -180,6 +177,14 @@ class DeadlineFragment() : Fragment() {
         mainViewModel.apply {
             deadlineSortOrder.observe(viewLifecycleOwner) {
                 deadlineViewModel.sortOrder.value = it
+                scrollToTopCountDown.restart()
+            }
+            deadlineFilter.observe(viewLifecycleOwner) {
+                if (it == DeadlineFilter.PENDING_TO_COMPLETE)
+                    touchHelper.attachToRecyclerView(recyclerView)
+                else touchHelper.attachToRecyclerView(null)
+                deadlineViewModel.filter.value = it
+                scrollToTopCountDown.restart()
             }
         }
 
@@ -191,18 +196,17 @@ class DeadlineFragment() : Fragment() {
                     if (newlyCrawledCount > 0) {
                         messageTextNewlySynced.text = "同步了 $newlyCrawledCount 项新的 Deadline。"
                         messageBarNewlySyncedContainer.visibility = View.VISIBLE
-                        messageBarNewlySyncedDismissTimer.cancel()
-                        messageBarNewlySyncedDismissTimer.start()
+                        messageBarNewlySyncedDismissTimer.restart()
                     }
                 }
         }
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
-        // TODO 不知道会不会内存泄露
+        // 防止内存泄露
         messageBarNewlySyncedDismissTimer.cancel()
         messageBarOperationDismissTimer.cancel()
+        scrollToTopCountDown.cancel()
     }
 }

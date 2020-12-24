@@ -90,6 +90,7 @@ data class DeadlinePadding(val identity: Int) : DeadlineItem() {
 class DeadlineListAdapter(
     private val context: Context,
     private val onClickStar: (Int, Boolean) -> Unit,
+    private val onClickComplete: (Int, Boolean) -> Unit,
     private val onAttemptDeleteItem: (Int) -> Unit,
     private val onAttemptCompleteItem: (Int) -> Unit
 ) :
@@ -203,6 +204,15 @@ class DeadlineListAdapter(
                         onClickStarBind(item.deadline.uid, isChecked)
                     }
                     isChecked = item.deadline.is_starred
+                }
+                deadlineItemCompleteButton.apply {
+//                    setOnCheckedChangeListener { _, bool ->
+//                        if (bool)
+//                            onAttemptCompleteItem(item.deadline.uid)
+//                        else
+//                            onClickComplete(item.deadline.uid, false)
+//                    }
+                    isChecked = item.deadline.is_completed
                 }
                 deadlineItemMemberSource.text =
                     pangu.spacingText(item.deadline.source_course_name_without_semester)

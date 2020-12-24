@@ -56,19 +56,19 @@ class ClassInfoRepository @Inject constructor(
 
 
     suspend fun crawlAllClassInfo() {
-        crawlCurrentClassInfoFromElective()
-        crawlSpecifiedClassInfoFromPortal(
-            Semester(
-                2019,
-                SemesterSeason.SPRING
-            )
-        )
-        crawlSpecifiedClassInfoFromPortal(
-            Semester(
-                2019,
-                SemesterSeason.SUMMER
-            )
-        )
+//        crawlCurrentClassInfoFromElective()
+//        crawlSpecifiedClassInfoFromPortal(
+//            Semester(
+//                2019,
+//                SemesterSeason.SPRING
+//            )
+//        )
+//        crawlSpecifiedClassInfoFromPortal(
+//            Semester(
+//                2019,
+//                SemesterSeason.SUMMER
+//            )
+//        )
     }
 
     suspend fun insertClassInfo(classInfoDao: ClassInfoDao) {
