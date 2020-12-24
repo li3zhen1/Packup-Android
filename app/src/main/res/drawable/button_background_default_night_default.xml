@@ -5,7 +5,7 @@
         <shape>
             <corners android:radius="4dp"/>
             <solid android:color="@color/color_black_transparent"/>
-            <stroke android:color="@color/color_primary_400" android:width="2dp"/>
+            <stroke android:color="@color/colorPrimary" android:width="2dp"/>
         </shape>
     </item>
 </ripple>

@@ -223,7 +223,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/color_primary_400_opaque"
         android:layout_height="4dp"
-        app:shimmer_color="@color/color_primary_400"
+        app:shimmer_color="@color/colorPrimary"
         android:visibility="invisible"
         android:id="@+id/login_activity_shimmer"/>
 

@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -87,6 +88,8 @@ class DeadlineFragment() : Fragment() {
             findViewById(R.id.deadline_fragment_message_bar_operation_withdraw)
         celebrateImage = findViewById(R.id.deadline_fragment_celebrate_image)
         celebrateText = findViewById(R.id.deadline_fragment_celebrate_text)
+        celebrateImage.visibility = View.INVISIBLE
+        celebrateText.visibility = View.INVISIBLE
 
         messageBarOperationContainer.visibility = View.GONE
         messageBarNewlySyncedContainer.visibility = View.GONE
@@ -98,51 +101,24 @@ class DeadlineFragment() : Fragment() {
                 deadlineViewModel.setStarred(uid, isStarred)
             },
             onClickComplete = { uid, isCompleted ->
-                deadlineViewModel.setDeadlineCompleted(uid, isCompleted)
+                if (isCompleted)
+                    SimpleCountDown(1000) {
+                        onSetDeadlineCompleted(uid, true)
+                    }.start()
+                else onSetDeadlineCompleted(uid, false)
             },
-            onAttemptCompleteItem = { uid ->
-                deadlineViewModel.setDeadlineCompleted(uid, true)
-                messageTextOperation.text =
-                    if (!deadlineViewModel.getDeadlineByUid(uid)?.name.isNullOrBlank()) {
-                        with(deadlineViewModel.getDeadlineByUid(uid)?.name!!) {
-                            getString(
-                                R.string.deadline_has_been_completed,
-                                if (this.length > 10) this.substring(0, 8) + "..."
-                                else this
-                            )
-                        }
-                    } else getString(
-                        R.string.deadline_has_been_completed,
-                        "1 项 Deadline"
-                    )
-                messageButtonWithdrawOperation.setOnClickListener {
-                    deadlineViewModel.setDeadlineCompleted(uid, false)
-                    messageBarOperationContainer.visibility = View.GONE
-                }
-                messageBarOperationContainer.visibility = View.VISIBLE
-                messageBarOperationDismissTimer.restart()
+            onClickRestore = { uid, isDeleted ->
+                if (isDeleted)
+                    SimpleCountDown(1000) {
+                        onSetDeadlineDeleted(uid, true)
+                    }.start()
+                else onSetDeadlineDeleted(uid, false)
             },
-            onAttemptDeleteItem = { uid ->
-                deadlineViewModel.setDeadlineDeleted(uid, true)
-                messageTextOperation.text =
-                    if (!deadlineViewModel.getDeadlineByUid(uid)?.name.isNullOrBlank()) {
-                        with(deadlineViewModel.getDeadlineByUid(uid)?.name!!) {
-                            getString(
-                                R.string.deadline_has_been_deleted,
-                                if (this.length > 10) this.substring(0, 8) + "..."
-                                else this
-                            )
-                        }
-                    } else getString(
-                        R.string.deadline_has_been_deleted,
-                        "1 项 Deadline"
-                    )
-                messageButtonWithdrawOperation.setOnClickListener {
-                    deadlineViewModel.setDeadlineDeleted(uid, false)
-                    messageBarOperationContainer.visibility = View.GONE
-                }
-                messageBarOperationContainer.visibility = View.VISIBLE
-                messageBarOperationDismissTimer.restart()
+            onSwipeComplete = { uid ->
+                onSetDeadlineCompleted(uid, true)
+            },
+            onSwipeDelete = { uid ->
+                onSetDeadlineDeleted(uid, true)
             }
         )
 
@@ -162,15 +138,26 @@ class DeadlineFragment() : Fragment() {
 
         deadlineViewModel.apply {
             sortedDeadlines.observe(viewLifecycleOwner) {
+                celebrateText.visibility = View.INVISIBLE
+                celebrateImage.visibility = View.INVISIBLE
                 it?.let {
                     deadlineAdapter.submitList(it + DeadlinePadding(it.size))
-                    if (it.isEmpty()) {
-                        celebrateText.visibility = View.VISIBLE
-                        celebrateImage.visibility = View.VISIBLE
-                    } else {
-                        celebrateText.visibility = View.GONE
-                        celebrateImage.visibility = View.GONE
-                    }
+                    if (it.isNullOrEmpty())
+                        SimpleCountDown(300) {
+                            if (sortedDeadlines.value.isNullOrEmpty()) {
+                                celebrateText.visibility = View.VISIBLE
+                                celebrateImage.visibility = View.VISIBLE
+                                if (filter.value == DeadlineFilter.PENDING_TO_COMPLETE) {
+                                    celebrateText.text = "似乎已经处理完了所有 Deadline"
+                                    celebrateImage.background =
+                                        ContextCompat.getDrawable(context, R.drawable.ic_celebrate)
+                                } else {
+                                    celebrateText.text = "这里似乎没有什么东西"
+                                    celebrateImage.background =
+                                        ContextCompat.getDrawable(context, R.drawable.ic_cactus)
+                                }
+                            }
+                        }.start()
                 }
             }
         }
@@ -187,7 +174,6 @@ class DeadlineFragment() : Fragment() {
                 scrollToTopCountDown.restart()
             }
         }
-
         activity?.let { activity ->
             WorkManager.getInstance(activity.application)
                 .getWorkInfoByIdLiveData(deadlineViewModel.deadlineCrawlerRef.id)
@@ -208,5 +194,55 @@ class DeadlineFragment() : Fragment() {
         messageBarNewlySyncedDismissTimer.cancel()
         messageBarOperationDismissTimer.cancel()
         scrollToTopCountDown.cancel()
+    }
+
+    private fun onSetDeadlineCompleted(uid: Int, isCompleted: Boolean) {
+        deadlineViewModel.setDeadlineCompleted(uid, isCompleted)
+        messageTextOperation.text =
+            if (!deadlineViewModel.getDeadlineByUid(uid)?.name.isNullOrBlank()) {
+                with(deadlineViewModel.getDeadlineByUid(uid)?.name!!) {
+                    getString(
+                        if (isCompleted) R.string.deadline_has_been_completed
+                        else R.string.deadline_has_been_completed_reverted,
+                        if (this.length > 10) this.substring(0, 8) + "..."
+                        else this
+                    )
+                }
+            } else getString(
+                if (isCompleted) R.string.deadline_has_been_completed
+                else R.string.deadline_has_been_completed_reverted,
+                "1 项 Deadline"
+            )
+        messageButtonWithdrawOperation.setOnClickListener {
+            deadlineViewModel.setDeadlineCompleted(uid, !isCompleted)
+            messageBarOperationContainer.visibility = View.GONE
+        }
+        messageBarOperationContainer.visibility = View.VISIBLE
+        messageBarOperationDismissTimer.restart()
+    }
+
+    private fun onSetDeadlineDeleted(uid: Int, isDeleted: Boolean) {
+        deadlineViewModel.setDeadlineDeleted(uid, isDeleted)
+        messageTextOperation.text =
+            if (!deadlineViewModel.getDeadlineByUid(uid)?.name.isNullOrBlank()) {
+                with(deadlineViewModel.getDeadlineByUid(uid)?.name!!) {
+                    getString(
+                        if (isDeleted) R.string.deadline_has_been_deleted
+                        else R.string.deadline_has_been_deleted_reverted,
+                        if (this.length > 10) this.substring(0, 8) + "..."
+                        else this
+                    )
+                }
+            } else getString(
+                if (isDeleted) R.string.deadline_has_been_deleted
+                else R.string.deadline_has_been_deleted_reverted,
+                "1 项 Deadline"
+            )
+        messageButtonWithdrawOperation.setOnClickListener {
+            deadlineViewModel.setDeadlineDeleted(uid, !isDeleted)
+            messageBarOperationContainer.visibility = View.GONE
+        }
+        messageBarOperationContainer.visibility = View.VISIBLE
+        messageBarOperationDismissTimer.restart()
     }
 }

@@ -102,9 +102,12 @@ fun List<Deadline>.sortAndGroup(
                 }
             }
         DeadlineSortOrder.IMPORTANCE_DESCENDING -> groupBy { it.importance }
+            .toSortedMap { o1, o2 ->
+                o2 - o1
+            }
             .flatMap { entry ->
                 listOf(
-                    DeadlineHeader(entry.key.toString(), entry.value.size)
+                    DeadlineHeader(if(entry.key == 1) "重要" else "其它", entry.value.size)
                 ) + entry.value.sortedBy { it.due_time }.map {
                     DeadlineMember(it)
                 }

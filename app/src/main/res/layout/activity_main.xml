@@ -33,15 +33,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:contentInsetStart="0dp"
-        android:elevation="8dp"
-        android:background="@color/color_primary_400">
+        android:background="@color/fragmentBackground"
+        android:elevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_width="match_parent"
             android:background="?android:statusBarColor"
-            android:animateLayoutChanges="true"
-            android:paddingBottom="@dimen/toolbar_vertical_padding_minus_ripple">
+            android:id="@+id/main_activity_tool_bar_background"
+            android:animateLayoutChanges="true">
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
                 android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
@@ -52,7 +53,7 @@
                 android:id="@+id/main_activity_nav_button"
                 android:src="@drawable/ic_fluent_navigation_24_regular"
                 android:background="@drawable/icon_button_on_status_bar"
-                android:tint="@color/color_white"/>
+                android:tint="@color/color_white" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

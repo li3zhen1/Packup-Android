@@ -2,6 +2,7 @@ package org.engrave.packup.ui.deadline
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -91,8 +92,9 @@ class DeadlineListAdapter(
     private val context: Context,
     private val onClickStar: (Int, Boolean) -> Unit,
     private val onClickComplete: (Int, Boolean) -> Unit,
-    private val onAttemptDeleteItem: (Int) -> Unit,
-    private val onAttemptCompleteItem: (Int) -> Unit
+    private val onClickRestore: (Int, Boolean) -> Unit,
+    private val onSwipeDelete: (Int) -> Unit,
+    private val onSwipeComplete: (Int) -> Unit
 ) :
     ListAdapter<DeadlineItem, RecyclerView.ViewHolder>(DistinctiveDiffCallback<DeadlineItem>()),
     DeadlineItemTouchHelper.IDeadlineItemTouchHelperAdapter {
@@ -205,14 +207,80 @@ class DeadlineListAdapter(
                     }
                     isChecked = item.deadline.is_starred
                 }
-                deadlineItemCompleteButton.apply {
-//                    setOnCheckedChangeListener { _, bool ->
-//                        if (bool)
-//                            onAttemptCompleteItem(item.deadline.uid)
-//                        else
-//                            onClickComplete(item.deadline.uid, false)
-//                    }
-                    isChecked = item.deadline.is_completed
+                if (!item.deadline.is_deleted) {
+                    deadlineItemCompleteButton.apply {
+                        setImageDrawable(
+                            ContextCompat.getDrawable(
+                                context,
+                                if (item.deadline.is_completed)
+                                    R.drawable.ic_packup_complete
+                                else R.drawable.ic_fluent_circle_24_regular
+                            )
+                        )
+                        imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                context,
+                                if (item.deadline.is_completed)
+                                    R.color.color_primary_400
+                                else R.color.colorText
+                            )
+                        )
+                        floatingCheckmark.visibility =
+                            if (item.deadline.is_completed) View.VISIBLE else View.INVISIBLE
+                        setOnClickListener {
+                            if (!item.deadline.is_completed) {
+                                binding.checkAnim.playAnimation()
+                                onClickComplete(item.deadline.uid, true)
+                                setImageDrawable(
+                                    ContextCompat.getDrawable(
+                                        context,
+                                        R.drawable.ic_packup_complete
+                                    )
+                                )
+                                imageTintList = ColorStateList.valueOf(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.color_primary_400
+                                    )
+                                )
+                                floatingCheckmark.visibility = View.VISIBLE
+                            } else {
+                                onClickComplete(item.deadline.uid, false)
+                                setImageDrawable(
+                                    ContextCompat.getDrawable(
+                                        context,
+                                        R.drawable.ic_fluent_circle_24_regular
+                                    )
+                                )
+                                imageTintList = ColorStateList.valueOf(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.colorText
+                                    )
+                                )
+                                floatingCheckmark.visibility = View.INVISIBLE
+                            }
+                        }
+                    }
+                } else {
+                    deadlineItemCompleteButton.apply {
+                        setImageDrawable(
+                            ContextCompat.getDrawable(
+                                context,
+                                R.drawable.ic_fluent_delete_off_24_regular
+                            )
+                        )
+                        imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.colorText
+                            )
+                        )
+                        setOnClickListener {
+                            onClickRestore(item.deadline.uid, false)
+                        }
+                    }
+                    floatingCheckmark.visibility = View.INVISIBLE
                 }
                 deadlineItemMemberSource.text =
                     pangu.spacingText(item.deadline.source_course_name_without_semester)
@@ -245,13 +313,13 @@ class DeadlineListAdapter(
     override fun onItemRemoved(position: Int) {
         val item = getItem(position)
         if (item is DeadlineMember)
-            onAttemptDeleteItem(item.deadline.uid)
+            onSwipeDelete(item.deadline.uid)
     }
 
     override fun onItemCompleted(position: Int) {
         val item = getItem(position)
         if (item is DeadlineMember)
-            onAttemptCompleteItem(item.deadline.uid)
+            onSwipeComplete(item.deadline.uid)
     }
 
 }

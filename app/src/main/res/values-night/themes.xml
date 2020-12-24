@@ -5,12 +5,12 @@
     <!-- Base application theme. -->
     <style name="Theme.Packup.Activity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/color_primary_400</item>
-        <item name="colorPrimaryVariant">@color/color_primary_400</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/color_black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/color_primary_400</item>
-        <item name="colorSecondaryVariant">@color/color_primary_400</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
         <item name="colorOnSecondary">@color/color_black</item>
 
         <item name="colorError">@color/color_error_background</item>
@@ -40,11 +40,11 @@
         <item name="android:windowBackground">@drawable/splash_night</item>
         <item name="colorSurface">@color/color_black</item>
         <!-- Same as Theme.Packup -->
-        <item name="colorPrimary">@color/color_primary_400</item>
-        <item name="colorPrimaryVariant">@color/color_primary_400</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/color_black</item>
-        <item name="colorSecondary">@color/color_primary_400</item>
-        <item name="colorSecondaryVariant">@color/color_primary_400</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
         <item name="colorOnSecondary">@color/color_black</item>
         <item name="android:statusBarColor">@color/color_black</item>
         <item name="android:windowLightStatusBar">false</item>
@@ -94,10 +94,12 @@
     <color name="messageBarButtonRippleColor">#6a6a6a</color>
 
     <color name="itemBackgroundRippleColor">@color/color_surface_neutral_dark_elevation_24dp</color>
-    <color name="cursorColorOnActionBar">@color/color_primary_400</color>
+    <color name="cursorColorOnActionBar">@color/colorPrimary</color>
 
     <color name="fragmentBackground">@color/color_black</color>
     <color name="itemBackgroundColor">@color/color_surface_neutral_dark_elevation_01dp</color>
     <color name="itemSeparatorColor">@color/color_surface_neutral_dark_elevation_04dp</color>
-    <color name="starColor">#F6CD3A</color>
+    <color name="starColor">#A68E36</color>
+    <color name="colorVibrant">#952A2C</color>
+    <color name="colorPrimary">#3B57BC</color>
     </resources>

@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.ActivityMainBinding
-import org.engrave.packup.ui.attached.AttachedFileBottomSheetFragment
 import org.engrave.packup.ui.deadline.DeadlineFragment
 import org.engrave.packup.ui.deadline.DocumentFragment
 import org.engrave.packup.ui.event.EventFragment
@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.mainActivityToolBarContainer)
-
-        binding.mainActivityToolbarTitle.text = "Deadline"
-
         binding.mainActivityViewPager.apply {
             isUserInputEnabled = false
             offscreenPageLimit = 2
@@ -84,53 +81,35 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
-        mainViewModel.fragmentId.observe(this) {
+        mainViewModel.statusBarStatus.observe(this) {
+            fun getButtonDrawable() =
+                if (it == MainViewModel.STATUS_BAR_DEADLINE_DELETED)
+                    ContextCompat.getDrawable(this, R.drawable.icon_button_on_status_bar_vibrant)
+                else ContextCompat.getDrawable(this, R.drawable.icon_button_on_status_bar)
+            binding.mainActivityToolBarBackground.background =
+                if (it == MainViewModel.STATUS_BAR_DEADLINE_DELETED)
+                    ContextCompat.getDrawable(this, R.color.colorVibrant)
+                else ContextCompat.getDrawable(this, R.color.activityStatusBarColor)
+            binding.mainActivitySearchButton.background = getButtonDrawable()
+            binding.mainActivityFilterButton.background = getButtonDrawable()
+            binding.mainActivityNavButton.background = getButtonDrawable()
+            window.statusBarColor =
+                if (it == MainViewModel.STATUS_BAR_DEADLINE_DELETED)
+                    ContextCompat.getColor(this, R.color.colorVibrant)
+                else ContextCompat.getColor(this, R.color.activityStatusBarColor)
             binding.mainActivityToolbarTitle.text = when (it) {
-                MainViewModel.FRAGMENT_ID_DOCUMENT -> "文档"
-                MainViewModel.FRAGMENT_ID_EVENT -> "事件"
+                MainViewModel.STATUS_BAR_DOCUMENT -> "文档"
+                MainViewModel.STATUS_BAR_EVENT -> "事件"
+                MainViewModel.STATUS_BAR_DEADLINE_COMPLETED -> "已完成的 Deadline"
+                MainViewModel.STATUS_BAR_DEADLINE_DELETED -> "已删除的 Deadline"
                 else -> "Deadline"
             }
             binding.mainActivityFilterButton.visibility =
-                if (it == MainViewModel.FRAGMENT_ID_DEADLINE) View.VISIBLE else View.GONE
+                if (it <= MainViewModel.STATUS_BAR_DEADLINE_COMPLETED) View.VISIBLE else View.GONE
         }
+
     }
 
-    private fun popDeadlineFilterMenu() {
-        val filterFragment = FilterBottomSheetFragment()
-        filterFragment.show(supportFragmentManager, "DEADLINE_FILTER_BOTTOM_SHEET")
-//        val items = arrayListOf(
-//            PopupMenuItem(
-//                id = 0,
-//                title = "按截止时间升序排列",
-//                iconResourceId = R.drawable.ic_fluent_chat_help_24_regular,
-//                showDividerBelow = true
-//            ),
-//            PopupMenuItem(
-//                id = 1,
-//                title = "按截止时间升序排列",
-//                iconResourceId = R.drawable.ic_fluent_chat_help_24_regular,
-//                showDividerBelow = true
-//            ),
-//            PopupMenuItem(
-//                id = 2,
-//                title = "按课程名称排列",
-//                iconResourceId = R.drawable.ic_fluent_chat_help_24_regular
-//            )
-//        )
-//        val onPopupMenuItemClickListener = object : PopupMenuItem.OnClickListener {
-//            override fun onPopupMenuItemClicked(popupMenuItem: PopupMenuItem) {
-//                mainViewModel.deadlineSortOrder.value = when(popupMenuItem.id){
-//                    0 -> DeadlineSortOrder.DUE_TIME_ASCENDING
-//                    1 -> DeadlineSortOrder.DUE_TIME_DESCENDING
-//                    2 -> DeadlineSortOrder.SOURCE_COURSE_NAME
-//                    else -> DeadlineSortOrder.DUE_TIME_ASCENDING
-//                }
-//            }
-//        }
-//        val popupMenu = PopupMenu(this, anchorView, items, PopupMenu.ItemCheckableBehavior.NONE)
-//        popupMenu.onItemClickListener = onPopupMenuItemClickListener
-//        popupMenu.show()
-    }
+    private fun popDeadlineFilterMenu() = FilterBottomSheetFragment()
+        .show(supportFragmentManager, "DEADLINE_FILTER_BOTTOM_SHEET")
 }

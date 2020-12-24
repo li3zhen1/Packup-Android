@@ -4,12 +4,12 @@
     <!-- Base application theme. -->
     <style name="Theme.Packup.Activity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/color_primary_400</item>
-        <item name="colorPrimaryVariant">@color/color_primary_400</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/color_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/color_primary_400</item>
-        <item name="colorSecondaryVariant">@color/color_primary_400</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
         <item name="colorOnSecondary">@color/color_black</item>
         <!-- Status bar color. -->
         <item name="colorError">@color/color_error_background</item>
@@ -18,7 +18,7 @@
 
         <item name="colorSurface">@color/color_white</item>
         <!--status bar-->
-        <item name="android:statusBarColor">@color/color_primary_400</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/color_white</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/color_white</item>
@@ -67,11 +67,11 @@
         <item name="android:windowBackground">@drawable/splash_day</item>
         <item name="colorSurface">@color/color_white</item>
         <!--Same as Theme.Packup-->
-        <item name="colorPrimary">@color/color_primary_400</item>
-        <item name="colorPrimaryVariant">@color/color_primary_400</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/color_white</item>
-        <item name="colorSecondary">@color/color_primary_400</item>
-        <item name="colorSecondaryVariant">@color/color_primary_400</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
         <item name="colorOnSecondary">@color/color_black</item>
         <item name="android:statusBarColor">@color/color_white</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -84,7 +84,7 @@
     <color name="colorText">#8A000000</color>
     <color name="windowBackgroundColor">@color/color_white</color>
 
-    <color name="activityStatusBarColor">@color/color_primary_400</color>
+    <color name="activityStatusBarColor">@color/colorPrimary</color>
 
     <color name="navBarBackgroundColor">@color/color_white</color>
 
@@ -133,4 +133,7 @@
     <color name="itemSeparatorColor">@color/color_surface_neutral_light_elevation_04dp</color>
     <color name="itemBackgroundColor">@color/color_white</color>
     <color name="starColor">#F6CD3A</color>
+
+    <color name="colorVibrant">@color/color_vibrant_400</color>
+    <color name="colorPrimary">@color/color_primary_400</color>
 </resources>

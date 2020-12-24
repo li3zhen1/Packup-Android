@@ -88,7 +88,9 @@
     <string name="packup_unsupported_file_format">Packup can\'t provide previews for this file.\nYou can <b>open</b> or <b>share</b> it in an external application.</string>
 
     <string name="deadline_has_been_completed"><b>%1$s</b> has been marked completed.</string>
+    <string name="deadline_has_been_completed_reverted"><b>%1$s</b> has been marked uncompleted.</string>
     <string name="deadline_has_been_deleted"><b>%1$s</b> has been deleted.</string>
+    <string name="deadline_has_been_deleted_reverted"><b>%1$s</b> has been recovered.</string>
     <string name="document_fragment_connect_to_onedrive">Connect to OneDrive to\nfully utilize Packup\'s functionality.</string>
 
     <string name="sign_in_with_microsoft">Sign in with <b>Microsoft</b></string>

@@ -7,7 +7,7 @@
 
     <style name="defaultButton_day" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:background">@drawable/button_background_default_day</item>
-        <item name="android:textColor">@color/color_primary_400</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="defaultButton_night" parent="Widget.AppCompat.Button.Borderless.Colored">

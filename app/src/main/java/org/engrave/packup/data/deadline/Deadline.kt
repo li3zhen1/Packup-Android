@@ -52,9 +52,8 @@ data class Deadline(
     /* 本地缓存 */
     var attached_file_list: List<DeadlineAttachedFile>,
     var attached_file_list_crawled: Boolean = false
-
 ) : IPayloadChangeAnimatable<Deadline> {
-    val importance: Int get() = 0
+    val importance: Int get() = if (is_starred) 1 else 0
     val inferred_subject: String? get() = null
 
     val source_course_name_without_semester: String

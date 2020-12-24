@@ -53,9 +53,9 @@ class DeadlineItemTouchHelper(
         else adapter.onItemCompleted(viewHolder.adapterPosition)
     }
 
-    val primaryColor400 = ContextCompat.getColor(context, R.color.color_primary_400)
+    val primaryColor400 = ContextCompat.getColor(context, R.color.colorPrimary)
     val primaryColor200 = ContextCompat.getColor(context, R.color.color_primary_200)
-    val vibrantColor400 = ContextCompat.getColor(context, R.color.color_vibrant_400)
+    val vibrantColor400 = ContextCompat.getColor(context, R.color.colorVibrant)
     val vibrantColor200 = ContextCompat.getColor(context, R.color.color_vibrant_200)
     val white = ContextCompat.getColor(context, R.color.color_white)
     val fragmentBackground = ContextCompat.getColor(context, R.color.fragmentBackground)

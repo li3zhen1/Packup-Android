@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:contentInsetStart="0dp"
         android:elevation="6dp"
-        android:background="@color/color_primary_400">
+        android:background="@color/colorPrimary">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="wrap_content"

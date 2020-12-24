@@ -4,7 +4,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="60dp"
         android:layout_width="match_parent"
-        android:background="@color/color_primary_400"
+        android:background="@color/colorPrimary"
         android:paddingHorizontal="@dimen/toolbar_horizontal_padding"
         android:paddingVertical="@dimen/toolbar_vertical_padding">
         <TextView
