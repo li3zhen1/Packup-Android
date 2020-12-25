@@ -27,6 +27,7 @@ class EditDateTimeBottomSheetFragment() : BottomSheetDialogFragment() {
             editDescFragmentTimeYear.setText(String.format("%04d", editViewModel.dueYear))
             editDescFragmentTimeMonth.setText(String.format("%02d", editViewModel.dueMonth + 1))
             editDescFragmentTimeDate.setText(String.format("%02d", editViewModel.dueDate))
+
             editDescFragmentTimeHour.setText(String.format("%02d", editViewModel.dueHour))
             editDescFragmentTimeMinute.setText(String.format("%02d", editViewModel.dueMinutes))
             editDescFragmentTimeYear.setJumpToOnValidate(4, editDescFragmentTimeMonth,
