@@ -64,6 +64,7 @@ data class DeadlinePadding(val identity: Int) : DeadlineItem() {
 
 
 const val PAYLOAD_STAR_CHANGED = "STAR"
+const val PAYLOAD_HEADER_NUM_CHANGED = "HEADER"
 
 class DeadlineListAdapter(
     private val context: Context,
@@ -76,13 +77,14 @@ class DeadlineListAdapter(
     ListAdapter<DeadlineItem, RecyclerView.ViewHolder>(object :
         DistinctiveDiffCallback<DeadlineItem>() {
         override fun getChangePayload(oldItem: DeadlineItem, newItem: DeadlineItem): Any? {
-            Log.e("OLD", oldItem.toString())
-            Log.e("NEW", newItem.toString())
             if (oldItem is DeadlineMember && newItem is DeadlineMember) {
-                Log.e("OLD", oldItem.toString())
-                Log.e("NEW", newItem.toString())
                 if (oldItem.deadline.is_starred != newItem.deadline.is_starred) {
                     return PAYLOAD_STAR_CHANGED
+                }
+            }
+            if (oldItem is DeadlineHeader && newItem is DeadlineHeader) {
+                if (oldItem.num != newItem.num) {
+                    return PAYLOAD_HEADER_NUM_CHANGED
                 }
             }
             return super.getChangePayload(oldItem, newItem)
@@ -127,6 +129,10 @@ class DeadlineListAdapter(
         if (holder is DeadlineMemberViewHolder) {
             if (payloads.contains(PAYLOAD_STAR_CHANGED))
                 holder.resetStarStatus(getItem(position) as DeadlineMember)
+        }
+        if (holder is DeadlineHeaderViewHolder) {
+            if (payloads.contains(PAYLOAD_HEADER_NUM_CHANGED))
+                holder.reBindNum(getItem(position) as DeadlineHeader)
         }
         super.onBindViewHolder(holder, position, payloads)
     }
@@ -343,6 +349,11 @@ class DeadlineListAdapter(
         fun bind(header: DeadlineHeader) {
             binding.apply {
                 deadlineItemHeaderDigest.text = header.title
+                deadlineItemHeaderDetail.text = header.num.toString()
+            }
+        }
+        fun reBindNum(header: DeadlineHeader) {
+            binding.apply {
                 deadlineItemHeaderDetail.text = header.num.toString()
             }
         }
