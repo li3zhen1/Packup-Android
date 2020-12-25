@@ -63,6 +63,7 @@ data class Deadline(
         uid == other.uid && name == other.name && calendar_id == other.calendar_id
                 && event_type == other.event_type && course_object_id == other.course_object_id
                 && source_name == other.source_name && due_time == other.due_time
+                && is_deleted == other.is_deleted && is_completed == other.is_completed
 
     override fun manipulatableFieldsSameWith(other: Deadline): Boolean =
         is_starred == other.is_starred && has_submission == other.has_submission

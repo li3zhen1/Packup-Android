@@ -12,7 +12,7 @@ interface IDistinctive {
     fun isOfSameContent(other: IDistinctive): Boolean
 }
 
-class DistinctiveDiffCallback<T: IDistinctive> : DiffUtil.ItemCallback<T>() {
+open class DistinctiveDiffCallback<T: IDistinctive> : DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T) =
         (oldItem.getTypeDescriptor() == newItem.getTypeDescriptor())
                 && (oldItem.getIdentityDescriptor() == newItem.getIdentityDescriptor())

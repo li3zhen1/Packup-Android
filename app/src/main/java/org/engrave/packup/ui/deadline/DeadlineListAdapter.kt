@@ -3,6 +3,7 @@ package org.engrave.packup.ui.deadline
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,7 @@ data class DeadlineMember(val deadline: Deadline) : DeadlineItem() {
     override fun getModifierDescriptor() = ""
 
     override fun isOfSameContent(other: IDistinctive): Boolean =
-        if (other is DeadlineMember) this.deadline.contentSameWith(other.deadline)
+        if (other is DeadlineMember) this.deadline.contentsSameWith(other.deadline)
         else false
 }
 
@@ -61,6 +62,9 @@ data class DeadlinePadding(val identity: Int) : DeadlineItem() {
     override fun isOfSameContent(other: IDistinctive): Boolean = true
 }
 
+
+const val PAYLOAD_STAR_CHANGED = "STAR"
+
 class DeadlineListAdapter(
     private val context: Context,
     private val onClickStar: (Int, Boolean) -> Unit,
@@ -69,7 +73,21 @@ class DeadlineListAdapter(
     private val onSwipeDelete: (Int) -> Unit,
     private val onSwipeComplete: (Int) -> Unit
 ) :
-    ListAdapter<DeadlineItem, RecyclerView.ViewHolder>(DistinctiveDiffCallback<DeadlineItem>()),
+    ListAdapter<DeadlineItem, RecyclerView.ViewHolder>(object :
+        DistinctiveDiffCallback<DeadlineItem>() {
+        override fun getChangePayload(oldItem: DeadlineItem, newItem: DeadlineItem): Any? {
+            Log.e("OLD", oldItem.toString())
+            Log.e("NEW", newItem.toString())
+            if (oldItem is DeadlineMember && newItem is DeadlineMember) {
+                Log.e("OLD", oldItem.toString())
+                Log.e("NEW", newItem.toString())
+                if (oldItem.deadline.is_starred != newItem.deadline.is_starred) {
+                    return PAYLOAD_STAR_CHANGED
+                }
+            }
+            return super.getChangePayload(oldItem, newItem)
+        }
+    }),
     DeadlineItemTouchHelper.IDeadlineItemTouchHelperAdapter {
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     val pangu = Pangu()
@@ -96,9 +114,21 @@ class DeadlineListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder) {
         is DeadlineHeaderViewHolder -> holder.bind(getItem(position) as DeadlineHeader)
-        is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember, onClickStar)
+        is DeadlineMemberViewHolder -> holder.bind(getItem(position) as DeadlineMember)
         is DeadlinePaddingViewHolder -> holder.bind(getItem(position) as DeadlinePadding)
         else -> throw ClassCastException("Unknown ViewHolder Class ${holder::class.simpleName} when inflating deadline list.")
+    }
+
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (holder is DeadlineMemberViewHolder) {
+            if (payloads.contains(PAYLOAD_STAR_CHANGED))
+                holder.resetStarStatus(getItem(position) as DeadlineMember)
+        }
+        super.onBindViewHolder(holder, position, payloads)
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
@@ -111,7 +141,7 @@ class DeadlineListAdapter(
 
     inner class DeadlineMemberViewHolder internal constructor(private val binding: ItemDeadlineBinding) :
         RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
-        fun bind(item: DeadlineMember, onClickStarBind: (Int, Boolean) -> Unit) {
+        fun bind(item: DeadlineMember) {
             val remainingTime = item.deadline.due_time?.minus(Date().time)
             binding.apply {
                 root.setOnClickListener {
@@ -175,10 +205,28 @@ class DeadlineListAdapter(
                     }
                 }
                 deadlineItemStarButton.apply {
-                    setOnCheckedChangeListener { _, isChecked ->
-                        onClickStarBind(item.deadline.uid, isChecked)
+                    setImageDrawable(
+                        ContextCompat.getDrawable(
+                            context,
+                            if (item.deadline.is_starred)
+                                R.drawable.ic_packup_star_24_filled
+                            else R.drawable.ic_packup_star_24_regular
+                        )
+                    )
+                    imageTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            context,
+                            if (item.deadline.is_starred)
+                                R.color.starColor
+                            else R.color.colorText
+                        )
+                    )
+                    setOnClickListener {
+                        if (!item.deadline.is_starred) {
+                            binding.starAnim.playAnimation()
+                        }
+                        onClickStar(item.deadline.uid, !item.deadline.is_starred)
                     }
-                    isChecked = item.deadline.is_starred
                 }
                 if (!item.deadline.is_deleted) {
                     deadlineItemCompleteButton.apply {
@@ -253,10 +301,39 @@ class DeadlineListAdapter(
                             onClickRestore(item.deadline.uid, false)
                         }
                     }
-//                    floatingCheckmark.visibility = View.INVISIBLE
                 }
                 deadlineItemMemberSource.text =
                     pangu.spacingText(item.deadline.source_course_name_without_semester)
+            }
+        }
+
+        fun resetStarStatus(item: DeadlineMember) {
+            if (item.deadline.is_starred) {
+                binding.deadlineItemStarButton.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_packup_star_24_filled
+                    )
+                )
+                binding.deadlineItemStarButton.imageTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.starColor
+                    )
+                )
+            } else {
+                binding.deadlineItemStarButton.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_packup_star_24_regular
+                    )
+                )
+                binding.deadlineItemStarButton.imageTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.colorText
+                    )
+                )
             }
         }
     }

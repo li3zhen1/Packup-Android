@@ -104,6 +104,13 @@ class DeadlineFragment() : Fragment() {
         deadlineAdapter = DeadlineListAdapter(
             context,
             onClickStar = { uid, isStarred ->
+                if (isStarred)
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                            120,
+                            24
+                        )
+                    )
                 deadlineViewModel.setStarred(uid, isStarred)
             },
             onClickComplete = { uid, isCompleted ->
