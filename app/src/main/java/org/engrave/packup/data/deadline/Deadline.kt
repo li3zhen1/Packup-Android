@@ -309,10 +309,10 @@ enum class DeadlineFilter {
 
 enum class DueTimeNode{
     UNKNOWN{
-        override fun toString() = "未知"
+        override fun toString() = "未指定到期时间"
     },
     EXPIRED{
-        override fun toString() = "已逾期"
+        override fun toString() = "已到期"
     },
     DUE_WITHIN_1_HOUR{
         override fun toString() = "1 小时内"

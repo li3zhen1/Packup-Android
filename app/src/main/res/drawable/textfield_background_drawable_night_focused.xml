@@ -9,10 +9,10 @@
     </item>
     <item>
         <shape>
-            <corners android:radius="4dp"/>
+            <corners android:radius="3dp"/>
             <stroke
                 android:width="2dp"
-                android:color="@color/color_surface_neutral_dark_elevation_12dp" />
+                android:color="@color/colorPrimary" />
         </shape>
     </item>
 </layer-list>

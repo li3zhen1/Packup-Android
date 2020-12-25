@@ -26,6 +26,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
 
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:textCursorDrawable">@drawable/primary_cursor</item>
     </style>
 
     <style name="Theme.Packup.Activity.Immersive" parent="Theme.Packup.Activity">
@@ -99,7 +100,7 @@
     <color name="fragmentBackground">@color/color_black</color>
     <color name="itemBackgroundColor">@color/color_surface_neutral_dark_elevation_01dp</color>
     <color name="itemSeparatorColor">@color/color_surface_neutral_dark_elevation_04dp</color>
-    <color name="starColor">#A68E36</color>
+    <color name="starColor">#AC9236</color>
     <color name="colorVibrant">#952A2C</color>
     <color name="colorPrimary">#3B57BC</color>
     </resources>

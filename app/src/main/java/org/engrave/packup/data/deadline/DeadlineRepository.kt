@@ -30,22 +30,24 @@ class DeadlineRepository @Inject constructor(
     val allDeadlinesStatic: List<Deadline> get() = deadlineDao.getAllDeadlinesStatic()
     fun getDeadlineAlive(uid: Int) = deadlineDao.getDeadline(uid)
 
-    val courseCrawler =
-        PeriodicWorkRequestBuilder<DeadlineCrawler>(30, TimeUnit.MINUTES)
-            .build()
 
-    val constraints = Constraints.Builder()
+
+    private val constraints = Constraints.Builder()
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .build()
+    val courseCrawler =
+        PeriodicWorkRequestBuilder<DeadlineCrawler>(30, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
 
     init {
         repositoryScope.launch {
             WorkManager
                 .getInstance(context)
-                .enqueueUniqueWork(
+                .enqueueUniquePeriodicWork(
                     COURSE_CRAWLER_NAME,
-                    ExistingWorkPolicy.REPLACE,
-                    OneTimeWorkRequestBuilder<DeadlineCrawler>().build()
+                    ExistingPeriodicWorkPolicy.KEEP,
+                    courseCrawler
                 )
         }
     }

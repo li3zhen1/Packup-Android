@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.data.deadline.DeadlineRepository
+import java.util.*
 
 class EditDeadlineViewModel @ViewModelInject constructor(
     private val deadlineRepository: DeadlineRepository,
@@ -16,6 +17,23 @@ class EditDeadlineViewModel @ViewModelInject constructor(
 ) : ViewModel() {
     val editingDeadlineTitle = MutableLiveData("")
     val editingDeadlineDescription = MutableLiveData("")
+    val calendar = Calendar.getInstance().apply {
+        add(Calendar.DATE, 2)
+    }
+    var dueYear = calendar.get(Calendar.YEAR)
+    var dueMonth = calendar.get(Calendar.MONTH)
+    var dueDate = calendar.get(Calendar.DAY_OF_MONTH)
+    var dueHour = 23
+    var dueMinutes = 30
+
+    val dueTimeStamp
+        get() = Date(
+            dueYear,
+            dueMonth,
+            dueDate,
+            dueHour,
+            dueMinutes
+        ).time
 
     fun commitDeadline() {
         viewModelScope.launch {

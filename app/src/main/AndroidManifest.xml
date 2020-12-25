@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Packup.Splash">
         <activity android:name=".EditDeadlineActivity"
-            android:theme="@style/Theme.Packup.Activity"/>
+            android:theme="@style/Theme.Packup.Activity"
+            android:windowSoftInputMode="adjustResize" />
         <!-- Providers -->
         <provider
             android:name="androidx.core.content.FileProvider"

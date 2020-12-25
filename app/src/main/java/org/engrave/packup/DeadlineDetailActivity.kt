@@ -30,7 +30,6 @@ class DeadlineDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailViewModel.setDeadlineUid(intent.getIntExtra(DEADLINE_DETAIL_ACTIVITY_UID, -1))
-
         binding = ActivityDeadlineDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.deadlineDetailActivityToolBarContainer)
@@ -64,7 +63,7 @@ class DeadlineDetailActivity : AppCompatActivity() {
                     deadlineDetailStarButton.setImageDrawable(
                         ContextCompat.getDrawable(
                             this@DeadlineDetailActivity,
-                            if (it.is_starred) R.drawable.ic_packup_star_24_filled
+                            if (it.is_starred) R.drawable.outline_button_star_filled
                             else R.drawable.ic_packup_star_24_white_border
                         )
                     )

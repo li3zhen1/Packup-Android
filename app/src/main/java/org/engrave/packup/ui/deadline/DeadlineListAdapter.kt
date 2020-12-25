@@ -3,7 +3,6 @@ package org.engrave.packup.ui.deadline
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -225,18 +224,17 @@ class DeadlineListAdapter(
                         ContextCompat.getDrawable(
                             context,
                             if (item.deadline.is_starred)
-                                R.drawable.ic_packup_star_24_filled
-                            else R.drawable.ic_packup_star_24_regular
+                                R.drawable.outline_button_star_filled
+                            else R.drawable.outline_button_star
                         )
                     )
-                    imageTintList = ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            context,
-                            if (item.deadline.is_starred)
-                                R.color.starColor
-                            else R.color.colorText
-                        )
-                    )
+//                    if (item.deadline.is_starred)
+//                        imageTintList = ColorStateList.valueOf(
+//                            ContextCompat.getColor(
+//                                context,
+//                                R.color.starColor
+//                            )
+//                        )
                     setOnClickListener {
                         if (!item.deadline.is_starred) {
                             binding.starAnim.playAnimation()
@@ -250,20 +248,12 @@ class DeadlineListAdapter(
                             ContextCompat.getDrawable(
                                 context,
                                 if (item.deadline.is_completed)
-                                    R.drawable.ic_fluent_checkmark_circle_24_filled
-                                else R.drawable.ic_fluent_circle_24_regular
+                                    R.drawable.outline_button_circle_filled
+                                else R.drawable.outline_button_circle
                             )
                         )
-                        imageTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                context,
-                                if (item.deadline.is_completed)
-                                    R.color.color_primary_400
-                                else R.color.colorText
-                            )
-                        )
-//                        floatingCheckmark.visibility =
-//                            if (item.deadline.is_completed) View.VISIBLE else View.INVISIBLE
+
+
                         setOnClickListener {
                             if (!item.deadline.is_completed) {
                                 binding.checkAnim.playAnimation()
@@ -271,30 +261,23 @@ class DeadlineListAdapter(
                                 setImageDrawable(
                                     ContextCompat.getDrawable(
                                         context,
-                                        R.drawable.ic_fluent_checkmark_circle_24_filled
+                                        R.drawable.outline_button_circle_filled
                                     )
                                 )
-                                imageTintList = ColorStateList.valueOf(
-                                    ContextCompat.getColor(
-                                        context,
-                                        R.color.color_primary_400
-                                    )
-                                )
-//                                floatingCheckmark.visibility = View.VISIBLE
                             } else {
                                 onClickComplete(item.deadline.uid, false)
                                 setImageDrawable(
                                     ContextCompat.getDrawable(
                                         context,
-                                        R.drawable.ic_fluent_circle_24_regular
+                                        R.drawable.outline_button_circle
                                     )
                                 )
-                                imageTintList = ColorStateList.valueOf(
-                                    ContextCompat.getColor(
-                                        context,
-                                        R.color.colorText
-                                    )
-                                )
+//                                imageTintList = ColorStateList.valueOf(
+//                                    ContextCompat.getColor(
+//                                        context,
+//                                        R.color.colorText
+//                                    )
+//                                )
 //                                floatingCheckmark.visibility = View.INVISIBLE
                             }
                         }
@@ -307,12 +290,12 @@ class DeadlineListAdapter(
                                 R.drawable.ic_fluent_delete_off_24_regular
                             )
                         )
-                        imageTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                context,
-                                R.color.colorText
-                            )
-                        )
+//                        imageTintList = ColorStateList.valueOf(
+//                            ContextCompat.getColor(
+//                                context,
+//                                R.color.colorText
+//                            )
+//                        )
                         setOnClickListener {
                             onClickRestore(item.deadline.uid, false)
                         }
@@ -328,28 +311,28 @@ class DeadlineListAdapter(
                 binding.deadlineItemStarButton.setImageDrawable(
                     ContextCompat.getDrawable(
                         context,
-                        R.drawable.ic_packup_star_24_filled
+                        R.drawable.outline_button_star_filled
                     )
                 )
-                binding.deadlineItemStarButton.imageTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.starColor
-                    )
-                )
+//                binding.deadlineItemStarButton.imageTintList = ColorStateList.valueOf(
+//                    ContextCompat.getColor(
+//                        context,
+//                        R.color.starColor
+//                    )
+//                )
             } else {
                 binding.deadlineItemStarButton.setImageDrawable(
                     ContextCompat.getDrawable(
                         context,
-                        R.drawable.ic_packup_star_24_regular
+                        R.drawable.outline_button_star
                     )
                 )
-                binding.deadlineItemStarButton.imageTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.colorText
-                    )
-                )
+//                binding.deadlineItemStarButton.imageTintList = ColorStateList.valueOf(
+//                    ContextCompat.getColor(
+//                        context,
+//                        R.color.colorText
+//                    )
+//                )
             }
         }
     }

@@ -21,8 +21,6 @@ class DeadlineViewModel @ViewModelInject constructor(
     private val deadlines: LiveData<List<Deadline>> = deadlineRepository.allDeadlines
 
     val deadlineCrawlerRef = deadlineRepository.courseCrawler
-
-
     val sortedDeadlines = MediatorLiveData<List<DeadlineItem>?>()
         .apply {
             value = listOf()

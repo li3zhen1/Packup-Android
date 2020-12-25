@@ -52,6 +52,7 @@
         <item name="packupDividerColor">@color/packup_gray_100</item>
 
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:textCursorDrawable">@drawable/primary_cursor</item>
     </style>
 
     <style name="Theme.Packup.Activity.Immersive" parent="Theme.Packup.Activity">

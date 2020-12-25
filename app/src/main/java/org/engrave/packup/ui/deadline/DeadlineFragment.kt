@@ -67,7 +67,7 @@ class DeadlineFragment() : Fragment() {
     private val messageBarOperationDismissTimer = SimpleCountDown(3000) {
         messageBarOperationContainer.visibility = View.GONE
     }
-    private val scrollToTopCountDown = SimpleCountDown(400) {
+    private val scrollToTopCountDown = SimpleCountDown(320) {
         recyclerView.smoothScrollToPosition(0)
     }
 
@@ -121,7 +121,7 @@ class DeadlineFragment() : Fragment() {
                             48
                         )
                     )
-                    SimpleCountDown(680) {
+                    SimpleCountDown(600) {
                         onSetDeadlineCompleted(uid, true)
                     }.start()
                 } else onSetDeadlineCompleted(uid, false)
@@ -175,6 +175,10 @@ class DeadlineFragment() : Fragment() {
                         }.start()
                 }
             }
+            filter.observe(viewLifecycleOwner) {
+                addButton.visibility =
+                    if (it == DeadlineFilter.PENDING_TO_COMPLETE) View.VISIBLE else View.GONE
+            }
         }
         mainViewModel.apply {
             deadlineSortOrder.observe(viewLifecycleOwner) {
@@ -190,16 +194,16 @@ class DeadlineFragment() : Fragment() {
             }
         }
         activity?.let { activity ->
-//            WorkManager.getInstance(activity.application)
-//                .getWorkInfoByIdLiveData(deadlineViewModel.deadlineCrawlerRef.id)
-//                .observe(viewLifecycleOwner) {
-//                    val newlyCrawledCount = it.progress.getInt(NEWLY_CRAWLED_DEADLINE_NUM, -1)
-//                    if (newlyCrawledCount > 0) {
-//                        messageTextNewlySynced.text = "同步了 $newlyCrawledCount 项新的 Deadline。"
-//                        messageBarNewlySyncedContainer.visibility = View.VISIBLE
-//                        messageBarNewlySyncedDismissTimer.restart()
-//                    }
-//                }
+            WorkManager.getInstance(activity.application)
+                .getWorkInfoByIdLiveData(deadlineViewModel.deadlineCrawlerRef.id)
+                .observe(viewLifecycleOwner) {
+                    val newlyCrawledCount = it.progress.getInt(NEWLY_CRAWLED_DEADLINE_NUM, -1)
+                    if (newlyCrawledCount > 0) {
+                        messageTextNewlySynced.text = "同步了 $newlyCrawledCount 项新的 Deadline。"
+                        messageBarNewlySyncedContainer.visibility = View.VISIBLE
+                        messageBarNewlySyncedDismissTimer.restart()
+                    }
+                }
         }
     }
 

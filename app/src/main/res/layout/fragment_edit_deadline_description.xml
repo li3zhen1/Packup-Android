@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/packup_general_padding_horizontal"
+    android:theme="@style/Theme.Packup.Activity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="添加描述"
+        android:textColor="?colorOnSurface"
+        android:textStyle="bold"
+        android:id="@+id/deadline_description_title"
+        android:textSize="@dimen/packup_h6"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_desc_fragment_edit_text"
+        android:textColor="?colorOnSurface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginVertical="@dimen/packup_general_padding_horizontal"
+        android:background="@drawable/primaryTextFieldBackground"
+        android:textColorHint="@color/primaryTextFieldHintColor"
+        android:focusedByDefault="true"
+        android:textSize="@dimen/packup_body2"
+        app:layout_constraintTop_toBottomOf="@id/deadline_description_title"/>
+
+    <TextView
+        android:paddingHorizontal="@dimen/packup_general_padding_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="完成"
+        android:gravity="center"
+        android:id="@+id/edit_desc_fragment_button"
+        android:background="@drawable/ripple_rect_button_on_item"
+        android:clickable="true"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/deadline_description_title"
+        app:layout_constraintBottom_toBottomOf="@id/deadline_description_title"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

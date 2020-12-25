@@ -35,7 +35,7 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/deadline_item_complete_button"
-        android:src="@drawable/checkbox_complete"
+        android:src="@drawable/outline_button_circle"
         android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
         android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
         android:layout_width="@dimen/image_button_size_with_ripple"
@@ -47,7 +47,7 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/deadline_item_star_button"
-        android:src="@drawable/ic_packup_star_24_regular"
+        android:src="@drawable/outline_button_star"
         android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
         android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
         android:layout_width="@dimen/image_button_size_with_ripple"
