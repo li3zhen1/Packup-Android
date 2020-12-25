@@ -1,8 +1,10 @@
 package org.engrave.packup.ui.deadline
 
+import android.app.Service
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +26,6 @@ import org.engrave.packup.R
 import org.engrave.packup.data.deadline.DeadlineFilter
 import org.engrave.packup.ui.main.MainViewModel
 import org.engrave.packup.util.SimpleCountDown
-import org.engrave.packup.util.inDp
 import org.engrave.packup.worker.NEWLY_CRAWLED_DEADLINE_NUM
 
 @AndroidEntryPoint
@@ -38,19 +39,22 @@ class DeadlineFragment() : Fragment() {
     lateinit var messageTextOperation: TextView
     lateinit var messageButtonWithdrawOperation: TextView
 
+    lateinit var vibrator: Vibrator
+
     lateinit var deadlineAdapter: DeadlineListAdapter
-    var deadlineItemDecorator = object : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
-            if (context != null)
-                outRect.bottom = 48.inDp(context!!)
-        }
-    }
+
+    //    var deadlineItemDecorator = object : RecyclerView.ItemDecoration() {
+//        override fun getItemOffsets(
+//            outRect: Rect,
+//            view: View,
+//            parent: RecyclerView,
+//            state: RecyclerView.State
+//        ) {
+//            super.getItemOffsets(outRect, view, parent, state)
+//            if (context != null)
+//                outRect.bottom = 48.inDp(context!!)
+//        }
+//    }
     lateinit var touchHelper: ItemTouchHelper
     lateinit var celebrateImage: ImageView
     lateinit var celebrateText: TextView
@@ -94,6 +98,8 @@ class DeadlineFragment() : Fragment() {
         messageBarOperationContainer.visibility = View.GONE
         messageBarNewlySyncedContainer.visibility = View.GONE
 
+        vibrator = activity?.getSystemService(Service.VIBRATOR_SERVICE) as Vibrator
+
         val deadlineLayoutManager = LinearLayoutManager(activity)
         deadlineAdapter = DeadlineListAdapter(
             context,
@@ -101,18 +107,20 @@ class DeadlineFragment() : Fragment() {
                 deadlineViewModel.setStarred(uid, isStarred)
             },
             onClickComplete = { uid, isCompleted ->
-                if (isCompleted)
-                    SimpleCountDown(1000) {
+                if (isCompleted) {
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                            120,
+                            48
+                        )
+                    )
+                    SimpleCountDown(640) {
                         onSetDeadlineCompleted(uid, true)
                     }.start()
-                else onSetDeadlineCompleted(uid, false)
+                } else onSetDeadlineCompleted(uid, false)
             },
             onClickRestore = { uid, isDeleted ->
-                if (isDeleted)
-                    SimpleCountDown(1000) {
-                        onSetDeadlineDeleted(uid, true)
-                    }.start()
-                else onSetDeadlineDeleted(uid, false)
+                onSetDeadlineDeleted(uid, isDeleted)
             },
             onSwipeComplete = { uid ->
                 onSetDeadlineCompleted(uid, true)

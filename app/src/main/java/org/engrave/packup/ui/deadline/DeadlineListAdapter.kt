@@ -61,33 +61,6 @@ data class DeadlinePadding(val identity: Int) : DeadlineItem() {
     override fun isOfSameContent(other: IDistinctive): Boolean = true
 }
 
-/*class DeadlineItemDiffCallback : DiffUtil.ItemCallback<DeadlineItem>() {
-    override fun areItemsTheSame(oldItem: DeadlineItem, newItem: DeadlineItem): Boolean =
-        when {
-            oldItem is DeadlineMember && newItem is DeadlineMember && oldItem.deadline.uid == newItem.deadline.uid -> true
-            oldItem is DeadlineHeader && newItem is DeadlineHeader && oldItem.title == oldItem.title -> true
-            else -> false
-        }
-
-    override fun areContentsTheSame(oldItem: DeadlineItem, newItem: DeadlineItem): Boolean =
-        if (oldItem is DeadlineMember && newItem is DeadlineMember) {
-            with(oldItem.deadline) {
-                newItem.deadline.let { n ->
-                    name == n.name
-                            && source_name == n.source_name
-                            && due_time == n.due_time
-                            && is_deleted == n.is_deleted
-                            && is_finished == n.is_finished
-                            && is_starred == n.is_starred
-                            && has_submission == n.has_submission
-                }
-            }
-        } else if (oldItem is DeadlineHeader && newItem is DeadlineHeader) {
-            oldItem.details == oldItem.details
-        } else false
-}*/
-
-
 class DeadlineListAdapter(
     private val context: Context,
     private val onClickStar: (Int, Boolean) -> Unit,
@@ -213,7 +186,7 @@ class DeadlineListAdapter(
                             ContextCompat.getDrawable(
                                 context,
                                 if (item.deadline.is_completed)
-                                    R.drawable.ic_packup_complete
+                                    R.drawable.ic_fluent_checkmark_circle_24_filled
                                 else R.drawable.ic_fluent_circle_24_regular
                             )
                         )
@@ -225,8 +198,8 @@ class DeadlineListAdapter(
                                 else R.color.colorText
                             )
                         )
-                        floatingCheckmark.visibility =
-                            if (item.deadline.is_completed) View.VISIBLE else View.INVISIBLE
+//                        floatingCheckmark.visibility =
+//                            if (item.deadline.is_completed) View.VISIBLE else View.INVISIBLE
                         setOnClickListener {
                             if (!item.deadline.is_completed) {
                                 binding.checkAnim.playAnimation()
@@ -234,7 +207,7 @@ class DeadlineListAdapter(
                                 setImageDrawable(
                                     ContextCompat.getDrawable(
                                         context,
-                                        R.drawable.ic_packup_complete
+                                        R.drawable.ic_fluent_checkmark_circle_24_filled
                                     )
                                 )
                                 imageTintList = ColorStateList.valueOf(
@@ -243,7 +216,7 @@ class DeadlineListAdapter(
                                         R.color.color_primary_400
                                     )
                                 )
-                                floatingCheckmark.visibility = View.VISIBLE
+//                                floatingCheckmark.visibility = View.VISIBLE
                             } else {
                                 onClickComplete(item.deadline.uid, false)
                                 setImageDrawable(
@@ -258,7 +231,7 @@ class DeadlineListAdapter(
                                         R.color.colorText
                                     )
                                 )
-                                floatingCheckmark.visibility = View.INVISIBLE
+//                                floatingCheckmark.visibility = View.INVISIBLE
                             }
                         }
                     }
@@ -280,7 +253,7 @@ class DeadlineListAdapter(
                             onClickRestore(item.deadline.uid, false)
                         }
                     }
-                    floatingCheckmark.visibility = View.INVISIBLE
+//                    floatingCheckmark.visibility = View.INVISIBLE
                 }
                 deadlineItemMemberSource.text =
                     pangu.spacingText(item.deadline.source_course_name_without_semester)

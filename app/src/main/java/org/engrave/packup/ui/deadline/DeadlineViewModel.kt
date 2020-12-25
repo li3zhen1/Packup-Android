@@ -27,9 +27,12 @@ class DeadlineViewModel @ViewModelInject constructor(
         .apply {
             value = listOf()
             addSource(deadlines) {
-                this.value = it
+                val isOriginallyEmpty = value.isNullOrEmpty()
+                val newValue = it
                     .applyDeadlineFilter(filter.value)
                     .sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_ASCENDING)
+                if (!(isOriginallyEmpty && newValue.isNullOrEmpty()))
+                    this.value = newValue
             }
             addSource(sortOrder) {
                 this.value = deadlines.value
@@ -44,7 +47,6 @@ class DeadlineViewModel @ViewModelInject constructor(
                     ?.sortAndGroup(sortOrder.value ?: DeadlineSortOrder.DUE_TIME_ASCENDING)
                     ?: listOf()
             }
-
         }
 
     fun setDeadlineStarred(uid: Int, boolean: Boolean) = viewModelScope.launch {
