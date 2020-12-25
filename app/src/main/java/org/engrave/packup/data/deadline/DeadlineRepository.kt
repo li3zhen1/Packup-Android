@@ -42,10 +42,10 @@ class DeadlineRepository @Inject constructor(
         repositoryScope.launch {
             WorkManager
                 .getInstance(context)
-                .enqueueUniquePeriodicWork(
+                .enqueueUniqueWork(
                     COURSE_CRAWLER_NAME,
-                    ExistingPeriodicWorkPolicy.KEEP,
-                    courseCrawler
+                    ExistingWorkPolicy.REPLACE,
+                    OneTimeWorkRequestBuilder<DeadlineCrawler>().build()
                 )
         }
     }

@@ -16,18 +16,20 @@
         android:id="@+id/deadline_fragment_celebrate_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/deadline_fragment_celebrate_text"
-        android:layout_marginTop="120dp"
-        android:visibility="invisible"
+        android:layout_marginTop="108dp"
+        android:visibility="gone"
         />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/deadline_fragment_celebrate_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/deadline_fragment_celebrate_image"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="108dp"
+        app:layout_goneMarginTop="340dp"
         android:visibility="invisible"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

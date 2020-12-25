@@ -35,10 +35,13 @@ class DeadlineViewModel @ViewModelInject constructor(
                     this.value = newValue
             }
             addSource(sortOrder) {
-                this.value = deadlines.value
+                val isOriginallyEmpty = value.isNullOrEmpty()
+                val newValue = deadlines.value
                     ?.applyDeadlineFilter(filter.value)
                     ?.sortAndGroup(it)
                     ?: listOf()
+                if (!(isOriginallyEmpty && newValue.isNullOrEmpty()))
+                    this.value = newValue
             }
 
             addSource(filter) {

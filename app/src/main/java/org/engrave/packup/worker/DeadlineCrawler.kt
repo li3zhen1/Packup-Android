@@ -15,6 +15,7 @@ import org.engrave.packup.api.pku.course.*
 import org.engrave.packup.data.account.AccountInfoRepository
 import org.engrave.packup.data.deadline.Deadline
 import org.engrave.packup.data.deadline.DeadlineDao
+import org.engrave.packup.data.deadline.getByUid
 import org.engrave.packup.util.asDocument
 
 
@@ -32,9 +33,7 @@ class DeadlineCrawler @WorkerInject constructor(
                 NEWLY_CRAWLED_DEADLINE_NUM to 0
             )
         )
-
         val accountInfo = accountInfoRepository.readAccountInfo()
-        val deadlines = deadlineDao.getAllDeadlines().value
         val loggedCookie = fetchCourseLoginCookies(
             accountInfo.studentId,
             accountInfo.password
@@ -44,28 +43,17 @@ class DeadlineCrawler @WorkerInject constructor(
                 loggedCookie
             )
         }
-
-        val newDealines = newDeadlinesUnparsed.map(Deadline::fromRawJson)
-
+        val newDeadlines = newDeadlinesUnparsed.map(Deadline::fromRawJson)
         var newlyCrawledCount = 0
 
-        newDealines.forEach { newDeadline ->
-            var existSameKey = false
-            var conflictDeadline: Deadline? = null
-            if (deadlines != null) {
-                for (existedDdl in deadlines) {
-                    if (newDeadline.keyFieldsSameWith(existedDdl)) {
-                        existSameKey = true
-                        conflictDeadline = existedDdl
-                        break
-                    }
-                }
-            }
+        newDeadlines.forEach { newDeadline ->
+            val existedDeadline = deadlineDao.getAllDeadlinesStatic().getByUid(newDeadline.uid)
+//            showToast(existedDeadline?.uid.toString())
             /**
              * 不存在相同的 Ddl
              */
             if (!newDeadline.course_object_id.isNullOrEmpty())
-                if (!existSameKey) {
+                if (existedDeadline == null) {
                     /**
                      * 数据库里没有相同 DDL ==> 全量更新
                      */
@@ -82,7 +70,6 @@ class DeadlineCrawler @WorkerInject constructor(
                         else detailPage
                     val attachedFiles = getAttachedFilesFromSubmitPage(submitPage)
                     val desc = getDescriptionFromSubmitPage(submitPage)
-
                     newDeadline.apply {
                         description = desc
                         attached_file_list = attachedFiles
@@ -91,16 +78,13 @@ class DeadlineCrawler @WorkerInject constructor(
                         downloadAttachedFiles(appContext, loggedCookie.toString())
                     }
                     deadlineDao.insertDeadline(newDeadline)
-
-
                     newlyCrawledCount += 1
                     setProgress(
                         workDataOf(
                             NEWLY_CRAWLED_DEADLINE_NUM to newlyCrawledCount
                         )
                     )
-
-                } else if (conflictDeadline != null && !conflictDeadline.has_submission) {
+                } else if (existedDeadline.has_submission) {
                     val detailHtmlStr by lazy {
                         fetchDeadlineDetailHtml(
                             newDeadline.course_object_id,
@@ -117,30 +101,25 @@ class DeadlineCrawler @WorkerInject constructor(
                         )
                         else detailHtmlStr.asDocument()
                     }
-
-                    /**
-                     * 有相同无提交 => 检查有没有提交，仅更新 has_submission 字段
-                     */
-                    if (!conflictDeadline.has_submission && hasSubmission) {
+                    if (!existedDeadline.has_submission && hasSubmission) {
                         deadlineDao.setDeadlineSubmission(
-                            conflictDeadline.uid,
+                            existedDeadline.uid,
                             true
                         )
                     }
 
-                    if (!conflictDeadline.attached_file_list_crawled) {
+                    if (!existedDeadline.attached_file_list_crawled) {
                         deadlineDao.setDeadlineAttachedFiles(
-                            conflictDeadline.uid,
+                            existedDeadline.uid,
                             getAttachedFilesFromSubmitPage(submitPage)
                         )
                     }
                 }
-
             // TODO: 记录所有操作同步到 Server
         }
         Result.success(
             workDataOf(
-                DATA_SUCCEED_PROCESSED_NUMBER_FIELD to newDealines.size
+                DATA_SUCCEED_PROCESSED_NUMBER_FIELD to newDeadlines.size
             )
         )
     } catch (e: Exception) {
@@ -155,7 +134,7 @@ class DeadlineCrawler @WorkerInject constructor(
     private fun showToast(msg: String) {
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({ // Run your task here
-            Toast.makeText(appContext, msg, Toast.LENGTH_LONG).show()
+            Toast.makeText(appContext, msg, Toast.LENGTH_SHORT).show()
         }, 1000)
     }
 }

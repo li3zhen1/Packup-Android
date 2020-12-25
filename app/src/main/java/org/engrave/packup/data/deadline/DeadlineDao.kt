@@ -41,4 +41,7 @@ interface DeadlineDao {
 
     @Query("UPDATE deadline SET is_deleted=:isDeleted WHERE uid = :uid")
     suspend fun setDeadlineDeleted(uid: Int, isDeleted: Boolean)
+
+    @Query("SELECT * FROM deadline WHERE uid = :uid")
+    suspend fun getDeadlineByUidStatic(uid: Int): Array<Deadline>
 }

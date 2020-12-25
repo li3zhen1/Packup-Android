@@ -137,6 +137,16 @@ class DeadlineListAdapter(
         super.onBindViewHolder(holder, position, payloads)
     }
 
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        if(holder is DeadlineMemberViewHolder){
+            holder.binding.starAnim.cancelAnimation()
+            holder.binding.starAnim.frame = 0
+            holder.binding.checkAnim.cancelAnimation()
+            holder.binding.checkAnim.frame = 0
+        }
+        super.onViewRecycled(holder)
+    }
+
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is DeadlineMember -> DEADLINE_ITEM_MEMBER
         is DeadlineHeader -> DEADLINE_ITEM_HEADER
@@ -145,7 +155,7 @@ class DeadlineListAdapter(
 
     interface DeadlineItemViewHolder
 
-    inner class DeadlineMemberViewHolder internal constructor(private val binding: ItemDeadlineBinding) :
+    inner class DeadlineMemberViewHolder internal constructor(val binding: ItemDeadlineBinding) :
         RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
         fun bind(item: DeadlineMember) {
             val remainingTime = item.deadline.due_time?.minus(Date().time)
