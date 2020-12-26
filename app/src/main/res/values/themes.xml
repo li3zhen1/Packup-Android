@@ -137,4 +137,7 @@
 
     <color name="colorVibrant">@color/color_vibrant_400</color>
     <color name="colorPrimary">@color/color_primary_400</color>
+    <color name="textFieldBackground">@color/color_surface_neutral_light_elevation_01dp</color>
+
+    <color name="colorHeroText">@color/color_black</color>
 </resources>

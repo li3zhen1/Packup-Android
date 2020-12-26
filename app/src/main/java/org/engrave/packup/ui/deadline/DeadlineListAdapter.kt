@@ -2,7 +2,6 @@ package org.engrave.packup.ui.deadline
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -171,7 +170,12 @@ class DeadlineListAdapter(
                 }
                 deadlineItemMemberTitle.text = pangu.spacingText(item.deadline.name)
                 deadlineItemMemberDesc.text =
-                    item.deadline.due_time.asLocalCalendar()?.toGlobalizedString(context)
+                    item.deadline.due_time.asLocalCalendar()?.toGlobalizedString(
+                        context,
+                        autoOmitYear = true,
+                        omitTime = false,
+                        omitWeek = true
+                    )
                 deadlineItemMemberWarningPill.apply {
                     if (item.deadline.has_submission) {
                         text = "已提交"

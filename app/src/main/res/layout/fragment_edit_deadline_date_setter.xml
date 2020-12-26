@@ -12,18 +12,28 @@
         android:id="@+id/deadline_time_picker_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="选择日期和时间"
+        android:text="选择到期时间"
         android:textColor="?colorOnSurface"
         android:textSize="@dimen/packup_h6"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_margin="@dimen/packup_general_padding_horizontal"
+        android:id="@+id/deadline_time_picker_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="现在是 2020 年 12 月 25 日 (星期五)。\n新的 Deadline 将被设置为 3 天后到期。"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/packup_body2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deadline_time_picker_title" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deadline_time_picker_title"
+        app:layout_constraintTop_toBottomOf="@id/deadline_time_picker_desc"
         android:orientation="horizontal"
         android:paddingTop="@dimen/packup_general_padding_vertical"
         android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal">
@@ -43,7 +53,7 @@
             android:textAlignment="textEnd"
             android:textColor="?colorOnSurface"
             android:textColorHint="@color/primaryTextFieldHintColor"
-            android:textSize="@dimen/packup_body2"
+            android:textSize="@dimen/packup_body1"
             android:selectAllOnFocus="true"/>
 
         <TextView
@@ -70,7 +80,7 @@
             android:fontFeatureSettings="tnum"
             android:padding="8dp"
             android:textColorHint="@color/primaryTextFieldHintColor"
-            android:textSize="@dimen/packup_body2" />
+            android:textSize="@dimen/packup_body1" />
         <TextView android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -94,7 +104,7 @@
             android:fontFeatureSettings="tnum"
             android:padding="8dp"
             android:textColorHint="@color/primaryTextFieldHintColor"
-            android:textSize="@dimen/packup_body2" />
+            android:textSize="@dimen/packup_body1" />
         <TextView android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -121,7 +131,7 @@
             android:fontFeatureSettings="tnum"
             android:padding="8dp"
             android:textColorHint="@color/primaryTextFieldHintColor"
-            android:textSize="@dimen/packup_body2" />
+            android:textSize="@dimen/packup_body1" />
         <TextView android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -145,12 +155,10 @@
             android:fontFeatureSettings="tnum"
             android:padding="8dp"
             android:textColorHint="@color/primaryTextFieldHintColor"
-            android:textSize="@dimen/packup_body2" />
-
+            android:textSize="@dimen/packup_body1" />
     </LinearLayout>
-
     <TextView
-        android:id="@+id/edit_desc_fragment_button"
+        android:id="@+id/edit_complete_button"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@drawable/ripple_rect_button_on_item"

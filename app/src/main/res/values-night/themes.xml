@@ -103,4 +103,6 @@
     <color name="starColor">#AC9236</color>
     <color name="colorVibrant">#952A2C</color>
     <color name="colorPrimary">#3B57BC</color>
+    <color name="textFieldBackground">@color/color_surface_neutral_dark_elevation_03dp</color>
+    <color name="colorHeroText">@color/color_white</color>
     </resources>

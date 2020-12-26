@@ -1,6 +1,7 @@
 package org.engrave.packup
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +11,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.ActivityDeadlineDetailBinding
 import org.engrave.packup.ui.detail.AttachedFilesAdapter
 import org.engrave.packup.ui.detail.DeadlineDetailViewModel
-import org.engrave.packup.util.DAY_IN_MILLIS
-import org.engrave.packup.util.HOUR_IN_MILLIS
-import org.engrave.packup.util.WEEK_IN_MILLIS
-import org.engrave.packup.util.getSpaced
+import org.engrave.packup.util.*
+import org.engrave.packup.util.view.setParaSpacing
 import ws.vinta.pangu.Pangu
 import java.util.*
 import kotlin.math.floor
@@ -53,12 +52,13 @@ class DeadlineDetailActivity : AppCompatActivity() {
                      */
                     deadlineDetailTitle.text = it.name.getSpaced(pangu)
                     deadlineDetailSourceLinkText.text = it.source_course_name_without_semester
-                    deadlineDetailDescBlock.text = it.description.let { desc ->
-                        if (desc.isNullOrBlank()) "未添加描述。"
-                        else desc
-                    }
+                    deadlineDetailDescriptionContent.text =
+                        setParaSpacing(it.description.let { desc ->
+                            if (desc.isNullOrBlank()) "未添加描述。"
+                            else desc.split("\n").filter { ts -> ts.isNotBlank() }.joinToString("\n")
+                        })
 
-                    attachedFilesAdapter.postFileList(it.attached_file_list)
+                    attachedFilesAdapter.postFileList(listOf(null) + it.attached_file_list + null)
 
                     deadlineDetailStarButton.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -124,6 +124,17 @@ class DeadlineDetailActivity : AppCompatActivity() {
                             }
                         }
                     }
+
+                    deadlineDetailDueButton.apply {
+                        text = Calendar.getInstance().apply {
+                            time = Date(it.due_time?:0)
+                        }.toGlobalizedString(
+                            context,
+                            autoOmitYear = false,
+                            omitTime = false,
+                            omitWeek = false
+                        )
+                    }
                 }
         }
         binding.apply {
@@ -134,4 +145,13 @@ class DeadlineDetailActivity : AppCompatActivity() {
     }
 
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("sViewY",binding.scrollContainer.scrollY)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        binding.scrollContainer.scrollTo(0, savedInstanceState.getInt("sViewY"))
+        super.onRestoreInstanceState(savedInstanceState)
+    }
 }

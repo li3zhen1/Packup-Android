@@ -57,8 +57,8 @@
     <string name="have_submission">已提交</string>
     <string name="no_submission">未提交</string>
 
-    <string name="date_time_format_omitted">%s 月 %s 日 %s:%s</string>
-    <string name="date_time_format">%s 年 %s 月 %s 日 %s:%s</string>
+    <string name="date_time_format_omitted">%s 月 %s 日</string>
+    <string name="date_time_format">%s 年 %s 月 %s 日</string>
 
     <string name="month1">1</string>
     <string name="month2">2</string>
@@ -72,6 +72,14 @@
     <string name="month10">10</string>
     <string name="month11">11</string>
     <string name="month12">12</string>
+
+    <string name="mon">(星期一)</string>
+    <string name="tue">(星期二)</string>
+    <string name="wed">(星期三)</string>
+    <string name="thu">(星期四)</string>
+    <string name="fri">(星期五)</string>
+    <string name="sat">(星期六)</string>
+    <string name="sun">(星期日)</string>
 
     <string name="date_at_time">%1$s %2$s</string>
     <string name="date_time">%1$s，%2$s</string>

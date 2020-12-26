@@ -49,18 +49,6 @@
                 android:text="添加新的 Deadline"
                 android:textColor="@color/color_white"
                 android:textSize="18sp" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/deadline_detail_star_button"
-                android:layout_width="@dimen/image_button_size_with_ripple"
-                android:layout_height="@dimen/image_button_size_with_ripple"
-                android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
-                android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
-                android:background="@drawable/icon_button_on_status_bar"
-                android:src="@drawable/ic_packup_star_24_white_border"
-                app:layout_constraintEnd_toStartOf="@id/deadline_detail_more_button"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
                 android:layout_marginTop="@dimen/toolbar_vertical_padding_minus_ripple"
@@ -72,9 +60,6 @@
                 android:src="@drawable/ic_fluent_more_vertical_24_regular"
                 android:background="@drawable/icon_button_on_status_bar"
                 android:tint="@color/color_white"/>
-
-
-
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/add_deadline_title"
                 android:layout_width="0dp"
@@ -98,8 +83,7 @@
                 android:paddingVertical="4dp"
                 android:singleLine="true"
                 android:focusedByDefault="true"
-                app:layout_constraintTop_toBottomOf="@id/deadline_detail_nav_button" />
-
+                app:layout_constraintTop_toBottomOf="@id/deadline_detail_nav_button"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
@@ -124,7 +108,7 @@
         android:layout_marginTop="@dimen/packup_general_padding_vertical"
         android:background="@color/itemBackgroundColor"
         android:elevation="2dp"
-        android:paddingBottom="@dimen/packup_text_padding_vertical"
+        android:paddingBottom="3dp"
         app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_tool_bar_container">
 
         <androidx.constraintlayout.widget.Guideline
@@ -152,7 +136,7 @@
             android:id="@+id/deadline_detail_activity_due_icon"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:layout_marginTop="@dimen/packup_text_padding_vertical"
+            android:layout_marginTop="3dp"
             android:paddingVertical="4dp"
             android:src="@drawable/ic_fluent_timer_24_regular"
             app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_start_margin"
@@ -202,8 +186,10 @@
             android:paddingVertical="4dp"
             android:singleLine="true"
             android:id="@+id/deadline_detail_due_button"
+            android:textAllCaps="false"
             android:text="设置到期时间"
-            android:textColor="@color/colorText"
+            android:textColor="?colorOnSurface"
+            android:fontFeatureSettings="tnum"
             app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_due_icon"
             app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
             app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_input_start_margin"
@@ -217,6 +203,7 @@
             android:paddingHorizontal="6dp"
             android:paddingVertical="4dp"
             android:singleLine="true"
+            android:textAllCaps="false"
             android:text="设置提醒时间"
             android:textColor="@color/colorText"
             app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_reminder_icon"
@@ -233,6 +220,7 @@
             android:paddingVertical="4dp"
             android:singleLine="true"
             android:text="链接到课程"
+            android:textAllCaps="false"
             android:textColor="@color/colorText"
             app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_course_icon"
             app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
@@ -248,6 +236,7 @@
             android:lines="6"
             android:textSize="@dimen/packup_body2"
             android:text="添加备注"
+            android:textAllCaps="false"
             android:id="@+id/deadline_detail_desc_button"
             android:gravity="center_vertical"
             android:textColor="@color/colorText"
@@ -283,7 +272,5 @@
             app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
             app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_input_start_margin"
             app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_course_icon" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

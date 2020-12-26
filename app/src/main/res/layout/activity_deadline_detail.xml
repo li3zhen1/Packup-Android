@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DeadlineDetailActivity"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:background="@color/fragmentBackground">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/deadline_detail_activity_tool_bar_container"
         android:layout_width="match_parent"
@@ -146,110 +147,303 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_tool_bar_container"
-        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
-        android:id="@+id/deadline_detail_desc_caption"
-        android:paddingTop="24dp"
-        android:text="描述"
-        android:textSize="@dimen/packup_caption"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/scroll_container">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/packup_general_padding_vertical"
+                android:background="@color/itemBackgroundColor"
+                android:elevation="2dp"
+                android:paddingBottom="3dp"
+                android:id="@+id/deadline_detail_activity_base_info_block">
 
-    <TextView
-        android:layout_width="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deadline_detail_desc_caption"
-        android:enabled="false"
-        android:paddingVertical="4dp"
-        android:layout_height="wrap_content"
-        android:textColor="?colorOnSurface"
-        android:id="@+id/deadline_detail_desc_block"
-        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
-        >
-    </TextView>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_start_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/packup_general_padding_horizontal" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deadline_detail_desc_block"
-        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
-        android:id="@+id/deadline_detail_due_time_caption"
-        android:paddingTop="24dp"
-        android:text="到期时间"
-        android:textSize="@dimen/packup_caption"/>
-    <TextView
-        android:layout_width="0dp"
-        app:layout_constraintTop_toBottomOf="@id/deadline_detail_due_time_caption"
-        android:paddingVertical="4dp"
-        app:layout_constraintStart_toStartOf="@id/deadline_detail_due_time_caption"
-        app:layout_constraintEnd_toEndOf="@id/deadline_detail_due_time_caption"
-        android:layout_height="wrap_content"
-        android:textColor="?colorOnSurface"
-        android:layout_marginTop="4dp"
-        android:id="@+id/deadline_detail_due_time_text"
-        android:enabled="false"
-        android:fontFeatureSettings="tnum"
-        android:text="12 月 25 日 (周五)   20:30">
-    </TextView>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_input_start_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="48dp" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/deadline_detail_due_time_text"
-        app:layout_constraintEnd_toEndOf="@id/deadline_detail_due_time_text"
-        app:layout_constraintTop_toBottomOf="@id/deadline_detail_due_time_text"
-        android:id="@+id/deadline_detail_reminder_time_caption"
-        android:paddingTop="24dp"
-        android:text="提醒时间"
-        android:textSize="@dimen/packup_caption"/>
-    <TextView
-        android:layout_width="0dp"
-        app:layout_constraintTop_toBottomOf="@id/deadline_detail_reminder_time_caption"
-        android:paddingVertical="4dp"
-        app:layout_constraintStart_toStartOf="@id/deadline_detail_due_time_caption"
-        app:layout_constraintEnd_toEndOf="@id/deadline_detail_due_time_caption"
-        android:layout_height="wrap_content"
-        android:textColor="?colorOnSurface"
-        android:id="@+id/deadline_detail_reminder_time_text"
-        android:layout_marginTop="4dp"
-        android:fontFeatureSettings="tnum"
-        android:text="12 月 25 日 (周五)   20:30">
-    </TextView>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_input_end_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/packup_general_padding_horizontal" />
 
-    <com.google.android.material.slider.Slider
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deadline_detail_reminder_time_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/reminder_slider"
-        android:visibility="gone"
-        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"/>
+                <ImageView
+                    android:id="@+id/deadline_detail_activity_due_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="3dp"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/ic_fluent_timer_24_regular"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_start_margin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorText" />
+
+                <ImageView
+                    android:id="@+id/deadline_detail_activity_reminder_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/packup_text_padding_vertical"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/ic_fluent_alert_24_regular"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_start_margin"
+                    app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_due_icon"
+                    app:tint="@color/colorText" />
 
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/reminder_slider"
-        android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
-        android:id="@+id/deadline_detail_files_caption"
-        android:paddingTop="24dp"
-        android:text="附件"
-        android:textSize="@dimen/packup_caption"/>
-    <androidx.recyclerview.widget.RecyclerView
-        tools:listitem="@layout/item_file_blobs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/deadline_detail_linked_file_list"
-        app:layout_constraintTop_toBottomOf="@id/deadline_detail_files_caption"/>
+                <ImageView
+                    android:id="@+id/deadline_detail_activity_course_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/packup_text_padding_vertical"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/ic_fluent_book_24_regular"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_start_margin"
+                    app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_reminder_icon"
+                    app:tint="@color/colorText" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/ripple_rect_button_on_item"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:id="@+id/deadline_detail_due_button"
+                    android:textAllCaps="false"
+                    android:text="设置到期时间"
+                    android:textColor="?colorOnSurface"
+                    android:fontFeatureSettings="tnum"
+                    app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_due_icon"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_input_start_margin"
+                    app:layout_constraintTop_toTopOf="@id/deadline_detail_activity_due_icon" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/ripple_rect_button_on_item"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+                    android:text="设置提醒时间"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_reminder_icon"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_input_start_margin"
+                    app:layout_constraintTop_toTopOf="@id/deadline_detail_activity_reminder_icon" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/ripple_rect_button_on_item"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:singleLine="true"
+                    android:text="链接到课程"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_course_icon"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_input_start_margin"
+                    app:layout_constraintTop_toTopOf="@id/deadline_detail_activity_course_icon" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2px"
+                    android:background="@color/itemSeparatorColor"
+                    app:layout_constraintBottom_toTopOf="@id/deadline_detail_activity_reminder_icon"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_input_start_margin"
+                    app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_due_icon" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2px"
+                    android:background="@color/itemSeparatorColor"
+                    app:layout_constraintBottom_toTopOf="@id/deadline_detail_activity_course_icon"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_input_start_margin"
+                    app:layout_constraintTop_toBottomOf="@id/deadline_detail_activity_reminder_icon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/packup_general_padding_vertical"
+                android:id="@+id/deadline_detail_description_block"
+                android:background="@color/itemBackgroundColor"
+                android:elevation="2dp"
+                android:paddingBottom="3dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_desc_block_start_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/packup_general_padding_horizontal" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_desc_block_input_start_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="48dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_desc_block_input_end_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/packup_general_padding_horizontal" />
+
+                <ImageView
+                    android:id="@+id/deadline_detail_activity_desc_block_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="3dp"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/ic_fluent_text_description_24_regular"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_desc_block_start_margin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:lines="6"
+                    android:textSize="@dimen/packup_body2"
+                    android:text="添加的备注"
+                    android:textAllCaps="false"
+                    android:id="@+id/deadline_detail_desc_block_caption"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_desc_block_icon"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_desc_block_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_desc_block_input_start_margin"
+                    app:layout_constraintTop_toTopOf="@id/deadline_detail_activity_desc_block_icon" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="6dp"
+                    android:textSize="@dimen/packup_body2"
+                    android:text="Hilt 是 Android 的依赖项注入库，可减少在项目中执行手动依赖项注入的样板代码。执行手动依赖项注入要求您手动构造每个类及其依赖项，并借助容器重复使用和管理依赖项。"
+                    android:textAllCaps="false"
+                    android:id="@+id/deadline_detail_description_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorHeroText"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_desc_block_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_desc_block_input_start_margin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="48dp"
+                    android:paddingBottom="14dp"
+                    android:lineSpacingMultiplier="1.08"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/packup_general_padding_vertical"
+                android:background="@color/itemBackgroundColor"
+                android:elevation="2dp"
+                android:paddingBottom="12dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_attach_block_start_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/packup_general_padding_horizontal" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_attach_block_input_start_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="48dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/deadline_detail_activity_attach_block_input_end_margin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/packup_general_padding_horizontal" />
+
+                <ImageView
+                    android:id="@+id/deadline_detail_activity_attach_block_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="3dp"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/ic_fluent_attach_24_regular"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_attach_block_start_margin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:lines="6"
+                    android:textSize="@dimen/packup_body2"
+                    android:text="附加的文件"
+                    android:textAllCaps="false"
+                    android:id="@+id/deadline_detail_attach_file_caption"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/deadline_detail_activity_attach_block_icon"
+                    app:layout_constraintEnd_toEndOf="@id/deadline_detail_activity_attach_block_input_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/deadline_detail_activity_attach_block_input_start_margin"
+                    app:layout_constraintTop_toTopOf="@id/deadline_detail_activity_attach_block_icon" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    tools:listitem="@layout/item_file_blobs"
+                    tools:itemCount="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deadline_detail_linked_file_list"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="48dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/packup_general_padding_vertical"/>
+        </LinearLayout>
+    </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

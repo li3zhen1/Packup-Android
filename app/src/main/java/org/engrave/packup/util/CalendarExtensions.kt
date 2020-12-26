@@ -39,10 +39,35 @@ inline fun Calendar?.applyFormat(
 ): String = if (this != null) fmt.format(this.time) else "Unspecified Date."
 
 
-fun Calendar.toGlobalizedString(context: Context, autoOmitYear: Boolean = true): String {
-    val template_omit = context.getString(R.string.date_time_format_omitted)
-    val template_complete = context.getString(R.string.date_time_format)
+fun Calendar.toGlobalizedString(
+    context: Context,
+    autoOmitYear: Boolean = true,
+    omitTime: Boolean = false,
+    omitWeek: Boolean = true
+): String {
+    val weekdayLiteral = " ${
+        when (this.get(Calendar.DAY_OF_WEEK)) {
+            1 -> context.getString(R.string.sun)
+            2 -> context.getString(R.string.mon)
+            3 -> context.getString(R.string.tue)
+            4 -> context.getString(R.string.wed)
+            5 -> context.getString(R.string.thu)
+            6 -> context.getString(R.string.fri)
+            7 -> context.getString(R.string.sat)
+            else -> context.getString(R.string.sun)
+        }
+    }"
     val isSameYear = this.get(Calendar.YEAR) == Calendar.getInstance().getYear()
+    val template_omit =
+        context.getString(R.string.date_time_format_omitted) +
+                (if (omitWeek) "" else weekdayLiteral) +
+                (if (!omitTime)" %02d:%02d" else "")
+    val template_complete =
+        context.getString(R.string.date_time_format) +
+                (if (omitWeek) "" else weekdayLiteral) +
+                (if (!omitTime)" %02d:%02d" else "")
+
+
     val monthName = when (this.get(Calendar.MONTH)) {
         0 -> context.getString(R.string.month1)
         1 -> context.getString(R.string.month2)
