@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="添加描述"
+        android:text="编辑备注"
         android:textColor="?colorOnSurface"
         android:textStyle="bold"
         android:id="@+id/deadline_description_title"

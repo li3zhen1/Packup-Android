@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.ActivityDeadlineDetailBinding
 import org.engrave.packup.ui.detail.AttachedFilesAdapter
 import org.engrave.packup.ui.detail.DeadlineDetailViewModel
+import org.engrave.packup.ui.detail.ModifyDescriptionBottomSheetFragment
 import org.engrave.packup.util.*
 import ws.vinta.pangu.Pangu
 import java.util.*
@@ -41,7 +42,6 @@ class DeadlineDetailActivity : AppCompatActivity() {
         binding.deadlineDetailStarButton.setOnClickListener {
             detailViewModel.alterStarredAsync()
         }
-
         detailViewModel.deadline.observe(this){
             if (it != null)
                 binding.apply {
@@ -184,6 +184,12 @@ class DeadlineDetailActivity : AppCompatActivity() {
         binding.apply {
             deadlineDetailNavButton.setOnClickListener {
                 finish()
+            }
+            modifyDescButton.setOnClickListener{
+                ModifyDescriptionBottomSheetFragment().show(
+                    supportFragmentManager,
+                    "MODIFY_DEADLINE_DESCRIPTION"
+                )
             }
         }
     }

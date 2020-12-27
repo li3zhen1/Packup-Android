@@ -38,7 +38,6 @@ class EditDeadlineActivity : AppCompatActivity() {
                 "EDIT_DESCRIPTION"
             )
         }
-
         binding.deadlineDetailDueButton.setOnClickListener {
             EditDueDateTimeBottomSheetFragment().show(
                 supportFragmentManager,

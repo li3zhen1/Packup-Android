@@ -38,4 +38,32 @@ class DeadlineDetailViewModel @ViewModelInject constructor(
             }
         }
     }
+
+    fun setDeadlineDescription(desc: String) = viewModelScope.launch {
+        deadlineUid.value?.let {
+            deadlineRepository.setDeadlineDescription(
+                it,
+                desc
+            )
+        }
+    }
+
+    fun setDeadlineSourceFullName(fullNameWithSemester: String) = viewModelScope.launch {
+        deadlineUid.value?.let {
+            deadlineRepository.setDeadlineSourceFullName(
+                it,
+                fullNameWithSemester
+            )
+        }
+    }
+
+    fun setDeadlineReminder(reminder: Long?) = viewModelScope.launch {
+        deadlineUid.value?.let {
+            deadlineRepository.setDeadlineReminder(
+                it,
+                reminder
+            )
+        }
+    }
+
 }

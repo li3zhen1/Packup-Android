@@ -30,7 +30,7 @@ fun fetchPortalCourseInfo(semester: Semester, loggedCookie: DummyCookie) =  fetc
     loggedCookie
 )
 
-enum class SemesterSeason(val value: Int) {
+enum class SemesterSeason(val value: Int){
     AUTUMN(1),
     SPRING(2),
     SUMMER(3)
@@ -39,21 +39,20 @@ enum class SemesterSeason(val value: Int) {
 data class Semester(
     val yearStart: Int,
     val season: SemesterSeason
-) {
+) : Comparable<Semester> {
     fun asCode() = "${yearStart % 100}-${(yearStart + 1) % 100}-${season.value}"
-
     companion object {
-        fun fromCurrentTime(): Semester{
+        fun fromCurrentTime(): Semester {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
-            return when(calendar.get(Calendar.MONTH)){
+            return when (calendar.get(Calendar.MONTH)) {
                 // TODO: !!! from campus calendar & elective status
                 in 1..6 -> Semester(
-                    year-1,
+                    year - 1,
                     SemesterSeason.SPRING
                 )
                 in 6..8 -> Semester(
-                    year -1,
+                    year - 1,
                     SemesterSeason.SUMMER
                 )
                 else -> Semester(
@@ -75,4 +74,6 @@ data class Semester(
             )
         }
     }
+    private val ordinal get() = yearStart * 3 + season.value
+    override fun compareTo(other: Semester): Int = ordinal - other.ordinal
 }
