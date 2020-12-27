@@ -157,7 +157,11 @@ class DeadlineFragment() : Fragment() {
                 celebrateText.visibility = View.INVISIBLE
                 celebrateImage.visibility = View.GONE
                 it?.let {
-                    deadlineAdapter.submitList(it + DeadlinePadding(it.size))
+
+                    deadlineAdapter.submitList(
+                        if (it.isNullOrEmpty()) it
+                        else (it + DeadlinePadding("共 ${it.filterIsInstance<DeadlineMember>().size} 项 Deadline"))
+                    )
                     if (it.isNullOrEmpty())
                         SimpleCountDown(600) {
                             if (sortedDeadlines.value.isNullOrEmpty()) {

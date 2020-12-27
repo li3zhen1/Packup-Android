@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="72dp"
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="96dp"
     android:focusable="false"
     android:focusedByDefault="false"
     android:clickable="false"
-    android:longClickable="false">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:longClickable="false"
+    android:gravity="center"
+    android:textColor="#78888888"
+    android:fontFeatureSettings="tnum"
+    android:textSize="@dimen/packup_caption"
+    android:id="@+id/sum_up_text"
+    android:paddingBottom="@dimen/packup_general_padding_vertical"/>

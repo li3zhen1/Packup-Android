@@ -87,7 +87,7 @@
     <string name="tomorrow">明天</string>
     <string name="yesterday">昨天</string>
 
-    <string name="packup_unsupported_file_format">Packup 无法提供该类型文件的预览。\n你可以 <b>通过外部应用程序打开</b> 或者 <b>分享</b> 它。</string>
+    <string name="packup_unsupported_file_format">Packup 无法提供该类型文件的预览。\n你可以通过外部应用程序 <b>打开</b> 或者 <b>分享</b> 它。</string>
 
     <string name="deadline_has_been_completed"><b>%1$s</b> 已被标记完成。</string>
     <string name="deadline_has_been_completed_reverted"><b>%1$s</b> 的完成状态已重置。</string>

@@ -65,11 +65,9 @@ class DeadlineDetailActivity : AppCompatActivity() {
                     }
 
                     if (it.attached_file_list.isNullOrEmpty()) {
-                        deadlineDetailLinkedFileList.visibility = View.GONE
-                        deadlineDetailAttachFileCaption.text = "没有附件"
+                        deadlineDetailActivityAttachBlock.visibility = View.GONE
                     } else {
-                        deadlineDetailLinkedFileList.visibility = View.VISIBLE
-                        deadlineDetailAttachFileCaption.text = "添加的附件"
+                        deadlineDetailActivityAttachBlock.visibility = View.VISIBLE
                         attachedFilesAdapter.postFileList(listOf(null) + it.attached_file_list + null)
                     }
 
@@ -81,6 +79,8 @@ class DeadlineDetailActivity : AppCompatActivity() {
                         )
                     )
                     val remainingTime = it.due_time?.minus(Date().time)
+                    deadlineDetailCaption.visibility =
+                        if (it.source_name.isNullOrBlank()) View.INVISIBLE else View.VISIBLE
                     deadlineDetailRemainingTimeText.apply {
                         if (it.has_submission) {
                             text = "已提交"

@@ -105,7 +105,8 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/button_embedded_on_action_bar"
                 android:id="@+id/deadline_detail_caption"
-                android:clickable="true">
+                android:clickable="true"
+                android:visibility="invisible">
                 <TextView
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -361,7 +362,6 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="6dp"
                     android:textSize="@dimen/packup_body2"
-                    android:text="Hilt 是 Android 的依赖项注入库，可减少在项目中执行手动依赖项注入的样板代码。执行手动依赖项注入要求您手动构造每个类及其依赖项，并借助容器重复使用和管理依赖项。"
                     android:textAllCaps="false"
                     android:id="@+id/deadline_detail_description_content"
                     android:gravity="center_vertical"
@@ -394,7 +394,9 @@
                 android:layout_marginTop="@dimen/packup_general_padding_vertical"
                 android:background="@color/itemBackgroundColor"
                 android:elevation="2dp"
-                android:paddingBottom="3dp">
+                android:paddingBottom="3dp"
+                android:visibility="gone"
+                android:id="@+id/deadline_detail_activity_attach_block">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/deadline_detail_activity_attach_block_start_margin"

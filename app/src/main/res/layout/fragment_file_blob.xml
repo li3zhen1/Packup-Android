@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/file_blob_fragment_file_name"
-        app:layout_constraintBottom_toBottomOf="@id/file_blob_fragment_file_desc"
+        app:layout_constraintBottom_toBottomOf="@id/file_blob_fragment_file_name"
         android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
         android:layout_marginVertical="@dimen/packup_general_padding_vertical"
         android:src="@drawable/ic_genericfile"
@@ -32,7 +32,8 @@
         android:textStyle="bold"
         android:layout_marginTop="@dimen/packup_general_padding_vertical"
         android:layout_marginHorizontal="8dp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="@dimen/packup_h6"/>
 
     <TextView
         android:ellipsize="middle"
@@ -40,7 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/file_blob_fragment_file_desc"
-        app:layout_constraintStart_toStartOf="@+id/file_blob_fragment_file_name"
+        app:layout_constraintStart_toStartOf="@id/file_blob_fragment_file_ext_icon"
         app:layout_constraintEnd_toEndOf="@id/file_blob_fragment_file_name"
         app:layout_constraintTop_toBottomOf="@id/file_blob_fragment_file_name"
 
@@ -73,7 +74,7 @@
         android:layout_height="120dp"
         android:paddingTop="24dp"
         android:src="@drawable/ic_emoji_grinning"
-        android:layout_margin="@dimen/packup_general_padding_horizontal"
+        android:layout_margin="36dp"
         app:layout_constraintTop_toBottomOf="@id/file_blob_fragment_file_preview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="center"
-        android:paddingBottom="36dp"
+        android:paddingBottom="48dp"
         />
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
@@ -98,13 +99,13 @@
         app:layout_constraintTop_toBottomOf="@id/file_blob_unable_to_provide_preview"
         android:drawableStart="@drawable/ic_fluent_open_24_regular"
         android:paddingHorizontal="12dp"
-        android:drawableTint="?colorSurface"
+        android:drawableTint="@color/color_white"
         android:text="通过外部应用程序打开"
         android:id="@+id/file_blob_fragment_open_external_button"
         android:layout_marginTop="@dimen/packup_general_padding_vertical"
         android:background="@drawable/primaryButtonBackground"
         android:layout_marginHorizontal="@dimen/packup_general_padding_horizontal"
-        android:textColor="?colorSurface"
+        android:textColor="@color/color_white"
         android:elevation="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

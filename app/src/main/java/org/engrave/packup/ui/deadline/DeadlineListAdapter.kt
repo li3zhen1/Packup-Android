@@ -51,19 +51,20 @@ data class DeadlineHeader(val title: String, val num: Int) : DeadlineItem() {
         else false
 }
 
-data class DeadlinePadding(val identity: Int) : DeadlineItem() {
+data class DeadlinePadding(val sumUpString: String) : DeadlineItem() {
     override fun getTypeDescriptor() = "P"
 
-    override fun getIdentityDescriptor() = identity.toString()
+    override fun getIdentityDescriptor() = ""
 
     override fun getModifierDescriptor() = ""
 
-    override fun isOfSameContent(other: IDistinctive): Boolean = true
+    override fun isOfSameContent(other: IDistinctive): Boolean = false
 }
 
 
 const val PAYLOAD_STAR_CHANGED = "STAR"
 const val PAYLOAD_HEADER_NUM_CHANGED = "HEADER"
+const val PAYLOAD_SPACING_NUM_CHANGED = "PADDING"
 
 class DeadlineListAdapter(
     private val activity: Activity,
@@ -86,6 +87,9 @@ class DeadlineListAdapter(
                 if (oldItem.num != newItem.num) {
                     return PAYLOAD_HEADER_NUM_CHANGED
                 }
+            }
+            if (oldItem is DeadlinePadding && newItem is DeadlinePadding){
+                return PAYLOAD_SPACING_NUM_CHANGED
             }
             return super.getChangePayload(oldItem, newItem)
         }
@@ -133,6 +137,10 @@ class DeadlineListAdapter(
         if (holder is DeadlineHeaderViewHolder) {
             if (payloads.contains(PAYLOAD_HEADER_NUM_CHANGED))
                 holder.reBindNum(getItem(position) as DeadlineHeader)
+        }
+        if (holder is DeadlinePaddingViewHolder){
+            if(payloads.contains(PAYLOAD_SPACING_NUM_CHANGED))
+                holder.bind(getItem(position) as DeadlinePadding)
         }
         super.onBindViewHolder(holder, position, payloads)
     }
@@ -369,6 +377,7 @@ class DeadlineListAdapter(
     inner class DeadlinePaddingViewHolder internal constructor(private val binding: ItemPaddingBinding) :
         RecyclerView.ViewHolder(binding.root), DeadlineItemViewHolder {
         fun bind(padding: DeadlinePadding) {
+            binding.sumUpText.text = padding.sumUpString
         }
     }
 
