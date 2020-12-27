@@ -102,6 +102,7 @@ class DeadlineFragment() : Fragment() {
 
         val deadlineLayoutManager = LinearLayoutManager(activity)
         deadlineAdapter = DeadlineListAdapter(
+            requireActivity(),
             context,
             onClickStar = { uid, isStarred ->
                 if (isStarred)

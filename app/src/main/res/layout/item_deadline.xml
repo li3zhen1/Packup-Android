@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/item_background_ripple"
     android:elevation="2dp"
+    android:id="@+id/deadline_container"
+    android:transitionName="DEADLINE_TITLE_VIEW"
     android:paddingBottom="16dp">
 
     <View
@@ -95,6 +97,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Lab4 内存机制"
+
         android:textColor="?colorOnSurface"
         android:textSize="@dimen/packup_subtitle1"
         android:textStyle="bold"

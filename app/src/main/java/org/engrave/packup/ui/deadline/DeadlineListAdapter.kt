@@ -1,5 +1,6 @@
 package org.engrave.packup.ui.deadline
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -65,6 +66,7 @@ const val PAYLOAD_STAR_CHANGED = "STAR"
 const val PAYLOAD_HEADER_NUM_CHANGED = "HEADER"
 
 class DeadlineListAdapter(
+    private val activity: Activity,
     private val context: Context,
     private val onClickStar: (Int, Boolean) -> Unit,
     private val onClickComplete: (Int, Boolean) -> Unit,
@@ -159,6 +161,7 @@ class DeadlineListAdapter(
             val remainingTime = item.deadline.due_time?.minus(Date().time)
             binding.apply {
                 root.setOnClickListener {
+
                     context.startActivity(
                         Intent(
                             context,
@@ -291,7 +294,7 @@ class DeadlineListAdapter(
                         setImageDrawable(
                             ContextCompat.getDrawable(
                                 context,
-                                R.drawable.ic_fluent_delete_off_24_regular
+                                R.drawable.ic_packup_delete
                             )
                         )
 //                        imageTintList = ColorStateList.valueOf(
@@ -305,8 +308,15 @@ class DeadlineListAdapter(
                         }
                     }
                 }
-                deadlineItemMemberSource.text =
-                    pangu.spacingText(item.deadline.source_course_name_without_semester)
+                if (item.deadline.source_course_name_without_semester.isBlank()) {
+                    deadlineItemMemberSource.visibility = View.INVISIBLE
+                    textSeparator.visibility = View.INVISIBLE
+                } else {
+                    deadlineItemMemberSource.visibility = View.VISIBLE
+                    textSeparator.visibility = View.VISIBLE
+                    deadlineItemMemberSource.text =
+                        pangu.spacingText(item.deadline.source_course_name_without_semester)
+                }
             }
         }
 

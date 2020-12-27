@@ -56,7 +56,7 @@ class ClassInfoRepository @Inject constructor(
 
 
     suspend fun crawlAllClassInfo() {
-//        crawlCurrentClassInfoFromElective()
+        crawlCurrentClassInfoFromElective()
 //        crawlSpecifiedClassInfoFromPortal(
 //            Semester(
 //                2019,

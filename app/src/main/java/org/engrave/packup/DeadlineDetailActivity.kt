@@ -1,7 +1,6 @@
 package org.engrave.packup
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +11,6 @@ import org.engrave.packup.databinding.ActivityDeadlineDetailBinding
 import org.engrave.packup.ui.detail.AttachedFilesAdapter
 import org.engrave.packup.ui.detail.DeadlineDetailViewModel
 import org.engrave.packup.util.*
-import org.engrave.packup.util.view.setParaSpacing
 import ws.vinta.pangu.Pangu
 import java.util.*
 import kotlin.math.floor
@@ -52,13 +50,28 @@ class DeadlineDetailActivity : AppCompatActivity() {
                      */
                     deadlineDetailTitle.text = it.name.getSpaced(pangu)
                     deadlineDetailSourceLinkText.text = it.source_course_name_without_semester
-                    deadlineDetailDescriptionContent.text =
-                        setParaSpacing(it.description.let { desc ->
-                            if (desc.isNullOrBlank()) "未添加描述。"
-                            else desc.split("\n").filter { ts -> ts.isNotBlank() }.joinToString("\n")
-                        })
 
-                    attachedFilesAdapter.postFileList(listOf(null) + it.attached_file_list + null)
+                    it.description.let { desc ->
+                        if (desc.isNullOrBlank()) {
+                            deadlineDetailDescriptionContent.visibility = View.GONE
+                            deadlineDetailDescBlockCaption.text = "添加备注"
+                        }
+                        else {
+                            deadlineDetailDescriptionContent.visibility = View.VISIBLE
+                            deadlineDetailDescBlockCaption.text = "备注"
+                            deadlineDetailDescriptionContent.text =
+                                desc.split("\n").filter { ts -> ts.isNotBlank() }.joinToString("\n")
+                        }
+                    }
+
+                    if (it.attached_file_list.isNullOrEmpty()) {
+                        deadlineDetailLinkedFileList.visibility = View.GONE
+                        deadlineDetailAttachFileCaption.text = "没有附件"
+                    } else {
+                        deadlineDetailLinkedFileList.visibility = View.VISIBLE
+                        deadlineDetailAttachFileCaption.text = "添加的附件"
+                        attachedFilesAdapter.postFileList(listOf(null) + it.attached_file_list + null)
+                    }
 
                     deadlineDetailStarButton.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -127,13 +140,44 @@ class DeadlineDetailActivity : AppCompatActivity() {
 
                     deadlineDetailDueButton.apply {
                         text = Calendar.getInstance().apply {
-                            time = Date(it.due_time?:0)
+                            time = Date(it.due_time ?: 0)
                         }.toGlobalizedString(
                             context,
                             autoOmitYear = false,
                             omitTime = false,
                             omitWeek = false
                         )
+                        isClickable = (it.course_object_id == null)
+                    }
+                    deadlineDetailActivityReminderButton.apply {
+                        text = if (it.reminder != null) {
+                            Calendar.getInstance().apply {
+                                time = Date(it.reminder)
+                            }.toGlobalizedString(
+                                context,
+                                autoOmitYear = false,
+                                omitTime = false,
+                                omitWeek = false
+                            )
+                        } else "设置提醒时间"
+                        setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                if (it.reminder != null)
+                                    R.color.colorHeroText
+                                else R.color.colorText
+                            )
+                        )
+                    }
+                    deadlineDetailActivityLinkCourseButton.apply {
+                        if (it.source_name.isNullOrBlank()) {
+                            text = "链接到课程"
+                            setTextColor(ContextCompat.getColor(context, R.color.colorText))
+                        } else {
+                            text = it.source_name
+                            setTextColor(ContextCompat.getColor(context, R.color.colorHeroText))
+                        }
+                        isClickable = (it.course_object_id == null)
                     }
                 }
         }

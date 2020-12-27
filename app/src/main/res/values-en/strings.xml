@@ -61,8 +61,8 @@
     <string name="have_submission">Submitted</string>
     <string name="no_submission">No submission</string>
 
-    <string name="date_time_format_omitted">%s %s </string>
-    <string name="date_time_format">%s %s </string>
+    <string name="date_time_format_omitted">%s %s</string>
+    <string name="date_time_format">%s %s %s</string>
 
     <string name="month1">Jan</string>
     <string name="month2">Feb</string>
@@ -77,13 +77,13 @@
     <string name="month11">Nov</string>
     <string name="month12">Dec</string>
 
-    <string name="mon">Mon.</string>
-    <string name="tue">Tue.</string>
-    <string name="wed">Wed.</string>
-    <string name="thu">Thu.</string>
-    <string name="fri">Fri.</string>
-    <string name="sat">Sat.</string>
-    <string name="sun">Sun.</string>
+    <string name="mon"> Mon.  </string>
+    <string name="tue"> Tue.  </string>
+    <string name="wed"> Wed.  </string>
+    <string name="thu"> Thu.  </string>
+    <string name="fri"> Fri.  </string>
+    <string name="sat"> Sat.  </string>
+    <string name="sun"> Sun.  </string>
     <!-- *** CalendarView *** -->
 
     <string name="date_at_time">%1$s at %2$s</string>
