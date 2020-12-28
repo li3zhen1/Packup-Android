@@ -19,8 +19,6 @@ class EventViewModel @ViewModelInject constructor(
     val classInfoList = classInfoRepository.allClassInfo
 
     init {
-        println("VM_INIT\n\n\n")
-        Log.e("VM_INIT","\n\n")
         viewModelScope.launch {
             classInfoRepository.crawlAllClassInfo()
         }

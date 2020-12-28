@@ -17,7 +17,6 @@ import kotlin.math.sin
 
 class RepeatedShimmer : FrameLayout, IBaseView {
     private var shimmer: View
-
     @ColorInt
     var shimmerColor: Int = 0
         set(value) {
@@ -26,7 +25,6 @@ class RepeatedShimmer : FrameLayout, IBaseView {
                 value
             )
         }
-
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -56,9 +54,7 @@ class RepeatedShimmer : FrameLayout, IBaseView {
             start()
         }
     }
-
     override fun init(context: Context) {}
-
     override fun retrieveAttributes(attrs: AttributeSet) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RepeatedShimmer)
         shimmerColor =
