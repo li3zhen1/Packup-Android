@@ -20,6 +20,9 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import org.engrave.packup.R
+import org.engrave.packup.util.asCalendar
+import org.engrave.packup.util.getDate
+import org.engrave.packup.util.getDayOfWeek
 import org.engrave.packup.util.inDp
 
 
@@ -47,10 +50,18 @@ class EventAdapter(
         fun bind(dailyRoutineItem: DailyEventsItem) {
             eventContainer = itemView.findViewById(R.id.event_item_day_container)
             eventDateHeroText = itemView.findViewById(R.id.event_date_title)
-            eventContainer.doOnPreDraw {
-
+            eventDateHeroText.text = dailyRoutineItem.startOfDayInMillis.run {
+                val cld = asCalendar()
+                "${cld.getDate()} ${when(cld.getDayOfWeek()){
+                    1 -> "周日"
+                    2 -> "周一"
+                    3 -> "周二"
+                    4 -> "周三"
+                    5 -> "周四"
+                    6 -> "周五"
+                    else -> "周六"
+                }}"
             }
-            eventDateHeroText.text = dailyRoutineItem.startOfDayInMillis.toString()
             dailyRoutineItem.courses.forEach {
                 eventContainer.addView(
                     generateClassInfoGrid(it)

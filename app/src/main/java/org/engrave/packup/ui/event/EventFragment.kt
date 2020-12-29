@@ -282,8 +282,10 @@ class EventFragment : Fragment() {
             )
         )
 
-        eventViewModel.classInfoList.observe(viewLifecycleOwner) {
-
+        eventViewModel.eventList.observe(viewLifecycleOwner) {
+            eventAdapter.postList(
+                it
+            )
         }
 
         mainViewModel.statusBarStatus.observe(viewLifecycleOwner) {

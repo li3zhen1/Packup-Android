@@ -3,7 +3,7 @@ package org.engrave.packup.ui.event
 import org.engrave.packup.data.deadline.Deadline
 
 data class DailyEventsItem(
-    val startOfDayInMillis: Int,
+    val startOfDayInMillis: Long,
     val deadlines: List<Deadline>,
     val courses: List<DailyCourseItem>
 )

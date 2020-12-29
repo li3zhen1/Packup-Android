@@ -2,8 +2,12 @@ package org.engrave.packup.ui.event
 
 import org.engrave.packup.data.course.ClassInfo
 import org.engrave.packup.data.course.ClassWeekType
+import org.engrave.packup.util.DAY_IN_MILLIS
+import org.engrave.packup.util.DAY_IN_MILLIS_LONG
+import org.engrave.packup.util.asCalendar
+import org.engrave.packup.util.getWeekStart
 
-suspend fun List<ClassInfo>.transformToWeeklyAspect(nthWeek: Int): List<List<DailyCourseItem>> {
+fun List<ClassInfo>.transformToWeeklyAspect(nthWeek: Int): List<List<DailyCourseItem>> {
     val isEvenWeek = (nthWeek.rem(2) == 0)
     val dailyEvents = Array<MutableList<DailyCourseItem>>(7) {
         mutableListOf()
@@ -30,6 +34,25 @@ suspend fun List<ClassInfo>.transformToWeeklyAspect(nthWeek: Int): List<List<Dai
     return dailyEvents.map { it }
 }
 
-suspend fun collectSemesterCourseItems(semesterStartInMillis: Long, semesterEndInMillis: Long){
+// 对应日子零点的时间
+val semester2020Start = 1598889600000L
+val semester2020End = 1610208000000L
 
+fun List<ClassInfo>.collectSemesterEventItems(
+    semesterStartInMillis: Long,
+    semesterEndInMillis: Long
+): List<DailyEventsItem> {
+    val firstWeekMonday = semesterStartInMillis.asCalendar().getWeekStart()
+    val lastWeekMonday = semesterEndInMillis.asCalendar().getWeekStart() + 7
+    val startDaysSliced = ((semesterStartInMillis - firstWeekMonday) / DAY_IN_MILLIS).toInt()
+    val endDaysSliced = (((lastWeekMonday - firstWeekMonday) / DAY_IN_MILLIS) + 7).toInt()
+    return (1..((lastWeekMonday - firstWeekMonday) / DAY_IN_MILLIS_LONG).toInt()).flatMap { weekNum ->
+        transformToWeeklyAspect(weekNum).mapIndexed { index, list ->
+            DailyEventsItem(
+                startOfDayInMillis = DAY_IN_MILLIS_LONG * index + firstWeekMonday,
+                deadlines = listOf(),
+                courses = list
+            )
+        }
+    }.drop(startDaysSliced).dropLast(endDaysSliced)
 }

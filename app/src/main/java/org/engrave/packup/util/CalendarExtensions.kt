@@ -198,3 +198,24 @@ inline fun Calendar.setToEndOfWeek(takeSaturdayAsEnd: Boolean = false): Calendar
             }
         }
     }
+
+//周一零点
+fun Calendar.getWeekStart(): Long {
+    this.add(
+        Calendar.HOUR,
+        24 * when (this.getDayOfWeek()) {
+            1 -> -6
+            2 -> 0
+            3 -> -1
+            4 -> -2
+            5 -> -3
+            6 -> -4
+            else -> -5
+        }
+    )
+    return this.timeInMillis
+}
+
+fun Long.asCalendar() = Calendar.getInstance().apply {
+    timeInMillis = this@asCalendar
+}
