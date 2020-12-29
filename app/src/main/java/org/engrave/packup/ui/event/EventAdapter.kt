@@ -71,17 +71,7 @@ class EventAdapter(
             }
         }
 
-        private fun generateClassInfoGrid(course: DailyCourseItem) =
-            object : AppCompatButton(context) {
-//                val paint = Paint()
-//                val rect = Rect(0, 0, width, width)
-//                override fun onDraw(canvas: Canvas?) {
-//                    paint.isAntiAlias = true
-//                    paint.color = Color.rgb(255, 255, 215)
-//                    canvas?.drawRect(rect, paint)
-//                    super.onDraw(canvas)
-//                }
-            }.apply {
+        private fun generateClassInfoGrid(course: DailyCourseItem) = AppCompatButton(context).apply {
                 isAllCaps = false
                 gravity = Gravity.START or Gravity.TOP
                 background = ContextCompat.getDrawable(context, R.drawable.course_button_default)
