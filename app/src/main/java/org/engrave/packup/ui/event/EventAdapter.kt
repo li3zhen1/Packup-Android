@@ -1,13 +1,14 @@
 package org.engrave.packup.ui.event
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.DrawableMarginSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +17,6 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
-import androidx.core.view.doOnPreDraw
-import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import org.engrave.packup.R
 import org.engrave.packup.util.asCalendar
@@ -42,25 +41,28 @@ class EventAdapter(
         lateinit var eventContainer: FrameLayout
 
         var canvasBaseY: Int = 36.inDp(context)
-        var canvasHeight: Int = parentHeight - canvasBaseY
+        private val canvasHeight: Int get() = parentHeight - canvasBaseY
         var minuteHeight = canvasHeight.toFloat() / (960) // 8:00 ~ 22:00 + 更早/ 更晚
 
-        private fun Int.toY() = ((this - 420) * minuteHeight).toInt()
+        private fun Int.toY() = ((this - 420) * canvasHeight.toFloat() / 960).toInt()
 
         fun bind(dailyRoutineItem: DailyEventsItem) {
+            Log.e("LAYOUT", minuteHeight.toString())
             eventContainer = itemView.findViewById(R.id.event_item_day_container)
             eventDateHeroText = itemView.findViewById(R.id.event_date_title)
             eventDateHeroText.text = dailyRoutineItem.startOfDayInMillis.run {
                 val cld = asCalendar()
-                "${cld.getDate()} ${when(cld.getDayOfWeek()){
-                    1 -> "周日"
-                    2 -> "周一"
-                    3 -> "周二"
-                    4 -> "周三"
-                    5 -> "周四"
-                    6 -> "周五"
-                    else -> "周六"
-                }}"
+                "${cld.getDate()} ${
+                    when (cld.getDayOfWeek()) {
+                        1 -> "周日"
+                        2 -> "周一"
+                        3 -> "周二"
+                        4 -> "周三"
+                        5 -> "周四"
+                        6 -> "周五"
+                        else -> "周六"
+                    }
+                }"
             }
             dailyRoutineItem.courses.forEach {
                 eventContainer.addView(
@@ -111,24 +113,26 @@ class EventAdapter(
                         ), 0, course.eventName.length + course.place.length + 1,
                         Spannable.SPAN_INCLUSIVE_EXCLUSIVE
                     )
-                    val drawable = ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_loc
-                    )
-                    drawable?.let {
-                        setSpan(
-                            DrawableMarginSpan(it.apply {
-                                setTint(
-                                    ContextCompat.getColor(
-                                        context,
-                                        R.color.eventTextColor
-                                    )
-                                )
-                            }, 2),
-                            course.eventName.length + 1,
-                            course.eventName.length + 2,
-                            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                    if (course.place.isNotEmpty()) {
+                        val drawable = ContextCompat.getDrawable(
+                            context,
+                            R.drawable.ic_loc
                         )
+                        drawable?.let {
+                            setSpan(
+                                DrawableMarginSpan(it.apply {
+                                    setTint(
+                                        ContextCompat.getColor(
+                                            context,
+                                            R.color.eventTextColor
+                                        )
+                                    )
+                                }, 2),
+                                course.eventName.length + 1,
+                                course.eventName.length + 2,
+                                Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                            )
+                        }
                     }
                 }
                 y = (course.startMinute.toY()).toFloat()
@@ -143,7 +147,7 @@ class EventAdapter(
         val view: View =
             LayoutInflater.from(context).inflate(R.layout.item_day, parent, false)
         view.layoutParams.width = parent.measuredWidth / 3
-        return DailyViewHolder(view, parent.measuredHeight)
+        return DailyViewHolder(view, parent.height)
     }
 
     override fun onViewRecycled(holder: DailyViewHolder) {
@@ -156,4 +160,5 @@ class EventAdapter(
     }
 
     override fun getItemCount(): Int = eventList.size
+
 }

@@ -55,6 +55,7 @@ class EventFragment : Fragment() {
                                 r.stopScroll()
                             }
                         }
+
                     }
 
                     fun smoothScrollToPosition() {
@@ -83,7 +84,7 @@ class EventFragment : Fragment() {
             }
         }
 
-        eventAdapter.postList(
+/*        eventAdapter.postList(
             listOf(
                 DailyEventsItem(
                     1,
@@ -280,7 +281,7 @@ class EventFragment : Fragment() {
                     )
                 )
             )
-        )
+        )*/
 
         eventViewModel.eventList.observe(viewLifecycleOwner) {
             eventAdapter.postList(
