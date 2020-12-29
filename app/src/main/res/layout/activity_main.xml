@@ -34,8 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:contentInsetStart="0dp"
-        android:background="@color/fragmentBackground"
-        android:elevation="8dp">
+        android:background="@color/fragmentBackground">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="56dp"

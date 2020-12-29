@@ -150,4 +150,12 @@
     <color name="textFieldBackground">@color/color_surface_neutral_light_elevation_01dp</color>
 
     <color name="colorHeroText">@color/color_black</color>
+
+    <color name="datePillBackgroundColor">@color/color_white</color>
+    <color name="gridColor">#d3e2f9</color>
+
+
+    <color name="eventAxisColor">@color/color_surface_neutral_light_elevation_01dp</color>
+    <color name="eventBackgroundColor">@color/color_white</color>
+    <color name="eventTextColor">#303C67</color>
 </resources>

@@ -1,12 +1,7 @@
 package org.engrave.packup
 
-import android.app.Service
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -20,6 +15,7 @@ import org.engrave.packup.ui.deadline.DocumentFragment
 import org.engrave.packup.ui.event.EventFragment
 import org.engrave.packup.ui.filter.FilterBottomSheetFragment
 import org.engrave.packup.ui.main.MainViewModel
+import org.engrave.packup.util.inDp
 
 
 @AndroidEntryPoint
@@ -111,6 +107,8 @@ class MainActivity : AppCompatActivity() {
             }
             binding.mainActivityFilterButton.visibility =
                 if (it <= MainViewModel.STATUS_BAR_DEADLINE_COMPLETED) View.VISIBLE else View.GONE
+            binding.mainActivityToolBarContainer.elevation =
+                if (it != MainViewModel.STATUS_BAR_EVENT) (8.inDp(this)).toFloat() else 0F
         }
 
     }

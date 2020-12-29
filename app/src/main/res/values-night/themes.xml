@@ -113,4 +113,12 @@
     <color name="colorPrimary">#3B57BC</color>
     <color name="textFieldBackground">@color/color_surface_neutral_dark_elevation_03dp</color>
     <color name="colorHeroText">@color/color_white</color>
+
+    <color name="datePillBackgroundColor">@color/colorPrimary</color>
+    <color name="gridColor">#1f2b49</color>
+
+
+    <color name="eventAxisColor">@color/color_surface_neutral_dark_elevation_01dp</color>
+    <color name="eventBackgroundColor">@color/color_black</color>
+    <color name="eventTextColor">#7094CA</color>
     </resources>

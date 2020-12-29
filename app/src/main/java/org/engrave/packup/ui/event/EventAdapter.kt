@@ -1,19 +1,27 @@
 package org.engrave.packup.ui.event
 
 import android.content.Context
+import android.graphics.*
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
+import android.text.style.DrawableMarginSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
+import androidx.core.view.doOnPreDraw
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import org.engrave.packup.R
 import org.engrave.packup.util.inDp
+
 
 class EventAdapter(
     private val context: Context
@@ -39,6 +47,9 @@ class EventAdapter(
         fun bind(dailyRoutineItem: DailyEventsItem) {
             eventContainer = itemView.findViewById(R.id.event_item_day_container)
             eventDateHeroText = itemView.findViewById(R.id.event_date_title)
+            eventContainer.doOnPreDraw {
+
+            }
             eventDateHeroText.text = dailyRoutineItem.startOfDayInMillis.toString()
             dailyRoutineItem.courses.forEach {
                 eventContainer.addView(
@@ -47,25 +58,74 @@ class EventAdapter(
             }
         }
 
-        private fun generateClassInfoGrid(course: DailyCourseItem) = Button(context).apply {
-            isAllCaps = false
-            gravity = Gravity.START or Gravity.TOP
-            text = SpannableStringBuilder(
-                "${course.eventName}\n${course.place}"
-            ).apply {
-                setSpan(
-                    AbsoluteSizeSpan(12, true),
-                    course.eventName.length + 1,
-                    course.eventName.length + course.place.length + 1,
-                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        private fun generateClassInfoGrid(course: DailyCourseItem) =
+            object : AppCompatButton(context) {
+//                val paint = Paint()
+//                val rect = Rect(0, 0, width, width)
+//                override fun onDraw(canvas: Canvas?) {
+//                    paint.isAntiAlias = true
+//                    paint.color = Color.rgb(255, 255, 215)
+//                    canvas?.drawRect(rect, paint)
+//                    super.onDraw(canvas)
+//                }
+            }.apply {
+                isAllCaps = false
+                gravity = Gravity.START or Gravity.TOP
+                background = ContextCompat.getDrawable(context, R.drawable.course_button_default)
+                elevation = 0F
+                stateListAnimator = null
+
+                setPadding(6.inDp(context),2.inDp(context), 6.inDp(context), 2.inDp(context))
+                text = SpannableStringBuilder(
+                    "${course.eventName}\n${course.place}"
+                ).apply {
+                    setSpan(
+                        AbsoluteSizeSpan(14, true),
+                        0,
+                        course.eventName.length + course.place.length + 1,
+                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                    )
+                    setSpan(
+                        StyleSpan(Typeface.BOLD),
+                        0,
+                        course.eventName.length + 1,
+                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                    )
+                    setSpan(
+                        ForegroundColorSpan(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.eventTextColor
+                            )
+                        ), 0, course.eventName.length + course.place.length + 1,
+                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                    )
+                    val drawable = ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_loc
+                    )
+                    drawable?.let {
+                        setSpan(
+                            DrawableMarginSpan(it.apply {
+                                setTint(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.eventTextColor
+                                    )
+                                )
+                            }, 2),
+                            course.eventName.length + 1,
+                            course.eventName.length + 2,
+                            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                        )
+                    }
+                }
+                y = (course.startMinute.toY()).toFloat()
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ((course.endMinute - course.startMinute) * minuteHeight).toInt()
                 )
             }
-            y = (course.startMinute.toY()).toFloat()
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ((course.endMinute - course.startMinute) * minuteHeight).toInt()
-            )
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyViewHolder {

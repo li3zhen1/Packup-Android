@@ -3,28 +3,174 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/itemBackgroundColor">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingEnd="6dp"
+    android:paddingStart="2dp">
+
     <TextView
-        android:layout_width="36dp"
+        android:id="@+id/event_date_title"
         android:layout_height="24dp"
-        android:text="24"
+        android:layout_width="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
         android:textStyle="bold"
+        android:layout_marginTop="6dp"
         android:background="@drawable/circle_text_primary"
-        android:textColor="@color/color_white"
-        android:textSize="@dimen/packup_body1"
+        android:paddingHorizontal="8dp"
+        android:text="24 周二"
         android:fontFeatureSettings="tnum"
-        android:ems="2"
-        android:layout_marginTop="5dp"
-        android:id="@+id/event_date_title"/>
+        android:textColor="@color/activityStatusBarColor"
+        android:textSize="@dimen/packup_caption" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="36dp" />
+
+    <View
+        android:id="@+id/axis1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toTopOf="@id/axis2"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis3"
+        app:layout_constraintTop_toTopOf="@id/axis1"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis4"
+        app:layout_constraintTop_toTopOf="@id/axis2"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis5"
+        app:layout_constraintTop_toTopOf="@id/axis3"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis6"
+        app:layout_constraintTop_toTopOf="@id/axis4"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis7"
+        app:layout_constraintTop_toTopOf="@id/axis5"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis8"
+        app:layout_constraintTop_toTopOf="@id/axis6"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis9"
+        app:layout_constraintTop_toTopOf="@id/axis7"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis10"
+        app:layout_constraintTop_toTopOf="@id/axis8"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis10"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis11"
+        app:layout_constraintTop_toTopOf="@id/axis9"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis12"
+        app:layout_constraintTop_toTopOf="@id/axis10"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis13"
+        app:layout_constraintTop_toTopOf="@id/axis11"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis13"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis14"
+        app:layout_constraintTop_toTopOf="@id/axis12"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis14"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="@id/axis15"
+        app:layout_constraintTop_toTopOf="@id/axis13"
+        tools:viewBindingIgnore="true" />
+
+    <View
+        android:id="@+id/axis15"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/eventAxisColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/axis14"
+        tools:viewBindingIgnore="true" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="36dp"
-        android:id="@+id/event_item_day_container"/>
+        android:id="@+id/event_item_day_container" />
 </androidx.constraintlayout.widget.ConstraintLayout>

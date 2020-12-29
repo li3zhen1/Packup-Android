@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.FragmentEventBinding
+import org.engrave.packup.ui.main.MainViewModel
+import org.engrave.packup.util.inDp
 
 @AndroidEntryPoint
 class EventFragment : Fragment() {
@@ -17,6 +20,7 @@ class EventFragment : Fragment() {
     private var _binding: FragmentEventBinding? = null
     private val binding get() = _binding!!
     private val eventViewModel: EventViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var eventAdapter: EventAdapter
     private lateinit var linearManager: LinearLayoutManager
 
@@ -279,6 +283,10 @@ class EventFragment : Fragment() {
         )
 
         eventViewModel.classInfoList.observe(viewLifecycleOwner) {
+
+        }
+
+        mainViewModel.statusBarStatus.observe(viewLifecycleOwner) {
 
         }
         return binding.root
