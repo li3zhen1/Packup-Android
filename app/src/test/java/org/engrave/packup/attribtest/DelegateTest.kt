@@ -16,4 +16,11 @@ class DelegateTest {
 
         println(b)
     }
+
+    @Test
+    fun inTest(){
+        for(i in 1..20){
+            println(i)
+        }
+    }
 }
