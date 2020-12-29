@@ -1,15 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.event.EventFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.constraintlayout.widget.Guideline
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:id="@+id/debug_string"/>
+        app:layout_constraintGuide_begin="36dp"
+        android:id="@+id/render_start_guideline"
+        android:orientation="horizontal"/>
 
-</FrameLayout>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/render_start_guideline"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_2"
+        android:id="@+id/time_bacon_1"/>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_1"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_3"
+        android:id="@+id/time_bacon_2"/>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_2"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_4"
+        android:id="@+id/time_bacon_3"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_3"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_5"
+        android:id="@+id/time_bacon_4"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_4"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_6"
+        android:id="@+id/time_bacon_5"/>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_5"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_7"
+        android:id="@+id/time_bacon_6"/>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_6"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_8"
+        android:id="@+id/time_bacon_7"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_7"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_9"
+        android:id="@+id/time_bacon_8"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_8"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_10"
+        android:id="@+id/time_bacon_9"/>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_9"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_11"
+        android:id="@+id/time_bacon_10"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_10"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_12"
+        android:id="@+id/time_bacon_11"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_11"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_13"
+        android:id="@+id/time_bacon_12"/>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_12"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_14"
+        android:id="@+id/time_bacon_13"/>
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_13"
+        app:layout_constraintBottom_toBottomOf="@id/time_bacon_15"
+        android:id="@+id/time_bacon_14"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="@id/time_bacon_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/time_bacon_15"/>
+
+    <View
+        android:background="@color/itemSeparatorColor"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="@id/render_start_guideline"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:id="@+id/time_axis_container"
+        android:background="@color/fragmentBackground">
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/events_recycler_view"
+        app:layout_constraintStart_toEndOf="@id/time_axis_container"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
