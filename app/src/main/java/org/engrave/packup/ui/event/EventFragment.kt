@@ -1,7 +1,6 @@
 package org.engrave.packup.ui.event
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,16 +51,20 @@ class EventFragment : Fragment() {
 
                     @Volatile
                     private var isUserControl = false
+
                     override fun onScrolled(r: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(r, dx, dy)
                         mainViewModel.eventViewTimeStamp.value = getChildItemId(getChildAt(0))
+
+                        eventViewModel.nthWeek.value =
+                            (getChildViewHolder(getChildAt(0)) as EventAdapter.DailyViewHolder).routine.nthWeek
+
                         if (r.scrollState == RecyclerView.SCROLL_STATE_SETTLING && !isUserControl) {
                             if (dx in -3..3) {
                                 r.stopScroll()
                             }
                         }
                     }
-
 
 
                     fun smoothScrollToPosition() {
@@ -97,6 +100,22 @@ class EventFragment : Fragment() {
                     listOf(),
                     listOf(
                         DailyCourseItem(
+                            480,
+                            590,
+                            0,
+                            "Hello",
+                            "classroom"
+                        ),
+                        DailyCourseItem(
+                            610,
+                            720,
+                            0,
+                            "Hello",
+                            "classroom"
+                        ),
+                        DailyCourseItem(
+                            780,
+                            890,                      DailyCourseItem(
                             480,
                             590,
                             0,
@@ -289,10 +308,15 @@ class EventFragment : Fragment() {
             )
         )*/
 
-        eventViewModel.eventList.observe(viewLifecycleOwner) {
-            eventAdapter.postList(
-                it
-            )
+        eventViewModel.apply {
+            eventList.observe(viewLifecycleOwner) {
+                eventAdapter.postList(
+                    it
+                )
+            }
+            nthWeek.observe(viewLifecycleOwner){
+                binding.eventsNthweek.text = "$it 周"
+            }
         }
 
         mainViewModel.statusBarStatus.observe(viewLifecycleOwner) {

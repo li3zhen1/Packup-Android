@@ -31,7 +31,6 @@ class EventAdapter(
 ) : RecyclerView.Adapter<EventAdapter.DailyViewHolder>() {
 
     private var eventList: List<DailyEventsItem> = listOf()
-    private val pangu = Pangu()
     fun postList(list: List<DailyEventsItem>) {
         eventList = list
         notifyDataSetChanged()
@@ -39,19 +38,24 @@ class EventAdapter(
 
 
 
-    inner class DailyViewHolder(private val itemView: View, private val parentHeight: Int) :
+    class DailyViewHolder(private val itemView: View, private val parentHeight: Int) :
         RecyclerView.ViewHolder(itemView) {
-        lateinit var eventDateHeroText: TextView
+
+        companion object{
+            private val pangu = Pangu()
+        }
+        lateinit var routine: DailyEventsItem
+        private lateinit var eventDateHeroText: TextView
         lateinit var eventContainer: FrameLayout
 
-        var canvasBaseY: Int = 36.inDp(context)
+        private var canvasBaseY: Int = 36.inDp(itemView.context)
         private val canvasHeight: Int get() = parentHeight - canvasBaseY
-        var minuteHeight = canvasHeight.toFloat() / (960) // 8:00 ~ 22:00 + 更早/ 更晚
+        private var minuteHeight = canvasHeight.toFloat() / (960) // 8:00 ~ 22:00 + 更早/ 更晚
 
         private fun Int.toY() = ((this - 420) * canvasHeight.toFloat() / 960).toInt()
 
         fun bind(dailyRoutineItem: DailyEventsItem) {
-            Log.e("LAYOUT", minuteHeight.toString())
+            routine = dailyRoutineItem
             eventContainer = itemView.findViewById(R.id.event_item_day_container)
             eventDateHeroText = itemView.findViewById(R.id.event_date_title)
             eventDateHeroText.text = dailyRoutineItem.startOfDayInMillis.run {
@@ -75,7 +79,7 @@ class EventAdapter(
             }
         }
 
-        private fun generateClassInfoGrid(course: DailyCourseItem) = AppCompatButton(context).apply {
+        private fun generateClassInfoGrid(course: DailyCourseItem) = AppCompatButton(itemView.context).apply {
             isAllCaps = false
             gravity = Gravity.START or Gravity.TOP
             background = ContextCompat.getDrawable(context, R.drawable.course_button_default)

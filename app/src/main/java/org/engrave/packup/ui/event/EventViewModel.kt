@@ -21,6 +21,8 @@ class EventViewModel @ViewModelInject constructor(
             .collectSemesterEventItems(semester2020Start, semester2020End)
     }
 
+    val nthWeek: MutableLiveData<Int> = MutableLiveData(0)
+
 
     init {
         viewModelScope.launch {

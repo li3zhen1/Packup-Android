@@ -14,6 +14,7 @@
     <dimen name="packup_body2">14sp</dimen>
     <dimen name="packup_caption">12sp</dimen>
     <dimen name="packup_overline">10sp</dimen>
+    <dimen name="packup_timeline">8sp</dimen>
 
     <dimen name="packup_general_padding_horizontal">16dp</dimen>
     <dimen name="packup_general_padding_vertical">16dp</dimen>

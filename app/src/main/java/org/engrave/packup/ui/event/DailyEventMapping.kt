@@ -66,15 +66,18 @@ fun List<ClassInfo>.transformToWeeklyAspect(nthWeek: Int): List<List<DailyCourse
 }
 
 // 对应日子零点的时间
-val semester2020Start = 1600617600000L
-val semester2020End = 1609948800000L
+val semester2020Start = 1600617600000L + 8 * HOUR_IN_MILLIS
+val semester2020End = 1609948800000L + 8 * HOUR_IN_MILLIS
 
 fun List<ClassInfo>.collectSemesterEventItems(
     semesterStartInMillis: Long,
     semesterEndInMillis: Long
 ): List<DailyEventsItem> {
     val firstWeekMonday = semesterStartInMillis.asGmtCalendar().getWeekStart()
+    Log.e("FIRST", firstWeekMonday.toString())
     val lastWeekMonday = semesterEndInMillis.asGmtCalendar().getWeekStart()
+    Log.e("LAST", lastWeekMonday.toString())
+
     val startDaysSliced = ((semesterStartInMillis - firstWeekMonday) / DAY_IN_MILLIS).toInt()
     val endDaysSliced = (((semesterEndInMillis - lastWeekMonday) / DAY_IN_MILLIS) + 7).toInt()
     return (1..((lastWeekMonday - firstWeekMonday) / DAY_IN_MILLIS_LONG).toInt()).flatMap { weekNum ->
@@ -83,7 +86,8 @@ fun List<ClassInfo>.collectSemesterEventItems(
             DailyEventsItem(
                 startOfDayInMillis = DAY_IN_MILLIS_LONG * index + firstWeekMonday + (weekNum - 1) * WEEK_IN_MILLIS_LONG,
                 deadlines = listOf(),
-                courses = list
+                courses = list,
+                nthWeek = weekNum
             )
         }
     }.drop(startDaysSliced).dropLast(endDaysSliced)

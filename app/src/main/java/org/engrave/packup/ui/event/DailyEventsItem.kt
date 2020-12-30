@@ -5,7 +5,8 @@ import org.engrave.packup.data.deadline.Deadline
 data class DailyEventsItem(
     val startOfDayInMillis: Long,
     val deadlines: List<Deadline>,
-    val courses: List<DailyCourseItem>
+    val courses: List<DailyCourseItem>,
+    val nthWeek: Int,
 )
 
 data class DailyCourseItem(

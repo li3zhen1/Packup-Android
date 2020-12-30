@@ -7,13 +7,13 @@
     tools:context=".ui.event.EventFragment"
     android:animateLayoutChanges="true"
     android:background="@color/eventBackgroundColor">
+
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintGuide_begin="36dp"
         android:id="@+id/render_start_guideline"
         android:orientation="horizontal" />
-
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,7 +23,6 @@
         android:id="@+id/time_axis_container"
         android:background="@color/eventAxisColor">
     </LinearLayout>
-
 
     <View
         android:background="@color/activityStatusBarColor"
@@ -42,5 +41,224 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/events_nthweek"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/render_start_guideline"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="12"
+        android:fontFeatureSettings="tnum"
+        android:gravity="center"
+        android:textColor="@color/datePillBackgroundColor"
+        android:textSize="@dimen/packup_caption"
+        android:elevation="8dp"
+        android:textStyle="bold">
 
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/render_start_guideline"
+        android:id="@+id/time_begin"
+        app:layout_constraintBottom_toBottomOf="@id/render_start_guideline"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintTop_toBottomOf="@id/time_begin"
+        android:id="@+id/time1"
+        app:layout_constraintEnd_toEndOf="@id/time3"
+        app:layout_constraintBottom_toTopOf="@id/time2"
+        android:textSize="@dimen/packup_overline"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintTop_toBottomOf="@id/time1"
+        android:id="@+id/time2"
+        app:layout_constraintEnd_toEndOf="@id/time3"
+        app:layout_constraintBottom_toTopOf="@id/time3"
+        android:textSize="@dimen/packup_overline"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintTop_toBottomOf="@id/time2"
+        android:id="@+id/time3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        app:layout_constraintBottom_toTopOf="@id/time4"
+        android:textSize="@dimen/packup_overline"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time3"
+        android:id="@+id/time4"
+        app:layout_constraintBottom_toTopOf="@id/time5"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time4"
+        android:id="@+id/time5"
+        app:layout_constraintBottom_toTopOf="@id/time6"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time5"
+        android:id="@+id/time6"
+        app:layout_constraintBottom_toTopOf="@id/time7"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time6"
+        android:id="@+id/time7"
+        app:layout_constraintBottom_toTopOf="@id/time8"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time7"
+        android:id="@+id/time8"
+        app:layout_constraintBottom_toTopOf="@id/time9"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time8"
+        android:id="@+id/time9"
+        app:layout_constraintBottom_toTopOf="@id/time10"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time9"
+        android:id="@+id/time10"
+        app:layout_constraintBottom_toTopOf="@id/time11"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time10"
+        android:id="@+id/time11"
+        app:layout_constraintBottom_toTopOf="@id/time12"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="19:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time11"
+        android:id="@+id/time12"
+        app:layout_constraintBottom_toTopOf="@id/time13"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time12"
+        android:id="@+id/time13"
+        app:layout_constraintBottom_toTopOf="@id/time14"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time13"
+        android:id="@+id/time14"
+        app:layout_constraintBottom_toTopOf="@id/time15"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22:00"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="@id/time14"
+        android:id="@+id/time15"
+        app:layout_constraintBottom_toTopOf="@id/time_end"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFeatureSettings="tnum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/time_axis_container"
+        android:textSize="@dimen/packup_overline"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:id="@+id/time_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
