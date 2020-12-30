@@ -1,6 +1,7 @@
 package org.engrave.packup.ui.event
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.FragmentEventBinding
 import org.engrave.packup.ui.main.MainViewModel
-import org.engrave.packup.util.inDp
 
 @AndroidEntryPoint
 class EventFragment : Fragment() {
@@ -33,12 +33,16 @@ class EventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEventBinding.inflate(inflater, container, false)
-        eventAdapter = EventAdapter(requireContext())
+        eventAdapter = EventAdapter(requireContext()).apply {
+            setHasStableIds(true)
+        }
         linearManager = LinearLayoutManager(requireContext()).apply {
             orientation = LinearLayoutManager.HORIZONTAL
+
         }
         binding.apply {
             eventsRecyclerView.apply {
+
                 layoutManager = linearManager
                 adapter = eventAdapter
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -50,13 +54,15 @@ class EventFragment : Fragment() {
                     private var isUserControl = false
                     override fun onScrolled(r: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(r, dx, dy)
+                        mainViewModel.eventViewTimeStamp.value = getChildItemId(getChildAt(0))
                         if (r.scrollState == RecyclerView.SCROLL_STATE_SETTLING && !isUserControl) {
                             if (dx in -3..3) {
                                 r.stopScroll()
                             }
                         }
-
                     }
+
+
 
                     fun smoothScrollToPosition() {
                         isUserControl = true

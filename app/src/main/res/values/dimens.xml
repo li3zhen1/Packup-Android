@@ -269,4 +269,5 @@
     <dimen name="fluentui_tooltip_radius">@dimen/fluentui_corner_radius_4</dimen>
     <dimen name="fluentui_tooltip_background_padding">2dp</dimen>
     <dimen name="packup_item_padding_vertical">24dp</dimen>
+    <dimen name="item_elevation">0dp</dimen>
 </resources>

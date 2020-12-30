@@ -20,5 +20,6 @@ class PackupApplication : Application(), Configuration.Provider{
     override fun onCreate() {
         super.onCreate()
         //Fresco.initialize(this)
+
     }
 }

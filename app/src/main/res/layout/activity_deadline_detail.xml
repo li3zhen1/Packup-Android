@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/packup_general_padding_vertical"
                 android:background="@color/itemBackgroundColor"
-                android:elevation="2dp"
+                android:elevation="@dimen/item_elevation"
                 android:paddingBottom="3dp"
                 android:id="@+id/deadline_detail_activity_base_info_block">
 
@@ -305,7 +305,7 @@
                 android:layout_marginTop="@dimen/packup_general_padding_vertical"
                 android:id="@+id/deadline_detail_description_block"
                 android:background="@color/itemBackgroundColor"
-                android:elevation="2dp"
+                android:elevation="@dimen/item_elevation"
                 android:paddingBottom="3dp">
 
                 <androidx.constraintlayout.widget.Guideline
@@ -393,7 +393,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/packup_general_padding_vertical"
                 android:background="@color/itemBackgroundColor"
-                android:elevation="2dp"
+                android:elevation="@dimen/item_elevation"
                 android:paddingBottom="3dp"
                 android:visibility="gone"
                 android:id="@+id/deadline_detail_activity_attach_block">

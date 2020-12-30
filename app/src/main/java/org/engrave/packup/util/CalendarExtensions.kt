@@ -201,7 +201,8 @@ inline fun Calendar.setToEndOfWeek(takeSaturdayAsEnd: Boolean = false): Calendar
 
 //周一零点
 fun Calendar.getWeekStart(): Long {
-    this.add(
+
+    add(
         Calendar.HOUR,
         24 * when (this.getDayOfWeek()) {
             1 -> -6
@@ -219,3 +220,7 @@ fun Calendar.getWeekStart(): Long {
 fun Long.asCalendar() = Calendar.getInstance().apply {
     timeInMillis = this@asCalendar
 }
+
+fun Long.asGmtCalendar() = Calendar.getInstance(TimeZone.getTimeZone("GMT")).apply {
+        timeInMillis = this@asGmtCalendar
+    }

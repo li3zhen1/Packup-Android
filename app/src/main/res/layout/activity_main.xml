@@ -63,7 +63,7 @@
                 app:layout_constraintEnd_toStartOf="@id/main_activity_search_button"
                 android:id="@+id/main_activity_toolbar_title"
                 android:layout_marginHorizontal="@dimen/toolbar_vertical_padding_minus_ripple"
-                android:text="Deadline"
+                android:fontFeatureSettings="tnum"
                 android:textColor="@color/color_white"
                 android:textSize="18sp" />
 

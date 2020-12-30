@@ -98,19 +98,15 @@ class MainActivity : AppCompatActivity() {
                 if (it == MainViewModel.STATUS_BAR_DEADLINE_DELETED)
                     ContextCompat.getColor(this, R.color.colorVibrant)
                 else ContextCompat.getColor(this, R.color.activityStatusBarColor)
-            binding.mainActivityToolbarTitle.text = when (it) {
-                MainViewModel.STATUS_BAR_DOCUMENT -> "文档"
-                MainViewModel.STATUS_BAR_EVENT -> "事件"
-                MainViewModel.STATUS_BAR_DEADLINE_COMPLETED -> "已完成的 Deadline"
-                MainViewModel.STATUS_BAR_DEADLINE_DELETED -> "已删除的 Deadline"
-                else -> "Deadline"
-            }
+
             binding.mainActivityFilterButton.visibility =
                 if (it <= MainViewModel.STATUS_BAR_DEADLINE_COMPLETED) View.VISIBLE else View.GONE
             binding.mainActivityToolBarContainer.elevation =
                 if (it != MainViewModel.STATUS_BAR_EVENT) (8.inDp(this)).toFloat() else 0F
         }
-
+        mainViewModel.statusBarDisplayString.observe(this){
+            binding.mainActivityToolbarTitle.text = it
+        }
     }
 
     private fun popDeadlineFilterMenu() = FilterBottomSheetFragment()

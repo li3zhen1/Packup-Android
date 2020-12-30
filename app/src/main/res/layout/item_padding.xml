@@ -9,5 +9,4 @@
     android:textColor="#78888888"
     android:fontFeatureSettings="tnum"
     android:textSize="@dimen/packup_caption"
-    android:id="@+id/sum_up_text"
-    android:paddingBottom="@dimen/packup_general_padding_vertical"/>
+    android:id="@+id/sum_up_text"/>

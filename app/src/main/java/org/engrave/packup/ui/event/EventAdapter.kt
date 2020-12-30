@@ -23,6 +23,7 @@ import org.engrave.packup.util.asCalendar
 import org.engrave.packup.util.getDate
 import org.engrave.packup.util.getDayOfWeek
 import org.engrave.packup.util.inDp
+import ws.vinta.pangu.Pangu
 
 
 class EventAdapter(
@@ -30,10 +31,13 @@ class EventAdapter(
 ) : RecyclerView.Adapter<EventAdapter.DailyViewHolder>() {
 
     private var eventList: List<DailyEventsItem> = listOf()
-    fun postList(ss: List<DailyEventsItem>) {
-        eventList = ss
+    private val pangu = Pangu()
+    fun postList(list: List<DailyEventsItem>) {
+        eventList = list
         notifyDataSetChanged()
     }
+
+
 
     inner class DailyViewHolder(private val itemView: View, private val parentHeight: Int) :
         RecyclerView.ViewHolder(itemView) {
@@ -72,65 +76,73 @@ class EventAdapter(
         }
 
         private fun generateClassInfoGrid(course: DailyCourseItem) = AppCompatButton(context).apply {
-                isAllCaps = false
-                gravity = Gravity.START or Gravity.TOP
-                background = ContextCompat.getDrawable(context, R.drawable.course_button_default)
-                elevation = 0F
-                stateListAnimator = null
+            isAllCaps = false
+            gravity = Gravity.START or Gravity.TOP
+            background = ContextCompat.getDrawable(context, R.drawable.course_button_default)
+            elevation = 0F
+            stateListAnimator = null
+            setPadding(6.inDp(context), 2.inDp(context), 6.inDp(context), 2.inDp(context))
 
-                setPadding(6.inDp(context),2.inDp(context), 6.inDp(context), 2.inDp(context))
-                text = SpannableStringBuilder(
-                    "${course.eventName}\n${course.place}"
-                ).apply {
-                    setSpan(
-                        AbsoluteSizeSpan(14, true),
-                        0,
-                        course.eventName.length + course.place.length + 1,
-                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-                    )
-                    setSpan(
-                        StyleSpan(Typeface.BOLD),
-                        0,
-                        course.eventName.length + 1,
-                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-                    )
-                    setSpan(
-                        ForegroundColorSpan(
-                            ContextCompat.getColor(
-                                context,
-                                R.color.eventTextColor
-                            )
-                        ), 0, course.eventName.length + course.place.length + 1,
-                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-                    )
-                    if (course.place.isNotEmpty()) {
-                        val drawable = ContextCompat.getDrawable(
+            val displayCourseName = course.eventName.replace("（", "(")
+                .replace("）", ")")
+
+            val displayPlaceName = pangu.spacingText(course.place)
+
+            text = SpannableStringBuilder(
+                "${displayCourseName}\n${displayPlaceName}"
+            ).apply {
+                setSpan(
+                    AbsoluteSizeSpan(14, true),
+                    0,
+                    displayCourseName.length + displayPlaceName.length + 1,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+                setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    0,
+                    displayCourseName.length + 1,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+                setSpan(
+                    ForegroundColorSpan(
+                        ContextCompat.getColor(
                             context,
-                            R.drawable.ic_loc
+                            R.color.eventTextColor
                         )
-                        drawable?.let {
-                            setSpan(
-                                DrawableMarginSpan(it.apply {
-                                    setTint(
-                                        ContextCompat.getColor(
-                                            context,
-                                            R.color.eventTextColor
-                                        )
+                    ), 0, displayCourseName.length + displayPlaceName.length + 1,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+                Log.e("DISPLAY_PLACE_NAME", displayPlaceName)
+                if (displayPlaceName.isNotEmpty()) {
+                    Log.e("DISPLAY is not empty", displayPlaceName)
+                    val drawable = ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_loc
+                    )
+                    drawable?.let {
+                        Log.e("!!!", "SettingSpan")
+                        setSpan(
+                            DrawableMarginSpan(it.apply {
+                                setTint(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.eventTextColor
                                     )
-                                }, 2),
-                                course.eventName.length + 1,
-                                course.eventName.length + 2,
-                                Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-                            )
-                        }
+                                )
+                            }, 4),
+                            displayCourseName.length + 1,
+                            displayCourseName.length + 2,
+                            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                        )
                     }
                 }
-                y = (course.startMinute.toY()).toFloat()
-                layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ((course.endMinute - course.startMinute) * minuteHeight).toInt()
-                )
             }
+            y = (course.startMinute.toY()).toFloat()
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ((course.endMinute - course.startMinute) * minuteHeight).toInt()
+            )
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyViewHolder {
@@ -150,5 +162,10 @@ class EventAdapter(
     }
 
     override fun getItemCount(): Int = eventList.size
+
+    override fun getItemId(position: Int): Long {
+        return eventList[position].startOfDayInMillis
+    }
+
 
 }

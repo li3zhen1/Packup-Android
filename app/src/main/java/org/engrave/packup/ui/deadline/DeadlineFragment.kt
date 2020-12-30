@@ -171,10 +171,16 @@ class DeadlineFragment() : Fragment() {
                                     celebrateText.text = "似乎已经处理完了所有 Deadline"
                                     celebrateImage.background =
                                         ContextCompat.getDrawable(context, R.drawable.ic_celebrate)
+                                            ?.apply {
+                                                this.alpha = 100
+                                            }
                                 } else {
                                     celebrateText.text = "这里似乎没有什么东西"
                                     celebrateImage.background =
                                         ContextCompat.getDrawable(context, R.drawable.ic_cactus)
+                                            ?.apply {
+                                                this.alpha = 100
+                                            }
                                 }
                             }
                         }.start()

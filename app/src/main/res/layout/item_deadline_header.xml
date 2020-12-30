@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/itemBackgroundColor"
-    android:elevation="2dp"
+    android:elevation="@dimen/item_elevation"
     android:layout_marginTop="16dp"
     android:paddingHorizontal="@dimen/deadline_recycler_view_item_horizontal_padding"
     android:paddingVertical="@dimen/deadline_recycler_view_header_vertical_padding">
