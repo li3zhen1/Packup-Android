@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:backgroundTint="?attr/appWidgetBackgroundColor"
+    android:theme="@style/ThemeOverlay.Scheduler.AppWidgetContainer">
+
+    <RelativeLayout
+        android:id="@+id/widget_recently_heading"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_huge_block_size"
+        android:layout_marginHorizontal="@dimen/widget_padding_horizontal"
+        android:layout_marginTop="@dimen/widget_padding_vertical"
+        >
+        <TextView
+            android:id="@+id/widget_all_deadline_number"
+            android:layout_width="@dimen/widget_huge_block_size"
+            android:layout_height="@dimen/widget_huge_block_size"
+            android:text="-"
+            android:textSize="32dp"
+            android:textAlignment="center"
+            android:textFontWeight="300"
+            android:gravity="center"
+            android:fontFamily="@font/inter"
+            android:background="@drawable/widget_pill_shape"
+            android:backgroundTint="@color/color_primary_400"
+            android:textColor="?attr/appWidgetBackgroundColor"/>
+
+        <TextView
+            android:id="@+id/widget_deadline_manifest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/widget_all_deadline_number"
+            android:contentDescription="@string/appwidget_text"
+            android:text="@string/widget_recently_title_recent_deadlines"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/widget_general_padding"
+            android:textColor="?attr/appWidgetTextColor"
+            android:fontFamily="@font/inter"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="?attr/colorOnSecondary"
+            android:id="@+id/widget_deadline_digest"
+            android:textSize="16dp"
+            android:layout_marginStart="@dimen/widget_general_padding"
+            android:layout_toEndOf="@id/widget_all_deadline_number"
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/inter"/>
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/widget_bottom_half_background"
+        android:backgroundTint="?attr/colorSecondary"
+        android:layout_below="@id/widget_recently_heading"
+        android:layout_marginTop="@dimen/widget_padding_vertical"
+        android:paddingVertical="@dimen/widget_padding_vertical"
+        android:paddingHorizontal="@dimen/widget_padding_horizontal">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_item_height"
+            >
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
