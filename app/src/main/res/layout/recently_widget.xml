@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
     android:backgroundTint="@color/itemBackgroundColor"
-    android:theme="@style/Theme.Packup.Activity">
+    android:theme="@style/Theme.Packup.Activity"
+    android:animateLayoutChanges="true"
+    android:id="@+id/widget_container">
 
     <RelativeLayout
         android:id="@+id/widget_recently_heading"
@@ -17,10 +19,9 @@
             android:id="@+id/widget_all_deadline_number"
             android:layout_width="@dimen/widget_huge_block_size"
             android:layout_height="@dimen/widget_huge_block_size"
-            android:text="-"
-            android:textSize="32dp"
+            android:textSize="36sp"
             android:textAlignment="center"
-            android:textFontWeight="300"
+            android:textStyle="bold"
             android:gravity="center"
             android:fontFamily="@font/inter"
             android:background="@drawable/widget_pill_shape"
@@ -31,14 +32,16 @@
             android:id="@+id/widget_deadline_manifest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
             android:layout_toEndOf="@id/widget_all_deadline_number"
             android:contentDescription="@string/appwidget_text"
+            android:fontFamily="@font/inter"
             android:text="@string/widget_recently_title_recent_deadlines"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_marginStart="@dimen/widget_general_padding"
             android:textColor="?colorOnSurface"
-            android:fontFamily="@font/inter"/>
+            android:textSize="@dimen/packup_h6"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +49,7 @@
             android:layout_alignParentEnd="true"
             android:textColor="@color/colorText"
             android:id="@+id/widget_deadline_digest"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:layout_marginStart="@dimen/widget_general_padding"
             android:layout_toEndOf="@id/widget_all_deadline_number"
             android:ellipsize="end"
@@ -66,10 +69,189 @@
         android:layout_marginTop="@dimen/widget_padding_vertical"
         android:paddingVertical="@dimen/widget_padding_vertical"
         android:paddingHorizontal="@dimen/widget_padding_horizontal">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_item_height"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
             >
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/item1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:textSize="@dimen/packup_subtitle1"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/inter"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/ddl1"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+
+                        android:id="@+id/due1"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="@font/inter"
+                        android:textSize="@dimen/packup_body1"
+                        />
+
+                    <ImageView
+                        android:id="@+id/sep1"
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="8dp"
+                        android:src="@drawable/item_sep"
+                        app:layout_constraintBottom_toBottomOf="@id/deadline_item_member_desc"
+                        app:layout_constraintStart_toEndOf="@id/deadline_item_member_desc"
+                        app:layout_constraintTop_toTopOf="@id/deadline_item_member_desc" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+                        android:id="@+id/course1"
+                        android:fontFamily="@font/inter"
+                        android:textSize="@dimen/packup_body1"
+                        android:textColor="@color/colorText"
+                        />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/outline_button_star_filled"
+                    android:id="@+id/star1"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/item2"
+                android:layout_marginTop="@dimen/packup_general_padding_vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:textSize="@dimen/packup_subtitle1"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/inter"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/ddl2"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+
+                        android:id="@+id/due2"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="@font/inter"
+                        android:textSize="@dimen/packup_body1"
+                        />
+
+                    <ImageView
+                        android:id="@+id/sep2"
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="8dp"
+                        android:src="@drawable/item_sep"
+                        app:layout_constraintBottom_toBottomOf="@id/deadline_item_member_desc"
+                        app:layout_constraintStart_toEndOf="@id/deadline_item_member_desc"
+                        app:layout_constraintTop_toTopOf="@id/deadline_item_member_desc" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+                        android:id="@+id/course2"
+                        android:fontFamily="@font/inter"
+                        android:textSize="@dimen/packup_body1"
+                        android:textColor="@color/colorText"
+                        />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/outline_button_star_filled"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/star2"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/item3"
+                android:layout_marginTop="@dimen/packup_general_padding_vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:textSize="@dimen/packup_subtitle1"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/inter"
+                    android:paddingBottom="6dp"
+                    android:id="@+id/ddl3"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+
+                        android:id="@+id/due3"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="@font/inter"
+                        android:textSize="@dimen/packup_body1"
+                        />
+
+                    <ImageView
+                        android:id="@+id/sep3"
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="8dp"
+                        android:src="@drawable/item_sep"
+                        app:layout_constraintBottom_toBottomOf="@id/deadline_item_member_desc"
+                        app:layout_constraintStart_toEndOf="@id/deadline_item_member_desc"
+                        app:layout_constraintTop_toTopOf="@id/deadline_item_member_desc" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+                        android:id="@+id/course3"
+                        android:fontFamily="@font/inter"
+                        android:textSize="@dimen/packup_body1"
+                        android:textColor="@color/colorText"
+                        />
+                </LinearLayout>
+                <ImageView android:id="@+id/star3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/outline_button_star_filled"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

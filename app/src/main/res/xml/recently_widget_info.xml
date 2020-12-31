@@ -2,8 +2,9 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialKeyguardLayout="@layout/recently_widget"
     android:initialLayout="@layout/recently_widget"
-    android:minWidth="250dp"
-    android:minHeight="110dp"
+    android:minWidth="240dp"
+    android:minHeight="120dp"
+    android:previewImage="@drawable/widget_preview_recently"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="900000"
     android:widgetCategory="home_screen"/>

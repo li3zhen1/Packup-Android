@@ -1,15 +1,25 @@
 package org.engrave.packup.widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
+import android.view.View
 import android.widget.RemoteViews
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.engrave.packup.R
+import org.engrave.packup.SplashActivity
 import org.engrave.packup.data.deadline.DeadlineRepository
 import org.engrave.packup.data.persistence.ApplicationPreferenceConfigsRepository
-import org.engrave.packup.util.*
+import org.engrave.packup.util.asLocalCalendar
+import org.engrave.packup.util.setToEndOfTomorrow
+import org.engrave.packup.util.setToEndOfWeek
+import org.engrave.packup.util.toGlobalizedString
 import java.util.*
 import javax.inject.Inject
 
@@ -38,6 +48,8 @@ class RecentlyWidgetProvider : AppWidgetProvider() {
             }
             val unfinished = allDeadlinesStatic.filter {
                 !it.is_completed && !it.is_deleted
+            }.sortedBy {
+                it.due_time
             }
             // TODO: 时区问题
             val tomorrowEnd = Calendar.getInstance().setToEndOfTomorrow().timeInMillis
@@ -49,7 +61,7 @@ class RecentlyWidgetProvider : AppWidgetProvider() {
             }.size
             val displayString = if (numDue == 0) {
                 numDue =
-                    unfinished.filter { it.due_time != null && it.due_time > 0 && it.due_time <= weekEnd }.size
+                    unfinished.filter { it.due_time != null && it.due_time > Date().time && it.due_time <= weekEnd }.size
                 unfinished.size.toString() + context.getString(R.string.widget_recently_remaining) +
                         numDue + context.getString(R.string.widget_recently_due_this_week)
             } else {
@@ -59,11 +71,23 @@ class RecentlyWidgetProvider : AppWidgetProvider() {
                         numDue + context.getString(R.string.widget_recently_due_tomorrow)
             }
 
+            val intent = Intent(context, SplashActivity::class.java)
+            val pending = PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_NO_CREATE
+            )
+
             appWidgetIds.forEach { appWidgetId ->
                 val views: RemoteViews = RemoteViews(
                     context.packageName,
                     R.layout.recently_widget
                 ).apply {
+                    setOnClickPendingIntent(
+                        R.id.widget_container,
+                        pending
+                    )
                     setTextViewText(
                         R.id.widget_all_deadline_number,
                         unfinished.size.toString()
@@ -72,6 +96,77 @@ class RecentlyWidgetProvider : AppWidgetProvider() {
                         R.id.widget_deadline_digest,
                         displayString
                     )
+                    if(unfinished.isNotEmpty()) {
+                        setTextViewText(
+                            R.id.ddl1,
+                            (unfinished.elementAtOrNull(0)?.name) ?: ""
+                        )
+                        setTextViewText(
+                            R.id.due1,
+                            (unfinished.elementAtOrNull(0)?.due_time?.asLocalCalendar()
+                                ?.toGlobalizedString(
+                                    context,
+                                    autoOmitYear = true,
+                                    omitTime = false,
+                                    omitWeek = true
+                                )) ?: ""
+                        )
+                        setTextViewText(
+                            R.id.course1,
+                            (unfinished.elementAtOrNull(0)?.source_course_name_without_semester)
+                                ?: ""
+                        )
+                        setViewVisibility(R.id.star1, if(unfinished[0].is_starred)View.VISIBLE else View.GONE)
+                    }else{
+                        setViewVisibility(R.id.item1, View.GONE)
+                    }
+
+                    if(unfinished.size>1) {
+                        setTextViewText(
+                            R.id.ddl2,
+                            (unfinished.elementAtOrNull(1)?.name) ?: ""
+                        )
+                        setTextViewText(
+                            R.id.due2,
+                            (unfinished.elementAtOrNull(1)?.due_time?.asLocalCalendar()
+                                ?.toGlobalizedString(
+                                    context,
+                                    autoOmitYear = true,
+                                    omitTime = false,
+                                    omitWeek = true
+                                )) ?: ""
+                        )
+                        setTextViewText(
+                            R.id.course2,
+                            (unfinished.elementAtOrNull(1)?.source_course_name_without_semester)
+                                ?: ""
+                        )
+                        setViewVisibility(R.id.star2, if(unfinished[1].is_starred)View.VISIBLE else View.GONE)
+                    }else{
+                        setViewVisibility(R.id.item2, View.GONE)
+                    }
+                    if(unfinished.size>2) {
+                        setTextViewText(
+                            R.id.ddl3,
+                            (unfinished.elementAtOrNull(2)?.name) ?: ""
+                        )
+                        setTextViewText(
+                            R.id.due3,
+                            (unfinished.elementAtOrNull(2)?.due_time?.asLocalCalendar()
+                                ?.toGlobalizedString(
+                                    context,
+                                    autoOmitYear = true,
+                                    omitTime = false,
+                                    omitWeek = true
+                                )) ?: ""
+                        )
+                        setTextViewText(
+                            R.id.course3,
+                            (unfinished.elementAtOrNull(2)?.source_course_name_without_semester)
+                                ?: ""
+                        )
+                        setViewVisibility(R.id.star3, if(unfinished[2].is_starred)View.VISIBLE else View.GONE)
+                    } else setViewVisibility(R.id.item3, View.GONE)
                 }
                 AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, views)
             }

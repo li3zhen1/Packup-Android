@@ -2,8 +2,9 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialKeyguardLayout="@layout/event_widget"
     android:initialLayout="@layout/event_widget"
-    android:minWidth="40dp"
-    android:minHeight="40dp"
+    android:minWidth="240dp"
+    android:minHeight="240dp"
+    android:previewImage="@drawable/event_widget_preview"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="7200000"
     android:widgetCategory="home_screen" />

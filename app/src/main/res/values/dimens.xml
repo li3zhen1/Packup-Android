@@ -43,7 +43,7 @@
     <dimen name="widget_background_corner_radius">18dp</dimen>
     <dimen name="widget_pill_corner_radius">8dp</dimen>
     <dimen name="widget_general_padding">12dp</dimen>
-    <dimen name="widget_huge_block_size">48dp</dimen>
+    <dimen name="widget_huge_block_size">60dp</dimen>
 
     <dimen name="widget_item_height">60dp</dimen>
 

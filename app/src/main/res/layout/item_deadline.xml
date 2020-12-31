@@ -96,7 +96,6 @@
         android:layout_marginStart="4dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Lab4 内存机制"
 
         android:textColor="?colorOnSurface"
         android:textSize="@dimen/packup_subtitle1"
@@ -114,7 +113,6 @@
         android:ellipsize="end"
         android:fontFeatureSettings="tnum"
         android:maxLines="1"
-        android:text="12 月 25 日 23:00"
         app:layout_constraintStart_toStartOf="@+id/item_deadline_content_guideline_begin"
         app:layout_constraintTop_toBottomOf="@id/deadline_item_member_title" />
 
