@@ -4,6 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
     android:backgroundTint="?attr/appWidgetBackgroundColor"
-    android:theme="@style/ThemeOverlay.Scheduler.AppWidgetContainer">
+    android:theme="@style/Theme.Packup.Activity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

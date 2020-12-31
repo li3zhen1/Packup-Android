@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
-    android:backgroundTint="?attr/appWidgetBackgroundColor"
-    android:theme="@style/ThemeOverlay.Scheduler.AppWidgetContainer">
+    android:backgroundTint="@color/itemBackgroundColor"
+    android:theme="@style/Theme.Packup.Activity">
 
     <RelativeLayout
         android:id="@+id/widget_recently_heading"
@@ -25,7 +25,7 @@
             android:fontFamily="@font/inter"
             android:background="@drawable/widget_pill_shape"
             android:backgroundTint="@color/color_primary_400"
-            android:textColor="?attr/appWidgetBackgroundColor"/>
+            android:textColor="@color/itemBackgroundColor"/>
 
         <TextView
             android:id="@+id/widget_deadline_manifest"
@@ -37,14 +37,14 @@
             android:textSize="16dp"
             android:textStyle="bold"
             android:layout_marginStart="@dimen/widget_general_padding"
-            android:textColor="?attr/appWidgetTextColor"
+            android:textColor="?colorOnSurface"
             android:fontFamily="@font/inter"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textColor="?attr/colorOnSecondary"
+            android:textColor="@color/colorText"
             android:id="@+id/widget_deadline_digest"
             android:textSize="16dp"
             android:layout_marginStart="@dimen/widget_general_padding"
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/widget_bottom_half_background"
-        android:backgroundTint="?attr/colorSecondary"
+        android:backgroundTint="@color/fragmentBackground"
         android:layout_below="@id/widget_recently_heading"
         android:layout_marginTop="@dimen/widget_padding_vertical"
         android:paddingVertical="@dimen/widget_padding_vertical"

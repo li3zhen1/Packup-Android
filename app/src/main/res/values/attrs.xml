@@ -7,15 +7,20 @@
         <attr name="bar_percent" format="float" />
     </declare-styleable>
 
-    <attr name="packupColorPrimaryDarker" format="reference|color"/>
-    <attr name="packupColorPrimaryLight" format="reference|color"/>
-    <attr name="packupColorPrimaryLighter" format="reference|color"/>
+    <declare-styleable name="AppWidgetAttrs">
+        <attr name="appWidgetBackgroundColor" format="color" />
+        <attr name="appWidgetTextColor" format="color" />
+    </declare-styleable>
+
+    <attr name="packupColorPrimaryDarker" format="reference|color" />
+    <attr name="packupColorPrimaryLight" format="reference|color" />
+    <attr name="packupColorPrimaryLighter" format="reference|color" />
 
     <!-- *** Base Semantic Colors *** -->
 
     <!--Backgrounds-->
-    <attr name="packupBackgroundColor" format="reference|color"/>
-    <attr name="packupBackgroundPressedColor" format="reference|color"/>
+    <attr name="packupBackgroundColor" format="reference|color" />
+    <attr name="packupBackgroundPressedColor" format="reference|color" />
     <attr name="packupBackgroundPrimaryColor" format="reference|color"/>
     <attr name="packupBackgroundSecondaryColor" format="reference|color"/>
     <attr name="packupBackgroundSecondaryPressedColor" format="reference|color"/>

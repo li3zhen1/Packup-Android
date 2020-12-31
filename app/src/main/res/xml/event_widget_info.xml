@@ -4,7 +4,6 @@
     android:initialLayout="@layout/event_widget"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/example_appwidget_preview"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="7200000"
     android:widgetCategory="home_screen" />

@@ -158,4 +158,8 @@
     <color name="eventAxisColor">@color/color_surface_neutral_light_elevation_01dp</color>
     <color name="eventBackgroundColor">@color/color_white</color>
     <color name="eventTextColor">#303C67</color>
+
+
+
+
 </resources>
