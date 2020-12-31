@@ -1,6 +1,7 @@
 package org.engrave.packup.ui.event
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import org.engrave.packup.databinding.FragmentEventBinding
 import org.engrave.packup.ui.main.MainViewModel
+import org.engrave.packup.util.HOUR_IN_MILLIS
+import java.util.*
 
 @AndroidEntryPoint
 class EventFragment : Fragment() {
@@ -37,7 +40,6 @@ class EventFragment : Fragment() {
         }
         linearManager = LinearLayoutManager(requireContext()).apply {
             orientation = LinearLayoutManager.HORIZONTAL
-
         }
         binding.apply {
             eventsRecyclerView.apply {
@@ -60,7 +62,7 @@ class EventFragment : Fragment() {
                             (getChildViewHolder(getChildAt(0)) as EventAdapter.DailyViewHolder).routine.nthWeek
 
                         if (r.scrollState == RecyclerView.SCROLL_STATE_SETTLING && !isUserControl) {
-                            if (dx in -3..3) {
+                            if (dx in -5..5) {
                                 r.stopScroll()
                             }
                         }
@@ -85,7 +87,7 @@ class EventFragment : Fragment() {
                         super.onScrollStateChanged(r, newState)
                         if (newState == RecyclerView.SCROLL_STATE_IDLE)
                             if (!isUserControl)
-                                postDelayed(runnable, 80)
+                                postDelayed(runnable, 100)
                         if (r.scrollState != RecyclerView.SCROLL_STATE_SETTLING)
                             isUserControl = false
                     }
@@ -313,9 +315,21 @@ class EventFragment : Fragment() {
                 eventAdapter.postList(
                     it
                 )
+                var currentIndex = 0
+                val time = Date().time + 8 * HOUR_IN_MILLIS
+                for (i in it.indices) {
+                    if (it[i].startOfDayInMillis > time) {
+                        currentIndex = i - 1
+                        break
+                    }
+                }
+                Log.e("INDEX", currentIndex.toString())
+                binding.eventsRecyclerView.scrollToPosition(
+                    currentIndex
+                )
             }
             nthWeek.observe(viewLifecycleOwner){
-                binding.eventsNthweek.text = "$it 周"
+                binding.eventsNthweek.text = if (it > 16) "考试周" else "$it 周"
             }
         }
 

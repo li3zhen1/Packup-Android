@@ -12,6 +12,13 @@
         <attr name="appWidgetTextColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="DeadlineIndicator">
+        <attr name="displayTitleText" format="string" />
+        <attr name="displayBackgroundResource" format="reference"/>
+        <attr name="displayWidth" format="integer"/>
+        <attr name="displayHeight" format="integer"/>
+    </declare-styleable>
+
     <attr name="packupColorPrimaryDarker" format="reference|color" />
     <attr name="packupColorPrimaryLight" format="reference|color" />
     <attr name="packupColorPrimaryLighter" format="reference|color" />

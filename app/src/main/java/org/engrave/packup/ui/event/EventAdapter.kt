@@ -8,17 +8,18 @@ import android.text.style.AbsoluteSizeSpan
 import android.text.style.DrawableMarginSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.engrave.packup.R
+import org.engrave.packup.component.indicator.DeadlineIndicator
 import org.engrave.packup.util.asCalendar
 import org.engrave.packup.util.getDate
 import org.engrave.packup.util.getDayOfWeek
@@ -34,6 +35,7 @@ class EventAdapter(
     fun postList(list: List<DailyEventsItem>) {
         eventList = list
         notifyDataSetChanged()
+
     }
 
 
@@ -56,7 +58,9 @@ class EventAdapter(
 
         fun bind(dailyRoutineItem: DailyEventsItem) {
             routine = dailyRoutineItem
+
             eventContainer = itemView.findViewById(R.id.event_item_day_container)
+            eventContainer.removeAllViews()
             eventDateHeroText = itemView.findViewById(R.id.event_date_title)
             eventDateHeroText.text = dailyRoutineItem.startOfDayInMillis.run {
                 val cld = asCalendar()
@@ -72,10 +76,19 @@ class EventAdapter(
                     }
                 }"
             }
+
             dailyRoutineItem.courses.forEach {
-                eventContainer.addView(
-                    generateClassInfoGrid(it)
-                )
+                when(it.itemType){
+                    DailyCourseItem.COURSE -> eventContainer.addView(
+                        generateClassInfoGrid(it)
+                    )
+                    DailyCourseItem.EXAM -> eventContainer.addView(
+                        generateExamInfoGrid(it)
+                    )
+                    else -> eventContainer.addView(
+                        generateDeadlineIndicator(it)
+                    )
+                }
             }
         }
 
@@ -116,15 +129,12 @@ class EventAdapter(
                     ), 0, displayCourseName.length + displayPlaceName.length + 1,
                     Spannable.SPAN_INCLUSIVE_EXCLUSIVE
                 )
-                Log.e("DISPLAY_PLACE_NAME", displayPlaceName)
                 if (displayPlaceName.isNotEmpty()) {
-                    Log.e("DISPLAY is not empty", displayPlaceName)
                     val drawable = ContextCompat.getDrawable(
                         context,
                         R.drawable.ic_loc
                     )
                     drawable?.let {
-                        Log.e("!!!", "SettingSpan")
                         setSpan(
                             DrawableMarginSpan(it.apply {
                                 setTint(
@@ -146,6 +156,54 @@ class EventAdapter(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ((course.endMinute - course.startMinute) * minuteHeight).toInt()
             )
+        }
+
+        private fun generateExamInfoGrid(course: DailyCourseItem) = AppCompatButton(itemView.context).apply {
+            isAllCaps = false
+            gravity = Gravity.START or Gravity.TOP
+            background = ContextCompat.getDrawable(context, R.drawable.course_button_exam)
+            elevation = 0F
+            stateListAnimator = null
+            setPadding(6.inDp(context), 2.inDp(context), 6.inDp(context), 2.inDp(context))
+
+            val displayPlaceName = pangu.spacingText(course.place.replace("（", "(")
+                .replace("）", ")"))
+
+            text = SpannableStringBuilder(
+                "${course.eventName}\n${displayPlaceName}"
+            ).apply {
+                setSpan(
+                    AbsoluteSizeSpan(14, true),
+                    0,
+                    course.eventName.length + displayPlaceName.length + 1,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+                setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    0,
+                    course.eventName.length + 1,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+                setSpan(
+                    ForegroundColorSpan(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.examTextColor
+                        )
+                    ), 0, course.eventName.length + displayPlaceName.length + 1,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+            }
+            y = (course.startMinute.toY()).toFloat()
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ((course.endMinute - course.startMinute) * minuteHeight).toInt()
+            )
+        }
+
+        private fun generateDeadlineIndicator(course: DailyCourseItem) = DeadlineIndicator(itemView.context).apply{
+            displayText = course.eventName
+            y = minuteHeight * 930 - 12.inDp(context)
         }
     }
 

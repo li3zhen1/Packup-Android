@@ -32,4 +32,9 @@ class CalendarTest {
             }
         }
     }
+
+    @Test
+    fun extTest(){
+        println(("20210112上午"))
+    }
 }

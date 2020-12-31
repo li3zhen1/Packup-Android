@@ -121,4 +121,7 @@
     <color name="eventAxisColor">@color/color_surface_neutral_dark_elevation_01dp</color>
     <color name="eventBackgroundColor">@color/color_black</color>
     <color name="eventTextColor">#7094CA</color>
+
+    <color name="examBackgroundColor">#493D26</color>
+    <color name="examTextColor">#D8C16E</color>
     </resources>
