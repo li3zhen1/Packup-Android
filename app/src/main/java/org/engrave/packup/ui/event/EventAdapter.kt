@@ -38,8 +38,6 @@ class EventAdapter(
 
     }
 
-
-
     class DailyViewHolder(private val itemView: View, private val parentHeight: Int) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -228,6 +226,4 @@ class EventAdapter(
     override fun getItemId(position: Int): Long {
         return eventList[position].startOfDayInMillis
     }
-
-
 }

@@ -1,5 +1,6 @@
 package org.engrave.packup.ui.event
 
+import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
@@ -14,6 +15,7 @@ class EventViewModel @ViewModelInject constructor(
     private val deadlineRepository: DeadlineRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
 ):ViewModel() {
+    var userScrolled: Boolean = false
     val classInfoList = classInfoRepository.allClassInfo
     val deadlines = deadlineRepository.allDeadlines
     val eventList = MediatorLiveData<List<DailyEventsItem>>().apply {
@@ -42,7 +44,22 @@ class EventViewModel @ViewModelInject constructor(
 
     init {
         viewModelScope.launch {
-            classInfoRepository.crawlAllClassInfo()
+            try {
+                classInfoRepository.crawlAllClassInfo()
+            } catch (e: Exception) {
+                Log.e("ERROR1", e.toString())
+            }
+
+
+            try {
+                classInfoRepository.crawlSpecifiedClassInfoFromPortal(
+                    Semester(
+                        2020, SemesterSeason.AUTUMN
+                    )
+                )
+            } catch (e: Exception) {
+                Log.e("ERROR2", e.toString())
+            }
         }
     }
 }

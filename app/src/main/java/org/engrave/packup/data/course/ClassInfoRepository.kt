@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 import org.engrave.packup.api.pku.elective.fetchElectiveLoginCookies
 import org.engrave.packup.api.pku.elective.fetchElectiveResultTable
 import org.engrave.packup.api.pku.portal.Semester
+import org.engrave.packup.api.pku.portal.SemesterSeason
 import org.engrave.packup.api.pku.portal.fetchPortalCourseInfo
 import org.engrave.packup.api.pku.portal.fetchPortalLoginCookies
 import org.engrave.packup.data.account.AccountInfoRepository
@@ -28,7 +29,7 @@ class ClassInfoRepository @Inject constructor(
     }
 
 
-    private suspend fun crawlSpecifiedClassInfoFromPortal(
+    suspend fun crawlSpecifiedClassInfoFromPortal(
         semester: Semester
     ) = withContext(Dispatchers.IO) {
         val accountInfo = accountInfoRepository.getAccountInfo
@@ -42,7 +43,7 @@ class ClassInfoRepository @Inject constructor(
         }
     }
 
-    private suspend fun crawlCurrentClassInfoFromElective() = withContext(Dispatchers.IO) {
+    suspend fun crawlCurrentClassInfoFromElective() = withContext(Dispatchers.IO) {
         val accountInfo = accountInfoRepository.getAccountInfo
         val rawHtml = fetchElectiveResultTable(
             fetchElectiveLoginCookies(accountInfo.studentId, accountInfo.password)
@@ -55,17 +56,13 @@ class ClassInfoRepository @Inject constructor(
 
 
     suspend fun crawlAllClassInfo() {
-        try {
-            crawlCurrentClassInfoFromElective()
-        } catch (e: Exception) {
-
-        }
-//        crawlSpecifiedClassInfoFromPortal(
-//            Semester(
-//                2019,
-//                SemesterSeason.SPRING
-//            )
-//        )
+        crawlCurrentClassInfoFromElective()
+        crawlSpecifiedClassInfoFromPortal(
+            Semester(
+                2019,
+                SemesterSeason.SPRING
+            )
+        )
 //        crawlSpecifiedClassInfoFromPortal(
 //            Semester(
 //                2019,

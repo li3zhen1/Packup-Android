@@ -52,7 +52,7 @@ class EventFragment : Fragment() {
                     }
 
                     @Volatile
-                    private var isUserControl = false
+                    private var isUserControl: Boolean = false
 
                     override fun onScrolled(r: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(r, dx, dy)
@@ -71,6 +71,7 @@ class EventFragment : Fragment() {
 
                     fun smoothScrollToPosition() {
                         isUserControl = true
+                        eventViewModel.userScrolled = true
                         val stickyInfoView = getChildAt(0)
                         val bottom = stickyInfoView.right
                         val height = stickyInfoView.measuredWidth
@@ -94,222 +95,6 @@ class EventFragment : Fragment() {
                 })
             }
         }
-
-/*        eventAdapter.postList(
-            listOf(
-                DailyEventsItem(
-                    1,
-                    listOf(),
-                    listOf(
-                        DailyCourseItem(
-                            480,
-                            590,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            610,
-                            720,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            780,
-                            890,                      DailyCourseItem(
-                            480,
-                            590,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            610,
-                            720,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            780,
-                            890,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            910,
-                            1020,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            1120,
-                            1290,
-                            0,
-                            "Hello",
-                            "classroom"
-                        )
-                    )
-                ),
-                DailyEventsItem(
-                    2,
-                    listOf(),
-                    listOf(
-                        DailyCourseItem(
-                            480,
-                            590,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            910,
-                            1020,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            1120,
-                            1290,
-                            0,
-                            "Hello",
-                            "classroom"
-                        )
-                    )
-                ),
-                DailyEventsItem(
-                    3,
-                    listOf(),
-                    listOf(
-
-                        DailyCourseItem(
-                            610,
-                            720,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            780,
-                            890,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-
-                        DailyCourseItem(
-                            1120,
-                            1290,
-                            0,
-                            "Hello",
-                            "classroom"
-                        )
-                    )
-                ),
-                DailyEventsItem(
-                    1,
-                    listOf(),
-                    listOf(
-                        DailyCourseItem(
-                            480,
-                            590,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            610,
-                            720,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            780,
-                            890,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            910,
-                            1020,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            1120,
-                            1290,
-                            0,
-                            "Hello",
-                            "classroom"
-                        )
-                    )
-                ),
-                DailyEventsItem(
-                    2,
-                    listOf(),
-                    listOf(
-                        DailyCourseItem(
-                            480,
-                            590,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            910,
-                            1020,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            1120,
-                            1290,
-                            0,
-                            "Hello",
-                            "classroom"
-                        )
-                    )
-                ),
-                DailyEventsItem(
-                    3,
-                    listOf(),
-                    listOf(
-
-                        DailyCourseItem(
-                            610,
-                            720,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-                        DailyCourseItem(
-                            780,
-                            890,
-                            0,
-                            "Hello",
-                            "classroom"
-                        ),
-
-                        DailyCourseItem(
-                            1120,
-                            1290,
-                            0,
-                            "Hello",
-                            "classroom"
-                        )
-                    )
-                )
-            )
-        )*/
-
         eventViewModel.apply {
             eventList.observe(viewLifecycleOwner) {
                 eventAdapter.postList(
@@ -324,9 +109,11 @@ class EventFragment : Fragment() {
                     }
                 }
                 Log.e("INDEX", currentIndex.toString())
-                binding.eventsRecyclerView.scrollToPosition(
-                    currentIndex
-                )
+                if (!userScrolled) {
+                    binding.eventsRecyclerView.scrollToPosition(
+                        currentIndex
+                    )
+                }
             }
             nthWeek.observe(viewLifecycleOwner){
                 binding.eventsNthweek.text = if (it > 16) "考试周" else "$it 周"

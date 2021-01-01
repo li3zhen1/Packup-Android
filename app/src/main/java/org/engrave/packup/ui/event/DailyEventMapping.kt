@@ -71,8 +71,10 @@ fun List<ClassInfo>.transformToWeeklyAspect(nthWeek: Int): List<List<DailyCourse
 fun Long.GmtToChn() = this + 8 * HOUR_IN_MILLIS
 
 // 对应日子零点的时间
+// 来不及了就写死了  只抓这学期的
+// 后续改成通过 Campus 判断或者用户手动
 val semester2020Start = 1600617600000L.GmtToChn()
-val semester2020End = 1611331200000L.GmtToChn()
+val semester2020End = 1611331200000L.GmtToChn() + 60 * DAY_IN_MILLIS_LONG
 
 fun List<ClassInfo>.collectSemesterEventItems(
     semesterStartInMillis: Long,
@@ -125,6 +127,7 @@ fun List<ClassInfo>.collectSemesterEventItems(
 }
 
 fun List<DailyEventsItem>.collectDeadlines(deadlines: List<Deadline>): List<DailyEventsItem> {
+    Log.e("ORIG", this.toString())
     deadlines.forEach {
         if (it.due_time != null) {
             var routineIndex = -1
