@@ -7,6 +7,8 @@ Pack up all about your university life.
 
 ## Screen Shots
 
+* Dark Mode is not shown here.
+
 ![Screen Shots](./Readme.assets/thumbnail.png)
 
 
