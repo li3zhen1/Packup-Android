@@ -5,6 +5,11 @@
 Pack up all about your university life.
 
 
+## Screen Shots
+
+![Screen Shots](./Readme.assets/thumbnail.png)
+
+
 
 ## Licenses
 
@@ -14,7 +19,7 @@ All files on the Scheduler repository are subject to the MIT license. Please rea
 
 ## Compile
 
-Compiled in [Android Studio 4.1](https://developer.android.google.cn/studio).
+[Android Studio 4.1](https://developer.android.google.cn/studio).
 
 
 
