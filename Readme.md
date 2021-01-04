@@ -5,6 +5,10 @@
 Pack up all about your university life.
 
 
+## Demo Video
+
+See [Bilibili](https://www.bilibili.com/video/bv135411p7Kb)
+
 ## Screen Shots
 
 * Dark Mode is not shown here.
