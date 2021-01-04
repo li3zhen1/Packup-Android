@@ -9,7 +9,7 @@ Pack up all about your university life.
 
 * Dark Mode is not shown here.
 
-![Screen Shots](./Readme.assets/thumbnail.png)
+![Screen Shots](./Readme.assets/screenshots.png)
 
 
 
