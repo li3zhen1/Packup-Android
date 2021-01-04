@@ -15,19 +15,13 @@ See [Bilibili](https://www.bilibili.com/video/bv135411p7Kb)
 
 ![Screen Shots](./Readme.assets/screenshots.png)
 
-
-
 ## Licenses
 
 All files on the Packup repository are subject to the MIT license. Please read the License file at the root of the project.
 
-
-
 ## Compile
 
 [Android Studio 4.1](https://developer.android.google.cn/studio).
-
-
 
 ## Unit Test
 
