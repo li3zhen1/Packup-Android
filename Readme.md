@@ -15,7 +15,7 @@ Pack up all about your university life.
 
 ## Licenses
 
-All files on the Scheduler repository are subject to the MIT license. Please read the License file at the root of the project.
+All files on the Packup repository are subject to the MIT license. Please read the License file at the root of the project.
 
 
 
